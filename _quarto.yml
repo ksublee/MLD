@@ -1,0 +1,28 @@
+project:
+  type: book
+  output-dir: docs
+
+book:
+  title: "MLD"
+  author: "Kyungsub Lee"
+  chapters:
+    - index.qmd
+    - 01. Neural_network.ipynb
+    - 02. Keras.ipynb
+    - 03. Keras_examples.ipynb
+    - 04. Deep_neural_network.ipynb
+    - 05. CNN.ipynb
+    - 06. RNN.ipynb
+    - 07. Encoder-decoder.ipynb
+    - 08. Attention.ipynb
+    - 09. Transformer.ipynb
+
+execute:
+  freeze: false
+  error: false
+
+format:
+  html:
+    theme: cosmo
+    toc: true
+    toc-depth: 3

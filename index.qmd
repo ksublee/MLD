@@ -1,0 +1,10 @@
+
+## Course Overview {.unnumbered}
+
+통계기계학습 강의자료
+
+#### 주요 참고자료{.unnumbered}
+
+[An Introduction to Statistical Learning](https://link.springer.com/book/10.1007/978-1-4614-7138-7)
+
+[Hands-On Machine Learning with Scikit-Learn, Keras, and TensorFlow](https://www.oreilly.com/library/view/hands-on-machine-learning/9781492032632/)

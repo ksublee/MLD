@@ -1,0 +1,1382 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.38">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>2&nbsp; 케라스 (Keras) – MLD</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./03. Keras_examples.html" rel="next">
+<link href="./01. Neural_network.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-9e3e5b9121e68b3f077afb32f2c64d95.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./02. Keras.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title"></span></a><a href="https://keras.io/">케라스 (Keras)</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">MLD</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Course Overview</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01. Neural_network.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">신경망</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02. Keras.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title"></span></span></a><a href="https://keras.io/">케라스 (Keras)</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03. Keras_examples.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">케라스 인공 신경망 응용</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04. Deep_neural_network.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">심층 신경망 훈련하기</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05. CNN.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">합성곱 신경망 (convolution neural network)</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06. RNN.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Recurrent neural networks</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./07. Encoder-decoder.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Encoder-Decoder 모델 개요</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./08. Attention.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Attention mechanism</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./09. Transformer.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Transformer</span></span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#데이터" id="toc-데이터" class="nav-link active" data-scroll-target="#데이터"><span class="header-section-number">2.0.1</span> 데이터</a></li>
+  <li><a href="#sequential-model" id="toc-sequential-model" class="nav-link" data-scroll-target="#sequential-model"><span class="header-section-number">2.0.2</span> Sequential model</a></li>
+  <li><a href="#layer" id="toc-layer" class="nav-link" data-scroll-target="#layer"><span class="header-section-number">2.1</span> Layer</a>
+  <ul class="collapse">
+  <li><a href="#dense-layer" id="toc-dense-layer" class="nav-link" data-scroll-target="#dense-layer"><span class="header-section-number">2.1.1</span> Dense layer</a></li>
+  <li><a href="#output-layer" id="toc-output-layer" class="nav-link" data-scroll-target="#output-layer"><span class="header-section-number">2.1.2</span> Output layer</a></li>
+  </ul></li>
+  <li><a href="#모델-컴파일" id="toc-모델-컴파일" class="nav-link" data-scroll-target="#모델-컴파일"><span class="header-section-number">2.2</span> 모델 컴파일</a>
+  <ul class="collapse">
+  <li><a href="#loss-function" id="toc-loss-function" class="nav-link" data-scroll-target="#loss-function"><span class="header-section-number">2.2.1</span> Loss function</a></li>
+  </ul></li>
+  <li><a href="#훈련" id="toc-훈련" class="nav-link" data-scroll-target="#훈련"><span class="header-section-number">2.3</span> 훈련</a>
+  <ul class="collapse">
+  <li><a href="#평가" id="toc-평가" class="nav-link" data-scroll-target="#평가"><span class="header-section-number">2.3.1</span> 평가</a></li>
+  <li><a href="#예측" id="toc-예측" class="nav-link" data-scroll-target="#예측"><span class="header-section-number">2.3.2</span> 예측</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title"><a href="https://keras.io/">케라스 (Keras)</a></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<hr>
+<p>Keras는 머신 러닝 플랫폼 TensorFlow에서 실행되는 Python으로 작성된 신경망 API이다.</p>
+<ul>
+<li><p>케라스는 간결하고 직관적인 코드 구조를 가지고 있어, 초보자부터 전문가까지 다양한 사용자들이 딥러닝 모델을 구현하는 데 유용하게 활용할 수 있다.</p></li>
+<li><p>빠른 실험을 가능하게 하는 데 중점을 두고 개발되었으며, 아이디어로부터 결과를 가능한 한 빨리 도출할 수 있도록 개발된 툴이다.</p></li>
+<li><p>Keras는 TensorFlow 2의 고수준 API이며, 현대 딥 러닝에 중점을 두고 있고, 접근하기 쉽고 생산성이 높은 인터페이스로서 머신 러닝 문제를 해결하기 할 수 있다.</p></li>
+</ul>
+<p>한편, TensorFlow는 Google에서 개발한 오픈 소스 머신 러닝 플랫폼으로, 다음과 같은 주요 기능을 가진다.</p>
+<ul>
+<li><p>저수준에서는 텐서 연산, 자동 미분, 분산 학습, GPU/TPU 실행 등을 가능하게 한다.</p></li>
+<li><p>고수준에서는 케라스를 통해 빠른 프로토타이핑과 모델 관리가 가능하다</p></li>
+<li><p>TensorFlow 2에서는 케라스를 기본 API로 채택하여, <code>tf.keras</code> 모듈을 통해 딥러닝 모델을 손쉽게 정의하고 학습시킬 수 있다.</p></li>
+</ul>
+<section id="데이터" class="level3" data-number="2.0.1">
+<h3 data-number="2.0.1" class="anchored" data-anchor-id="데이터"><span class="header-section-number">2.0.1</span> 데이터</h3>
+<p>아래 예제에서는 <a href="https://scikit-learn.org/stable/modules/generated/sklearn.datasets.make_circles.html">sklearn.datasets.make_circles</a>로 생성된 가상의 데이터를 통한 실습을 진행해 본다.</p>
+<div id="88801a4d-a0cb-4829-ab6a-2c6bd42aecd9" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.datasets <span class="im">import</span> make_circles</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>X, targets <span class="op">=</span> make_circles(n_samples <span class="op">=</span> <span class="dv">1000</span>, factor<span class="op">=</span><span class="fl">0.1</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>X_training <span class="op">=</span> X[<span class="dv">250</span>:, :]</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>X_testing <span class="op">=</span> X[:<span class="dv">250</span>, :]</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>Targets_training <span class="op">=</span> targets[<span class="dv">250</span>:]</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>Targets_testing <span class="op">=</span> targets[:<span class="dv">250</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Feature variable인 <code>X</code>가 2차원인 데이터이다.</p>
+<p>Target인 y는 두 개의 클래스로 구성되어 있다.</p>
+<div id="fd694b83-f9b6-4407-b958-e592b610cb41" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>plt.scatter(X_training[:,<span class="dv">0</span>], X_training[:,<span class="dv">1</span>], (Targets_training <span class="op">==</span> <span class="dv">0</span>).astype(<span class="bu">float</span>), color<span class="op">=</span><span class="st">'red'</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>plt.scatter(X_training[:,<span class="dv">0</span>], X_training[:,<span class="dv">1</span>], (Targets_training <span class="op">==</span> <span class="dv">1</span>).astype(<span class="bu">float</span>), color<span class="op">=</span><span class="st">'blue'</span>)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'X1'</span>)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'X2'</span>)</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="02. Keras_files/figure-html/cell-3-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="sequential-model" class="level3" data-number="2.0.2">
+<h3 data-number="2.0.2" class="anchored" data-anchor-id="sequential-model"><span class="header-section-number">2.0.2</span> Sequential model</h3>
+<p>Keras의 핵심 데이터 구조는 layer와 model이다.</p>
+<p><a href="https://keras.io/api/models/sequential/"><code>tensorflow.keras.Sequential</code></a> : 가장 간단한 모델 유형으로, layer를 선형으로 쌓은 구조이다. 즉, 각 layer가 하나의 입력과 하나의 출력만을 갖고, 순차적으로 연결된다.</p>
+<p>더 복잡한 아키텍처의 경우 layer의 임의 그래프를 작성하거나 서브 클래스를 통해 처음부터 완전히 모델을 작성할 수있는 Keras 기능 (functional) API를 사용해야 한다.</p>
+<p>다음은 sequential 모델의 예시이다.</p>
+<div id="436a456f-56ed-40c2-b49c-dfc74572dbf8" class="cell" data-execution_count="3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> tensorflow.keras <span class="im">import</span> Sequential</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> Sequential()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="c77ee398-1b2c-4e76-b372-3ba3f7fbe887" class="cell" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="bu">type</span>(model)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="4">
+<pre><code>keras.engine.sequential.Sequential</code></pre>
+</div>
+</div>
+<div id="507bf730-1f76-480c-b5bb-b5a37e29f03c" class="cell" data-execution_count="5">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 아래와 같이 생성하기도 한다.</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> tensorflow <span class="im">as</span> tf</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> tf.keras.Sequential()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="layer" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="layer"><span class="header-section-number">2.1</span> <a href="https://keras.io/api/layers/base_layer/#layer-class">Layer</a></h2>
+<p>층 (layer)은 Keras에서 신경망의 기본 구성 요소이다.</p>
+<p>레이어는 신경망의 구조를 정의하고, 입력 데이터로부터 가중치와 활성화 함수를 이용한 변환을 수행하여 출력 데이터를 생성한다.</p>
+<p>Keras에는 다양한 종류의 레이어가 존재하며, 각 레이어는 고유한 기능을 수행한다.</p>
+<ul>
+<li><p>Input object : 모델에 입력 데이터를 제공하는 시작점</p></li>
+<li><p>Dense layer : 가장 기본적인 레이어 중 하나</p></li>
+<li><p>Activation layer : 별도의 레이어로 활성화 함수 (ReLU, sigmoid 등)를 적용할 수 있음</p></li>
+<li><p>Embedding layer : 자연어 처리에서 주로 사용되는 임베딩 레이어</p></li>
+<li><p>Masking layer : 특정 값을 가진 입력을 무시하도록 하며, 시퀀스 처리에서 유용</p></li>
+<li><p>Lambda layer : 사용자 정의 연산을 적용할 수 있는 레이어</p></li>
+</ul>
+<section id="dense-layer" class="level3" data-number="2.1.1">
+<h3 data-number="2.1.1" class="anchored" data-anchor-id="dense-layer"><span class="header-section-number">2.1.1</span> Dense layer</h3>
+<p><a href="https://keras.io/api/layers/core_layers/dense/"><code>tensorflow.keras.layers.Dense</code></a>로 구현되어 있으며, 가장 기본적인 뉴럴 네트워크 층으로 base layer를 상속받아 정의된다.</p>
+<p>Dense는 다음 작업을 구현한다.</p>
+<p><code>output = activation(dot(input, kernel) + bias)</code></p>
+<p>주요 인자로는 다음과 같다.</p>
+<ul>
+<li><p><code>units</code>: 양의 정수이며, 해당 층의 뉴런의 숫자(=출력 노드의 숫자)</p></li>
+<li><p><code>activation</code>: 활성화 함수의 종류. 기본값은 linear 함수</p></li>
+<li><p><code>use_bias</code>: Boolean, bias vector의 이용 여부</p></li>
+</ul>
+<p>Sequential 모델에서는 <a href="https://keras.io/api/models/sequential/#add-method"><code>.add()</code></a>를 이용하여 생성된 모형에 순차적으로 layer들을 쌓을 수 있다.</p>
+<p>아래 예시 코드에서 <code>input_shape=(2,)</code>은 입력 벡터가 두 개의 요소로 이루어졌음을 의미한다.</p>
+<ul>
+<li>두 개의 feature variable로 구성됨 : <span class="math inline">\(X_1, X_2\)</span></li>
+</ul>
+</section>
+<section id="output-layer" class="level3" data-number="2.1.2">
+<h3 data-number="2.1.2" class="anchored" data-anchor-id="output-layer"><span class="header-section-number">2.1.2</span> Output layer</h3>
+<p>마지막 layer는 문제의 유형에 따라 구성한다.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 14%">
+<col style="width: 34%">
+<col style="width: 24%">
+<col style="width: 26%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>문제 유형</th>
+<th>Output layer 구성</th>
+<th>Loss function</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>(1) 회귀 문제</td>
+<td>units = 1, 활성화 함수 없음 (또는 <code>activation='linear'</code>)</td>
+<td><code>mean_squared_error</code> (또는 <code>mse</code>)</td>
+<td>연속값 예측이므로 출력 제한 불필요</td>
+</tr>
+<tr class="even">
+<td>(2) 이진 분류</td>
+<td>units = 1, <code>activation='sigmoid'</code></td>
+<td><code>binary_crossentropy</code></td>
+<td>확률(0~1) 출력 필요</td>
+</tr>
+<tr class="odd">
+<td>(3) 다중 분류 (one-hot)</td>
+<td>units = 클래스 수, <code>activation='softmax'</code></td>
+<td><code>categorical_crossentropy</code></td>
+<td>각 클래스에 대한 확률 분포 출력, (y)가 one-hot 인코딩</td>
+</tr>
+<tr class="even">
+<td>(4) 다중 분류 (정수 클래스)</td>
+<td>units = 클래스 수, <code>activation='softmax'</code></td>
+<td><code>sparse_categorical_crossentropy</code></td>
+<td>타깃 (y)가 0,1,2,… 등 정수 레이블일 때 사용</td>
+</tr>
+</tbody>
+</table>
+<p>이 문제에서는 마지막으로 추가된 dense layer에서 유닛의 개수는 하나이며, 활성화 함수로 sigmoid 함수를 사용한다..</p>
+<ul>
+<li>이는 출력값이 0과 1 사이의 확률로 해석될 수 있도록 하기 위함이며, <span class="math inline">\(y\)</span>가 두 개의 클래스로 구성된 이진 분류 문제이기 때문이다.</li>
+</ul>
+<div id="fb073447-3582-4a6c-8892-0f84f692fa7f" class="cell" data-execution_count="6">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> tensorflow.keras.layers <span class="im">import</span> Dense</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>model.add(Dense(units<span class="op">=</span><span class="dv">4</span>, input_shape<span class="op">=</span>(<span class="dv">2</span>,), activation<span class="op">=</span><span class="st">'relu'</span>))  <span class="co"># 2개의 feature variable을 받을 예정</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>model.add(Dense(units<span class="op">=</span><span class="dv">2</span>, activation<span class="op">=</span><span class="st">'relu'</span>))</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>model.add(Dense(units<span class="op">=</span><span class="dv">1</span>, activation<span class="op">=</span><span class="st">'sigmoid'</span>))   <span class="co"># binary class 구별을 위함</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="6fe53860-51da-4a29-b3f8-0765ff39d0c8" class="cell" data-execution_count="7">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>model.summary()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Model: "sequential_1"
+_________________________________________________________________
+ Layer (type)                Output Shape              Param #   
+=================================================================
+ dense (Dense)               (None, 4)                 12        
+                                                                 
+ dense_1 (Dense)             (None, 2)                 10        
+                                                                 
+ dense_2 (Dense)             (None, 1)                 3         
+                                                                 
+=================================================================
+Total params: 25
+Trainable params: 25
+Non-trainable params: 0
+_________________________________________________________________</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="모델-컴파일" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="모델-컴파일"><span class="header-section-number">2.2</span> 모델 컴파일</h2>
+<p>모델 구조가 학습할 준비가 되었으면 <a href="https://keras.io/api/models/model_training_apis/#compile-method"><code>.compile()</code></a> 메서드를 사용하여 학습 프로세스를 설정한다.</p>
+<p>컴파일은 모델 생성의 마지막 단계로 컴파일이 완료되면 훈련 단계로 넘어갈 수 있다.</p>
+<p>컴파일에서는 주로 다음과 같은 작업을 설정한다.</p>
+<ul>
+<li><p>손실 함수(loss function) 정의: 모델이 최소화하려는 손실 함수를 지정.</p></li>
+<li><p>옵티마이저(optimizer) 설정: 옵티마이저는 손실 함수를 최소화하기 위해 가중치를 업데이트하는 알고리즘을 설정.</p></li>
+<li><p>평가 지표(metrics) 정의: 훈련 및 테스트 과정에서 모델의 성능을 평가하는 데 사용되는 지표를 설정.</p></li>
+</ul>
+<p>아래 코드에서 loss function으로 <code>'binary_crossentropy'</code>를 사용하였다.</p>
+<p>이는 이번 예제에서 2개의 클래스로 구성된 y를 분류하는 문제를 다루기 때문이다.</p>
+<p>이 손실 함수의 식은 다음과 같다.</p>
+<p><span class="math display">\[L(y, \hat y) = - y  \log(\hat y) - (1 - y)  \log(1 - \hat y)\]</span></p>
+<div id="d38945f8-ece0-421c-b945-70e2d836bcf5" class="cell" data-execution_count="8">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>model.<span class="bu">compile</span>(loss<span class="op">=</span><span class="st">'binary_crossentropy'</span>,</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>              optimizer<span class="op">=</span><span class="st">'adam'</span>,</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>              metrics<span class="op">=</span>[<span class="st">'accuracy'</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<section id="loss-function" class="level3" data-number="2.2.1">
+<h3 data-number="2.2.1" class="anchored" data-anchor-id="loss-function"><span class="header-section-number">2.2.1</span> <a href="https://keras.io/api/losses/">Loss</a> function</h3>
+<p>머신러닝에서 손실 함수 (loss function)는 머신러닝 모델이 예측한 값과 실제 값 사이의 차이를 수치화하여 학습 과정에서 오류를 정량적으로 측정하는 데 사용된다.</p>
+<p>Keras에서는 모델을 컴파일할 때 반드시 하나의 loss function을 지정해야 한다.</p>
+<p>Keras는 다양한 종류의 손실 함수를 기본적으로 제공하며, 문제의 특성에 따라 적절한 함수를 선택할 수 있다.</p>
+<p>주요 함수는 다음과 같으며 일반적으로 <code>loss='binary_crossentropy'</code>와 같이 입력한다.</p>
+<ul>
+<li><p><code>mean_squared_error</code> (MSE) : 회귀(regression) 문제에서 자주 사용되는 손실 함수. 오차 제곱의 평균</p></li>
+<li><p><code>mean_absolute_error</code> (MAE) : 절대 오차의 평균. 이상치에 덜 민감함</p></li>
+<li><p><code>mean_absolute_percentage_error</code></p></li>
+<li><p><code>mean_squared_logarithmic_error</code></p></li>
+<li><p><code>squared_hinge</code></p></li>
+<li><p><code>hinge</code></p></li>
+<li><p><code>categorical_hinge</code></p></li>
+<li><p><code>logcosh</code></p></li>
+<li><p><code>huber_loss</code></p></li>
+<li><p><code>categorical_crossentropy</code> : 다중 클래스 분류, y가 one-hot 벡터 (예: <code>(0, 0, 1, 0, 0)</code>)</p></li>
+<li><p><code>sparse_categorical_crossentropy</code> : 다중 클래스 분류, y가 정수 인덱스 (예: <code>2</code>)</p></li>
+<li><p><code>binary_crossentropy</code> : 이진 분류, y는 0 또는 1</p></li>
+<li><p><code>kullback_leibler_divergence</code></p></li>
+<li><p><code>poisson</code></p></li>
+<li><p><code>cosine_proximity</code></p></li>
+<li><p><code>is_categorical_crossentropy</code></p></li>
+</ul>
+<p>이 중에서도 실제로 많이 사용되는 함수는 다음과 같다.</p>
+<ul>
+<li><p>회귀 문제: <code>mean_squared_error</code>, <code>huber_loss</code></p></li>
+<li><p>이진 분류: <code>binary_crossentropy</code></p></li>
+<li><p>다중 클래스 분류: <code>categorical_crossentropy</code>, <code>sparse_categorical_crossentropy</code></p></li>
+</ul>
+<section id="optimizer" class="level4" data-number="2.2.1.1">
+<h4 data-number="2.2.1.1" class="anchored" data-anchor-id="optimizer"><span class="header-section-number">2.2.1.1</span> <a href="https://keras.io/api/optimizers/">Optimizer</a></h4>
+<p>기계학습에서 최적화는 예측 결과와 손실 함수 값을 비교하여 모델의 가중치(weight)를 조정하는 핵심 과정이다.</p>
+<p>Keras는 다양한 optimizer를 제공하며, 문제의 성격과 데이터에 따라 적절한 알고리즘을 선택할 수 있다.</p>
+<p>대표적인 옵티마이저는 다음과 같다.</p>
+<ul>
+<li><p>SGD (Stochastic Gradient Descent)</p>
+<ul>
+<li>가장 기본적인 옵티마이저. 한 번에 하나의 샘플(또는 미니배치)을 사용해 가중치를 업데이트함 <br><br></li>
+</ul></li>
+<li><p>RMSprop</p>
+<ul>
+<li>학습률을 각 파라미터마다 다르게 조정하며, 순환 신경망(RNN)에 자주 사용 <br><br></li>
+</ul></li>
+<li><p>Adam</p>
+<ul>
+<li>가장 널리 사용되는 옵티마이저 중 하나. 모멘텀과 적응적 학습률을 결합 <br><br></li>
+</ul></li>
+<li><p>Adamax</p>
+<ul>
+<li>Adam의 변형. <br><br></li>
+</ul></li>
+<li><p>Nadam − Nesterov Adam optimizer.</p>
+<ul>
+<li>Adam의 변형. 일부 문제에서 더 나은 성능을 보이기도 함 <br><br></li>
+</ul></li>
+<li><p>Adagrad</p></li>
+<li><p>Adadelta</p></li>
+</ul>
+</section>
+<section id="metrics" class="level4" data-number="2.2.1.2">
+<h4 data-number="2.2.1.2" class="anchored" data-anchor-id="metrics"><span class="header-section-number">2.2.1.2</span> <a href="https://keras.io/api/metrics/">Metrics</a></h4>
+<p>기계학습에서 Metrics (평가지표)는 모델의 성능을 평가하는 데 사용된다.</p>
+<p>손실 함수와 유사해 보이지만 훈련 과정에서는 직접 손실 최적화에 사용되지 않고, 훈련 결과나 테스트 셋에 대한 예측 결과를 평가하는 데에 사용된다.</p>
+<p>분류 문제에서는 다음과 같은 metric들이 활용된다.</p>
+<ul>
+<li><code>accuracy</code></li>
+<li><code>binary_accuracy</code></li>
+<li><code>categorical_accuracy</code></li>
+<li><code>sparse_categorical_accuracy</code></li>
+<li><code>top_k_categorical_accuracy</code></li>
+<li><code>sparse_top_k_categorical_accuracy</code></li>
+<li><code>cosine_proximity</code></li>
+<li><code>clone_metric</code></li>
+</ul>
+<p>회귀 문제에서는 다음과 같은 metric들이 활용된다.</p>
+<ul>
+<li><code>mean_squared_error</code><br>
+</li>
+<li><code>mean_absolute_error</code></li>
+<li><code>mean_absolute_percentage_error</code></li>
+<li><code>mean_squared_logarithmic_error</code></li>
+</ul>
+<p>필요한 경우 최적화 프로그램을 추가로 구성할 수 있다. Keras의 철학은 단순한 것을 단순하게 유지하면서, 사용자가 필요할 때 완전한 제어가 가능하도록 하는 것이다.</p>
+</section>
+</section>
+</section>
+<section id="훈련" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="훈련"><span class="header-section-number">2.3</span> 훈련</h2>
+<p>이제 모델에 훈련 데이터를 입력하여 학습을 진행할 수 있다.</p>
+<p>위에서 이미 생성한 numpy array들 (<code>X_training, Targets_training</code>)을 이용하여 학습할 수 있으며, <a href="https://keras.io/api/models/model_training_apis/#fit-method"><code>.fit()</code></a> method를 이용한다.</p>
+<p>기본적인 문법 구조는 다음과 같다.</p>
+<p><code>model.fit(X, y, epochs = , batch_size = )</code></p>
+<ul>
+<li><p><code>epochs</code></p>
+<ul>
+<li>전체 데이터셋을 몇 번 반복하여 학습할지를 나타내는 하이퍼파라미터.</li>
+<li>하나의 에포크(epoch)는 전체 훈련 데이터를 모델이 한 번 모두 처리하는 것을 의미한다. <br><br></li>
+</ul></li>
+<li><p><code>batch_size</code></p>
+<ul>
+<li>한 번의 가중치 업데이트에 사용되는 샘플의 수.<br>
+</li>
+<li>전체 데이터셋이 너무 클 경우, 한 번에 모두 처리하지 않고 작은 배치 단위로 나누어 처리하여 학습의 안정성과 계산 효율성을 확보한다.</li>
+<li>예를 들어 <code>batch_size=32</code>이면, 32개 샘플씩 나누어 순차적으로 모델을 학습시킨다.</li>
+</ul></li>
+</ul>
+<p>추가적으로 다음과 같은 인자들도 설정할 수 있다.</p>
+<ul>
+<li><p><code>validation_data=(X_val, y_val)</code> : 훈련 중 검증을 위해 사용할 데이터셋을 명시 모델의 일반화 성능을 실시간으로 확인할 수 있다.</p></li>
+<li><p><code>verbose</code> : 학습 진행 상태 출력 여부를 설정 (0: 출력 없음, 1: 기본 출력, 2: 에포크별 출력 등)</p></li>
+<li><p><code>shuffle=True</code> : 각 epoch마다 데이터를 섞을지 여부. 대부분의 경우 성능 향상에 도움이 된다.</p></li>
+</ul>
+<div id="34ebd0c9-e84f-4f3d-9a70-d4ed66eb5e32" class="cell" data-execution_count="9">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>history <span class="op">=</span> model.fit(X_training, Targets_training, epochs<span class="op">=</span><span class="dv">30</span>, batch_size<span class="op">=</span><span class="dv">5</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Epoch 1/30
+150/150 [==============================] - 0s 642us/step - loss: 0.6044 - accuracy: 0.7213
+Epoch 2/30
+150/150 [==============================] - 0s 596us/step - loss: 0.5317 - accuracy: 1.0000
+Epoch 3/30
+150/150 [==============================] - 0s 601us/step - loss: 0.4641 - accuracy: 1.0000
+Epoch 4/30
+150/150 [==============================] - 0s 592us/step - loss: 0.3937 - accuracy: 1.0000
+Epoch 5/30
+150/150 [==============================] - 0s 602us/step - loss: 0.3231 - accuracy: 1.0000
+Epoch 6/30
+150/150 [==============================] - 0s 614us/step - loss: 0.2550 - accuracy: 1.0000
+Epoch 7/30
+150/150 [==============================] - 0s 604us/step - loss: 0.1945 - accuracy: 1.0000
+Epoch 8/30
+150/150 [==============================] - 0s 589us/step - loss: 0.1455 - accuracy: 1.0000
+Epoch 9/30
+150/150 [==============================] - 0s 591us/step - loss: 0.1081 - accuracy: 1.0000
+Epoch 10/30
+150/150 [==============================] - 0s 575us/step - loss: 0.0808 - accuracy: 1.0000
+Epoch 11/30
+150/150 [==============================] - 0s 611us/step - loss: 0.0612 - accuracy: 1.0000
+Epoch 12/30
+150/150 [==============================] - 0s 581us/step - loss: 0.0470 - accuracy: 1.0000
+Epoch 13/30
+150/150 [==============================] - 0s 578us/step - loss: 0.0368 - accuracy: 1.0000
+Epoch 14/30
+150/150 [==============================] - 0s 608us/step - loss: 0.0292 - accuracy: 1.0000
+Epoch 15/30
+150/150 [==============================] - 0s 617us/step - loss: 0.0235 - accuracy: 1.0000
+Epoch 16/30
+150/150 [==============================] - 0s 622us/step - loss: 0.0191 - accuracy: 1.0000
+Epoch 17/30
+150/150 [==============================] - 0s 603us/step - loss: 0.0158 - accuracy: 1.0000
+Epoch 18/30
+150/150 [==============================] - 0s 590us/step - loss: 0.0131 - accuracy: 1.0000
+Epoch 19/30
+150/150 [==============================] - 0s 611us/step - loss: 0.0110 - accuracy: 1.0000
+Epoch 20/30
+150/150 [==============================] - 0s 621us/step - loss: 0.0094 - accuracy: 1.0000
+Epoch 21/30
+150/150 [==============================] - 0s 639us/step - loss: 0.0080 - accuracy: 1.0000
+Epoch 22/30
+150/150 [==============================] - 0s 587us/step - loss: 0.0069 - accuracy: 1.0000
+Epoch 23/30
+150/150 [==============================] - 0s 592us/step - loss: 0.0059 - accuracy: 1.0000
+Epoch 24/30
+150/150 [==============================] - 0s 608us/step - loss: 0.0051 - accuracy: 1.0000
+Epoch 25/30
+150/150 [==============================] - 0s 602us/step - loss: 0.0045 - accuracy: 1.0000
+Epoch 26/30
+150/150 [==============================] - 0s 602us/step - loss: 0.0039 - accuracy: 1.0000
+Epoch 27/30
+150/150 [==============================] - 0s 605us/step - loss: 0.0035 - accuracy: 1.0000
+Epoch 28/30
+150/150 [==============================] - 0s 604us/step - loss: 0.0030 - accuracy: 1.0000
+Epoch 29/30
+150/150 [==============================] - 0s 592us/step - loss: 0.0027 - accuracy: 1.0000
+Epoch 30/30
+150/150 [==============================] - 0s 602us/step - loss: 0.0024 - accuracy: 1.0000</code></pre>
+</div>
+</div>
+<section id="평가" class="level3" data-number="2.3.1">
+<h3 data-number="2.3.1" class="anchored" data-anchor-id="평가"><span class="header-section-number">2.3.1</span> 평가</h3>
+<p>학습이 완료된 모델은 테스트 데이터를 통해 성능을 평가할 수 있다.</p>
+<p>이를 위해 <a href="https://keras.io/api/models/model_training_apis/#evaluate-method"><code>.evaluate()</code></a> 메서드를 사용한다.</p>
+<p>기본 문법 구조는 다음과 같다.</p>
+<p><code>model.evaluate(X_test, y_test, batch_size=, verbose=)</code></p>
+<ul>
+<li><p><code>X_test, y_test</code> :</p>
+<ul>
+<li><p>모델의 입력과 정답 라벨을 포함하는 테스트 데이터셋.</p></li>
+<li><p>모델이 이전에 보지 못한 데이터에 대해 얼마나 잘 일반화되었는지를 평가하는 데 사용된다.</p></li>
+</ul></li>
+</ul>
+<p><code>evaluate()</code>는 모델 컴파일 시 설정한 손실 함수 값과 평가지표(metric) 값들을 리스트 또는 딕셔너리 형태로 반환한다.</p>
+<ul>
+<li>이 예제에서는 <code>loss='binary_crossentropy'</code>와 <code>metrics=['accuracy']</code>이다.</li>
+</ul>
+<div id="b2dce297-c59d-4a6e-8d32-16d6cbdd252d" class="cell" data-execution_count="10">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>test_results <span class="op">=</span> model.evaluate(X_testing, Targets_testing, verbose<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(model.metrics_names)</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(test_results)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>8/8 [==============================] - 0s 707us/step - loss: 0.0022 - accuracy: 1.0000
+['loss', 'accuracy']
+[0.002211799845099449, 1.0]</code></pre>
+</div>
+</div>
+</section>
+<section id="예측" class="level3" data-number="2.3.2">
+<h3 data-number="2.3.2" class="anchored" data-anchor-id="예측"><span class="header-section-number">2.3.2</span> 예측</h3>
+<p>훈련이 완료된 모델과 <a href="https://keras.io/api/models/model_training_apis/#predict-method"><code>.predict()</code></a> 메서드로 새로운 데이터에 대한 예측을 수행한다.</p>
+<p>기본 문법은 다음과 같다.</p>
+<p><code>y_pred = model.predict(X_new)</code></p>
+<p>현재 모형의 마지막 층의 활성함수인 sigmoid 함수는 0과 1사이의 실수(확률)를 내보내기 때문에, <code>predict()</code>의 출력은 0과 1 사이의 실수값(확률)이다.</p>
+<p>이 확률값을 이용해 클래스를 결정한다. - 0.5의 기준(threshold)를 기준으로 0.5보다 작으면 0의 클래스를, 크면 1의 클래스로 결정. - 이 과정은 뉴럴 네트워크 모형과 별도의 코드로 작성해 주어야 한다.</p>
+<div id="1154ee0e-7e62-48f6-aeb8-ed5032cd18ee" class="cell" data-execution_count="11">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>y_prob <span class="op">=</span> model.predict(X_testing)</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>predicted_class <span class="op">=</span> np.where(y_prob <span class="op">&gt;</span> <span class="fl">0.5</span>, <span class="dv">1</span>,<span class="dv">0</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>8/8 [==============================] - 0s 857us/step</code></pre>
+</div>
+</div>
+<p>예측값과 실제값을 비교해 보자.</p>
+<div id="0e76e9c2-233a-4f3c-ad6e-648318b3e42c" class="cell" data-execution_count="12">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>np.c_[predicted_class, Targets_testing]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="12">
+<pre><code>array([[0, 0],
+       [1, 1],
+       [0, 0],
+       [1, 1],
+       [1, 1],
+       [1, 1],
+       [0, 0],
+       [0, 0],
+       [1, 1],
+       [1, 1],
+       [0, 0],
+       [0, 0],
+       [1, 1],
+       [0, 0],
+       [0, 0],
+       [0, 0],
+       [0, 0],
+       [0, 0],
+       [0, 0],
+       [0, 0],
+       [0, 0],
+       [1, 1],
+       [1, 1],
+       [1, 1],
+       [1, 1],
+       [1, 1],
+       [1, 1],
+       [1, 1],
+       [1, 1],
+       [1, 1],
+       [0, 0],
+       [1, 1],
+       [0, 0],
+       [0, 0],
+       [1, 1],
+       [0, 0],
+       [0, 0],
+       [1, 1],
+       [0, 0],
+       [0, 0],
+       [0, 0],
+       [0, 0],
+       [1, 1],
+       [1, 1],
+       [0, 0],
+       [1, 1],
+       [0, 0],
+       [1, 1],
+       [1, 1],
+       [1, 1],
+       [0, 0],
+       [1, 1],
+       [1, 1],
+       [0, 0],
+       [0, 0],
+       [0, 0],
+       [0, 0],
+       [0, 0],
+       [1, 1],
+       [1, 1],
+       [1, 1],
+       [0, 0],
+       [1, 1],
+       [1, 1],
+       [0, 0],
+       [0, 0],
+       [1, 1],
+       [0, 0],
+       [1, 1],
+       [1, 1],
+       [1, 1],
+       [0, 0],
+       [1, 1],
+       [1, 1],
+       [1, 1],
+       [0, 0],
+       [1, 1],
+       [0, 0],
+       [0, 0],
+       [1, 1],
+       [0, 0],
+       [1, 1],
+       [0, 0],
+       [0, 0],
+       [0, 0],
+       [1, 1],
+       [1, 1],
+       [0, 0],
+       [1, 1],
+       [0, 0],
+       [0, 0],
+       [1, 1],
+       [0, 0],
+       [1, 1],
+       [0, 0],
+       [1, 1],
+       [0, 0],
+       [0, 0],
+       [0, 0],
+       [0, 0],
+       [1, 1],
+       [1, 1],
+       [1, 1],
+       [1, 1],
+       [0, 0],
+       [1, 1],
+       [0, 0],
+       [0, 0],
+       [1, 1],
+       [1, 1],
+       [1, 1],
+       [0, 0],
+       [1, 1],
+       [0, 0],
+       [1, 1],
+       [1, 1],
+       [0, 0],
+       [0, 0],
+       [0, 0],
+       [0, 0],
+       [1, 1],
+       [0, 0],
+       [0, 0],
+       [1, 1],
+       [0, 0],
+       [1, 1],
+       [1, 1],
+       [1, 1],
+       [1, 1],
+       [0, 0],
+       [1, 1],
+       [1, 1],
+       [1, 1],
+       [1, 1],
+       [0, 0],
+       [1, 1],
+       [1, 1],
+       [1, 1],
+       [1, 1],
+       [0, 0],
+       [0, 0],
+       [1, 1],
+       [1, 1],
+       [0, 0],
+       [1, 1],
+       [0, 0],
+       [0, 0],
+       [0, 0],
+       [0, 0],
+       [1, 1],
+       [0, 0],
+       [0, 0],
+       [0, 0],
+       [1, 1],
+       [1, 1],
+       [1, 1],
+       [1, 1],
+       [1, 1],
+       [0, 0],
+       [0, 0],
+       [1, 1],
+       [0, 0],
+       [1, 1],
+       [1, 1],
+       [0, 0],
+       [1, 1],
+       [0, 0],
+       [1, 1],
+       [0, 0],
+       [0, 0],
+       [1, 1],
+       [0, 0],
+       [0, 0],
+       [0, 0],
+       [1, 1],
+       [0, 0],
+       [0, 0],
+       [0, 0],
+       [0, 0],
+       [1, 1],
+       [0, 0],
+       [0, 0],
+       [0, 0],
+       [0, 0],
+       [0, 0],
+       [1, 1],
+       [0, 0],
+       [0, 0],
+       [1, 1],
+       [1, 1],
+       [1, 1],
+       [1, 1],
+       [0, 0],
+       [1, 1],
+       [0, 0],
+       [0, 0],
+       [1, 1],
+       [1, 1],
+       [0, 0],
+       [0, 0],
+       [0, 0],
+       [1, 1],
+       [1, 1],
+       [1, 1],
+       [0, 0],
+       [1, 1],
+       [0, 0],
+       [0, 0],
+       [1, 1],
+       [0, 0],
+       [0, 0],
+       [1, 1],
+       [0, 0],
+       [0, 0],
+       [0, 0],
+       [0, 0],
+       [1, 1],
+       [0, 0],
+       [0, 0],
+       [1, 1],
+       [1, 1],
+       [1, 1],
+       [0, 0],
+       [1, 1],
+       [1, 1],
+       [1, 1],
+       [0, 0],
+       [0, 0],
+       [1, 1],
+       [0, 0],
+       [1, 1],
+       [1, 1],
+       [0, 0],
+       [0, 0],
+       [1, 1],
+       [0, 0],
+       [1, 1],
+       [1, 1],
+       [1, 1],
+       [0, 0],
+       [1, 1],
+       [0, 0],
+       [0, 0],
+       [0, 0],
+       [1, 1],
+       [1, 1],
+       [0, 0],
+       [0, 0],
+       [1, 1],
+       [1, 1]], dtype=int64)</code></pre>
+</div>
+</div>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./01. Neural_network.html" class="pagination-link" aria-label="신경망">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">신경망</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./03. Keras_examples.html" class="pagination-link" aria-label="케라스 인공 신경망 응용">
+        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">케라스 인공 신경망 응용</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

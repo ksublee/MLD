@@ -1,0 +1,9 @@
+.ipynb_checkpoints
+old
+/.quarto/
+/site_libs/
+**/*.quarto_ipynb
+.Rproj.user
+Untitled*
+Transform*
+IMDB*
