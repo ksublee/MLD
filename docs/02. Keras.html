@@ -289,11 +289,11 @@ window.Quarto = {
 
 
 <hr>
-<p><a href="https://keras.io/">Keras</a>는 머신 러닝 플랫폼 TensorFlow에서 실행되는 Python으로 작성된 신경망 API이다.</p>
+<p>Keras는 신경망 모델을 쉽게 구현하고 학습하기 위한 고수준 딥러닝 API이다. Keras 3는 TensorFlow, JAX, PyTorch를 백엔드로 지원한다. 이 강의에서는 TensorFlow의 <code>tf.keras</code>를 사용한다.</p>
 <ul>
 <li><p>케라스는 간결하고 직관적인 코드 구조를 가지고 있어, 초보자부터 전문가까지 다양한 사용자들이 딥러닝 모델을 구현하는 데 유용하게 활용할 수 있다.</p></li>
 <li><p>빠른 실험을 가능하게 하는 데 중점을 두고 개발되었으며, 아이디어로부터 결과를 가능한 한 빨리 도출할 수 있도록 개발된 툴이다.</p></li>
-<li><p>Keras는 TensorFlow 2의 고수준 API이며, 현대 딥 러닝에 중점을 두고 있고, 접근하기 쉽고 생산성이 높은 인터페이스로서 머신 러닝 문제를 해결하기 할 수 있다.</p></li>
+<li><p>Keras는 TensorFlow 2의 고수준 API이며, 현대 딥 러닝에 중점을 두고 있고, 접근하기 쉽고 생산성이 높은 인터페이스로서 머신 러닝 문제를 해결할 수 있다.</p></li>
 </ul>
 <p>한편, <a href="https://www.tensorflow.org/">TensorFlow</a>는 Google에서 개발한 오픈 소스 머신 러닝 플랫폼으로, 다음과 같은 주요 기능을 가진다.</p>
 <ul>
@@ -313,8 +313,8 @@ window.Quarto = {
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>Targets_training <span class="op">=</span> targets[<span class="dv">250</span>:]</span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>Targets_testing <span class="op">=</span> targets[:<span class="dv">250</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>Feature variable인 <code>X</code>가 2차원인 데이터이다.</p>
-<p>Target인 y는 두 개의 클래스로 구성되어 있다.</p>
+<p><code>X</code>는 두 개의 특성변수로 구성된다.</p>
+<p>타깃 변수는 두 개의 클래스로 구성된다.</p>
 <div id="fd694b83-f9b6-4407-b958-e592b610cb41" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-19T09:36:21.802458Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-19T09:36:21.802458Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-19T09:36:22.453850Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-19T09:36:22.453850Z&quot;}}" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>plt.scatter(X_training[Targets_training<span class="op">==</span><span class="dv">0</span>, <span class="dv">0</span>], X_training[Targets_training<span class="op">==</span><span class="dv">0</span>, <span class="dv">1</span>], color<span class="op">=</span><span class="st">'red'</span>)</span>
@@ -336,30 +336,27 @@ window.Quarto = {
 <h2 data-number="2.2" class="anchored" data-anchor-id="sequential-model"><span class="header-section-number">2.2</span> Sequential model</h2>
 <p>Keras의 핵심 데이터 구조는 layer와 model이다.</p>
 <p><a href="https://keras.io/api/models/sequential/"><code>tensorflow.keras.Sequential</code></a> : 가장 간단한 모델 유형으로, layer를 선형으로 쌓은 구조이다. 즉, 각 layer가 하나의 입력과 하나의 출력만을 갖고, 순차적으로 연결된다.</p>
-<p>더 복잡한 아키텍처의 경우 layer의 임의 그래프를 작성하거나 서브 클래스를 통해 처음부터 완전히 모델을 작성할 수있는 Keras 기능 (functional) API를 사용해야 한다.</p>
+<p>여러 입력이나 출력, 분기 또는 잔차 연결이 있는 복잡한 모델에는 Functional API 또는 모델 subclassing을 사용할 수 있다.</p>
 <p>다음은 sequential 모델의 예시이다.</p>
 <div id="436a456f-56ed-40c2-b49c-dfc74572dbf8" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-19T09:36:22.457775Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-19T09:36:22.457329Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-19T09:36:26.281742Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-19T09:36:26.281742Z&quot;}}" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> tensorflow.keras <span class="im">import</span> Sequential</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> Sequential()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="c77ee398-1b2c-4e76-b372-3ba3f7fbe887" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-19T09:36:26.281742Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-19T09:36:26.281742Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-19T09:36:26.289558Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-19T09:36:26.289558Z&quot;}}" data-execution_count="4">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="bu">type</span>(model)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="4">
-<pre><code>keras.src.models.sequential.Sequential</code></pre>
-</div>
+<div id="c77ee398-1b2c-4e76-b372-3ba3f7fbe887" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-19T09:36:26.281742Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-19T09:36:26.281742Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-19T09:36:26.289558Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-19T09:36:26.289558Z&quot;}}">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="bu">isinstance</span>(model, Sequential)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div id="507bf730-1f76-480c-b5bb-b5a37e29f03c" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-19T09:36:26.289558Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-19T09:36:26.289558Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-19T09:36:26.296572Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-19T09:36:26.296572Z&quot;}}" data-execution_count="5">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 아래와 같이 생성하기도 한다.</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> tensorflow <span class="im">as</span> tf</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> tf.keras.Sequential()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 아래와 같이 생성하기도 한다.</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> tensorflow <span class="im">as</span> tf</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> tf.keras.Sequential()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="layer" class="level2" data-number="2.3">
 <h2 data-number="2.3" class="anchored" data-anchor-id="layer"><span class="header-section-number">2.3</span> <a href="https://keras.io/api/layers/base_layer/#layer-class">Layer</a></h2>
 <p>층 (layer)은 Keras에서 신경망의 기본 구성 요소이다.</p>
 <p>레이어는 신경망의 구조를 정의하고, 입력 데이터로부터 가중치와 활성화 함수를 이용한 변환을 수행하여 출력 데이터를 생성한다.</p>
-<p>Keras에는 다양한 종류의 레이어가 존재하며, 각 레이어는 고유한 기능을 수행한다.</p>
+<p>Keras에서 자주 사용하는 입력 객체와 레이어는 다음과 같다.</p>
 <ul>
 <li><p>Input object : 모델에 입력 데이터를 제공하는 시작점</p></li>
 <li><p>Dense layer : 가장 기본적인 레이어 중 하나</p></li>
@@ -380,7 +377,7 @@ window.Quarto = {
 <li><p><code>use_bias</code>: Boolean, bias vector의 이용 여부</p></li>
 </ul>
 <p>Sequential 모델에서는 <a href="https://keras.io/api/models/sequential/#add-method"><code>.add()</code></a>를 이용하여 생성된 모형에 순차적으로 layer들을 쌓을 수 있다.</p>
-<p>아래 예시 코드에서 <code>input_shape=(2,)</code>은 입력 벡터가 두 개의 요소로 이루어졌음을 의미한다.</p>
+<p>아래 예시 코드에서 <code>Input(shape=(2,))</code>는 각 관측치가 두 개의 특성변수 (X_1,X_2)로 구성됨을 의미한다.</p>
 <ul>
 <li>두 개의 feature variable로 구성됨 : <span class="math inline">\(X_1, X_2\)</span></li>
 </ul>
@@ -430,23 +427,20 @@ window.Quarto = {
 </tr>
 </tbody>
 </table>
-<p>이 문제에서는 마지막으로 추가된 dense layer에서 유닛의 개수는 하나이며, 활성화 함수로 sigmoid 함수를 사용한다..</p>
+<p>이 문제에서는 마지막으로 추가된 dense layer에서 유닛 수는 1이며, 활성화 함수로 sigmoid 함수를 사용한다.</p>
 <ul>
 <li>이는 출력값이 0과 1 사이의 확률로 해석될 수 있도록 하기 위함이며, <span class="math inline">\(y\)</span>가 두 개의 클래스로 구성된 이진 분류 문제이기 때문이다.</li>
 </ul>
-<div id="fb073447-3582-4a6c-8892-0f84f692fa7f" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-19T09:36:26.296572Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-19T09:36:26.296572Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-19T09:36:26.355290Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-19T09:36:26.354903Z&quot;}}" data-execution_count="6">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> tensorflow.keras.layers <span class="im">import</span> Dense</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>model.add(Dense(units<span class="op">=</span><span class="dv">4</span>, input_shape<span class="op">=</span>(<span class="dv">2</span>,), activation<span class="op">=</span><span class="st">'relu'</span>))  <span class="co"># 2개의 feature variable을 받을 예정</span></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>model.add(Dense(units<span class="op">=</span><span class="dv">2</span>, activation<span class="op">=</span><span class="st">'relu'</span>))</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>model.add(Dense(units<span class="op">=</span><span class="dv">1</span>, activation<span class="op">=</span><span class="st">'sigmoid'</span>))   <span class="co"># binary class 구별을 위함</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>C:\Users\KSLee\AppData\Local\Programs\Python\Python311\Lib\site-packages\keras\src\layers\core\dense.py:107: UserWarning: Do not pass an `input_shape`/`input_dim` argument to a layer. When using Sequential models, prefer using an `Input(shape)` object as the first layer in the model instead.
-  super().__init__(activity_regularizer=activity_regularizer, **kwargs)</code></pre>
-</div>
+<div id="fb073447-3582-4a6c-8892-0f84f692fa7f" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-19T09:36:26.296572Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-19T09:36:26.296572Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-19T09:36:26.355290Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-19T09:36:26.354903Z&quot;}}">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> tensorflow.keras.layers <span class="im">import</span> Input, Dense</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>model.add(Input(shape<span class="op">=</span>(<span class="dv">2</span>,)))</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>model.add(Dense(units<span class="op">=</span><span class="dv">4</span>, activation<span class="op">=</span><span class="st">'relu'</span>))  <span class="co"># 2개의 feature variable을 받을 예정</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>model.add(Dense(units<span class="op">=</span><span class="dv">2</span>, activation<span class="op">=</span><span class="st">'relu'</span>))</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>model.add(Dense(units<span class="op">=</span><span class="dv">1</span>, activation<span class="op">=</span><span class="st">'sigmoid'</span>))   <span class="co"># binary class 구별을 위함</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div id="6fe53860-51da-4a29-b3f8-0765ff39d0c8" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-19T09:36:26.355290Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-19T09:36:26.355290Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-19T09:36:26.373542Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-19T09:36:26.373542Z&quot;}}" data-execution_count="7">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>model.summary()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>model.summary()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="font-weight: bold">Model: "sequential_1"</span>
 </pre>
@@ -493,9 +487,9 @@ window.Quarto = {
 <p>이 손실 함수의 식은 다음과 같다.</p>
 <p><span class="math display">\[L(y, \hat y) = - y  \log(\hat y) - (1 - y)  \log(1 - \hat y)\]</span></p>
 <div id="d38945f8-ece0-421c-b945-70e2d836bcf5" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-19T09:36:26.373542Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-19T09:36:26.373542Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-19T09:36:26.388494Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-19T09:36:26.387693Z&quot;}}" data-execution_count="8">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>model.<span class="bu">compile</span>(loss<span class="op">=</span><span class="st">'binary_crossentropy'</span>,</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>              optimizer<span class="op">=</span><span class="st">'adam'</span>,</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>              metrics<span class="op">=</span>[<span class="st">'accuracy'</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>model.<span class="bu">compile</span>(loss<span class="op">=</span><span class="st">'binary_crossentropy'</span>,</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>              optimizer<span class="op">=</span><span class="st">'adam'</span>,</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>              metrics<span class="op">=</span>[<span class="st">'accuracy'</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>WARNING:tensorflow:TensorFlow GPU support is not available on native Windows for TensorFlow &gt;= 2.11. Even if CUDA/cuDNN are installed, GPU will not be used. Please use WSL2 or the TensorFlow-DirectML plugin.</code></pre>
 </div>
@@ -503,7 +497,7 @@ window.Quarto = {
 <section id="loss-function" class="level3" data-number="2.4.1">
 <h3 data-number="2.4.1" class="anchored" data-anchor-id="loss-function"><span class="header-section-number">2.4.1</span> <a href="https://keras.io/api/losses/">Loss</a> function</h3>
 <p>머신러닝에서 손실 함수 (loss function)는 머신러닝 모델이 예측한 값과 실제 값 사이의 차이를 수치화하여 학습 과정에서 오류를 정량적으로 측정하는 데 사용된다.</p>
-<p>Keras에서는 모델을 컴파일할 때 반드시 하나의 loss function을 지정해야 한다.</p>
+<p>일반적인 지도학습에서는 모델을 컴파일할 때 손실 함수를 지정한다.</p>
 <p>Keras는 다양한 종류의 손실 함수를 기본적으로 제공하며, 문제의 특성에 따라 적절한 함수를 선택할 수 있다.</p>
 <p>주요 함수는 다음과 같으며 일반적으로 <code>loss='binary_crossentropy'</code>와 같이 입력한다.</p>
 <ul>
@@ -536,7 +530,7 @@ window.Quarto = {
 <ul>
 <li><p>SGD (Stochastic Gradient Descent)</p>
 <ul>
-<li>가장 기본적인 옵티마이저. 한 번에 하나의 샘플(또는 미니배치)을 사용해 가중치를 업데이트함 <br><br></li>
+<li>가장 기본적인 옵티마이저로, 현재 gradient의 반대 방향으로 가중치를 업데이트한다. <br><br></li>
 </ul></li>
 <li><p>RMSprop</p>
 <ul>
@@ -562,7 +556,7 @@ window.Quarto = {
 <h4 data-number="2.4.1.2" class="anchored" data-anchor-id="metrics"><span class="header-section-number">2.4.1.2</span> <a href="https://keras.io/api/metrics/">Metrics</a></h4>
 <p>기계학습에서 Metrics (평가지표)는 모델의 성능을 평가하는 데 사용된다.</p>
 <p>손실 함수와 유사해 보이지만 훈련 과정에서는 직접 손실 최적화에 사용되지 않고, 훈련 결과나 테스트 셋에 대한 예측 결과를 평가하는 데에 사용된다.</p>
-<p>분류 문제에서는 다음과 같은 metric들이 활용된다.</p>
+<p>분류 문제에서는 다음과 같은 평가지표가 활용된다.</p>
 <ul>
 <li><code>accuracy</code></li>
 <li><code>binary_accuracy</code></li>
@@ -571,7 +565,7 @@ window.Quarto = {
 <li><code>top_k_categorical_accuracy</code></li>
 <li><code>sparse_top_k_categorical_accuracy</code></li>
 </ul>
-<p>회귀 문제에서는 다음과 같은 metric들이 활용된다.</p>
+<p>회귀 문제에서는 다음과 같은 평가지표가 활용된다.</p>
 <ul>
 <li><code>mean_squared_error</code><br>
 </li>
@@ -586,7 +580,7 @@ window.Quarto = {
 <section id="훈련" class="level2" data-number="2.5">
 <h2 data-number="2.5" class="anchored" data-anchor-id="훈련"><span class="header-section-number">2.5</span> 훈련</h2>
 <p>이제 모델에 훈련 데이터를 입력하여 학습을 진행할 수 있다.</p>
-<p>위에서 이미 생성한 numpy array들 (<code>X_training, Targets_training</code>)을 이용하여 학습할 수 있으며, <a href="https://keras.io/api/models/model_training_apis/#fit-method"><code>.fit()</code></a> method를 이용한다.</p>
+<p>위에서 이미 생성한 numpy array들 (<code>X_training, Targets_training</code>)을 이용하여 학습할 수 있으며, <a href="https://keras.io/api/models/model_training_apis/#fit-method"><code>.fit()</code></a> 메서드를 이용한다.</p>
 <p>기본적인 문법 구조는 다음과 같다.</p>
 <p><code>model.fit(X, y, epochs = , batch_size = )</code></p>
 <ul>
@@ -607,10 +601,10 @@ window.Quarto = {
 <ul>
 <li><p><code>validation_data=(X_val, y_val)</code> : 훈련 중 검증을 위해 사용할 데이터셋을 명시 모델의 일반화 성능을 실시간으로 확인할 수 있다.</p></li>
 <li><p><code>verbose</code> : 학습 진행 상태 출력 여부를 설정 (0: 출력 없음, 1: 기본 출력, 2: 에포크별 출력 등)</p></li>
-<li><p><code>shuffle=True</code> : 각 epoch마다 데이터를 섞을지 여부. 대부분의 경우 성능 향상에 도움이 된다.</p></li>
+<li><p><code>shuffle=True</code> : 각 epoch가 시작되기 전에 훈련 데이터를 섞는다. 시계열처럼 자료의 순서가 중요한 경우에는 주의해야 한다.</p></li>
 </ul>
 <div id="34ebd0c9-e84f-4f3d-9a70-d4ed66eb5e32" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-19T09:36:26.388818Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-19T09:36:26.388818Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-19T09:36:30.608924Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-19T09:36:30.607840Z&quot;}}" data-execution_count="9">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>history <span class="op">=</span> model.fit(X_training, Targets_training, epochs<span class="op">=</span><span class="dv">10</span>, batch_size<span class="op">=</span><span class="dv">5</span>, verbose<span class="op">=</span><span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>history <span class="op">=</span> model.fit(X_training, Targets_training, epochs<span class="op">=</span><span class="dv">10</span>, batch_size<span class="op">=</span><span class="dv">5</span>, verbose<span class="op">=</span><span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Epoch 1/10
 150/150 - 1s - 8ms/step - accuracy: 0.6920 - loss: 0.6095
@@ -647,26 +641,19 @@ Epoch 10/10
 <li><p>모델이 이전에 보지 못한 데이터에 대해 얼마나 잘 일반화되었는지를 평가하는 데 사용된다.</p></li>
 </ul></li>
 </ul>
-<p><code>evaluate()</code>는 모델 컴파일 시 설정한 손실 함수 값과 평가지표(metric) 값들을 리스트 또는 딕셔너리 형태로 반환한다.</p>
+<p><code>evaluate()</code>는 모델 컴파일 시 설정한 손실 함수와 평가지표의 값을 반환한다. <code>return_dict=True</code>로 설정하면 결과를 이름과 값으로 구성된 딕셔너리로 반환한다.</p>
 <ul>
 <li>이 예제에서는 <code>loss='binary_crossentropy'</code>와 <code>metrics=['accuracy']</code>이다.</li>
 </ul>
-<div id="b2dce297-c59d-4a6e-8d32-16d6cbdd252d" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-19T09:36:30.611920Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-19T09:36:30.611920Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-19T09:36:30.910032Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-19T09:36:30.910032Z&quot;}}" data-execution_count="10">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>test_results <span class="op">=</span> model.evaluate(X_testing, Targets_testing, verbose<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(model.metrics_names)</span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(test_results)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<div class="ansi-escaped-output">
-<pre><span class="ansi-bold">1/8</span> <span class="ansi-green-fg">━━</span><span class="ansi-white-fg">━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">1s</span> 188ms/step - accuracy: 1.0000 - loss: 0.1634
-
-<span class="ansi-bold">8/8</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">0s</span> 5ms/step - accuracy: 1.0000 - loss: 0.1904  
-
-['loss', 'compile_metrics']
-
-[0.19037319719791412, 1.0]
-</pre>
-</div>
-</div>
+<div id="b2dce297-c59d-4a6e-8d32-16d6cbdd252d" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-19T09:36:30.611920Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-19T09:36:30.611920Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-19T09:36:30.910032Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-19T09:36:30.910032Z&quot;}}">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>test_results <span class="op">=</span> model.evaluate(</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    X_testing,</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    Targets_testing,</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>    verbose<span class="op">=</span><span class="dv">0</span>,</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>    return_dict<span class="op">=</span><span class="va">True</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(test_results)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="예측" class="level3" data-number="2.5.2">
@@ -674,25 +661,17 @@ Epoch 10/10
 <p>훈련이 완료된 모델과 <a href="https://keras.io/api/models/model_training_apis/#predict-method"><code>.predict()</code></a> 메서드로 새로운 데이터에 대한 예측을 수행한다.</p>
 <p>기본 문법은 다음과 같다.</p>
 <p><code>y_pred = model.predict(X_new)</code></p>
-<p>현재 모형의 마지막 층의 활성함수인 sigmoid 함수는 0과 1사이의 실수(확률)를 내보내기 때문에, <code>predict()</code>의 출력은 0과 1 사이의 실수값(확률)이다.</p>
-<p>이 확률값을 이용해 클래스를 결정한다. - 0.5의 기준(threshold)를 기준으로 0.5보다 작으면 0의 클래스를, 크면 1의 클래스로 결정. - 이 과정은 뉴럴 네트워크 모형과 별도의 코드로 작성해 주어야 한다.</p>
-<div id="1154ee0e-7e62-48f6-aeb8-ed5032cd18ee" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-19T09:36:30.914625Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-19T09:36:30.914625Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-19T09:36:31.129495Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-19T09:36:31.129495Z&quot;}}" data-execution_count="11">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>y_prob <span class="op">=</span> model.predict(X_testing)</span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>predicted_class <span class="op">=</span> np.where(y_prob <span class="op">&gt;</span> <span class="fl">0.5</span>, <span class="dv">1</span>,<span class="dv">0</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<div class="ansi-escaped-output">
-<pre><span class="ansi-bold">1/8</span> <span class="ansi-green-fg">━━</span><span class="ansi-white-fg">━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">0s</span> 67ms/step
-
-<span class="ansi-bold">8/8</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">0s</span> 10ms/step
-</pre>
-</div>
-</div>
+<p>현재 모형의 마지막 층의 활성함수인 sigmoid 함수는 0과 1 사이의 실수(확률)를 내보내기 때문에, <code>predict()</code>의 출력은 0과 1 사이의 실수값(확률)이다.</p>
+<p>이 확률값을 이용해 클래스를 결정한다. - 예측확률이 0.5보다 크면 클래스 1로, 그렇지 않으면 클래스 0으로 분류한다. - 이 과정은 신경망 모형의 출력에 별도의 기준을 적용하는 코드로 작성해 주어야 한다.</p>
+<div id="1154ee0e-7e62-48f6-aeb8-ed5032cd18ee" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-19T09:36:30.914625Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-19T09:36:30.914625Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-19T09:36:31.129495Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-19T09:36:31.129495Z&quot;}}">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>y_prob <span class="op">=</span> model.predict(X_testing, verbose<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>predicted_class <span class="op">=</span> np.where(y_prob <span class="op">&gt;</span> <span class="fl">0.5</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>예측값과 실제값을 비교해 보자.</p>
 <div id="0e76e9c2-233a-4f3c-ad6e-648318b3e42c" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-19T09:36:31.129495Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-19T09:36:31.129495Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-19T09:36:31.154718Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-19T09:36:31.154718Z&quot;}}" data-execution_count="12">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>pd.DataFrame(np.c_[predicted_class, Targets_testing], columns<span class="op">=</span>[<span class="st">'predicted'</span>, <span class="st">'actual'</span>]).head(<span class="dv">10</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>pd.DataFrame(np.c_[predicted_class, Targets_testing], columns<span class="op">=</span>[<span class="st">'predicted'</span>, <span class="st">'actual'</span>]).head(<span class="dv">10</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="12">
 <div>
 
