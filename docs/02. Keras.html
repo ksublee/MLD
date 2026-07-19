@@ -304,7 +304,7 @@ window.Quarto = {
 <section id="데이터" class="level2" data-number="2.1">
 <h2 data-number="2.1" class="anchored" data-anchor-id="데이터"><span class="header-section-number">2.1</span> 데이터</h2>
 <p>아래 예제에서는 <a href="https://scikit-learn.org/stable/modules/generated/sklearn.datasets.make_circles.html">sklearn.datasets.make_circles</a>로 생성된 가상의 데이터를 통한 실습을 진행해 본다.</p>
-<div id="88801a4d-a0cb-4829-ab6a-2c6bd42aecd9" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-19T07:06:53.691007Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-19T07:06:53.690458Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-19T07:06:56.156052Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-19T07:06:56.156052Z&quot;}}" data-execution_count="1">
+<div id="88801a4d-a0cb-4829-ab6a-2c6bd42aecd9" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-19T09:36:19.293541Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-19T09:36:19.293541Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-19T09:36:21.800364Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-19T09:36:21.800364Z&quot;}}" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.datasets <span class="im">import</span> make_circles</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>X, targets <span class="op">=</span> make_circles(n_samples <span class="op">=</span> <span class="dv">1000</span>, factor<span class="op">=</span><span class="fl">0.1</span>)</span>
@@ -315,7 +315,7 @@ window.Quarto = {
 </div>
 <p>Feature variable인 <code>X</code>가 2차원인 데이터이다.</p>
 <p>Target인 y는 두 개의 클래스로 구성되어 있다.</p>
-<div id="fd694b83-f9b6-4407-b958-e592b610cb41" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-19T07:06:56.159812Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-19T07:06:56.159812Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-19T07:06:57.374924Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-19T07:06:57.374924Z&quot;}}" data-execution_count="2">
+<div id="fd694b83-f9b6-4407-b958-e592b610cb41" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-19T09:36:21.802458Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-19T09:36:21.802458Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-19T09:36:22.453850Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-19T09:36:22.453850Z&quot;}}" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>plt.scatter(X_training[Targets_training<span class="op">==</span><span class="dv">0</span>, <span class="dv">0</span>], X_training[Targets_training<span class="op">==</span><span class="dv">0</span>, <span class="dv">1</span>], color<span class="op">=</span><span class="st">'red'</span>)</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>plt.scatter(X_training[Targets_training<span class="op">==</span><span class="dv">1</span>, <span class="dv">0</span>], X_training[Targets_training<span class="op">==</span><span class="dv">1</span>, <span class="dv">1</span>], color<span class="op">=</span><span class="st">'blue'</span>)</span>
@@ -338,18 +338,18 @@ window.Quarto = {
 <p><a href="https://keras.io/api/models/sequential/"><code>tensorflow.keras.Sequential</code></a> : 가장 간단한 모델 유형으로, layer를 선형으로 쌓은 구조이다. 즉, 각 layer가 하나의 입력과 하나의 출력만을 갖고, 순차적으로 연결된다.</p>
 <p>더 복잡한 아키텍처의 경우 layer의 임의 그래프를 작성하거나 서브 클래스를 통해 처음부터 완전히 모델을 작성할 수있는 Keras 기능 (functional) API를 사용해야 한다.</p>
 <p>다음은 sequential 모델의 예시이다.</p>
-<div id="436a456f-56ed-40c2-b49c-dfc74572dbf8" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-19T07:06:57.378872Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-19T07:06:57.378872Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-19T07:07:01.505223Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-19T07:07:01.505223Z&quot;}}" data-execution_count="3">
+<div id="436a456f-56ed-40c2-b49c-dfc74572dbf8" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-19T09:36:22.457775Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-19T09:36:22.457329Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-19T09:36:26.281742Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-19T09:36:26.281742Z&quot;}}" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> tensorflow.keras <span class="im">import</span> Sequential</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> Sequential()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="c77ee398-1b2c-4e76-b372-3ba3f7fbe887" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-19T07:07:01.507047Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-19T07:07:01.507047Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-19T07:07:01.511049Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-19T07:07:01.511049Z&quot;}}" data-execution_count="4">
+<div id="c77ee398-1b2c-4e76-b372-3ba3f7fbe887" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-19T09:36:26.281742Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-19T09:36:26.281742Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-19T09:36:26.289558Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-19T09:36:26.289558Z&quot;}}" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="bu">type</span>(model)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="4">
 <pre><code>keras.src.models.sequential.Sequential</code></pre>
 </div>
 </div>
-<div id="507bf730-1f76-480c-b5bb-b5a37e29f03c" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-19T07:07:01.511049Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-19T07:07:01.511049Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-19T07:07:01.516183Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-19T07:07:01.516183Z&quot;}}" data-execution_count="5">
+<div id="507bf730-1f76-480c-b5bb-b5a37e29f03c" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-19T09:36:26.289558Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-19T09:36:26.289558Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-19T09:36:26.296572Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-19T09:36:26.296572Z&quot;}}" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 아래와 같이 생성하기도 한다.</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> tensorflow <span class="im">as</span> tf</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> tf.keras.Sequential()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -434,7 +434,7 @@ window.Quarto = {
 <ul>
 <li>이는 출력값이 0과 1 사이의 확률로 해석될 수 있도록 하기 위함이며, <span class="math inline">\(y\)</span>가 두 개의 클래스로 구성된 이진 분류 문제이기 때문이다.</li>
 </ul>
-<div id="fb073447-3582-4a6c-8892-0f84f692fa7f" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-19T07:07:01.518192Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-19T07:07:01.516183Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-19T07:07:01.610515Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-19T07:07:01.610515Z&quot;}}" data-execution_count="6">
+<div id="fb073447-3582-4a6c-8892-0f84f692fa7f" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-19T09:36:26.296572Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-19T09:36:26.296572Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-19T09:36:26.355290Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-19T09:36:26.354903Z&quot;}}" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> tensorflow.keras.layers <span class="im">import</span> Dense</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>model.add(Dense(units<span class="op">=</span><span class="dv">4</span>, input_shape<span class="op">=</span>(<span class="dv">2</span>,), activation<span class="op">=</span><span class="st">'relu'</span>))  <span class="co"># 2개의 feature variable을 받을 예정</span></span>
@@ -445,7 +445,7 @@ window.Quarto = {
   super().__init__(activity_regularizer=activity_regularizer, **kwargs)</code></pre>
 </div>
 </div>
-<div id="6fe53860-51da-4a29-b3f8-0765ff39d0c8" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-19T07:07:01.610515Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-19T07:07:01.610515Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-19T07:07:01.631063Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-19T07:07:01.631063Z&quot;}}" data-execution_count="7">
+<div id="6fe53860-51da-4a29-b3f8-0765ff39d0c8" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-19T09:36:26.355290Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-19T09:36:26.355290Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-19T09:36:26.373542Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-19T09:36:26.373542Z&quot;}}" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>model.summary()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="font-weight: bold">Model: "sequential_1"</span>
@@ -492,7 +492,7 @@ window.Quarto = {
 <p>이는 이번 예제에서 2개의 클래스로 구성된 y를 분류하는 문제를 다루기 때문이다.</p>
 <p>이 손실 함수의 식은 다음과 같다.</p>
 <p><span class="math display">\[L(y, \hat y) = - y  \log(\hat y) - (1 - y)  \log(1 - \hat y)\]</span></p>
-<div id="d38945f8-ece0-421c-b945-70e2d836bcf5" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-19T07:07:01.631063Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-19T07:07:01.631063Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-19T07:07:01.645812Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-19T07:07:01.645812Z&quot;}}" data-execution_count="8">
+<div id="d38945f8-ece0-421c-b945-70e2d836bcf5" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-19T09:36:26.373542Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-19T09:36:26.373542Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-19T09:36:26.388494Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-19T09:36:26.387693Z&quot;}}" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>model.<span class="bu">compile</span>(loss<span class="op">=</span><span class="st">'binary_crossentropy'</span>,</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>              optimizer<span class="op">=</span><span class="st">'adam'</span>,</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>              metrics<span class="op">=</span>[<span class="st">'accuracy'</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -609,119 +609,29 @@ window.Quarto = {
 <li><p><code>verbose</code> : 학습 진행 상태 출력 여부를 설정 (0: 출력 없음, 1: 기본 출력, 2: 에포크별 출력 등)</p></li>
 <li><p><code>shuffle=True</code> : 각 epoch마다 데이터를 섞을지 여부. 대부분의 경우 성능 향상에 도움이 된다.</p></li>
 </ul>
-<div id="34ebd0c9-e84f-4f3d-9a70-d4ed66eb5e32" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-19T07:07:01.645812Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-19T07:07:01.645812Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-19T07:07:04.209426Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-19T07:07:04.209426Z&quot;}}" data-execution_count="9">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>history <span class="op">=</span> model.fit(X_training, Targets_training, epochs<span class="op">=</span><span class="dv">10</span>, batch_size<span class="op">=</span><span class="dv">5</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="34ebd0c9-e84f-4f3d-9a70-d4ed66eb5e32" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-19T09:36:26.388818Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-19T09:36:26.388818Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-19T09:36:30.608924Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-19T09:36:30.607840Z&quot;}}" data-execution_count="9">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>history <span class="op">=</span> model.fit(X_training, Targets_training, epochs<span class="op">=</span><span class="dv">10</span>, batch_size<span class="op">=</span><span class="dv">5</span>, verbose<span class="op">=</span><span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<div class="ansi-escaped-output">
-<pre>Epoch 1/10
-
-
-<span class="ansi-bold">  1/150</span> <span class="ansi-white-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">2:11</span> 883ms/step - accuracy: 0.6000 - loss: 0.6996
-
-<span class="ansi-bold"> 74/150</span> <span class="ansi-green-fg">━━━━━━━━━</span><span class="ansi-white-fg">━━━━━━━━━━━</span> <span class="ansi-bold">0s</span> 854us/step - accuracy: 0.5054 - loss: 0.6709  
-
-<span class="ansi-bold">142/150</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━━━</span><span class="ansi-white-fg">━━</span> <span class="ansi-bold">0s</span> 802us/step - accuracy: 0.5690 - loss: 0.6620
-
-<span class="ansi-bold">150/150</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">1s</span> 1ms/step - accuracy: 0.5680 - loss: 0.6621  
-
+<pre><code>Epoch 1/10
+150/150 - 1s - 8ms/step - accuracy: 0.6920 - loss: 0.6095
 Epoch 2/10
-
-
-<span class="ansi-bold">  1/150</span> <span class="ansi-white-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">2s</span> 17ms/step - accuracy: 0.8000 - loss: 0.6913
-
-<span class="ansi-bold"> 66/150</span> <span class="ansi-green-fg">━━━━━━━━</span><span class="ansi-white-fg">━━━━━━━━━━━━</span> <span class="ansi-bold">0s</span> 835us/step - accuracy: 0.6121 - loss: 0.6547
-
-<span class="ansi-bold">136/150</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━━━</span><span class="ansi-white-fg">━━</span> <span class="ansi-bold">0s</span> 798us/step - accuracy: 0.6603 - loss: 0.6400
-
-<span class="ansi-bold">150/150</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">0s</span> 846us/step - accuracy: 0.6680 - loss: 0.6372
-
+150/150 - 0s - 2ms/step - accuracy: 0.8960 - loss: 0.5650
 Epoch 3/10
-
-
-<span class="ansi-bold">  1/150</span> <span class="ansi-white-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">2s</span> 15ms/step - accuracy: 0.8000 - loss: 0.6826
-
-<span class="ansi-bold"> 79/150</span> <span class="ansi-green-fg">━━━━━━━━━━</span><span class="ansi-white-fg">━━━━━━━━━━</span> <span class="ansi-bold">0s</span> 815us/step - accuracy: 0.8025 - loss: 0.6118
-
-<span class="ansi-bold">150/150</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">0s</span> 897us/step - accuracy: 0.8107 - loss: 0.6008
-
+150/150 - 0s - 2ms/step - accuracy: 0.9747 - loss: 0.5111
 Epoch 4/10
-
-
-<span class="ansi-bold">  1/150</span> <span class="ansi-white-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">2s</span> 17ms/step - accuracy: 1.0000 - loss: 0.5265
-
-<span class="ansi-bold"> 78/150</span> <span class="ansi-green-fg">━━━━━━━━━━</span><span class="ansi-white-fg">━━━━━━━━━━</span> <span class="ansi-bold">0s</span> 849us/step - accuracy: 0.8692 - loss: 0.5636
-
-<span class="ansi-bold">135/150</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━━━</span><span class="ansi-white-fg">━━</span> <span class="ansi-bold">0s</span> 868us/step - accuracy: 0.8830 - loss: 0.5622
-
-<span class="ansi-bold">150/150</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">0s</span> 893us/step - accuracy: 0.8853 - loss: 0.5619
-
+150/150 - 0s - 2ms/step - accuracy: 0.9840 - loss: 0.4550
 Epoch 5/10
-
-
-<span class="ansi-bold">  1/150</span> <span class="ansi-white-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">4s</span> 28ms/step - accuracy: 1.0000 - loss: 0.5363
-
-<span class="ansi-bold"> 58/150</span> <span class="ansi-green-fg">━━━━━━━</span><span class="ansi-white-fg">━━━━━━━━━━━━━</span> <span class="ansi-bold">0s</span> 908us/step - accuracy: 0.9276 - loss: 0.5263
-
-<span class="ansi-bold">107/150</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━</span><span class="ansi-white-fg">━━━━━━</span> <span class="ansi-bold">0s</span> 980us/step - accuracy: 0.9271 - loss: 0.5234
-
-<span class="ansi-bold">150/150</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">0s</span> 1ms/step - accuracy: 0.9373 - loss: 0.5147  
-
+150/150 - 0s - 2ms/step - accuracy: 0.9933 - loss: 0.4021
 Epoch 6/10
-
-
-<span class="ansi-bold">  1/150</span> <span class="ansi-white-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">2s</span> 17ms/step - accuracy: 1.0000 - loss: 0.6025
-
-<span class="ansi-bold"> 55/150</span> <span class="ansi-green-fg">━━━━━━━</span><span class="ansi-white-fg">━━━━━━━━━━━━━</span> <span class="ansi-bold">0s</span> 1ms/step - accuracy: 0.9709 - loss: 0.4648 
-
-<span class="ansi-bold">110/150</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━</span><span class="ansi-white-fg">━━━━━━</span> <span class="ansi-bold">0s</span> 1ms/step - accuracy: 0.9673 - loss: 0.4604
-
-<span class="ansi-bold">150/150</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">0s</span> 1ms/step - accuracy: 0.9720 - loss: 0.4563
-
+150/150 - 0s - 2ms/step - accuracy: 1.0000 - loss: 0.3531
 Epoch 7/10
-
-
-<span class="ansi-bold">  1/150</span> <span class="ansi-white-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">3s</span> 23ms/step - accuracy: 1.0000 - loss: 0.5750
-
-<span class="ansi-bold"> 68/150</span> <span class="ansi-green-fg">━━━━━━━━━</span><span class="ansi-white-fg">━━━━━━━━━━━</span> <span class="ansi-bold">0s</span> 848us/step - accuracy: 0.9794 - loss: 0.4156
-
-<span class="ansi-bold">133/150</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━━</span><span class="ansi-white-fg">━━━</span> <span class="ansi-bold">0s</span> 842us/step - accuracy: 0.9865 - loss: 0.4006
-
-<span class="ansi-bold">150/150</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">0s</span> 920us/step - accuracy: 0.9867 - loss: 0.3996
-
+150/150 - 0s - 2ms/step - accuracy: 1.0000 - loss: 0.3093
 Epoch 8/10
-
-
-<span class="ansi-bold">  1/150</span> <span class="ansi-white-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">2s</span> 16ms/step - accuracy: 1.0000 - loss: 0.4465
-
-<span class="ansi-bold"> 66/150</span> <span class="ansi-green-fg">━━━━━━━━</span><span class="ansi-white-fg">━━━━━━━━━━━━</span> <span class="ansi-bold">0s</span> 862us/step - accuracy: 1.0000 - loss: 0.3634
-
-<span class="ansi-bold">121/150</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━</span><span class="ansi-white-fg">━━━━</span> <span class="ansi-bold">0s</span> 895us/step - accuracy: 1.0000 - loss: 0.3555
-
-<span class="ansi-bold">150/150</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">0s</span> 914us/step - accuracy: 1.0000 - loss: 0.3499
-
+150/150 - 0s - 2ms/step - accuracy: 1.0000 - loss: 0.2709
 Epoch 9/10
-
-
-<span class="ansi-bold">  1/150</span> <span class="ansi-white-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">3s</span> 22ms/step - accuracy: 1.0000 - loss: 0.3304
-
-<span class="ansi-bold"> 64/150</span> <span class="ansi-green-fg">━━━━━━━━</span><span class="ansi-white-fg">━━━━━━━━━━━━</span> <span class="ansi-bold">0s</span> 1ms/step - accuracy: 1.0000 - loss: 0.3253 
-
-<span class="ansi-bold">121/150</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━</span><span class="ansi-white-fg">━━━━</span> <span class="ansi-bold">0s</span> 966us/step - accuracy: 1.0000 - loss: 0.3116
-
-<span class="ansi-bold">150/150</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">0s</span> 1ms/step - accuracy: 1.0000 - loss: 0.3064  
-
+150/150 - 0s - 2ms/step - accuracy: 1.0000 - loss: 0.2381
 Epoch 10/10
-
-
-<span class="ansi-bold">  1/150</span> <span class="ansi-white-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">2s</span> 17ms/step - accuracy: 1.0000 - loss: 0.3099
-
-<span class="ansi-bold"> 65/150</span> <span class="ansi-green-fg">━━━━━━━━</span><span class="ansi-white-fg">━━━━━━━━━━━━</span> <span class="ansi-bold">0s</span> 917us/step - accuracy: 1.0000 - loss: 0.2809
-
-<span class="ansi-bold">123/150</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━</span><span class="ansi-white-fg">━━━━</span> <span class="ansi-bold">0s</span> 937us/step - accuracy: 1.0000 - loss: 0.2720
-
-<span class="ansi-bold">150/150</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">0s</span> 981us/step - accuracy: 1.0000 - loss: 0.2682
-</pre>
-</div>
+150/150 - 0s - 2ms/step - accuracy: 1.0000 - loss: 0.2107</code></pre>
 </div>
 </div>
 <section id="평가" class="level3" data-number="2.5.1">
@@ -741,19 +651,19 @@ Epoch 10/10
 <ul>
 <li>이 예제에서는 <code>loss='binary_crossentropy'</code>와 <code>metrics=['accuracy']</code>이다.</li>
 </ul>
-<div id="b2dce297-c59d-4a6e-8d32-16d6cbdd252d" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-19T07:07:04.209426Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-19T07:07:04.209426Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-19T07:07:04.395907Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-19T07:07:04.395907Z&quot;}}" data-execution_count="10">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>test_results <span class="op">=</span> model.evaluate(X_testing, Targets_testing, verbose<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(model.metrics_names)</span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(test_results)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="b2dce297-c59d-4a6e-8d32-16d6cbdd252d" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-19T09:36:30.611920Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-19T09:36:30.611920Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-19T09:36:30.910032Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-19T09:36:30.910032Z&quot;}}" data-execution_count="10">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>test_results <span class="op">=</span> model.evaluate(X_testing, Targets_testing, verbose<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(model.metrics_names)</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(test_results)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <div class="ansi-escaped-output">
-<pre><span class="ansi-bold">1/8</span> <span class="ansi-green-fg">━━</span><span class="ansi-white-fg">━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">0s</span> 83ms/step - accuracy: 1.0000 - loss: 0.2668
-
-<span class="ansi-bold">8/8</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">0s</span> 3ms/step - accuracy: 1.0000 - loss: 0.2513 
+<pre><span class="ansi-bold">1/8</span> <span class="ansi-green-fg">━━</span><span class="ansi-white-fg">━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">1s</span> 188ms/step - accuracy: 1.0000 - loss: 0.1634
+
+<span class="ansi-bold">8/8</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">0s</span> 5ms/step - accuracy: 1.0000 - loss: 0.1904  
 
 ['loss', 'compile_metrics']
 
-[0.2513488829135895, 1.0]
+[0.19037319719791412, 1.0]
 </pre>
 </div>
 </div>
@@ -766,23 +676,23 @@ Epoch 10/10
 <p><code>y_pred = model.predict(X_new)</code></p>
 <p>현재 모형의 마지막 층의 활성함수인 sigmoid 함수는 0과 1사이의 실수(확률)를 내보내기 때문에, <code>predict()</code>의 출력은 0과 1 사이의 실수값(확률)이다.</p>
 <p>이 확률값을 이용해 클래스를 결정한다. - 0.5의 기준(threshold)를 기준으로 0.5보다 작으면 0의 클래스를, 크면 1의 클래스로 결정. - 이 과정은 뉴럴 네트워크 모형과 별도의 코드로 작성해 주어야 한다.</p>
-<div id="1154ee0e-7e62-48f6-aeb8-ed5032cd18ee" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-19T07:07:04.397744Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-19T07:07:04.397744Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-19T07:07:04.554584Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-19T07:07:04.554584Z&quot;}}" data-execution_count="11">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>y_prob <span class="op">=</span> model.predict(X_testing)</span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>predicted_class <span class="op">=</span> np.where(y_prob <span class="op">&gt;</span> <span class="fl">0.5</span>, <span class="dv">1</span>,<span class="dv">0</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="1154ee0e-7e62-48f6-aeb8-ed5032cd18ee" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-19T09:36:30.914625Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-19T09:36:30.914625Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-19T09:36:31.129495Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-19T09:36:31.129495Z&quot;}}" data-execution_count="11">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>y_prob <span class="op">=</span> model.predict(X_testing)</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>predicted_class <span class="op">=</span> np.where(y_prob <span class="op">&gt;</span> <span class="fl">0.5</span>, <span class="dv">1</span>,<span class="dv">0</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <div class="ansi-escaped-output">
-<pre><span class="ansi-bold">1/8</span> <span class="ansi-green-fg">━━</span><span class="ansi-white-fg">━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">0s</span> 83ms/step
+<pre><span class="ansi-bold">1/8</span> <span class="ansi-green-fg">━━</span><span class="ansi-white-fg">━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">0s</span> 67ms/step
 
-<span class="ansi-bold">8/8</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">0s</span> 5ms/step 
+<span class="ansi-bold">8/8</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">0s</span> 10ms/step
 </pre>
 </div>
 </div>
 </div>
 <p>예측값과 실제값을 비교해 보자.</p>
-<div id="0e76e9c2-233a-4f3c-ad6e-648318b3e42c" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-19T07:07:04.554584Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-19T07:07:04.554584Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-19T07:07:04.570980Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-19T07:07:04.570980Z&quot;}}" data-execution_count="12">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>pd.DataFrame(np.c_[predicted_class, Targets_testing], columns<span class="op">=</span>[<span class="st">'predicted'</span>, <span class="st">'actual'</span>]).head(<span class="dv">10</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="0e76e9c2-233a-4f3c-ad6e-648318b3e42c" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-19T09:36:31.129495Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-19T09:36:31.129495Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-19T09:36:31.154718Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-19T09:36:31.154718Z&quot;}}" data-execution_count="12">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>pd.DataFrame(np.c_[predicted_class, Targets_testing], columns<span class="op">=</span>[<span class="st">'predicted'</span>, <span class="st">'actual'</span>]).head(<span class="dv">10</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="12">
 <div>
 
@@ -798,8 +708,8 @@ Epoch 10/10
 <tbody>
 <tr class="odd">
 <th data-quarto-table-cell-role="th">0</th>
-<td>1</td>
-<td>1</td>
+<td>0</td>
+<td>0</td>
 </tr>
 <tr class="even">
 <th data-quarto-table-cell-role="th">1</th>
@@ -813,13 +723,13 @@ Epoch 10/10
 </tr>
 <tr class="even">
 <th data-quarto-table-cell-role="th">3</th>
-<td>0</td>
-<td>0</td>
+<td>1</td>
+<td>1</td>
 </tr>
 <tr class="odd">
 <th data-quarto-table-cell-role="th">4</th>
-<td>1</td>
-<td>1</td>
+<td>0</td>
+<td>0</td>
 </tr>
 <tr class="even">
 <th data-quarto-table-cell-role="th">5</th>
@@ -838,8 +748,8 @@ Epoch 10/10
 </tr>
 <tr class="odd">
 <th data-quarto-table-cell-role="th">8</th>
-<td>1</td>
-<td>1</td>
+<td>0</td>
+<td>0</td>
 </tr>
 <tr class="even">
 <th data-quarto-table-cell-role="th">9</th>
