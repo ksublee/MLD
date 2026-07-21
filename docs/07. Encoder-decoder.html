@@ -298,13 +298,13 @@ window.Quarto = {
 </header>
 
 
-<p>Encoder-Decoder 구조는 입력 데이터를 고정된 크기의 벡터 표현으로 변환(인코딩)하고, 이를 다시 원하는 형태로 변환(디코딩)하는 구조.</p>
+<p>기본적인 RNN 기반 Encoder-Decoder에서는 Encoder가 입력 시퀀스를 상태 벡터로 요약하고, Decoder가 이 상태를 이용하여 출력 시퀀스를 생성한다. Attention과 Transformer에서는 이 구조가 확장되며, 이는 뒤에서 살펴본다.</p>
 <p>Encoder-Decoder 모델은 입력 도메인에서 출력 도메인으로 데이터 포인트를 매핑하는 것을 학습하는 모델군으로, 두 단계의 네트워크로 구성된다.</p>
 <ul>
 <li><p>인코더(Encoder): 입력 시퀀스 <span class="math inline">\(x\)</span>를 고정된 크기의 벡터 <span class="math inline">\(z = f(x)\)</span>로 인코딩하여 의미 정보를 압축한다.</p></li>
 <li><p>디코더(Decoder): 이 잠재 벡터 <span class="math inline">\(z\)</span>를 바탕으로 출력 시퀀스 <span class="math inline">\(y = g(z)\)</span>를 단계적으로 생성한다.</p></li>
 </ul>
-<p>이때, <span class="math inline">\(f\)</span>와 <span class="math inline">\(g\)</span>는 각각 딥러닝 기반의 함수 (예: RNN, LSTM, GRU, Transformer 등)로 구현된다.</p>
+<p>이때, <span class="math inline">\(f\)</span>와 <span class="math inline">\(g\)</span>는 각각 딥러닝 기반의 함수 (예: RNN, LSTM, GRU 등)로 구현된다.</p>
 <p>이 구조는 주로 자연어 처리에서 많이 사용되며, 기계 번역, 요약, 대화 시스템 등 다양한 곳에서 응용된다.</p>
 <section id="encoder" class="level2" data-number="7.1">
 <h2 data-number="7.1" class="anchored" data-anchor-id="encoder"><span class="header-section-number">7.1</span> Encoder</h2>
@@ -319,7 +319,7 @@ window.Quarto = {
 <h2 data-number="7.2" class="anchored" data-anchor-id="decoder"><span class="header-section-number">7.2</span> Decoder</h2>
 <ul>
 <li><p>인코더에서 전달된 컨텍스트 벡터(또는 시계열 상태)를 기반으로 <strong>출력 시퀀스</strong> <span class="math inline">\(\mathbf{y} = (y_1, y_2, \dots, y_{T'})\)</span>를 단계적으로 생성한다.</p></li>
-<li><p>초기 상태는 인코더로부터 전달된 컨텍스트 벡터로 설정되며, 이후 디코더 출력 결과를 입력으로 사용해 다음 출력을 예측하는 <strong>autoregressive 구조</strong>를 가진다.</p></li>
+<li><p>초기 상태는 인코더로부터 전달된 컨텍스트 벡터로 설정된다. RNN 기반 seq2seq 모델의 Decoder는 이전 출력값을 다음 입력으로 사용하여 출력을 단계적으로 생성하는 <strong>autoregressive 구조</strong>를 사용할 수 있다.</p></li>
 <li><p>디코더에서도 주로 <strong>RNN 계열</strong> 또는 <strong>Transformer 디코더</strong>가 사용되며, Attention 메커니즘이 함께 사용되면 인코더의 전체 시퀀스를 동적으로 참조할 수 있다.</p></li>
 </ul>
 </section>
@@ -336,7 +336,7 @@ window.Quarto = {
 <p>학습의 목적은 <strong>복원된 출력 <span class="math inline">\(\hat{x}\)</span>가 원래 입력 <span class="math inline">\(x\)</span>와 최대한 비슷해지도록</strong> 손실함수(예: MSE)를 최소화하는 것이다.</p>
 <p>이러한 구조는 다음과 같은 다양한 응용으로 활용된다:</p>
 <ul>
-<li>차원 축소 (PCA의 비선형 확장으로 이해 가능)</li>
+<li>차원 축소 및 특징 추출</li>
 <li>노이즈 제거 (Denoising Autoencoder)</li>
 <li>이상 탐지 (입력과 출력 차이가 큰 데이터를 이상으로 탐지)</li>
 <li>데이터 생성 (변형된 오토인코더: Variational Autoencoder 등)</li>
@@ -344,7 +344,7 @@ window.Quarto = {
 <section id="autoencoder-fashion-mnist-예제" class="level3" data-number="7.3.1">
 <h3 data-number="7.3.1" class="anchored" data-anchor-id="autoencoder-fashion-mnist-예제"><span class="header-section-number">7.3.1</span> Autoencoder Fashion-MNIST 예제</h3>
 <p>다음은 Autoencoder를 사용하는 예제이다.</p>
-<div id="9613030c-dcae-4524-915a-d4678d83f823" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-21T07:37:40.717250Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-21T07:37:40.717250Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-21T07:37:52.354560Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-21T07:37:52.352546Z&quot;}}" data-execution_count="1">
+<div id="9613030c-dcae-4524-915a-d4678d83f823" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-21T08:36:40.757411Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-21T08:36:40.756393Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-21T08:36:51.601015Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-21T08:36:51.599995Z&quot;}}" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> tensorflow <span class="im">as</span> tf</span>
@@ -363,13 +363,13 @@ window.Quarto = {
 </div>
 <p><code>encoding_dim</code>은 인코더에서 사용할 dense layer의 유닛의 수로, 이것을 32로 설정하여 784의 <code>input_dim</code>보다 훨씬 작은 차원을 구성하였다.</p>
 <p>이것은 autoencoder가 때로는 입력된 데이터를 요약하는 역할을 할 수 있음을 뜻한다.</p>
-<div id="898c09f9-689f-4f5e-99a3-9b2f91337c7f" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-21T07:37:52.359558Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-21T07:37:52.358557Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-21T07:37:52.368444Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-21T07:37:52.366430Z&quot;}}" data-execution_count="2">
+<div id="898c09f9-689f-4f5e-99a3-9b2f91337c7f" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-21T08:36:51.607014Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-21T08:36:51.606034Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-21T08:36:51.614247Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-21T08:36:51.613239Z&quot;}}" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Autoencoder 모델 구성</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>input_dim <span class="op">=</span> x_train.shape[<span class="dv">1</span>]</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>encoding_dim <span class="op">=</span> <span class="dv">32</span>  <span class="co"># 잠재 공간 크기</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>간단하게 인코더와 디코더를 구성하고, 이 둘을 이용하여 <code>autoencoder</code> 모형을 정의하였다.</p>
-<div id="696c26c5-c8a3-41dc-ae88-eb471bfe599c" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-21T07:37:52.373443Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-21T07:37:52.373443Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-21T07:37:52.546419Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-21T07:37:52.544409Z&quot;}}" data-execution_count="3">
+<div id="696c26c5-c8a3-41dc-ae88-eb471bfe599c" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-21T08:36:51.618242Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-21T08:36:51.618242Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-21T08:36:51.758211Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-21T08:36:51.757207Z&quot;}}" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>autoencoder <span class="op">=</span> Sequential([</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    Input(shape<span class="op">=</span>(input_dim,)),</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    Dense(encoding_dim, activation<span class="op">=</span><span class="st">'relu'</span>, name<span class="op">=</span><span class="st">'encoded_layer'</span>),</span>
@@ -415,7 +415,7 @@ window.Quarto = {
 <li><p>따라서 특징 추출이나 차원 축소에 활용할 수 있다.</p></li>
 <li><p>다만 이는 일반적인 이미지 압축 파일처럼 저장 공간을 직접 줄여주는 것은 아니다.</p></li>
 </ul>
-<div id="d21c4072-45d1-45cd-8de3-df5dd7f93987" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-21T07:37:52.552421Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-21T07:37:52.551425Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-21T07:38:21.549040Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-21T07:38:21.548030Z&quot;}}" data-execution_count="4">
+<div id="d21c4072-45d1-45cd-8de3-df5dd7f93987" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-21T08:36:51.762287Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-21T08:36:51.761275Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-21T08:37:20.702327Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-21T08:37:20.701112Z&quot;}}" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 모델 컴파일</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>autoencoder.<span class="bu">compile</span>(optimizer<span class="op">=</span><span class="st">'adam'</span>, loss<span class="op">=</span><span class="st">'binary_crossentropy'</span>)</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -432,7 +432,7 @@ window.Quarto = {
 <div class="cell-output cell-output-stdout">
 <pre><code>WARNING:tensorflow:TensorFlow GPU support is not available on native Windows for TensorFlow &gt;= 2.11. Even if CUDA/cuDNN are installed, GPU will not be used. Please use WSL2 or the TensorFlow-DirectML plugin.
 Epoch 1/20
-215/215 - 3s - 12ms/step - loss: 0.4225 - val_loss: 0.3389
+215/215 - 3s - 13ms/step - loss: 0.4225 - val_loss: 0.3389
 Epoch 2/20
 215/215 - 1s - 6ms/step - loss: 0.3286 - val_loss: 0.3166
 Epoch 3/20
@@ -473,10 +473,10 @@ Epoch 20/20
 215/215 - 1s - 6ms/step - loss: 0.2840 - val_loss: 0.2813</code></pre>
 </div>
 <div class="cell-output cell-output-display" data-execution_count="4">
-<pre><code>&lt;keras.src.callbacks.history.History at 0x22a655537d0&gt;</code></pre>
+<pre><code>&lt;keras.src.callbacks.history.History at 0x23853eeee10&gt;</code></pre>
 </div>
 </div>
-<div id="aaaaaaaa-0001-4000-8000-000000000001" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-21T07:38:21.554050Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-21T07:38:21.553052Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-21T07:38:22.390893Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-21T07:38:22.389493Z&quot;}}" data-execution_count="5">
+<div id="aaaaaaaa-0001-4000-8000-000000000001" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-21T08:37:20.706329Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-21T08:37:20.705330Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-21T08:37:21.432859Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-21T08:37:21.431845Z&quot;}}" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>test_loss <span class="op">=</span> autoencoder.evaluate(x_test, x_test, verbose<span class="op">=</span><span class="dv">0</span>)</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Test reconstruction loss:"</span>, test_loss)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -493,7 +493,7 @@ Epoch 20/20
 <li>아래에서는 동일한 구조의 <code>denoising_autoencoder</code>를 새로 만들어 이 방식으로 훈련한다.</li>
 </ul>
 <p>먼저 노이즈를 인위적으로 그림에 추가해 본다.</p>
-<div id="f9c18839-959f-42c7-9de5-ace12ce6fbc7" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-21T07:38:22.395892Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-21T07:38:22.394898Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-21T07:38:25.080364Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-21T07:38:25.078352Z&quot;}}" data-execution_count="6">
+<div id="f9c18839-959f-42c7-9de5-ace12ce6fbc7" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-21T08:37:21.436854Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-21T08:37:21.436854Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-21T08:37:23.975422Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-21T08:37:23.973440Z&quot;}}" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 노이즈 추가</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>noise_factor <span class="op">=</span> <span class="fl">0.2</span></span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>x_train_noisy <span class="op">=</span> x_train <span class="op">+</span> noise_factor <span class="op">*</span> np.random.normal(loc<span class="op">=</span><span class="fl">0.0</span>, scale<span class="op">=</span><span class="fl">1.0</span>, size<span class="op">=</span>x_train.shape) </span>
@@ -503,7 +503,7 @@ Epoch 20/20
 <span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>x_train_noisy <span class="op">=</span> np.clip(x_train_noisy, <span class="fl">0.</span>, <span class="fl">1.</span>)</span>
 <span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>x_test_noisy <span class="op">=</span> np.clip(x_test_noisy, <span class="fl">0.</span>, <span class="fl">1.</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="aaaaaaaa-0002-4000-8000-000000000002" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-21T07:38:25.085364Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-21T07:38:25.084365Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-21T07:38:54.953541Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-21T07:38:54.952448Z&quot;}}" data-execution_count="7">
+<div id="aaaaaaaa-0002-4000-8000-000000000002" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-21T08:37:23.979441Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-21T08:37:23.979441Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-21T08:37:55.243281Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-21T08:37:55.241266Z&quot;}}" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>denoising_autoencoder <span class="op">=</span> Sequential([</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>    Input(shape<span class="op">=</span>(input_dim,)),</span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    Dense(encoding_dim, activation<span class="op">=</span><span class="st">'relu'</span>, name<span class="op">=</span><span class="st">'encoded_layer'</span>),</span>
@@ -531,23 +531,23 @@ Epoch 3/20
 Epoch 4/20
 215/215 - 1s - 6ms/step - loss: 0.3130 - val_loss: 0.3080
 Epoch 5/20
-215/215 - 1s - 7ms/step - loss: 0.3081 - val_loss: 0.3041
+215/215 - 3s - 12ms/step - loss: 0.3081 - val_loss: 0.3041
 Epoch 6/20
 215/215 - 1s - 6ms/step - loss: 0.3047 - val_loss: 0.3009
 Epoch 7/20
-215/215 - 1s - 6ms/step - loss: 0.3020 - val_loss: 0.2984
+215/215 - 1s - 7ms/step - loss: 0.3020 - val_loss: 0.2984
 Epoch 8/20
-215/215 - 1s - 6ms/step - loss: 0.2998 - val_loss: 0.2963
+215/215 - 1s - 7ms/step - loss: 0.2998 - val_loss: 0.2963
 Epoch 9/20
 215/215 - 1s - 6ms/step - loss: 0.2980 - val_loss: 0.2947
 Epoch 10/20
-215/215 - 1s - 6ms/step - loss: 0.2967 - val_loss: 0.2935
+215/215 - 1s - 7ms/step - loss: 0.2967 - val_loss: 0.2935
 Epoch 11/20
-215/215 - 1s - 7ms/step - loss: 0.2957 - val_loss: 0.2926
+215/215 - 1s - 6ms/step - loss: 0.2957 - val_loss: 0.2926
 Epoch 12/20
 215/215 - 1s - 6ms/step - loss: 0.2949 - val_loss: 0.2920
 Epoch 13/20
-215/215 - 1s - 7ms/step - loss: 0.2944 - val_loss: 0.2915
+215/215 - 1s - 6ms/step - loss: 0.2944 - val_loss: 0.2915
 Epoch 14/20
 215/215 - 1s - 6ms/step - loss: 0.2940 - val_loss: 0.2912
 Epoch 15/20
@@ -565,11 +565,11 @@ Epoch 20/20
 Test denoising loss: 0.2937961220741272</code></pre>
 </div>
 </div>
-<div id="29f9a91e-5faf-4969-8796-8fa0d705e77c" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-21T07:38:54.959478Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-21T07:38:54.958461Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-21T07:38:55.871440Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-21T07:38:55.870267Z&quot;}}" data-execution_count="8">
+<div id="29f9a91e-5faf-4969-8796-8fa0d705e77c" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-21T08:37:55.248280Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-21T08:37:55.247283Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-21T08:37:56.156671Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-21T08:37:56.154657Z&quot;}}" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 노이즈 데이터 복원 (denoising 모형 사용)</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>decoded_imgs <span class="op">=</span> denoising_autoencoder.predict(x_test_noisy, verbose<span class="op">=</span><span class="dv">0</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="7cc936e9-ca3f-4f5c-997f-7a36b8a102f3" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-21T07:38:55.876437Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-21T07:38:55.875436Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-21T07:38:57.156226Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-21T07:38:57.154210Z&quot;}}" data-execution_count="9">
+<div id="7cc936e9-ca3f-4f5c-997f-7a36b8a102f3" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-21T08:37:56.161669Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-21T08:37:56.160671Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-21T08:37:57.298098Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-21T08:37:57.296081Z&quot;}}" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 결과 시각화</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="dv">10</span></span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">20</span>, <span class="dv">4</span>))</span>
@@ -612,8 +612,8 @@ Test denoising loss: 0.2937961220741272</code></pre>
 <p>아래 예제보다는 조금 더 복잡한 구조이니 주의 깊게 살펴보자.</p>
 <p>아래 모델 parameter에서 <code>latent_dim</code>은 앞으로 정의할 인코더의 LSTM 유닛의 수를 의미한다.</p>
 <ul>
-<li><p>LSTM에서 유닛의 수 = 출력의 수 = 은닉 상태의 수 = 셀 상태의 수</p></li>
-<li><p>일반적으로 차원이 축소되는 오토인코더와는 달리, 이 예제는 충분히 많은 LSTM의 유닛의 수로 통해 입력 시퀀스의 특성을 잡아내는 것이 목표이다.</p></li>
+<li><p><code>latent_dim</code>은 LSTM의 유닛 수를 의미하며, hidden state와 cell state의 차원도 <code>latent_dim</code>과 같다.</p></li>
+<li><p>일반적으로 차원이 축소되는 오토인코더와는 달리, 이 예제는 충분한 수의 LSTM 유닛을 사용하여 입력 시퀀스의 특징을 학습하는 것이 목표이다.</p></li>
 </ul>
 <section id="인코더" class="level3" data-number="7.4.1">
 <h3 data-number="7.4.1" class="anchored" data-anchor-id="인코더"><span class="header-section-number">7.4.1</span> 인코더</h3>
@@ -652,14 +652,7 @@ Test denoising loss: 0.2937961220741272</code></pre>
 </section>
 <section id="encoder_outputs와-디코더의-관계" class="level3" data-number="7.4.3">
 <h3 data-number="7.4.3" class="anchored" data-anchor-id="encoder_outputs와-디코더의-관계"><span class="header-section-number">7.4.3</span> <code>encoder_outputs</code>와 디코더의 관계</h3>
-<ul>
-<li><p>일반적으로, 인코더의 마지막 LSTM이 <code>return_sequences=True</code>로 설정되면, <strong>모든 타임스텝에 대한 출력</strong>인 <code>encoder_outputs</code>가 반환된다.</p></li>
-<li><p>이 <code>encoder_outputs</code>는 디코더로 전달될 수도 있고, 그렇지 않을 수도 있다.</p></li>
-<li><p>이 예제에서는 <code>encoder_outputs</code>를 디코더에 직접 전달하지 않고, 상태 벡터들인 <code>state_h</code>, <code>state_c</code>만 디코더로 전달한다.</p></li>
-<li><p>반면, <strong>Attention 메커니즘</strong>을 사용하는 경우에는 <code>encoder_outputs</code>가 필수적으로 디코더에 전달되어, 디코더가 시점마다 인코더의 전체 출력 시퀀스를 동적으로 참조할 수 있다.</p></li>
-<li><p>따라서 <code>encoder_outputs</code>의 전달 여부는 모델 구조와 목적에 따라 다르며, 이 예제는 Attention 없이 간단한 인코더-디코더 구조임을 참고하면 된다.</p></li>
-<li><p>현재 Encoder는 <code>return_sequences=False</code>이므로 <code>encoder_outputs</code>는 마지막 타임 스텝의 출력이다. 이 예제에서는 <code>state_h</code>와 <code>state_c</code>만 디코더의 초기 상태로 사용한다.</p></li>
-</ul>
+<p>이 예제에서는 Encoder의 마지막 상태 (h, c)만 Decoder에 전달한다. Attention에서는 Encoder의 전체 출력 시퀀스를 이용하며, 이는 다음 장에서 살펴본다.</p>
 </section>
 <section id="모델" class="level3" data-number="7.4.4">
 <h3 data-number="7.4.4" class="anchored" data-anchor-id="모델"><span class="header-section-number">7.4.4</span> 모델</h3>
@@ -669,16 +662,8 @@ Test denoising loss: 0.2937961220741272</code></pre>
 <li><p><code>Model</code>의 inputs 인자로 리스트를 사용함으로써, 모델이 여러 입력을 동시에 받을 수 있도록 한다.</p></li>
 <li><p>인코더-디코더 구조에서는 인코더와 디코더가 각각 별도의 입력을 필요하기 때문이다.</p>
 <ul>
-<li>Functional API를 사용해야 하는 이유이다. <br><br></li>
+<li>Encoder와 Decoder처럼 여러 입력을 연결해야 하므로 여기서는 Functional API를 사용한다.</li>
 </ul></li>
-</ul>
-<section id="functional-api와-모델-구성" class="level4" data-number="7.4.4.1">
-<h4 data-number="7.4.4.1" class="anchored" data-anchor-id="functional-api와-모델-구성"><span class="header-section-number">7.4.4.1</span> Functional API와 모델 구성</h4>
-<ul>
-<li><p>Sequential API는 단일 입력-출력 구조를 순차적으로 쌓는 데 최적화되어 있다.</p></li>
-<li><p>반면, Functional API는 <strong>복잡한 네트워크 구조</strong>를 자유롭게 설계할 수 있다. (여러 입력, 여러 출력, 분기, 병합 등)</p></li>
-<li><p>Functional API에서 모델은 <code>Model(inputs=..., outputs=...)</code> 형태로 생성하며, <code>inputs</code>는 입력 텐서(들), <code>outputs</code>는 최종 출력 텐서(들)를 의미한다.</p></li>
-<li><p>여기서 인코더 입력과 디코더 입력 텐서는 이미 앞서 정의한 인코더, 디코더 부분의 입출력 흐름에 맞게 연결되어 있다.</p></li>
 </ul>
 <p>이 모델은 다음의 데이터 흐름을 가진다.</p>
 <pre><code>encoder_inputs → [Encoder LSTM] → state_h, state_c
@@ -688,14 +673,13 @@ decoder_inputs → [Decoder LSTM] (uses state_h, state_c) → decoder_LSTM_outpu
 <p>입력 파트를 <code>[encoder_inputs, decoder_inputs]</code>, 출력 파트를 <code>decoder_outputs</code>로 설정하여 functional API를 통해 모델을 구성한다.</p>
 </section>
 </section>
-</section>
 <section id="숫자-시퀀스-1-예제" class="level2" data-number="7.5">
 <h2 data-number="7.5" class="anchored" data-anchor-id="숫자-시퀀스-1-예제"><span class="header-section-number">7.5</span> 숫자 시퀀스 (+1) 예제</h2>
 <p>연속된 숫자를 입력으로 받아 출력이 입력 +1이 되게 생성되도록 하는 것이 목표이다.</p>
 <ul>
 <li>인코더 입력 : <code>[4, 5, 6, 7, 8]</code> -&gt; 디코더 출력 : <code>[5, 6, 7, 8, 9]</code></li>
 </ul>
-<div id="17543d8d-5060-4aff-8947-4aa3c9e9e1a8" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-21T07:38:57.163231Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-21T07:38:57.162222Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-21T07:38:57.174298Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-21T07:38:57.172276Z&quot;}}" data-execution_count="10">
+<div id="17543d8d-5060-4aff-8947-4aa3c9e9e1a8" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-21T08:37:57.305144Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-21T08:37:57.305144Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-21T08:37:57.316531Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-21T08:37:57.315517Z&quot;}}" data-execution_count="10">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> tensorflow.keras.models <span class="im">import</span> Model</span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> tensorflow.keras.layers <span class="im">import</span> Input, LSTM, Dense</span>
@@ -710,7 +694,7 @@ decoder_inputs → [Decoder LSTM] (uses state_h, state_c) → decoder_LSTM_outpu
 <p>위에서 설명한 것과 동일한 방식으로 인코더를 정의한다.</p>
 <section id="인코더-1" class="level3" data-number="7.5.1">
 <h3 data-number="7.5.1" class="anchored" data-anchor-id="인코더-1"><span class="header-section-number">7.5.1</span> 인코더</h3>
-<div id="118bc6ad-89b9-4e67-aacb-48e6641e38ee" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-21T07:38:57.180304Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-21T07:38:57.179302Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-21T07:38:57.259801Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-21T07:38:57.257788Z&quot;}}" data-execution_count="11">
+<div id="118bc6ad-89b9-4e67-aacb-48e6641e38ee" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-21T08:37:57.320058Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-21T08:37:57.320058Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-21T08:37:57.385620Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-21T08:37:57.383602Z&quot;}}" data-execution_count="11">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 인코더 정의</span></span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>encoder_inputs <span class="op">=</span> Input(shape<span class="op">=</span>(timesteps, input_dim), name<span class="op">=</span><span class="st">'encoder_input'</span>)</span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>encoder_lstm <span class="op">=</span> LSTM(latent_dim, return_state<span class="op">=</span><span class="va">True</span>, name<span class="op">=</span><span class="st">'encoder_lstm'</span>)</span>
@@ -740,7 +724,7 @@ decoder_inputs → [Decoder LSTM] (uses state_h, state_c) → decoder_LSTM_outpu
 <li><p><code>decoder_dense</code>는 <code>(batch_size, timesteps = 5, latent_dim = 50)</code>의 입력을 받아 <code>(batch_size, timesteps = 5, input_dim = 1)</code>의 출력을 내보냄</p></li>
 <li><p>3차원 입력에 Dense 층을 적용하면 마지막 축에 동일한 Dense 변환이 적용된다. 따라서 각 타임 스텝의 LSTM 출력이 같은 Dense 층을 통과한다.</p></li>
 </ul>
-<div id="de538f60-60f6-41f5-9cab-c79067dd6a91" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-21T07:38:57.265799Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-21T07:38:57.264807Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-21T07:38:57.318554Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-21T07:38:57.316516Z&quot;}}" data-execution_count="12">
+<div id="de538f60-60f6-41f5-9cab-c79067dd6a91" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-21T08:37:57.390636Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-21T08:37:57.389622Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-21T08:37:57.444381Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-21T08:37:57.443871Z&quot;}}" data-execution_count="12">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 디코더 정의</span></span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>decoder_inputs <span class="op">=</span> Input(shape<span class="op">=</span>(timesteps, input_dim), name<span class="op">=</span><span class="st">'decoder_input'</span>)  </span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -760,7 +744,7 @@ decoder_inputs → [Decoder LSTM] (uses state_h, state_c) → decoder_LSTM_outpu
                                      ↓ 
 decoder_inputs → [Decoder LSTM] (uses state_h, state_c) → decoder_LSTM_output → [Dense] → decoder_outputs</code></pre>
 <p>입력 파트를 <code>[encoder_inputs, decoder_inputs]</code>, 출력 파트를 <code>decoder_outputs</code>로 설정하여 functional API를 통해 모델을 구성한다.</p>
-<div id="37e483fc-f197-4c50-aed3-85e258394cda" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-21T07:38:57.324549Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-21T07:38:57.323548Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-21T07:38:57.380675Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-21T07:38:57.378644Z&quot;}}" data-execution_count="13">
+<div id="37e483fc-f197-4c50-aed3-85e258394cda" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-21T08:37:57.450394Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-21T08:37:57.449395Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-21T08:37:57.495435Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-21T08:37:57.493423Z&quot;}}" data-execution_count="13">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 전체 모델 정의</span></span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> Model(inputs <span class="op">=</span> [encoder_inputs, decoder_inputs], outputs <span class="op">=</span> decoder_outputs)</span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>model.summary()</span>
@@ -808,7 +792,7 @@ decoder_inputs → [Decoder LSTM] (uses state_h, state_c) → decoder_LSTM_outpu
 </div>
 <p>인코더의 입력으로 사용할 <code>input_data</code>는 동일한 방법으로 생성하였다.</p>
 <p>디코더의 타겟으로 사용할 <code>output_data</code>는 <code>input_data</code>에 1을 더한 형태.</p>
-<div id="ce263cdd-a8ab-420c-92b7-4baf8bb2a743" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-21T07:38:57.386087Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-21T07:38:57.385086Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-21T07:38:57.403922Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-21T07:38:57.402400Z&quot;}}" data-execution_count="14">
+<div id="ce263cdd-a8ab-420c-92b7-4baf8bb2a743" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-21T08:37:57.500439Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-21T08:37:57.499435Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-21T08:37:57.512826Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-21T08:37:57.511801Z&quot;}}" data-execution_count="14">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 훈련에 사용할 간단한 시퀀스 데이터 생성</span></span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="co"># 이 랜덤 시퀀스는 첫 시작점만 랜덤이고, 그 이후의 값은 1씩 증가</span></span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>start_points <span class="op">=</span> np.random.uniform(<span class="dv">0</span>, <span class="dv">100</span>, size<span class="op">=</span><span class="dv">1000</span>)</span>
@@ -840,7 +824,7 @@ decoder_inputs → [Decoder LSTM] (uses state_h, state_c) → decoder_LSTM_outpu
 </ul>
 <section id="훈련-단계" class="level4" data-number="7.5.3.1">
 <h4 data-number="7.5.3.1" class="anchored" data-anchor-id="훈련-단계"><span class="header-section-number">7.5.3.1</span> 훈련 단계</h4>
-<p>디코더는 훈련 단계에서 <strong>타깃 시퀀스의 처음부터 끝까지 전체를 입력으로 받는다.</strong></p>
+<p>훈련 단계에서는 시작 토큰 뒤에 이전 시점의 실제 정답값을 붙여 디코더 입력을 구성한다.</p>
 <p>예를 들어, 인코더 입력이 <code>[1, 2, 3, 4, 5]</code>일 때, 디코더 출력으로 <code>[2, 3, 4, 5, 6]</code>을 해야하는 상황을 고려하자.</p>
 <p>훈련 시에 디코더 입력으로 정답 시퀀스를 한 칸 뒤로 민 <code>[0, 2, 3, 4, 5]</code>가 주어진다.</p>
 <ul>
@@ -870,7 +854,7 @@ decoder_inputs → [Decoder LSTM] (uses state_h, state_c) → decoder_LSTM_outpu
 <li>훈련과 예측에서 디코더 입력이 다르기 때문에 발생하는 이러한 불일치 문제를 exposure bias라고 부른다.</li>
 </ul>
 <p>예측 단계의 디코더 입력은 추후에 설명한다.</p>
-<div id="a0b95ab1-7a1f-4439-8488-0d1ed9f578d3" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-21T07:38:57.409456Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-21T07:38:57.408438Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-21T07:38:57.423980Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-21T07:38:57.422452Z&quot;}}" data-execution_count="15">
+<div id="a0b95ab1-7a1f-4439-8488-0d1ed9f578d3" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-21T08:37:57.516824Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-21T08:37:57.516824Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-21T08:37:57.527057Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-21T08:37:57.526047Z&quot;}}" data-execution_count="15">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 시작 토큰 추가 및 디코더 입력 생성</span></span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>start_token <span class="op">=</span> np.zeros((input_data.shape[<span class="dv">0</span>], <span class="dv">1</span>, input_dim))</span>
 <span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>decoder_input_data <span class="op">=</span> np.concatenate([start_token, output_data[:, :<span class="op">-</span><span class="dv">1</span>, :]], axis<span class="op">=</span><span class="dv">1</span>)</span>
@@ -884,220 +868,28 @@ Decoder input data  :  [0.         0.98162187 0.99162187 1.00162187 1.01162187]
 Target data         :  [0.98162187 0.99162187 1.00162187 1.01162187 1.02162187]</code></pre>
 </div>
 </div>
-<div id="b9f2acb7-a19f-414a-b8e8-f616e3582dab" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-21T07:38:57.428986Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-21T07:38:57.428986Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-21T07:39:32.297660Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-21T07:39:32.296586Z&quot;}}" data-execution_count="16">
+<div id="b9f2acb7-a19f-414a-b8e8-f616e3582dab" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-21T08:37:57.531060Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-21T08:37:57.531060Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-21T08:38:31.952650Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-21T08:38:31.950573Z&quot;}}" data-execution_count="16">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 모델 훈련</span></span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>model.fit([input_data, decoder_input_data], output_data, epochs<span class="op">=</span><span class="dv">100</span>, batch_size<span class="op">=</span><span class="dv">32</span>, validation_split<span class="op">=</span><span class="fl">0.2</span>, verbose<span class="op">=</span><span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Epoch 1/100
-25/25 - 4s - 155ms/step - loss: 0.1228 - val_loss: 0.0282
-Epoch 2/100
-25/25 - 0s - 12ms/step - loss: 0.0126 - val_loss: 0.0048
-Epoch 3/100
-25/25 - 0s - 13ms/step - loss: 0.0035 - val_loss: 0.0017
-Epoch 4/100
-25/25 - 0s - 12ms/step - loss: 0.0011 - val_loss: 7.1036e-04
-Epoch 5/100
-25/25 - 0s - 13ms/step - loss: 6.4952e-04 - val_loss: 5.4671e-04
-Epoch 6/100
-25/25 - 0s - 13ms/step - loss: 5.1482e-04 - val_loss: 4.3811e-04
-Epoch 7/100
-25/25 - 0s - 10ms/step - loss: 4.1144e-04 - val_loss: 3.5031e-04
-Epoch 8/100
-25/25 - 0s - 11ms/step - loss: 3.2828e-04 - val_loss: 2.7869e-04
-Epoch 9/100
-25/25 - 0s - 14ms/step - loss: 2.6081e-04 - val_loss: 2.2108e-04
-Epoch 10/100
-25/25 - 0s - 13ms/step - loss: 2.0669e-04 - val_loss: 1.7512e-04
-Epoch 11/100
-25/25 - 0s - 12ms/step - loss: 1.6353e-04 - val_loss: 1.3860e-04
-Epoch 12/100
-25/25 - 0s - 12ms/step - loss: 1.2926e-04 - val_loss: 1.0969e-04
-Epoch 13/100
-25/25 - 0s - 12ms/step - loss: 1.0216e-04 - val_loss: 8.6885e-05
-Epoch 14/100
-25/25 - 0s - 14ms/step - loss: 8.0815e-05 - val_loss: 6.8974e-05
-Epoch 15/100
-25/25 - 0s - 12ms/step - loss: 6.4105e-05 - val_loss: 5.4982e-05
-Epoch 16/100
-25/25 - 0s - 12ms/step - loss: 5.1116e-05 - val_loss: 4.4129e-05
-Epoch 17/100
-25/25 - 0s - 13ms/step - loss: 4.1109e-05 - val_loss: 3.5780e-05
-Epoch 18/100
-25/25 - 0s - 12ms/step - loss: 3.3475e-05 - val_loss: 2.9412e-05
-Epoch 19/100
-25/25 - 0s - 11ms/step - loss: 2.7709e-05 - val_loss: 2.4591e-05
-Epoch 20/100
-25/25 - 0s - 11ms/step - loss: 2.3388e-05 - val_loss: 2.0959e-05
-Epoch 21/100
-25/25 - 0s - 12ms/step - loss: 2.0165e-05 - val_loss: 1.8223e-05
-Epoch 22/100
-25/25 - 0s - 13ms/step - loss: 1.7756e-05 - val_loss: 1.6152e-05
-Epoch 23/100
-25/25 - 0s - 13ms/step - loss: 1.5941e-05 - val_loss: 1.4564e-05
-Epoch 24/100
-25/25 - 0s - 12ms/step - loss: 1.4547e-05 - val_loss: 1.3326e-05
-Epoch 25/100
-25/25 - 0s - 12ms/step - loss: 1.3450e-05 - val_loss: 1.2337e-05
-Epoch 26/100
-25/25 - 0s - 13ms/step - loss: 1.2557e-05 - val_loss: 1.1528e-05
-Epoch 27/100
-25/25 - 0s - 11ms/step - loss: 1.1804e-05 - val_loss: 1.0846e-05
-Epoch 28/100
-25/25 - 0s - 11ms/step - loss: 1.1148e-05 - val_loss: 1.0254e-05
-Epoch 29/100
-25/25 - 0s - 13ms/step - loss: 1.0557e-05 - val_loss: 9.7224e-06
-Epoch 30/100
-25/25 - 0s - 11ms/step - loss: 1.0013e-05 - val_loss: 9.2291e-06
-Epoch 31/100
-25/25 - 0s - 11ms/step - loss: 9.5016e-06 - val_loss: 8.7590e-06
-Epoch 32/100
-25/25 - 0s - 12ms/step - loss: 9.0164e-06 - val_loss: 8.3047e-06
-Epoch 33/100
-25/25 - 0s - 13ms/step - loss: 8.5544e-06 - val_loss: 7.8660e-06
-Epoch 34/100
-25/25 - 0s - 13ms/step - loss: 8.1154e-06 - val_loss: 7.4468e-06
-Epoch 35/100
-25/25 - 0s - 12ms/step - loss: 7.7008e-06 - val_loss: 7.0516e-06
-Epoch 36/100
-25/25 - 0s - 13ms/step - loss: 7.3118e-06 - val_loss: 6.6832e-06
-Epoch 37/100
-25/25 - 0s - 14ms/step - loss: 6.9488e-06 - val_loss: 6.3421e-06
-Epoch 38/100
-25/25 - 0s - 14ms/step - loss: 6.6111e-06 - val_loss: 6.0272e-06
-Epoch 39/100
-25/25 - 0s - 11ms/step - loss: 6.2976e-06 - val_loss: 5.7372e-06
-Epoch 40/100
-25/25 - 0s - 13ms/step - loss: 6.0072e-06 - val_loss: 5.4702e-06
-Epoch 41/100
-25/25 - 0s - 13ms/step - loss: 5.7384e-06 - val_loss: 5.2246e-06
-Epoch 42/100
-25/25 - 0s - 11ms/step - loss: 5.4899e-06 - val_loss: 4.9990e-06
-Epoch 43/100
-25/25 - 0s - 11ms/step - loss: 5.2607e-06 - val_loss: 4.7918e-06
-Epoch 44/100
-25/25 - 0s - 12ms/step - loss: 5.0493e-06 - val_loss: 4.6018e-06
-Epoch 45/100
-25/25 - 0s - 12ms/step - loss: 4.8548e-06 - val_loss: 4.4279e-06
-Epoch 46/100
-25/25 - 0s - 13ms/step - loss: 4.6761e-06 - val_loss: 4.2688e-06
-Epoch 47/100
-25/25 - 0s - 12ms/step - loss: 4.5120e-06 - val_loss: 4.1235e-06
-Epoch 48/100
-25/25 - 0s - 12ms/step - loss: 4.3616e-06 - val_loss: 3.9911e-06
-Epoch 49/100
-25/25 - 0s - 13ms/step - loss: 4.2238e-06 - val_loss: 3.8705e-06
-Epoch 50/100
-25/25 - 0s - 14ms/step - loss: 4.0977e-06 - val_loss: 3.7610e-06
-Epoch 51/100
-25/25 - 0s - 12ms/step - loss: 3.9825e-06 - val_loss: 3.6616e-06
-Epoch 52/100
-25/25 - 0s - 13ms/step - loss: 3.8772e-06 - val_loss: 3.5716e-06
-Epoch 53/100
-25/25 - 0s - 11ms/step - loss: 3.7812e-06 - val_loss: 3.4902e-06
-Epoch 54/100
-25/25 - 0s - 11ms/step - loss: 3.6936e-06 - val_loss: 3.4167e-06
-Epoch 55/100
-25/25 - 0s - 12ms/step - loss: 3.6138e-06 - val_loss: 3.3505e-06
-Epoch 56/100
-25/25 - 0s - 13ms/step - loss: 3.5411e-06 - val_loss: 3.2907e-06
-Epoch 57/100
-25/25 - 0s - 14ms/step - loss: 3.4750e-06 - val_loss: 3.2366e-06
-Epoch 58/100
-25/25 - 0s - 14ms/step - loss: 3.4149e-06 - val_loss: 3.1876e-06
-Epoch 59/100
-25/25 - 0s - 12ms/step - loss: 3.3604e-06 - val_loss: 3.1430e-06
-Epoch 60/100
-25/25 - 0s - 13ms/step - loss: 3.3111e-06 - val_loss: 3.1017e-06
-Epoch 61/100
-25/25 - 0s - 11ms/step - loss: 3.2667e-06 - val_loss: 3.0630e-06
-Epoch 62/100
-25/25 - 0s - 14ms/step - loss: 3.2269e-06 - val_loss: 3.0256e-06
-Epoch 63/100
-25/25 - 0s - 11ms/step - loss: 3.1915e-06 - val_loss: 2.9882e-06
-Epoch 64/100
-25/25 - 0s - 13ms/step - loss: 3.1605e-06 - val_loss: 2.9493e-06
-Epoch 65/100
-25/25 - 0s - 11ms/step - loss: 3.1337e-06 - val_loss: 2.9079e-06
-Epoch 66/100
-25/25 - 0s - 11ms/step - loss: 3.1110e-06 - val_loss: 2.8623e-06
-Epoch 67/100
-25/25 - 0s - 12ms/step - loss: 3.0923e-06 - val_loss: 2.8121e-06
-Epoch 68/100
-25/25 - 0s - 14ms/step - loss: 3.0772e-06 - val_loss: 2.7572e-06
-Epoch 69/100
-25/25 - 0s - 13ms/step - loss: 3.0648e-06 - val_loss: 2.6992e-06
-Epoch 70/100
-25/25 - 0s - 13ms/step - loss: 3.0539e-06 - val_loss: 2.6410e-06
-Epoch 71/100
-25/25 - 0s - 12ms/step - loss: 3.0424e-06 - val_loss: 2.5862e-06
-Epoch 72/100
-25/25 - 0s - 14ms/step - loss: 3.0276e-06 - val_loss: 2.5382e-06
-Epoch 73/100
-25/25 - 0s - 14ms/step - loss: 3.0067e-06 - val_loss: 2.4991e-06
-Epoch 74/100
-25/25 - 0s - 12ms/step - loss: 2.9772e-06 - val_loss: 2.4678e-06
-Epoch 75/100
-25/25 - 0s - 14ms/step - loss: 2.9382e-06 - val_loss: 2.4412e-06
-Epoch 76/100
-25/25 - 0s - 11ms/step - loss: 2.8906e-06 - val_loss: 2.4154e-06
-Epoch 77/100
-25/25 - 0s - 11ms/step - loss: 2.8370e-06 - val_loss: 2.3873e-06
-Epoch 78/100
-25/25 - 0s - 11ms/step - loss: 2.7811e-06 - val_loss: 2.3560e-06
-Epoch 79/100
-25/25 - 0s - 15ms/step - loss: 2.7261e-06 - val_loss: 2.3226e-06
-Epoch 80/100
-25/25 - 0s - 13ms/step - loss: 2.6739e-06 - val_loss: 2.2881e-06
-Epoch 81/100
-25/25 - 0s - 14ms/step - loss: 2.6254e-06 - val_loss: 2.2536e-06
-Epoch 82/100
-25/25 - 0s - 12ms/step - loss: 2.5804e-06 - val_loss: 2.2199e-06
-Epoch 83/100
-25/25 - 0s - 13ms/step - loss: 2.5384e-06 - val_loss: 2.1873e-06
-Epoch 84/100
-25/25 - 0s - 14ms/step - loss: 2.4990e-06 - val_loss: 2.1558e-06
-Epoch 85/100
-25/25 - 0s - 12ms/step - loss: 2.4618e-06 - val_loss: 2.1258e-06
-Epoch 86/100
-25/25 - 0s - 13ms/step - loss: 2.4263e-06 - val_loss: 2.0973e-06
-Epoch 87/100
-25/25 - 0s - 12ms/step - loss: 2.3925e-06 - val_loss: 2.0705e-06
-Epoch 88/100
-25/25 - 0s - 11ms/step - loss: 2.3600e-06 - val_loss: 2.0454e-06
-Epoch 89/100
-25/25 - 0s - 12ms/step - loss: 2.3290e-06 - val_loss: 2.0223e-06
-Epoch 90/100
-25/25 - 0s - 12ms/step - loss: 2.2992e-06 - val_loss: 2.0015e-06
-Epoch 91/100
-25/25 - 0s - 12ms/step - loss: 2.2707e-06 - val_loss: 1.9831e-06
-Epoch 92/100
-25/25 - 0s - 14ms/step - loss: 2.2436e-06 - val_loss: 1.9678e-06
-Epoch 93/100
-25/25 - 0s - 12ms/step - loss: 2.2180e-06 - val_loss: 1.9562e-06
-Epoch 94/100
-25/25 - 0s - 11ms/step - loss: 2.1942e-06 - val_loss: 1.9487e-06
-Epoch 95/100
-25/25 - 0s - 14ms/step - loss: 2.1724e-06 - val_loss: 1.9464e-06
-Epoch 96/100
-25/25 - 0s - 13ms/step - loss: 2.1529e-06 - val_loss: 1.9502e-06
-Epoch 97/100
-25/25 - 0s - 11ms/step - loss: 2.1363e-06 - val_loss: 1.9611e-06
-Epoch 98/100
-25/25 - 0s - 13ms/step - loss: 2.1231e-06 - val_loss: 1.9806e-06
-Epoch 99/100
-25/25 - 0s - 11ms/step - loss: 2.1139e-06 - val_loss: 2.0099e-06
-Epoch 100/100
-25/25 - 0s - 11ms/step - loss: 2.1096e-06 - val_loss: 2.0501e-06</code></pre>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>history <span class="op">=</span> model.fit([input_data, decoder_input_data], output_data, epochs<span class="op">=</span><span class="dv">100</span>, batch_size<span class="op">=</span><span class="dv">32</span>, validation_split<span class="op">=</span><span class="fl">0.2</span>, verbose<span class="op">=</span><span class="dv">0</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div class="cell-output cell-output-display" data-execution_count="16">
-<pre><code>&lt;keras.src.callbacks.history.History at 0x22a684826d0&gt;</code></pre>
+<div id="bbbbbbbb-0001-4000-8000-000000000001" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-21T08:38:31.958097Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-21T08:38:31.957585Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-21T08:38:32.112313Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-21T08:38:32.111215Z&quot;}}" data-execution_count="17">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>plt.plot(history.history[<span class="st">"loss"</span>], label<span class="op">=</span><span class="st">"Training"</span>)</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>plt.plot(history.history[<span class="st">"val_loss"</span>], label<span class="op">=</span><span class="st">"Validation"</span>)</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="07. Encoder-decoder_files/figure-html/cell-18-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
 </div>
 </div>
 </section>
 </section>
 <section id="예측추론" class="level3" data-number="7.5.4">
 <h3 data-number="7.5.4" class="anchored" data-anchor-id="예측추론"><span class="header-section-number">7.5.4</span> 예측(추론)</h3>
-<p>Seq2Seq 모델에서는 훈련 단계와 예측 단계의 동작이 다르기 때문에, 예측 단계에서는 인코더와 디코더를 별도로 정의하여 사용해야 한다.</p>
+<p>이 예제에서는 예측 단계에서 한 스텝씩 출력을 생성하기 위해 인코더와 디코더를 별도의 예측용 모델로 구성한다.</p>
 <ul>
 <li><p>훈련 단계에서는 정답 시퀀스를 한 번에 디코더에 넣는 Teacher Forcing을 사용하지만,</p></li>
 <li><p>예측 단계에서는 이전 시점의 출력값을 다음 입력으로 반복적으로 사용하는 방식이기 때문이다</p></li>
@@ -1113,10 +905,10 @@ Epoch 100/100
 <li><p>이 상태 벡터들이 디코더의 <strong>초기 상태(initial state)</strong> 로 사용된다.</p></li>
 <li><p>예측 과정에서 인코더는 입력 시퀀스를 잠재 표현으로 인코딩해주는 역할을 하며, 한 번만 호출된다.</p></li>
 </ul>
-<div id="12f625a9-c071-4ace-b595-08e42eb926ab" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-21T07:39:32.302664Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-21T07:39:32.301665Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-21T07:39:32.332409Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-21T07:39:32.331330Z&quot;}}" data-execution_count="17">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 인코더 모델 정의 (예측 시에 필요)</span></span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>encoder_model <span class="op">=</span> Model(inputs <span class="op">=</span> encoder_inputs, outputs <span class="op">=</span> [state_h, state_c])</span>
-<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>encoder_model.summary()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="12f625a9-c071-4ace-b595-08e42eb926ab" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-21T08:38:32.117225Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-21T08:38:32.116225Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-21T08:38:32.144617Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-21T08:38:32.143607Z&quot;}}" data-execution_count="18">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 인코더 모델 정의 (예측 시에 필요)</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>encoder_model <span class="op">=</span> Model(inputs <span class="op">=</span> encoder_inputs, outputs <span class="op">=</span> [state_h, state_c])</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>encoder_model.summary()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="font-weight: bold">Model: "functional_3"</span>
 </pre>
@@ -1148,49 +940,26 @@ Epoch 100/100
 </section>
 <section id="예측용-디코더-모델" class="level4" data-number="7.5.4.2">
 <h4 data-number="7.5.4.2" class="anchored" data-anchor-id="예측용-디코더-모델"><span class="header-section-number">7.5.4.2</span> 예측용 디코더 모델</h4>
-<ul>
-<li><p>훈련 시 디코더는 전체 정답 시퀀스를 (하나씩 뒤로 밀린 형태로) 한 번에 입력받아 출력했지만, 예측 단계에서는 <strong>한 타임스텝씩 반복적으로 실행</strong>된다.</p></li>
-<li><p>따라서 예측용 디코더는 다음과 같은 입력을 받아야 한다:</p>
-<ul>
-<li>이전 시점의 출력값 (1타임스텝 시퀀스)</li>
-<li>이전 시점의 상태(state_h, state_c) <br><br></li>
-</ul></li>
-<li><p>디코더는 이 입력을 바탕으로 다음 시점의 출력과 <strong>업데이트된 상태</strong>를 반환한다. 이 출력은 다시 다음 시점의 입력으로 사용되고, 상태는 갱신된다.</p></li>
-</ul>
+<p>훈련할 때는 전체 정답 시퀀스를 사용할 수 있지만, 실제 예측에서는 정답을 알 수 없다. 따라서 예측 시에는 Decoder를 한 번에 한 스텝씩 실행한다. 각 단계에서 (1) 이전 출력값, (2) 이전 hidden state와 cell state를 입력하여 다음 값과 새로운 상태를 얻는다.</p>
 <p><strong>예측용 디코더 모델</strong>은 이전에 정의하고 훈련했던 <code>decoder_lstm</code>와 <code>decoder_dense</code>를 그대로 가져다 사용하나, Input layer들은 새롭게 생성한다.</p>
-<ul>
-<li><p>훈련 시에는 전체 시퀀스를 한 번에 처리하지만, 예측 시에는 시퀀스를 값 하나씩 점진적으로 생성하기 때문</p>
-<ul>
-<li>언어 모델에서는 단어 하나씩 <br><br></li>
-</ul></li>
-<li><p>예측 시에는 디코더가 한 번에 하나의 값을 생성하며, 이 값을 다음 스텝의 값으로 사용하여 다음 값을 예측. 이를 반복.</p></li>
-<li><p>최초 예측 시에는 start token을 받는다.</p></li>
-</ul>
-<p>훈련 시에는 길이가 5인 시퀀스를 사용했는데, 예측 시에는 길이 1의 시퀀스를 써도 괜찮은가?</p>
-<ul>
-<li><p>LSTM은 시퀀스 길이에 상관없이 작동하도록 설계되어 있으며, 내부적으로는 타임스텝 단위로 반복 연산 수행하는 구조.</p></li>
-<li><p>따라서, 길이가 1인 시퀀스를 입력해도 문제 없이 하나의 타임스텝만 처리하면 되므로 동일한 레이어를 그대로 사용할 수 있다.</p></li>
-</ul>
-<p>Dense layer는 훈련 시에는 길이가 5인 시퀀스를 input으로 다루지만, 예측 시에는 길이가 1인 시퀀스를 input으로 다룬다. 괜찮은가?</p>
-<ul>
-<li><p>3차원 입력에 Dense 층을 적용하면 마지막 축에 동일한 변환이 적용되어, 각 타임 스텝에 동일한 연산이 적용된다. 내부적으로 <code>TimeDistributed</code> 층으로 바뀌는 것은 아니다.</p></li>
-<li><p>이에 따라, 훈련과 예측에 사용되는 sequence 길이가 달라도 문제 없음.</p></li>
-</ul>
-<div id="bd8022e6-3933-4bbc-924f-6dc81732a030" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-21T07:39:32.338406Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-21T07:39:32.337406Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-21T07:39:32.353400Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-21T07:39:32.352322Z&quot;}}" data-execution_count="18">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 디코더 모델 정의 (예측 시에 필요)</span></span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="co"># 새로운 input tensor들</span></span>
-<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>decoder_state_input_h <span class="op">=</span> Input(shape<span class="op">=</span>(latent_dim,), name <span class="op">=</span> <span class="st">"hidden state"</span>)   </span>
-<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>decoder_state_input_c <span class="op">=</span> Input(shape<span class="op">=</span>(latent_dim,), name <span class="op">=</span> <span class="st">"cell state"</span>)</span>
-<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>decoder_states_inputs <span class="op">=</span> [decoder_state_input_h, decoder_state_input_c]</span>
-<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a><span class="co"># 디코더의 입력이 한 번에 하나의 값을 받음</span></span>
-<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>decoder_single_input <span class="op">=</span> Input(shape<span class="op">=</span>(<span class="dv">1</span>, input_dim), name<span class="op">=</span><span class="st">"previous prediction"</span>)</span>
-<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a><span class="co"># 훈련된 decoder_lstm과 decoder_dense</span></span>
-<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a>decoder_outputs, state_h, state_c <span class="op">=</span> decoder_lstm(decoder_single_input, initial_state <span class="op">=</span> decoder_states_inputs)</span>
-<span id="cb28-12"><a href="#cb28-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-13"><a href="#cb28-13" aria-hidden="true" tabindex="-1"></a>decoder_states <span class="op">=</span> [state_h, state_c]</span>
-<span id="cb28-14"><a href="#cb28-14" aria-hidden="true" tabindex="-1"></a>decoder_outputs <span class="op">=</span> decoder_dense(decoder_outputs)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<blockquote class="blockquote">
+<p><strong>참고:</strong> 훈련 시에는 길이가 5인 시퀀스를 사용했지만 예측 시에는 길이 1의 시퀀스를 사용한다. LSTM과 Dense 층은 모두 타임스텝 단위로 반복 적용되는 구조이므로, 훈련과 예측에서 시퀀스 길이가 달라도 동일한 레이어를 그대로 사용할 수 있다.</p>
+</blockquote>
+<div id="bd8022e6-3933-4bbc-924f-6dc81732a030" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-21T08:38:32.149619Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-21T08:38:32.148619Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-21T08:38:32.167648Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-21T08:38:32.165630Z&quot;}}" data-execution_count="19">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 디코더 모델 정의 (예측 시에 필요)</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="co"># 새로운 input tensor들</span></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>decoder_state_input_h <span class="op">=</span> Input(shape<span class="op">=</span>(latent_dim,), name <span class="op">=</span> <span class="st">"hidden state"</span>)   </span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>decoder_state_input_c <span class="op">=</span> Input(shape<span class="op">=</span>(latent_dim,), name <span class="op">=</span> <span class="st">"cell state"</span>)</span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>decoder_states_inputs <span class="op">=</span> [decoder_state_input_h, decoder_state_input_c]</span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a><span class="co"># 디코더의 입력이 한 번에 하나의 값을 받음</span></span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>decoder_single_input <span class="op">=</span> Input(shape<span class="op">=</span>(<span class="dv">1</span>, input_dim), name<span class="op">=</span><span class="st">"previous prediction"</span>)</span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a><span class="co"># 훈련된 decoder_lstm과 decoder_dense</span></span>
+<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a>decoder_outputs, state_h, state_c <span class="op">=</span> decoder_lstm(decoder_single_input, initial_state <span class="op">=</span> decoder_states_inputs)</span>
+<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a>decoder_states <span class="op">=</span> [state_h, state_c]</span>
+<span id="cb27-14"><a href="#cb27-14" aria-hidden="true" tabindex="-1"></a>decoder_outputs <span class="op">=</span> decoder_dense(decoder_outputs)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>인코더, 디코더 모델의 데이터 흐름은 다음과 같다.</p>
 <pre><code>{Encoder model} encoder_input → [Trained Encoder LSTM] → h, c
@@ -1199,13 +968,13 @@ Epoch 100/100
 {Decoder model} single_input  → [Trained Decoder LSTM] (h, c) → (h', c'), decoder_LSTM_single_outputs → [Trained Dense]
 
                 → next_single_value</code></pre>
-<div id="9d0e6253-85e8-4cf7-978a-d2020631273c" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-21T07:39:32.359408Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-21T07:39:32.358398Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-21T07:39:32.372966Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-21T07:39:32.370879Z&quot;}}" data-execution_count="19">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>decoder_model <span class="op">=</span> Model(</span>
-<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>    inputs <span class="op">=</span> [decoder_single_input] <span class="op">+</span> decoder_states_inputs,</span>
-<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>    outputs <span class="op">=</span> [decoder_outputs] <span class="op">+</span> decoder_states)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="9d0e6253-85e8-4cf7-978a-d2020631273c" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-21T08:38:32.171651Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-21T08:38:32.171651Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-21T08:38:32.185524Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-21T08:38:32.183993Z&quot;}}" data-execution_count="20">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>decoder_model <span class="op">=</span> Model(</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>    inputs <span class="op">=</span> [decoder_single_input] <span class="op">+</span> decoder_states_inputs,</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>    outputs <span class="op">=</span> [decoder_outputs] <span class="op">+</span> decoder_states)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="a6afa993-0606-4803-8f32-d6149ef7d0ea" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-21T07:39:32.377973Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-21T07:39:32.377973Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-21T07:39:32.406993Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-21T07:39:32.405905Z&quot;}}" data-execution_count="20">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>decoder_model.summary()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="a6afa993-0606-4803-8f32-d6149ef7d0ea" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-21T08:38:32.189529Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-21T08:38:32.189529Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-21T08:38:32.221022Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-21T08:38:32.219008Z&quot;}}" data-execution_count="21">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>decoder_model.summary()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="font-weight: bold">Model: "functional_4"</span>
 </pre>
@@ -1261,40 +1030,40 @@ Epoch 100/100
 <li>생성된 출력을 다시 디코더의 입력으로 사용</li>
 <li>원하는 길이만큼 반복하거나 종료 토큰이 나올 때까지 반복</li>
 </ol>
-<div id="58823424-4cf1-4c7a-bb6f-ade2df9a05fd" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-21T07:39:32.409916Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-21T07:39:32.409916Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-21T07:39:33.593594Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-21T07:39:33.591580Z&quot;}}" data-execution_count="21">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>test_input <span class="op">=</span> np.array([<span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">7</span>])</span>
-<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Input sequence:"</span>, test_input)</span>
-<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>test_input_scaled <span class="op">=</span> (test_input[np.newaxis, :,  np.newaxis]) <span class="op">/</span> scale</span>
-<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a><span class="co"># 인코더 상태는 최초 디코더의 상태 입력에 사용됨</span></span>
-<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>states_value <span class="op">=</span> encoder_model.predict(test_input_scaled, verbose<span class="op">=</span><span class="dv">0</span>)</span>
-<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a><span class="co"># 디코더를 위한 시작 토큰 생성</span></span>
-<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a>target_seq <span class="op">=</span> np.zeros((<span class="dv">1</span>, <span class="dv">1</span>, input_dim))  <span class="co"># array([[[0.]]])</span></span>
-<span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-11"><a href="#cb32-11" aria-hidden="true" tabindex="-1"></a><span class="co"># 결과 저장을 위한 리스트</span></span>
-<span id="cb32-12"><a href="#cb32-12" aria-hidden="true" tabindex="-1"></a>decoded_sequence <span class="op">=</span> []</span>
-<span id="cb32-13"><a href="#cb32-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-14"><a href="#cb32-14" aria-hidden="true" tabindex="-1"></a><span class="co"># 타임스텝 만큼 반복</span></span>
-<span id="cb32-15"><a href="#cb32-15" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(timesteps):</span>
-<span id="cb32-16"><a href="#cb32-16" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 현재 타임스텝의 출력과 상태 예측</span></span>
-<span id="cb32-17"><a href="#cb32-17" aria-hidden="true" tabindex="-1"></a>    next_value, h, c <span class="op">=</span> decoder_model.predict([target_seq] <span class="op">+</span> states_value, verbose<span class="op">=</span><span class="dv">0</span>)</span>
-<span id="cb32-18"><a href="#cb32-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-19"><a href="#cb32-19" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 예측된 값을 출력 (scale 복원)</span></span>
-<span id="cb32-20"><a href="#cb32-20" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Predicted value in this step: "</span>, next_value[<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>] <span class="op">*</span> scale, <span class="st">"based on"</span>, target_seq[<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>] <span class="op">*</span> scale)</span>
-<span id="cb32-21"><a href="#cb32-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-22"><a href="#cb32-22" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 예측된 다음 숫자를 저장 (scale 복원)</span></span>
-<span id="cb32-23"><a href="#cb32-23" aria-hidden="true" tabindex="-1"></a>    decoded_sequence.append(next_value[<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>] <span class="op">*</span> scale)</span>
-<span id="cb32-24"><a href="#cb32-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-25"><a href="#cb32-25" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 다음 타임스텝 입력 준비</span></span>
-<span id="cb32-26"><a href="#cb32-26" aria-hidden="true" tabindex="-1"></a>    target_seq <span class="op">=</span> np.zeros((<span class="dv">1</span>, <span class="dv">1</span>, input_dim))</span>
-<span id="cb32-27"><a href="#cb32-27" aria-hidden="true" tabindex="-1"></a>    target_seq[<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>] <span class="op">=</span> next_value[<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>]</span>
-<span id="cb32-28"><a href="#cb32-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-29"><a href="#cb32-29" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 갱신된 상태 저장</span></span>
-<span id="cb32-30"><a href="#cb32-30" aria-hidden="true" tabindex="-1"></a>    states_value <span class="op">=</span> [h, c]</span>
-<span id="cb32-31"><a href="#cb32-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-32"><a href="#cb32-32" aria-hidden="true" tabindex="-1"></a><span class="co"># 최종 예측된 시퀀스 출력</span></span>
-<span id="cb32-33"><a href="#cb32-33" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Predicted sequence:"</span>, decoded_sequence)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="58823424-4cf1-4c7a-bb6f-ade2df9a05fd" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-21T08:38:32.226024Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-21T08:38:32.226024Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-21T08:38:33.395399Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-21T08:38:33.393869Z&quot;}}" data-execution_count="22">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>test_input <span class="op">=</span> np.array([<span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">7</span>])</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Input sequence:"</span>, test_input)</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>test_input_scaled <span class="op">=</span> (test_input[np.newaxis, :,  np.newaxis]) <span class="op">/</span> scale</span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a><span class="co"># 인코더 상태는 최초 디코더의 상태 입력에 사용됨</span></span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>states_value <span class="op">=</span> encoder_model.predict(test_input_scaled, verbose<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a><span class="co"># 디코더를 위한 시작 토큰 생성</span></span>
+<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a>target_seq <span class="op">=</span> np.zeros((<span class="dv">1</span>, <span class="dv">1</span>, input_dim))  <span class="co"># array([[[0.]]])</span></span>
+<span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-11"><a href="#cb31-11" aria-hidden="true" tabindex="-1"></a><span class="co"># 결과 저장을 위한 리스트</span></span>
+<span id="cb31-12"><a href="#cb31-12" aria-hidden="true" tabindex="-1"></a>decoded_sequence <span class="op">=</span> []</span>
+<span id="cb31-13"><a href="#cb31-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-14"><a href="#cb31-14" aria-hidden="true" tabindex="-1"></a><span class="co"># 타임스텝 만큼 반복</span></span>
+<span id="cb31-15"><a href="#cb31-15" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(timesteps):</span>
+<span id="cb31-16"><a href="#cb31-16" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 현재 타임스텝의 출력과 상태 예측</span></span>
+<span id="cb31-17"><a href="#cb31-17" aria-hidden="true" tabindex="-1"></a>    next_value, h, c <span class="op">=</span> decoder_model.predict([target_seq] <span class="op">+</span> states_value, verbose<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb31-18"><a href="#cb31-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-19"><a href="#cb31-19" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 예측된 값을 출력 (scale 복원)</span></span>
+<span id="cb31-20"><a href="#cb31-20" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Predicted value in this step: "</span>, next_value[<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>] <span class="op">*</span> scale, <span class="st">"based on"</span>, target_seq[<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">0</span>] <span class="op">*</span> scale)</span>
+<span id="cb31-21"><a href="#cb31-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-22"><a href="#cb31-22" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 예측된 다음 숫자를 저장 (scale 복원)</span></span>
+<span id="cb31-23"><a href="#cb31-23" aria-hidden="true" tabindex="-1"></a>    decoded_sequence.append(next_value[<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>] <span class="op">*</span> scale)</span>
+<span id="cb31-24"><a href="#cb31-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-25"><a href="#cb31-25" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 다음 타임스텝 입력 준비</span></span>
+<span id="cb31-26"><a href="#cb31-26" aria-hidden="true" tabindex="-1"></a>    target_seq <span class="op">=</span> np.zeros((<span class="dv">1</span>, <span class="dv">1</span>, input_dim))</span>
+<span id="cb31-27"><a href="#cb31-27" aria-hidden="true" tabindex="-1"></a>    target_seq[<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>] <span class="op">=</span> next_value[<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>]</span>
+<span id="cb31-28"><a href="#cb31-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-29"><a href="#cb31-29" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 갱신된 상태 저장</span></span>
+<span id="cb31-30"><a href="#cb31-30" aria-hidden="true" tabindex="-1"></a>    states_value <span class="op">=</span> [h, c]</span>
+<span id="cb31-31"><a href="#cb31-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-32"><a href="#cb31-32" aria-hidden="true" tabindex="-1"></a><span class="co"># 최종 예측된 시퀀스 출력</span></span>
+<span id="cb31-33"><a href="#cb31-33" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Predicted sequence:"</span>, decoded_sequence)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Input sequence: [3 4 5 6 7]
 Predicted value in this step:  4.3400846 based on 0.0
@@ -1305,6 +1074,7 @@ Predicted value in this step:  8.453599 based on 7.19313845038414
 Predicted sequence: [np.float32(4.3400846), np.float32(5.0563364), np.float32(6.0379105), np.float32(7.1931386), np.float32(8.453599)]</code></pre>
 </div>
 </div>
+<p>훈련 과정의 validation loss는 매우 작지만, 실제 예측에서는 이전 예측값을 다시 입력으로 사용하므로 오차가 누적될 수 있다.</p>
 <p>반복을 포함한 이 예측 과정의 데이터 흐름은 다음과 같다.</p>
 <pre><code>test_input → [Trained Encoder LSTM] → state_h, state_c
                                         ↓  
