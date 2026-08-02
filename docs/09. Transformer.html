@@ -297,13 +297,18 @@ window.Quarto = {
 </header>
 
 
-<p>Attention 단원에서는 encoder-decoder RNN에 attention을 결합해, query(디코더)가 key/value(인코더)를 조회하는 cross-attention을 배웠다. Transformer는 여기서 한 걸음 더 나아가, 순환 구조(RNN)를 완전히 제거하고 attention만으로 시퀀스를 처리하는 모델이다 (Vaswani et al., 2017, “Attention Is All You Need”).</p>
+<p>Attention 단원에서는 encoder-decoder RNN에 attention을 결합하여, query(디코더)가 key/value(인코더)를 조회하는 cross-attention을 살펴보았다.</p>
+<p>Transformer는 순환 구조(RNN)를 완전히 제거하고 attention만으로 시퀀스를 처리하는 모델이다 (Vaswani et al., 2017, “Attention Is All You Need”).</p>
 <ul>
-<li>순환 신경망은 토큰을 순서대로 처리하므로 병렬화가 어렵고, 멀리 떨어진 토큰 간의 관계를 유지하기 어렵다.</li>
-<li>Transformer는 attention으로 모든 위치 쌍의 관계를 동시에 계산하므로 병렬 연산이 가능하고, 긴 문맥도 직접 참조할 수 있다.</li>
-<li>GPT, BERT 등 현대 언어 모델은 모두 Transformer에 기반한다.</li>
+<li>순환 신경망은 토큰을 순서대로 처리하므로 병렬화가 어렵고, 멀리 떨어진 토큰 간의 관계를 유지하기 어려움</li>
+<li>Transformer는 모든 위치 쌍의 관계를 동시에 계산하므로 병렬 연산이 가능하고, 긴 문맥도 직접 참조 가능</li>
+<li>GPT, BERT 등 현대 언어 모델은 모두 Transformer에 기반</li>
 </ul>
-<p>이 단원에서는 Attention 단원의 attention을 self-attention으로 확장한 뒤, GPT 계열 모델과 같은 구조의 작은 decoder-only Transformer를 <code>tensorflow.keras</code>로 직접 만들어 본다. Karpathy의 <code>minGPT</code> / <code>nanoGPT</code> 아이디어를 단순화한 것으로, 목표는 성능 좋은 언어 모델을 만드는 것이 아니라 GPT 계열 모델의 핵심 구조를 눈으로 확인하는 것이다.</p>
+<p>이 단원에서는 attention을 self-attention으로 확장한 뒤, GPT 계열과 같은 구조의 작은 decoder-only Transformer를 <code>tensorflow.keras</code>로 직접 만들어 본다.</p>
+<ul>
+<li>Karpathy의 <code>minGPT</code> / <code>nanoGPT</code> 아이디어를 단순화한 것</li>
+<li>목표는 성능 좋은 언어 모델이 아니라, GPT 계열 모델의 핵심 구조를 눈으로 확인하는 것</li>
+</ul>
 <p>다루는 내용은 다음과 같다.</p>
 <ul>
 <li>Self-attention과 <span class="math inline">\(\sqrt{d_k}\)</span> 스케일링 (Attention 단원의 확장)</li>
@@ -314,14 +319,16 @@ window.Quarto = {
 <li>Transformer block의 구성</li>
 <li>학습된 모델로 새 문자를 생성하고 attention을 시각화하는 방법</li>
 </ul>
-<p>참고로 원 논문의 Transformer는 번역을 위한 encoder-decoder 구조다. 이 단원에서는 그보다 단순하면서 현대 언어 모델의 표준이 된 <strong>decoder-only</strong> 구조를 다룬다.</p>
+<p>참고로 원 논문의 Transformer는 번역을 위한 encoder-decoder 구조다.</p>
+<p>이 단원에서는 그보다 단순하면서 현대 언어 모델의 표준이 된 <strong>decoder-only</strong> 구조를 다룬다.</p>
 <section id="attention의-직관-부드러운-dictionary-조회" class="level2" data-number="9.1">
 <h2 data-number="9.1" class="anchored" data-anchor-id="attention의-직관-부드러운-dictionary-조회"><span class="header-section-number">9.1</span> Attention의 직관: 부드러운 dictionary 조회</h2>
-<p>Attention 단원에서 <span class="math inline">\(\text{Attention}(Q,K,V) = \text{softmax}(QK^\top)V\)</span> 계산을 이미 numpy로 직접 해봤다. 여기서는 같은 아이디어를 다른 각도에서 정리해 보자. Attention을 처음 볼 때 가장 어려운 것은 query, key, value가 왜 필요한지이다. 이미 알고 있는 Python dictionary와 비교하면 감을 잡기 쉽다.</p>
+<p>Attention 단원에서 <span class="math inline">\(\text{Attention}(Q,K,V) = \text{softmax}(QK^\top)V\)</span> 계산을 numpy로 직접 해 보았다.</p>
+<p>query, key, value가 왜 필요한지는 Python dictionary와 비교하면 이해하기 쉽다.</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>d <span class="op">=</span> {<span class="st">"apple"</span>: <span class="fl">1.2</span>, <span class="st">"banana"</span>: <span class="fl">0.5</span>, <span class="st">"cherry"</span>: <span class="fl">3.0</span>}</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>d[<span class="st">"apple"</span>]   <span class="co"># 1.2</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Dictionary 조회는 query(<code>"apple"</code>)와 정확히 일치하는 key를 찾아 그 value 하나를 돌려준다.</p>
-<p>Attention도 같은 구조다. query 하나로 여러 (key, value) 쌍을 조회한다. 차이는 다음과 같다.</p>
+<p>Dictionary 조회는 query(<code>"apple"</code>)와 정확히 일치하는 key를 찾아 value 하나를 돌려준다.</p>
+<p>Attention도 query 하나로 여러 (key, value) 쌍을 조회한다. 차이는 다음과 같다.</p>
 <table class="caption-top table">
 <thead>
 <tr class="header">
@@ -343,8 +350,12 @@ window.Quarto = {
 </tr>
 </tbody>
 </table>
-<p>즉, attention은 <strong>부드러운(soft) dictionary 조회</strong>다. “일치하면 1, 아니면 0”이 아니라 유사한 정도만큼 모든 value를 조금씩 가져온다. 유사도가 내적이라는 미분 가능한 연산으로 정의되므로, 무엇을 조회할지 자체를 gradient로 학습할 수 있다.</p>
-<p>세 가지 역할을 정리하면 다음과 같다.</p>
+<p>즉, attention은 <strong>부드러운(soft) dictionary 조회</strong>이다.</p>
+<ul>
+<li>“일치하면 1, 아니면 0”이 아니라, 유사한 정도만큼 모든 value를 조금씩 가져옴</li>
+<li>유사도가 내적이라는 미분 가능한 연산이므로, 무엇을 조회할지를 gradient로 학습 가능</li>
+</ul>
+<p>세 가지 역할은 다음과 같다.</p>
 <ul>
 <li><strong>Query</strong>: 지금 무엇을 찾고 싶은가 (조회하는 쪽)</li>
 <li><strong>Key</strong>: 각 항목이 자신을 어떻게 나타내는가 (조회 대상의 색인)</li>
@@ -352,21 +363,34 @@ window.Quarto = {
 </ul>
 <section id="복습-attention-계산" class="level3" data-number="9.1.1">
 <h3 data-number="9.1.1" class="anchored" data-anchor-id="복습-attention-계산"><span class="header-section-number">9.1.1</span> 복습: attention 계산</h3>
-<p>Attention 단원에서 이미 봤듯이 attention은 다음 세 단계로 계산된다.</p>
+<p>Attention은 다음 세 단계로 계산된다.</p>
 <p><span class="math display">\[
 \text{scores} = QK^\top \;\longrightarrow\; \text{weights} = \text{softmax}(\text{scores}) \;\longrightarrow\; \text{output} = \text{weights} \cdot V
 \]</span></p>
-<p>query와 key의 내적으로 유사도를 구하고, softmax로 정규화한 뒤, 그 가중치로 value를 가중평균한다. Q, K, V는 각각 <span class="math inline">\(W_q, W_k, W_v\)</span> 가중치 행렬을 입력에 곱해 만든다는 것도 Attention 단원에서 확인했다.</p>
-<p>Transformer는 여기에 한 가지를 추가한다. 바로 <span class="math inline">\(\sqrt{d_k}\)</span>로 나누는 <strong>스케일링</strong>이다.</p>
+<ul>
+<li>query와 key의 내적으로 유사도를 구함</li>
+<li>softmax로 정규화</li>
+<li>그 가중치로 value를 가중평균</li>
+<li><span class="math inline">\(Q, K, V\)</span>는 각각 <span class="math inline">\(W_q, W_k, W_v\)</span>를 입력에 곱해 생성</li>
+</ul>
+<p>Transformer는 여기에 <span class="math inline">\(\sqrt{d_k}\)</span>로 나누는 <strong>스케일링</strong>을 추가한다.</p>
 <p><span class="math display">\[
 \text{Attention}(Q, K, V) = \text{softmax}\left(\frac{QK^\top}{\sqrt{d_k}}\right)V
 \]</span></p>
 </section>
 <section id="왜-스케일링이-필요한가" class="level3" data-number="9.1.2">
 <h3 data-number="9.1.2" class="anchored" data-anchor-id="왜-스케일링이-필요한가"><span class="header-section-number">9.1.2</span> 왜 스케일링이 필요한가</h3>
-<p><span class="math inline">\(Q\)</span>와 <span class="math inline">\(K\)</span>의 각 성분이 평균 0, 분산 1로 독립이라고 하면, 내적 <span class="math inline">\(q \cdot k = \sum_{i=1}^{d_k} q_i k_i\)</span>의 분산은 대략 <span class="math inline">\(d_k\)</span>에 비례해서 커진다. 차원 <span class="math inline">\(d_k\)</span>가 커질수록 내적 값 자체도 커진다는 뜻이다.</p>
-<p>내적 값이 크면 softmax의 입력값 차이가 커져서 가중치가 한 곳에 거의 100%로 쏠리는 <strong>saturation</strong>이 일어나기 쉽다. 이렇게 되면 softmax의 gradient가 거의 0이 되어 학습이 느려진다. <span class="math inline">\(\sqrt{d_k}\)</span>로 나누면 내적 값의 분산을 대략 1로 되돌려 이 문제를 완화한다.</p>
-<p>직접 확인해 보자. <span class="math inline">\(d_k = 64\)</span>인 임의의 query 하나와 key 5개로 attention weight를 계산한다.</p>
+<p><span class="math inline">\(Q\)</span>와 <span class="math inline">\(K\)</span>의 각 성분이 평균 0, 분산 1로 독립이라고 하자.</p>
+<ul>
+<li>내적 <span class="math inline">\(q \cdot k = \sum_{i=1}^{d_k} q_i k_i\)</span>의 분산은 대략 <span class="math inline">\(d_k\)</span>에 비례</li>
+<li>즉, <span class="math inline">\(d_k\)</span>가 커질수록 내적 값도 커진다</li>
+</ul>
+<p>내적 값이 크면 softmax 입력값의 차이가 커져 가중치가 한 곳에 쏠리는 <strong>saturation</strong>이 일어나기 쉽다.</p>
+<ul>
+<li>이 경우 softmax의 gradient가 거의 0이 되어 학습이 느려짐</li>
+<li><span class="math inline">\(\sqrt{d_k}\)</span>로 나누면 내적 값의 분산을 대략 1로 되돌려 완화</li>
+</ul>
+<p><span class="math inline">\(d_k = 64\)</span>인 query 하나와 key 5개로 확인해 보자.</p>
 <div id="tf-scale-demo" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-18T04:06:47.945557Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-18T04:06:47.945557Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-18T04:06:58.772054Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-18T04:06:58.772054Z&quot;}}" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> math</span>
@@ -392,22 +416,37 @@ window.Quarto = {
 스케일링 적용 -&gt; softmax weights: [[0.033 0.295 0.517 0.107 0.049]]</code></pre>
 </div>
 </div>
-<p>스케일링 없이 계산한 weight는 거의 하나의 key에만 1에 가깝게 쏠려 있고(saturation), 스케일링을 적용한 weight는 값이 조금 더 고르게 퍼져 있는 것을 볼 수 있다. <span class="math inline">\(d_k\)</span>가 지금처럼 64, 실제 모델에서는 수백에 이르므로, 스케일링이 없으면 이 문제가 훨씬 심해진다.</p>
+<ul>
+<li>스케일링 없음: 거의 하나의 key에만 1에 가깝게 쏠림 (saturation)</li>
+<li>스케일링 적용: 값이 조금 더 고르게 퍼짐</li>
+</ul>
+<p><span class="math inline">\(d_k\)</span>는 실제 모델에서 수백에 이르므로, 스케일링이 없으면 이 문제가 훨씬 심해진다.</p>
 </section>
 <section id="self-attention과-multi-head-attention" class="level3" data-number="9.1.3">
 <h3 data-number="9.1.3" class="anchored" data-anchor-id="self-attention과-multi-head-attention"><span class="header-section-number">9.1.3</span> Self-attention과 multi-head attention</h3>
-<p>Attention 단원의 attention에서는 query가 디코더에서, key와 value가 인코더에서 나왔다(cross-attention). <strong>Self-attention</strong>은 query, key, value가 전부 같은 시퀀스에서 나온다는 점만 다르다. 같은 입력 <span class="math inline">\(\mathbf{X}\)</span>에 서로 다른 가중치 행렬을 곱해 세 가지를 모두 만든다.</p>
+<p>Attention 단원에서는 query가 디코더에서, key와 value가 인코더에서 나왔다 (cross-attention).</p>
+<p><strong>Self-attention</strong>은 query, key, value가 전부 같은 시퀀스에서 나온다는 점만 다르다.</p>
+<p>같은 입력 <span class="math inline">\(\mathbf{X}\)</span>에 서로 다른 가중치 행렬을 곱해 세 가지를 모두 만든다.</p>
 <p><span class="math display">\[
 \mathbf{Q} = \mathbf{X}W_q, \qquad \mathbf{K} = \mathbf{X}W_k, \qquad \mathbf{V} = \mathbf{X}W_v
 \]</span></p>
-<p>문장 안의 각 단어가 같은 문장의 다른 단어들을 참조하여 자신의 표현을 갱신하는 셈이다. 예를 들어 “그 동물은 길을 건너지 못했다. 그것은 너무 피곤했다”에서 “그것”의 표현은 “동물”을 강하게 참조하도록 학습될 수 있다.</p>
-<p><strong>Multi-head attention</strong>은 이 attention을 여러 개(head)를 병렬로 수행한 뒤 결과를 이어 붙이는 것이다. head마다 서로 다른 <span class="math inline">\(W_q, W_k, W_v\)</span>를 가지므로, 서로 다른 종류의 관계를 나누어 볼 수 있다.</p>
-<p>Attention 단원에서는 <code>Dot</code>, <code>Activation</code> 레이어를 직접 조합해 attention을 구현했다. Keras의 <code>layers.MultiHeadAttention</code>은 가중치 행렬 생성, head 분할, 스케일링, 결합을 한 번에 처리해 주는 레이어다. 이 단원에서는 이 레이어를 부품으로 사용하고, 내부 계산과 파라미터 수 분석은 다음 단원(보충 자료)에서 자세히 다룬다.</p>
+<p>문장 안의 각 단어가 같은 문장의 다른 단어들을 참조하여 자신의 표현을 갱신한다.</p>
+<ul>
+<li>예: “그 동물은 길을 건너지 못했다. 그것은 너무 피곤했다”에서 “그것”이 “동물”을 강하게 참조하도록 학습</li>
+</ul>
+<p><strong>Multi-head attention</strong>은 이 attention을 여러 개(head) 병렬로 수행한 뒤 결과를 이어 붙인다.</p>
+<ul>
+<li>head마다 서로 다른 <span class="math inline">\(W_q, W_k, W_v\)</span>를 가짐</li>
+<li>따라서 서로 다른 종류의 관계를 나누어 볼 수 있음</li>
+</ul>
+<p>Attention 단원에서는 <code>Dot</code>, <code>Activation</code> 레이어를 직접 조합해 attention을 구현하였다.</p>
+<p>Keras의 <code>layers.MultiHeadAttention</code>은 가중치 행렬 생성, head 분할, 스케일링, 결합을 한 번에 처리한다.</p>
+<p>이 단원에서는 이 레이어를 부품으로 사용한다. 내부 계산과 파라미터 수 분석은 다음 단원(보충 자료)에서 다룬다.</p>
 </section>
 </section>
 <section id="전체-구조-한눈에-보기" class="level2" data-number="9.2">
 <h2 data-number="9.2" class="anchored" data-anchor-id="전체-구조-한눈에-보기"><span class="header-section-number">9.2</span> 전체 구조 한눈에 보기</h2>
-<p>이 단원에서 만드는 모델은 작은 GPT다. GPT는 입력 문자를 왼쪽에서 오른쪽으로 읽고, 각 위치에서 다음 문자를 예측한다.</p>
+<p>이 단원에서 만드는 모델은 작은 GPT다. 입력 문자를 왼쪽에서 오른쪽으로 읽고, 각 위치에서 다음 문자를 예측한다.</p>
 <pre class="text"><code>문자열
   -&gt; 문자 tokenizer로 정수 토큰열 변환
   -&gt; token embedding + positional embedding
@@ -415,14 +454,18 @@ window.Quarto = {
   -&gt; 다음 문자 점수(logits)
   -&gt; 확률로 변환 후 sampling
   -&gt; 새 문자 생성</code></pre>
-<p>중요한 점은 모델이 한 번에 문장 전체를 생성하는 것이 아니라, “지금까지 나온 문자들을 보고 다음 문자 하나”를 반복해서 예측한다는 것이다.</p>
+<p>모델은 한 번에 문장 전체를 생성하지 않는다. “지금까지 나온 문자들을 보고 다음 문자 하나”를 반복해서 예측한다.</p>
 </section>
 <section id="준비" class="level2" data-number="9.3">
 <h2 data-number="9.3" class="anchored" data-anchor-id="준비"><span class="header-section-number">9.3</span> 준비</h2>
-<p>TensorFlow가 필요하다. 설치되어 있지 않으면 아래 명령을 터미널이나 노트북 셀에서 한 번 실행한다.</p>
+<p>TensorFlow가 필요하다. 설치되어 있지 않으면 아래를 한 번 실행한다.</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install tensorflow</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>이 실습은 외부 데이터셋을 다운로드하지 않는다. 짧은 예제 문장을 여러 번 반복하여 작은 학습 데이터를 만든다.</p>
-<p>기본 설정은 수업 중 실습이 버벅이지 않도록 작게 잡았다. 더 좋은 생성 결과를 보고 싶으면 마지막 연습 문제에서 층 수, 임베딩 차원, epoch 수를 조금씩 늘려 본다.</p>
+<ul>
+<li>외부 데이터셋은 다운로드하지 않음</li>
+<li>짧은 예제 문장을 여러 번 반복하여 작은 학습 데이터를 만듦</li>
+<li>기본 설정은 실습이 버벅이지 않도록 작게 설정</li>
+</ul>
+<p>더 좋은 생성 결과를 보고 싶으면 마지막 연습 문제에서 층 수, 임베딩 차원, epoch 수를 늘려 본다.</p>
 <div id="03a90ad1" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-18T04:06:58.772054Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-18T04:06:58.772054Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-18T04:06:58.793366Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-18T04:06:58.793366Z&quot;}}" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="cf">try</span>:</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    <span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -441,8 +484,9 @@ window.Quarto = {
 </section>
 <section id="문자-단위-데이터-만들기" class="level2" data-number="9.4">
 <h2 data-number="9.4" class="anchored" data-anchor-id="문자-단위-데이터-만들기"><span class="header-section-number">9.4</span> 문자 단위 데이터 만들기</h2>
-<p>언어 모델은 토큰의 순서를 학습한다. 실제 대형 언어 모델은 복잡한 tokenizer를 사용하지만, 여기서는 원리를 쉽게 보기 위해 문자 하나를 하나의 토큰으로 사용한다.</p>
-<p>예를 들어 <code>attention</code>이라는 단어는 여러 개의 문자 토큰으로 나뉘고, 각 문자는 정수 번호로 바뀐다.</p>
+<p>언어 모델은 토큰의 순서를 학습한다.</p>
+<p>실제 대형 언어 모델은 복잡한 tokenizer를 사용하지만, 여기서는 원리를 쉽게 보기 위해 문자 하나를 하나의 토큰으로 사용한다.</p>
+<p>예를 들어 <code>attention</code>은 여러 개의 문자 토큰으로 나뉘고, 각 문자는 정수 번호로 바뀐다.</p>
 <div id="45cf9414" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-18T04:06:58.797245Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-18T04:06:58.797245Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-18T04:06:58.809202Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-18T04:06:58.809202Z&quot;}}" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>text <span class="op">=</span> <span class="st">"""</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="st">To learn a transformer, start with attention.</span></span>
@@ -479,7 +523,8 @@ attention</code></pre>
 <section id="입력과-정답-만들기" class="level2" data-number="9.5">
 <h2 data-number="9.5" class="anchored" data-anchor-id="입력과-정답-만들기"><span class="header-section-number">9.5</span> 입력과 정답 만들기</h2>
 <p>언어 모델의 학습 목표는 현재까지의 토큰을 보고 다음 토큰을 맞히는 것이다.</p>
-<p>예를 들어 입력이 <code>To learn</code>이라면 정답은 한 칸 오른쪽으로 이동한 <code>o learn</code>이 된다. 즉, 각 위치마다 “다음 문자”를 예측하도록 학습한다.</p>
+<p>예를 들어 입력이 <code>To learn</code>이면 정답은 한 칸 오른쪽으로 이동한 <code>o learn</code>이 된다.</p>
+<p>즉, 각 위치마다 “다음 문자”를 예측하도록 학습한다.</p>
 <div id="4fbb1dac" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-18T04:06:58.812545Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-18T04:06:58.812545Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-18T04:06:58.880193Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-18T04:06:58.878678Z&quot;}}" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> np.array(encode(text), dtype<span class="op">=</span>np.int32)</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>block_size <span class="op">=</span> <span class="dv">24</span></span>
@@ -511,7 +556,8 @@ To learn a transformer, </code></pre>
 <section id="기준-모델-bigram-언어-모델" class="level2" data-number="9.6">
 <h2 data-number="9.6" class="anchored" data-anchor-id="기준-모델-bigram-언어-모델"><span class="header-section-number">9.6</span> 기준 모델: Bigram 언어 모델</h2>
 <p>먼저 매우 단순한 기준 모델을 만든다. Bigram 모델은 현재 문자 하나만 보고 다음 문자를 예측한다.</p>
-<p>이 모델은 문맥을 길게 보지 못한다. 따라서 나중에 만들 Transformer가 무엇을 개선하는지 비교하는 기준점으로 사용할 수 있다.</p>
+<p>이 모델은 문맥을 길게 보지 못한다.</p>
+<p>따라서 나중에 만들 Transformer가 무엇을 개선하는지 비교하는 기준점이 된다.</p>
 <div id="2be17e28" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-18T04:06:58.880193Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-18T04:06:58.880193Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-18T04:06:58.975251Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-18T04:06:58.973495Z&quot;}}" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> build_bigram_model(vocab_size):</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    inputs <span class="op">=</span> keras.Input(shape<span class="op">=</span>(<span class="va">None</span>,), dtype<span class="op">=</span><span class="st">'int32'</span>)</span>
@@ -589,8 +635,13 @@ Epoch 2/2
 </section>
 <section id="문자-생성-함수" class="level2" data-number="9.7">
 <h2 data-number="9.7" class="anchored" data-anchor-id="문자-생성-함수"><span class="header-section-number">9.7</span> 문자 생성 함수</h2>
-<p>모델은 각 위치에서 다음 문자에 대한 점수(logit)를 출력한다. 이 점수를 확률로 바꾸고, 그 확률에 따라 다음 문자를 하나 뽑는다.</p>
-<p>이 과정을 반복하면 짧은 문장을 생성할 수 있다. <code>temperature</code>가 작으면 더 보수적으로, 크면 더 다양하게 생성한다.</p>
+<p>모델은 각 위치에서 다음 문자에 대한 점수(logit)를 출력한다.</p>
+<ul>
+<li>이 점수를 확률로 변환</li>
+<li>그 확률에 따라 다음 문자를 하나 추출</li>
+<li>반복하면 짧은 문장을 생성</li>
+</ul>
+<p><code>temperature</code>가 작으면 더 보수적으로, 크면 더 다양하게 생성한다.</p>
 <div id="fd822f2d" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-18T04:06:59.988394Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-18T04:06:59.988394Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-18T04:07:01.364347Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-18T04:07:01.364347Z&quot;}}" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> sample_from_logits(logits, temperature<span class="op">=</span><span class="fl">1.0</span>):</span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>    logits <span class="op">=</span> logits <span class="op">/</span> temperature</span>
@@ -626,12 +677,19 @@ Thamon,, t pWed t t s t cthain pan.xen checarn s</code></pre>
 </section>
 <section id="causal-self-attention" class="level2" data-number="9.8">
 <h2 data-number="9.8" class="anchored" data-anchor-id="causal-self-attention"><span class="header-section-number">9.8</span> Causal self-attention</h2>
-<p>Bigram 모델은 현재 문자 하나만 본다. Transformer는 이전에 나온 여러 토큰을 함께 참고한다. 이때 사용하는 핵심 연산이 self-attention이다.</p>
-<p>다만 다음 문자를 예측하는 모델은 미래의 정답을 미리 보면 안 된다. 그래서 각 위치가 자기 자신과 과거 위치만 보도록 causal mask를 적용한다.</p>
-<p>Keras의 <code>MultiHeadAttention</code>에서는 <code>use_causal_mask=True</code>로 이 마스크를 사용할 수 있다.</p>
+<p>Bigram 모델은 현재 문자 하나만 본다. Transformer는 이전에 나온 여러 토큰을 함께 참고하며, 이때 사용하는 핵심 연산이 self-attention이다.</p>
+<p>다만 다음 문자를 예측하는 모델은 미래의 정답을 미리 보면 안 된다.</p>
+<ul>
+<li>각 위치가 자기 자신과 과거 위치만 보도록 causal mask를 적용</li>
+<li>Keras의 <code>MultiHeadAttention</code>에서는 <code>use_causal_mask=True</code>로 사용</li>
+</ul>
 <section id="causal-mask-그림" class="level3" data-number="9.8.1">
 <h3 data-number="9.8.1" class="anchored" data-anchor-id="causal-mask-그림"><span class="header-section-number">9.8.1</span> Causal mask 그림</h3>
-<p>다음 문자 예측에서는 미래 문자를 보면 안 된다. 예를 들어 세 번째 입력 위치에서는 첫 번째부터 세 번째 문자까지를 이용해 네 번째 문자를 예측한다. 따라서 네 번째 이후의 문자를 미리 참조하면 정답을 훔쳐보는 셈이 된다.</p>
+<p>다음 문자 예측에서는 미래 문자를 보면 안 된다.</p>
+<ul>
+<li>세 번째 입력 위치에서는 첫 번째부터 세 번째 문자까지를 이용해 네 번째 문자를 예측</li>
+<li>네 번째 이후의 문자를 미리 참조하면 정답을 훔쳐보는 것</li>
+</ul>
 <p>causal mask는 각 위치가 자기 자신과 과거 위치만 보게 만든다.</p>
 <pre class="text"><code>볼 수 있음: O, 볼 수 없음: X
 
@@ -642,7 +700,7 @@ query 2   O  O  X  X  X
 query 3   O  O  O  X  X
 query 4   O  O  O  O  X
 query 5   O  O  O  O  O</code></pre>
-<p>따라서 첫 번째 위치는 첫 번째 토큰만 보고, 다섯 번째 위치는 첫 번째부터 다섯 번째 토큰까지 볼 수 있다.</p>
+<p>첫 번째 위치는 첫 번째 토큰만, 다섯 번째 위치는 첫 번째부터 다섯 번째 토큰까지 볼 수 있다.</p>
 <div id="7bd873ae" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-18T04:07:01.366122Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-18T04:07:01.366122Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-18T04:07:01.431067Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-18T04:07:01.430528Z&quot;}}" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>demo_x <span class="op">=</span> tf.random.normal((<span class="dv">1</span>, <span class="dv">6</span>, <span class="dv">8</span>))</span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>att <span class="op">=</span> layers.MultiHeadAttention(num_heads<span class="op">=</span><span class="dv">2</span>, key_dim<span class="op">=</span><span class="dv">4</span>)</span>
@@ -691,15 +749,17 @@ attention score shape: (1, 2, 6, 6)
 </section>
 <section id="transformer-block-만들기" class="level2" data-number="9.9">
 <h2 data-number="9.9" class="anchored" data-anchor-id="transformer-block-만들기"><span class="header-section-number">9.9</span> Transformer block 만들기</h2>
-<p>이제 작은 GPT 모델을 구성한다. GPT는 encoder-decoder 구조가 아니라 decoder-only 구조를 사용한다. 여기서는 다음 구성 요소를 순서대로 쌓는다.</p>
+<p>이제 작은 GPT 모델을 구성한다. GPT는 encoder-decoder가 아니라 decoder-only 구조를 사용한다.</p>
+<p>다음 구성 요소를 순서대로 쌓는다.</p>
 <ol type="1">
-<li>token embedding: 문자 번호를 벡터로 바꾼다.</li>
-<li>positional embedding: 문자의 위치 정보를 더한다.</li>
-<li>masked multi-head self-attention: 과거 토큰들을 참고한다.</li>
-<li>feed-forward network: 각 위치의 표현을 한 번 더 변환한다.</li>
-<li>residual connection과 layer normalization: 학습을 안정적으로 만든다.</li>
+<li>token embedding: 문자 번호를 벡터로 변환</li>
+<li>positional embedding: 문자의 위치 정보를 더함</li>
+<li>masked multi-head self-attention: 과거 토큰들을 참고</li>
+<li>feed-forward network: 각 위치의 표현을 한 번 더 변환</li>
+<li>residual connection과 layer normalization: 학습을 안정적으로</li>
 </ol>
-<p>참고로 여기서 positional embedding은 위치마다 학습되는 벡터를 사용한다(GPT 방식). 원 논문은 학습하지 않는 사인/코사인 함수 방식(sinusoidal positional encoding)을 사용하는데, 이는 다음 단원에서 다룬다.</p>
+<p>여기서 positional embedding은 위치마다 학습되는 벡터를 사용한다 (GPT 방식).</p>
+<p>원 논문은 학습하지 않는 사인/코사인 방식(sinusoidal positional encoding)을 사용하며, 이는 다음 단원에서 다룬다.</p>
 <section id="transformer-block의-내부-구조" class="level3" data-number="9.9.1">
 <h3 data-number="9.9.1" class="anchored" data-anchor-id="transformer-block의-내부-구조"><span class="header-section-number">9.9.1</span> Transformer block의 내부 구조</h3>
 <p>Transformer block은 입력 표현을 조금씩 더 좋은 표현으로 바꾸는 층이다. 이 실습에서는 매우 작은 block을 사용한다.</p>
@@ -709,10 +769,11 @@ attention score shape: (1, 2, 6, 6)
 h ──→ LayerNorm ──→ Feed-Forward Network ──→ (+) ──→ 출력
 └───────────────────────────────────────────────┘   residual 2</code></pre>
 <ul>
-<li>두 개의 residual connection <code>(+)</code>는 이전 정보를 보존하면서 새 정보를 더하는 역할을 한다.</li>
-<li>Layer normalization은 각 단계의 값 범위를 정돈하여 학습이 불안정해지지 않게 한다.</li>
-<li>LayerNorm을 attention과 FFN <strong>앞</strong>에 두는 구조를 Pre-LN이라고 한다. 원 논문은 뒤에 두는 Post-LN 구조였지만, Pre-LN이 학습이 더 안정적이어서 GPT-2 이후 사실상 표준이 되었다. 아래 구현도 Pre-LN이다.</li>
+<li>두 개의 residual connection <code>(+)</code>: 이전 정보를 보존하면서 새 정보를 더함</li>
+<li>Layer normalization: 각 단계의 값 범위를 정돈하여 학습이 불안정해지지 않게 함</li>
+<li>LayerNorm을 attention과 FFN <strong>앞</strong>에 두는 구조를 Pre-LN이라 함</li>
 </ul>
+<p>원 논문은 뒤에 두는 Post-LN 구조였으나, Pre-LN이 학습이 더 안정적이어서 GPT-2 이후 사실상 표준이 되었다. 아래 구현도 Pre-LN이다.</p>
 <div id="2d3f318a" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-18T04:07:01.562178Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-18T04:07:01.562178Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-18T04:07:01.568607Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-18T04:07:01.568607Z&quot;}}" data-execution_count="10">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> TokenAndPositionEmbedding(layers.Layer):</span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, block_size, vocab_size, n_embd):</span>
@@ -759,9 +820,12 @@ h ──→ LayerNorm ──→ Feed-Forward Network ──→ (+) ──→ 출
 </section>
 <section id="작은-gpt-모델-학습하기" class="level2" data-number="9.10">
 <h2 data-number="9.10" class="anchored" data-anchor-id="작은-gpt-모델-학습하기"><span class="header-section-number">9.10</span> 작은 GPT 모델 학습하기</h2>
-<p>아래 모델은 수업 중 실행하기 쉽도록 매우 작게 설정했다. 하지만 GPT 계열 모델의 핵심 구조는 모두 들어 있다.</p>
-<p>출력층은 각 위치마다 다음 문자 후보 전체에 대한 점수를 만든다. 손실 함수는 정답 문자 번호와 예측 점수를 비교하는 sparse categorical crossentropy를 사용한다.</p>
-<p>수업 중 빠르게 실행하기 위해 각 epoch에서 일부 batch만 사용한다. 더 오래 학습하고 싶으면 <code>take(60)</code> 값을 늘리거나 제거하면 된다.</p>
+<p>아래 모델은 실행하기 쉽도록 매우 작게 설정하였다. 그래도 GPT 계열 모델의 핵심 구조는 모두 들어 있다.</p>
+<ul>
+<li>출력층: 각 위치마다 다음 문자 후보 전체에 대한 점수를 생성</li>
+<li>손실 함수: 정답 문자 번호와 예측 점수를 비교하는 sparse categorical crossentropy</li>
+</ul>
+<p>빠르게 실행하기 위해 각 epoch에서 일부 batch만 사용한다. 더 오래 학습하려면 <code>take(60)</code> 값을 늘리거나 제거한다.</p>
 <div id="7a602a02" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-18T04:07:01.568607Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-18T04:07:01.568607Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-18T04:07:03.635471Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-18T04:07:03.635471Z&quot;}}" data-execution_count="11">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> build_tiny_gpt(block_size, vocab_size, n_embd<span class="op">=</span><span class="dv">64</span>, n_head<span class="op">=</span><span class="dv">4</span>, n_layer<span class="op">=</span><span class="dv">2</span>, dropout<span class="op">=</span><span class="fl">0.1</span>):</span>
 <span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>    inputs <span class="op">=</span> keras.Input(shape<span class="op">=</span>(<span class="va">None</span>,), dtype<span class="op">=</span><span class="st">'int32'</span>)</span>
@@ -877,9 +941,13 @@ Epoch 3/3
 </section>
 <section id="bigram과-정량적으로-비교하기" class="level2" data-number="9.11">
 <h2 data-number="9.11" class="anchored" data-anchor-id="bigram과-정량적으로-비교하기"><span class="header-section-number">9.11</span> Bigram과 정량적으로 비교하기</h2>
-<p>학습이 짧아 생성 문장이 아직 어색하더라도, validation loss를 비교하면 개선을 수치로 확인할 수 있다.</p>
-<p>loss는 다음 문자에 대한 cross-entropy이므로, 낮을수록 다음 문자를 잘 맞힌다는 뜻이다. 문맥을 한 글자만 보는 bigram보다 여러 글자를 보는 Transformer의 loss가 낮게 나오는지 확인해 보자.</p>
-<p>여기서 validation loss는 새로운 문장에 대한 일반화 성능이라기보다, 동일한 짧은 말뭉치에서 Transformer가 bigram 모델보다 문맥을 더 잘 학습하는지를 비교하기 위한 값이다. (<code>text</code>를 그대로 30번 반복한 뒤 셔플 없이 순서대로 나눴으므로, validation 구간도 학습에 쓰인 것과 같은 문단에서 나온다.)</p>
+<p>생성 문장이 아직 어색하더라도, validation loss를 비교하면 개선을 수치로 확인할 수 있다.</p>
+<p>loss는 다음 문자에 대한 cross-entropy이므로, 낮을수록 다음 문자를 잘 맞힌다는 뜻이다.</p>
+<p>문맥을 한 글자만 보는 bigram보다 여러 글자를 보는 Transformer의 loss가 낮게 나오는지 확인해 보자.</p>
+<ul>
+<li>여기서 validation loss는 일반화 성능이 아니라, 같은 말뭉치에서 Transformer가 문맥을 더 잘 학습하는지 비교하기 위한 값</li>
+<li><code>text</code>를 30번 반복한 뒤 셔플 없이 순서대로 나누었으므로, validation 구간도 학습에 쓰인 것과 같은 문단에서 나옴</li>
+</ul>
 <div id="tf-cmp2" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-18T04:07:06.379389Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-18T04:07:06.379389Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-18T04:07:06.498649Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-18T04:07:06.498103Z&quot;}}" data-execution_count="13">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>bigram_loss <span class="op">=</span> bigram.evaluate(val_ds, verbose<span class="op">=</span><span class="dv">0</span>)</span>
 <span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>gpt_loss <span class="op">=</span> gpt.evaluate(val_ds, verbose<span class="op">=</span><span class="dv">0</span>)</span>
@@ -894,8 +962,12 @@ GPT    validation loss : 0.712</code></pre>
 </section>
 <section id="학습된-모델로-생성하기" class="level2" data-number="9.12">
 <h2 data-number="9.12" class="anchored" data-anchor-id="학습된-모델로-생성하기"><span class="header-section-number">9.12</span> 학습된 모델로 생성하기</h2>
-<p>학습이 끝난 뒤 같은 생성 함수를 사용해 문자를 생성한다. 처음에는 완벽한 영어 문장이 나오지 않을 수 있다. 그러나 Bigram 모델보다 반복되는 단어, 공백, 문장 구조를 더 잘 흉내 내는지 비교해 볼 수 있다.</p>
-<p>짧게 학습한 모델은 아직 철자가 흔들릴 수 있다. <code>temperature</code>를 조금 낮추면 더 보수적이고 반복적인 문장이 나오며, epoch 수를 늘리면 말뭉치의 문장 패턴을 더 잘 따라간다.</p>
+<p>학습이 끝난 뒤 같은 생성 함수로 문자를 생성한다.</p>
+<p>완벽한 영어 문장이 나오지는 않는다. 다만 Bigram 모델보다 반복되는 단어, 공백, 문장 구조를 더 잘 흉내 내는지 비교해 볼 수 있다.</p>
+<ul>
+<li><code>temperature</code>를 낮추면 더 보수적이고 반복적인 문장이 나옴</li>
+<li>epoch 수를 늘리면 말뭉치의 문장 패턴을 더 잘 따라감</li>
+</ul>
 <div id="2651df33" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-18T04:07:06.500211Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-18T04:07:06.498649Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-18T04:07:13.715475Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-18T04:07:13.713444Z&quot;}}" data-execution_count="14">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(generate_text(gpt, start<span class="op">=</span><span class="st">"To "</span>, max_new_tokens<span class="op">=</span><span class="dv">500</span>, temperature<span class="op">=</span><span class="fl">0.6</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -913,7 +985,11 @@ The model pre</code></pre>
 <section id="학습된-attention-들여다보기" class="level2" data-number="9.13">
 <h2 data-number="9.13" class="anchored" data-anchor-id="학습된-attention-들여다보기"><span class="header-section-number">9.13</span> 학습된 attention 들여다보기</h2>
 <p>학습된 모델이 실제로 어디를 참조하는지 attention weight를 시각화해 보자.</p>
-<p>첫 번째 Transformer block에서 attention score를 꺼내, head들의 평균을 히트맵으로 그린다. 행이 query(예측하는 위치), 열이 key(참조되는 위치)다.</p>
+<p>첫 번째 Transformer block에서 attention score를 꺼내, head들의 평균을 히트맵으로 그린다.</p>
+<ul>
+<li>행: query (예측하는 위치)</li>
+<li>열: key (참조되는 위치)</li>
+</ul>
 <div id="tf-att2" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-18T04:07:13.718995Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-18T04:07:13.718995Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-18T04:07:14.076784Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-18T04:07:14.075228Z&quot;}}" data-execution_count="15">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> attention_heatmap(model, prompt):</span>
 <span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>    ids <span class="op">=</span> np.array([encode(prompt)], dtype<span class="op">=</span>np.int32)</span>
@@ -946,8 +1022,12 @@ The model pre</code></pre>
 </div>
 </div>
 </div>
-<p>행(query)마다 어느 열(key)이 진한지 살펴보자. 하삼각 구조는 causal mask 때문이고, 그 안에서 진한 칸이 모델이 학습으로 얻은 참조 패턴이다.</p>
-<p>작게 학습한 모델이라 패턴이 뚜렷하지 않을 수 있다. epoch 수를 늘려 다시 학습한 뒤 이 그림을 다시 그리면, 공백이나 자주 나오는 문자 조합에 집중하는 패턴이 점점 뚜렷해지는 것을 관찰할 수 있다.</p>
+<p>행(query)마다 어느 열(key)이 진한지 살펴보자.</p>
+<ul>
+<li>하삼각 구조: causal mask 때문</li>
+<li>그 안의 진한 칸: 모델이 학습으로 얻은 참조 패턴</li>
+</ul>
+<p>작게 학습한 모델이라 패턴이 뚜렷하지 않을 수 있다. epoch 수를 늘려 다시 학습하면 공백이나 자주 나오는 문자 조합에 집중하는 패턴이 점점 뚜렷해진다.</p>
 </section>
 <section id="연습-문제" class="level2" data-number="9.14">
 <h2 data-number="9.14" class="anchored" data-anchor-id="연습-문제"><span class="header-section-number">9.14</span> 연습 문제</h2>
@@ -975,8 +1055,9 @@ The model pre</code></pre>
 <li>feed-forward network</li>
 <li>autoregressive generation</li>
 </ul>
-<p>실제 GPT는 같은 아이디어를 훨씬 큰 데이터, 더 많은 층, 더 큰 embedding dimension으로 확장한 모델이라고 볼 수 있다.</p>
-<p>이 단원의 모델은 decoder-only 구조였다. 번역처럼 입력 시퀀스와 출력 시퀀스가 서로 다른 문제에서는 인코더와 디코더를 모두 사용하는 encoder-decoder 구조를 쓴다. 원 논문의 encoder-decoder Transformer, sinusoidal positional encoding, multi-head attention의 내부 계산과 파라미터 수는 다음 단원(보충 자료)에서 다룬다.</p>
+<p>실제 GPT는 같은 아이디어를 훨씬 큰 데이터, 더 많은 층, 더 큰 embedding dimension으로 확장한 것이다.</p>
+<p>이 단원의 모델은 decoder-only 구조였다. 번역처럼 입력 시퀀스와 출력 시퀀스가 다른 문제에서는 encoder-decoder 구조를 쓴다.</p>
+<p>원 논문의 encoder-decoder Transformer, sinusoidal positional encoding, multi-head attention의 내부 계산과 파라미터 수는 다음 단원(보충 자료)에서 다룬다.</p>
 
 
 </section>
