@@ -630,21 +630,11 @@
     ]
   },
   {
-    "objectID": "09. Transformer.html#연습-문제",
-    "href": "09. Transformer.html#연습-문제",
-    "title": "9  Transformer",
-    "section": "9.14 연습 문제",
-    "text": "9.14 연습 문제\n\nblock_size를 8, 16, 64로 바꾸면 생성 결과가 어떻게 달라지는가?\nn_layer를 1에서 4로 늘리면 loss와 학습 시간이 어떻게 달라지는가?\nn_head를 1로 줄이면 multi-head attention의 효과가 어떻게 달라지는가?\nuse_causal_mask=False로 바꾸면 왜 언어 모델 학습에서 문제가 되는가?\n예제 말뭉치를 직접 바꾸고, 모델이 어떤 패턴을 먼저 배우는지 관찰하라.\nfeed-forward network의 relu를 gelu로 바꾸어 보고 결과를 비교하라.\ntemperature를 0.5, 1.0, 1.5로 바꾸면 생성 문장이 어떻게 달라지는가?\n학습 epoch 수를 늘려 다시 학습한 뒤 attention_heatmap을 다시 그려 보라. attention 패턴이 어떻게 달라지는가?",
-    "crumbs": [
-      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Transformer</span>"
-    ]
-  },
-  {
     "objectID": "09. Transformer.html#정리",
     "href": "09. Transformer.html#정리",
     "title": "9  Transformer",
-    "section": "9.15 정리",
-    "text": "9.15 정리\n이 실습에서 만든 모델은 작지만 GPT 계열 모델의 핵심 부품을 포함한다.\n\ntoken embedding\npositional embedding\ncausal self-attention\nmulti-head attention\nresidual connection\nlayer normalization\nfeed-forward network\nautoregressive generation\n\n실제 GPT는 같은 아이디어를 훨씬 큰 데이터, 더 많은 층, 더 큰 embedding dimension으로 확장한 것이다.\n이 단원의 모델은 decoder-only 구조였다. 번역처럼 입력 시퀀스와 출력 시퀀스가 다른 문제에서는 encoder-decoder 구조를 쓴다.",
+    "section": "9.14 정리",
+    "text": "9.14 정리\n이 실습에서 만든 모델은 작지만 GPT 계열 모델의 핵심 부품을 포함한다.\n\ntoken embedding\npositional embedding\ncausal self-attention\nmulti-head attention\nresidual connection\nlayer normalization\nfeed-forward network\nautoregressive generation\n\n실제 GPT는 같은 아이디어를 훨씬 큰 데이터, 더 많은 층, 더 큰 embedding dimension으로 확장한 것이다.\n이 단원의 모델은 decoder-only 구조였다. 번역처럼 입력 시퀀스와 출력 시퀀스가 다른 문제에서는 encoder-decoder 구조를 쓴다.",
     "crumbs": [
       "<span class='chapter-number'>9</span>  <span class='chapter-title'>Transformer</span>"
     ]

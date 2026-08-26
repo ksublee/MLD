@@ -270,8 +270,7 @@ window.Quarto = {
   <li><a href="#bigram과-정량적으로-비교하기" id="toc-bigram과-정량적으로-비교하기" class="nav-link" data-scroll-target="#bigram과-정량적으로-비교하기"><span class="header-section-number">9.11</span> Bigram과 정량적으로 비교하기</a></li>
   <li><a href="#학습된-모델로-생성하기" id="toc-학습된-모델로-생성하기" class="nav-link" data-scroll-target="#학습된-모델로-생성하기"><span class="header-section-number">9.12</span> 학습된 모델로 생성하기</a></li>
   <li><a href="#학습된-attention-들여다보기" id="toc-학습된-attention-들여다보기" class="nav-link" data-scroll-target="#학습된-attention-들여다보기"><span class="header-section-number">9.13</span> 학습된 attention 들여다보기</a></li>
-  <li><a href="#연습-문제" id="toc-연습-문제" class="nav-link" data-scroll-target="#연습-문제"><span class="header-section-number">9.14</span> 연습 문제</a></li>
-  <li><a href="#정리" id="toc-정리" class="nav-link" data-scroll-target="#정리"><span class="header-section-number">9.15</span> 정리</a></li>
+  <li><a href="#정리" id="toc-정리" class="nav-link" data-scroll-target="#정리"><span class="header-section-number">9.14</span> 정리</a></li>
   </ul>
 </nav>
     </div>
@@ -1029,21 +1028,8 @@ The model pre</code></pre>
 </ul>
 <p>작게 학습한 모델이라 패턴이 뚜렷하지 않을 수 있다. epoch 수를 늘려 다시 학습하면 공백이나 자주 나오는 문자 조합에 집중하는 패턴이 점점 뚜렷해진다.</p>
 </section>
-<section id="연습-문제" class="level2" data-number="9.14">
-<h2 data-number="9.14" class="anchored" data-anchor-id="연습-문제"><span class="header-section-number">9.14</span> 연습 문제</h2>
-<ol type="1">
-<li><code>block_size</code>를 8, 16, 64로 바꾸면 생성 결과가 어떻게 달라지는가?</li>
-<li><code>n_layer</code>를 1에서 4로 늘리면 loss와 학습 시간이 어떻게 달라지는가?</li>
-<li><code>n_head</code>를 1로 줄이면 multi-head attention의 효과가 어떻게 달라지는가?</li>
-<li><code>use_causal_mask=False</code>로 바꾸면 왜 언어 모델 학습에서 문제가 되는가?</li>
-<li>예제 말뭉치를 직접 바꾸고, 모델이 어떤 패턴을 먼저 배우는지 관찰하라.</li>
-<li>feed-forward network의 <code>relu</code>를 <code>gelu</code>로 바꾸어 보고 결과를 비교하라.</li>
-<li><code>temperature</code>를 0.5, 1.0, 1.5로 바꾸면 생성 문장이 어떻게 달라지는가?</li>
-<li>학습 epoch 수를 늘려 다시 학습한 뒤 <code>attention_heatmap</code>을 다시 그려 보라. attention 패턴이 어떻게 달라지는가?</li>
-</ol>
-</section>
-<section id="정리" class="level2" data-number="9.15">
-<h2 data-number="9.15" class="anchored" data-anchor-id="정리"><span class="header-section-number">9.15</span> 정리</h2>
+<section id="정리" class="level2" data-number="9.14">
+<h2 data-number="9.14" class="anchored" data-anchor-id="정리"><span class="header-section-number">9.14</span> 정리</h2>
 <p>이 실습에서 만든 모델은 작지만 GPT 계열 모델의 핵심 부품을 포함한다.</p>
 <ul>
 <li>token embedding</li>
