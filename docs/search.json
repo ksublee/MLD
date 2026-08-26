@@ -520,11 +520,11 @@
     ]
   },
   {
-    "objectID": "09. Transformer.html#준비",
-    "href": "09. Transformer.html#준비",
+    "objectID": "09. Transformer.html#준비tensorflow가-필요하다.-설치되어-있지-않으면-아래를-한-번-실행한다.bashpip-install-tensorflow--외부-데이터셋은-다운로드하지-않음--짧은-예제-문장을-여러-번-반복하여-작은-학습-데이터를-만듦--기본-설정은-실습이-버벅이지-않도록-작게-설정더-좋은-생성-결과를-보고-싶으면-n_layer층-수-n_embd임베딩-차원-epoch-수를-늘려-본다.",
+    "href": "09. Transformer.html#준비tensorflow가-필요하다.-설치되어-있지-않으면-아래를-한-번-실행한다.bashpip-install-tensorflow--외부-데이터셋은-다운로드하지-않음--짧은-예제-문장을-여러-번-반복하여-작은-학습-데이터를-만듦--기본-설정은-실습이-버벅이지-않도록-작게-설정더-좋은-생성-결과를-보고-싶으면-n_layer층-수-n_embd임베딩-차원-epoch-수를-늘려-본다.",
     "title": "9  Transformer",
-    "section": "9.3 준비",
-    "text": "9.3 준비\nTensorFlow가 필요하다. 설치되어 있지 않으면 아래를 한 번 실행한다.\npip install tensorflow\n\n외부 데이터셋은 다운로드하지 않음\n짧은 예제 문장을 여러 번 반복하여 작은 학습 데이터를 만듦\n기본 설정은 실습이 버벅이지 않도록 작게 설정\n\n더 좋은 생성 결과를 보고 싶으면 마지막 연습 문제에서 층 수, 임베딩 차원, epoch 수를 늘려 본다.\n\ntry:\n    import numpy as np\n    import tensorflow as tf\n    from tensorflow import keras\n    from tensorflow.keras import layers\nexcept ModuleNotFoundError as e:\n    raise ModuleNotFoundError(\"TensorFlow가 필요합니다. 먼저 `pip install tensorflow`를 실행한 뒤 다시 시도하세요.\") from e\n\nkeras.utils.set_random_seed(42)\nprint(tf.__version__)\n\n2.21.0",
+    "section": "9.3 준비TensorFlow가 필요하다. 설치되어 있지 않으면 아래를 한 번 실행한다.bashpip install tensorflow- 외부 데이터셋은 다운로드하지 않음- 짧은 예제 문장을 여러 번 반복하여 작은 학습 데이터를 만듦- 기본 설정은 실습이 버벅이지 않도록 작게 설정더 좋은 생성 결과를 보고 싶으면 n_layer(층 수), n_embd(임베딩 차원), epoch 수를 늘려 본다.",
+    "text": "9.3 준비TensorFlow가 필요하다. 설치되어 있지 않으면 아래를 한 번 실행한다.bashpip install tensorflow- 외부 데이터셋은 다운로드하지 않음- 짧은 예제 문장을 여러 번 반복하여 작은 학습 데이터를 만듦- 기본 설정은 실습이 버벅이지 않도록 작게 설정더 좋은 생성 결과를 보고 싶으면 n_layer(층 수), n_embd(임베딩 차원), epoch 수를 늘려 본다.\n\ntry:\n    import numpy as np\n    import tensorflow as tf\n    from tensorflow import keras\n    from tensorflow.keras import layers\nexcept ModuleNotFoundError as e:\n    raise ModuleNotFoundError(\"TensorFlow가 필요합니다. 먼저 `pip install tensorflow`를 실행한 뒤 다시 시도하세요.\") from e\n\nkeras.utils.set_random_seed(42)\nprint(tf.__version__)\n\n2.21.0",
     "crumbs": [
       "<span class='chapter-number'>9</span>  <span class='chapter-title'>Transformer</span>"
     ]
