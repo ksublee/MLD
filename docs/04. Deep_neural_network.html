@@ -1444,13 +1444,14 @@ Epoch 25/25
 </div>
 </div>
 <div id="cell-80" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-20T06:43:41.347143Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-20T06:43:41.346130Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-20T06:43:41.484163Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-20T06:43:41.483592Z&quot;}}" data-execution_count="52">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb67"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a>plt.plot(history.epoch, history.history[<span class="st">"learning_rate"</span>], <span class="st">"o-"</span>)</span>
-<span id="cb67-2"><a href="#cb67-2" aria-hidden="true" tabindex="-1"></a>plt.axis([<span class="dv">0</span>, n_epochs <span class="op">-</span> <span class="dv">1</span>, <span class="dv">0</span>, <span class="fl">0.011</span>])</span>
-<span id="cb67-3"><a href="#cb67-3" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Epoch"</span>)</span>
-<span id="cb67-4"><a href="#cb67-4" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Learning Rate"</span>)</span>
-<span id="cb67-5"><a href="#cb67-5" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Exponential Scheduling"</span>, fontsize<span class="op">=</span><span class="dv">14</span>)</span>
-<span id="cb67-6"><a href="#cb67-6" aria-hidden="true" tabindex="-1"></a>plt.grid(<span class="va">True</span>)</span>
-<span id="cb67-7"><a href="#cb67-7" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb67"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a>lr_key <span class="op">=</span> <span class="st">"learning_rate"</span> <span class="cf">if</span> <span class="st">"learning_rate"</span> <span class="kw">in</span> history.history <span class="cf">else</span> <span class="st">"lr"</span></span>
+<span id="cb67-2"><a href="#cb67-2" aria-hidden="true" tabindex="-1"></a>plt.plot(history.epoch, history.history[lr_key], <span class="st">"o-"</span>)</span>
+<span id="cb67-3"><a href="#cb67-3" aria-hidden="true" tabindex="-1"></a>plt.axis([<span class="dv">0</span>, n_epochs <span class="op">-</span> <span class="dv">1</span>, <span class="dv">0</span>, <span class="fl">0.011</span>])</span>
+<span id="cb67-4"><a href="#cb67-4" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Epoch"</span>)</span>
+<span id="cb67-5"><a href="#cb67-5" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Learning Rate"</span>)</span>
+<span id="cb67-6"><a href="#cb67-6" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Exponential Scheduling"</span>, fontsize<span class="op">=</span><span class="dv">14</span>)</span>
+<span id="cb67-7"><a href="#cb67-7" aria-hidden="true" tabindex="-1"></a>plt.grid(<span class="va">True</span>)</span>
+<span id="cb67-8"><a href="#cb67-8" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
