@@ -390,7 +390,7 @@ window.Quarto = {
 <li><span class="math inline">\(\sqrt{d_k}\)</span>로 나누면 내적 값의 분산을 대략 1로 되돌려 완화</li>
 </ul>
 <p><span class="math inline">\(d_k = 64\)</span>인 query 하나와 key 5개로 확인해 보자.</p>
-<div id="tf-scale-demo" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-18T04:06:47.945557Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-18T04:06:47.945557Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-18T04:06:58.772054Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-18T04:06:58.772054Z&quot;}}" data-execution_count="1">
+<div id="tf-scale-demo" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-08-31T07:05:56.230998Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-08-31T07:05:56.230998Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-08-31T07:06:28.349013Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-08-31T07:06:28.348002Z&quot;}}" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> math</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> tensorflow <span class="im">as</span> tf</span>
@@ -465,7 +465,7 @@ window.Quarto = {
 <li>기본 설정은 실습이 버벅이지 않도록 작게 설정</li>
 </ul>
 <p>더 좋은 생성 결과를 보고 싶으면 <code>n_layer</code>(층 수), <code>n_embd</code>(임베딩 차원), epoch 수를 늘려 본다.</p>
-<div id="03a90ad1" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-18T04:06:58.772054Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-18T04:06:58.772054Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-18T04:06:58.793366Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-18T04:06:58.793366Z&quot;}}" data-execution_count="2">
+<div id="03a90ad1" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-08-31T07:06:28.352793Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-08-31T07:06:28.352793Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-08-31T07:06:28.369308Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-08-31T07:06:28.368759Z&quot;}}" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="cf">try</span>:</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    <span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="im">import</span> tensorflow <span class="im">as</span> tf</span>
@@ -486,7 +486,7 @@ window.Quarto = {
 <p>언어 모델은 토큰의 순서를 학습한다.</p>
 <p>실제 대형 언어 모델은 복잡한 tokenizer를 사용하지만, 여기서는 원리를 쉽게 보기 위해 문자 하나를 하나의 토큰으로 사용한다.</p>
 <p>예를 들어 <code>attention</code>은 여러 개의 문자 토큰으로 나뉘고, 각 문자는 정수 번호로 바뀐다.</p>
-<div id="45cf9414" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-18T04:06:58.797245Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-18T04:06:58.797245Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-18T04:06:58.809202Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-18T04:06:58.809202Z&quot;}}" data-execution_count="3">
+<div id="45cf9414" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-08-31T07:06:28.373907Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-08-31T07:06:28.373907Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-08-31T07:06:28.387450Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-08-31T07:06:28.386436Z&quot;}}" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>text <span class="op">=</span> <span class="st">"""</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="st">To learn a transformer, start with attention.</span></span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="st">Attention looks back at previous tokens.</span></span>
@@ -524,7 +524,7 @@ attention</code></pre>
 <p>언어 모델의 학습 목표는 현재까지의 토큰을 보고 다음 토큰을 맞히는 것이다.</p>
 <p>예를 들어 입력이 <code>To learn</code>이면 정답은 한 칸 오른쪽으로 이동한 <code>o learn</code>이 된다.</p>
 <p>즉, 각 위치마다 “다음 문자”를 예측하도록 학습한다.</p>
-<div id="4fbb1dac" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-18T04:06:58.812545Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-18T04:06:58.812545Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-18T04:06:58.880193Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-18T04:06:58.878678Z&quot;}}" data-execution_count="4">
+<div id="4fbb1dac" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-08-31T07:06:28.392358Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-08-31T07:06:28.391363Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-08-31T07:06:28.421686Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-08-31T07:06:28.420658Z&quot;}}" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> np.array(encode(text), dtype<span class="op">=</span>np.int32)</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>block_size <span class="op">=</span> <span class="dv">24</span></span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>batch_size <span class="op">=</span> <span class="dv">16</span></span>
@@ -536,13 +536,10 @@ attention</code></pre>
 <span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>X_train, y_train <span class="op">=</span> X[:n], y[:n]</span>
 <span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>X_val, y_val <span class="op">=</span> X[n:], y[n:]</span>
 <span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>train_ds <span class="op">=</span> tf.data.Dataset.from_tensor_slices((X_train, y_train)).shuffle(<span class="dv">10000</span>).batch(batch_size)</span>
-<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>val_ds <span class="op">=</span> tf.data.Dataset.from_tensor_slices((X_val, y_val)).batch(batch_size)</span>
-<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(X_train.shape, y_train.shape)</span>
-<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(decode(X_train[<span class="dv">0</span>]))</span>
-<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'--- target ---'</span>)</span>
-<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(decode(y_train[<span class="dv">0</span>]))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(X_train.shape, y_train.shape)</span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(decode(X_train[<span class="dv">0</span>]))</span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'--- target ---'</span>)</span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(decode(y_train[<span class="dv">0</span>]))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>(5810, 24) (5810, 24)
 
@@ -557,7 +554,7 @@ To learn a transformer, </code></pre>
 <p>먼저 매우 단순한 기준 모델을 만든다. Bigram 모델은 현재 문자 하나만 보고 다음 문자를 예측한다.</p>
 <p>이 모델은 문맥을 길게 보지 못한다.</p>
 <p>따라서 나중에 만들 Transformer가 무엇을 개선하는지 비교하는 기준점이 된다.</p>
-<div id="2be17e28" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-18T04:06:58.880193Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-18T04:06:58.880193Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-18T04:06:58.975251Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-18T04:06:58.973495Z&quot;}}" data-execution_count="5">
+<div id="2be17e28" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-08-31T07:06:28.423429Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-08-31T07:06:28.423429Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-08-31T07:06:28.576163Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-08-31T07:06:28.574147Z&quot;}}" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> build_bigram_model(vocab_size):</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    inputs <span class="op">=</span> keras.Input(shape<span class="op">=</span>(<span class="va">None</span>,), dtype<span class="op">=</span><span class="st">'int32'</span>)</span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    logits <span class="op">=</span> layers.Embedding(vocab_size, vocab_size)(inputs)</span>
@@ -599,36 +596,35 @@ To learn a transformer, </code></pre>
 </pre>
 </div>
 </div>
-<div id="03237654" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-18T04:06:58.978817Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-18T04:06:58.978817Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-18T04:06:59.983208Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-18T04:06:59.983208Z&quot;}}" data-execution_count="6">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>bigram.fit(train_ds.take(<span class="dv">40</span>), validation_data<span class="op">=</span>val_ds.take(<span class="dv">10</span>), epochs<span class="op">=</span><span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Epoch 1/2</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>C:\Users\KSLee\AppData\Local\Programs\Python\Python311\Lib\site-packages\keras\src\trainers\epoch_iterator.py:74: UserWarning: `shuffle=True` was passed, but will be ignored since the data `x` was provided as a tf.data.Dataset. The Dataset is expected to already be shuffled (via `.shuffle(buffer_size)`).
-  self.data_adapter = data_adapters.get_data_adapter(</code></pre>
-</div>
+<div id="03237654" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-08-31T07:06:28.577161Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-08-31T07:06:28.577161Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-08-31T07:06:30.062208Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-08-31T07:06:30.062208Z&quot;}}" data-execution_count="6">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>bigram.fit(X_train[:<span class="dv">640</span>], y_train[:<span class="dv">640</span>],</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>           batch_size<span class="op">=</span>batch_size,</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>           validation_data<span class="op">=</span>(X_val[:<span class="dv">160</span>], y_val[:<span class="dv">160</span>]),</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>           epochs<span class="op">=</span><span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <div class="ansi-escaped-output">
-<pre><span class="ansi-bold"> 1/40</span> <span class="ansi-white-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">21s</span> 545ms/step - loss: 3.3979
+<pre>Epoch 1/2
+
+
+<span class="ansi-bold"> 1/40</span> <span class="ansi-white-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">26s</span> 674ms/step - loss: 3.3951
 
-<span class="ansi-bold">32/40</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━</span><span class="ansi-white-fg">━━━━</span> <span class="ansi-bold">0s</span> 2ms/step - loss: 2.8006   
+<span class="ansi-bold">24/40</span> <span class="ansi-green-fg">━━━━━━━━━━━━</span><span class="ansi-white-fg">━━━━━━━━</span> <span class="ansi-bold">0s</span> 2ms/step - loss: 2.9269   
 
-<span class="ansi-bold">40/40</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">1s</span> 6ms/step - loss: 2.6937 - val_loss: 2.1849
+<span class="ansi-bold">40/40</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">1s</span> 9ms/step - loss: 2.6992 - val_loss: 2.1957
 
 Epoch 2/2
 
 
-<span class="ansi-bold"> 1/40</span> <span class="ansi-white-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">1s</span> 37ms/step - loss: 2.1960
+<span class="ansi-bold"> 1/40</span> <span class="ansi-white-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">1s</span> 47ms/step - loss: 2.1856
 
-<span class="ansi-bold">26/40</span> <span class="ansi-green-fg">━━━━━━━━━━━━━</span><span class="ansi-white-fg">━━━━━━━</span> <span class="ansi-bold">0s</span> 2ms/step - loss: 2.0728 
+<span class="ansi-bold">22/40</span> <span class="ansi-green-fg">━━━━━━━━━━━</span><span class="ansi-white-fg">━━━━━━━━━</span> <span class="ansi-bold">0s</span> 3ms/step - loss: 2.0811 
 
-<span class="ansi-bold">40/40</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">0s</span> 4ms/step - loss: 2.0196 - val_loss: 1.8748
+<span class="ansi-bold">40/40</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">0s</span> 5ms/step - loss: 2.0159 - val_loss: 1.8723
 </pre>
 </div>
 </div>
 <div class="cell-output cell-output-display" data-execution_count="6">
-<pre><code>&lt;keras.src.callbacks.history.History at 0x16ee0bd9c50&gt;</code></pre>
+<pre><code>&lt;keras.src.callbacks.history.History at 0x17a55d5d010&gt;</code></pre>
 </div>
 </div>
 </section>
@@ -641,36 +637,37 @@ Epoch 2/2
 <li>반복하면 짧은 문장을 생성</li>
 </ul>
 <p><code>temperature</code>가 작으면 더 보수적으로, 크면 더 다양하게 생성한다.</p>
-<div id="fd822f2d" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-18T04:06:59.988394Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-18T04:06:59.988394Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-18T04:07:01.364347Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-18T04:07:01.364347Z&quot;}}" data-execution_count="7">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> sample_from_logits(logits, temperature<span class="op">=</span><span class="fl">1.0</span>):</span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>    logits <span class="op">=</span> logits <span class="op">/</span> temperature</span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> tf.random.categorical(logits, num_samples<span class="op">=</span><span class="dv">1</span>)[<span class="dv">0</span>, <span class="dv">0</span>].numpy()</span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> generate_text(model, start<span class="op">=</span><span class="st">'</span><span class="ch">\n</span><span class="st">'</span>, max_new_tokens<span class="op">=</span><span class="dv">300</span>, temperature<span class="op">=</span><span class="fl">1.0</span>):</span>
-<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>    ids <span class="op">=</span> encode(start)</span>
-<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(max_new_tokens):</span>
-<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>        idx <span class="op">=</span> np.array([ids[<span class="op">-</span>block_size:]], dtype<span class="op">=</span>np.int32)</span>
-<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>        logits <span class="op">=</span> model(idx, training<span class="op">=</span><span class="va">False</span>)</span>
-<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>        next_logits <span class="op">=</span> logits[:, <span class="op">-</span><span class="dv">1</span>, :]</span>
-<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>        next_id <span class="op">=</span> sample_from_logits(next_logits, temperature<span class="op">=</span>temperature)</span>
-<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>        ids.append(next_id)</span>
-<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> decode(ids)</span>
-<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(generate_text(bigram, max_new_tokens<span class="op">=</span><span class="dv">300</span>, temperature<span class="op">=</span><span class="fl">0.8</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="fd822f2d" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-08-31T07:06:30.070088Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-08-31T07:06:30.067744Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-08-31T07:06:31.689406Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-08-31T07:06:31.689406Z&quot;}}" data-execution_count="7">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> sample_from_logits(logits, temperature<span class="op">=</span><span class="fl">1.0</span>):</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>    logits <span class="op">=</span> logits <span class="op">/</span> temperature</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> tf.random.categorical(logits, num_samples<span class="op">=</span><span class="dv">1</span>)[<span class="dv">0</span>, <span class="dv">0</span>].numpy()</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> generate_text(model, start<span class="op">=</span><span class="st">'</span><span class="ch">\n</span><span class="st">'</span>, max_new_tokens<span class="op">=</span><span class="dv">300</span>, temperature<span class="op">=</span><span class="fl">1.0</span>):</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>    ids <span class="op">=</span> encode(start)</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(max_new_tokens):</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>        idx <span class="op">=</span> np.array([ids[<span class="op">-</span>block_size:]], dtype<span class="op">=</span>np.int32)</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>        logits <span class="op">=</span> model(idx, training<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>        next_logits <span class="op">=</span> logits[:, <span class="op">-</span><span class="dv">1</span>, :]</span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>        next_id <span class="op">=</span> sample_from_logits(next_logits, temperature<span class="op">=</span>temperature)</span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>        ids.append(next_id)</span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> decode(ids)</span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(generate_text(bigram, max_new_tokens<span class="op">=</span><span class="dv">300</span>, temperature<span class="op">=</span><span class="fl">0.8</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
-Tuviok s pe ttsm
-Tl pctokeaangvarmodenerttru
-Tbarmprat ch toubitt.eratt smpe sfntaiorne, ara smo tha me st the l tted.
-A arle,u catrng, llererbr, tatte marndA pectiontt s svinsperteWchit anster.
-Ahedus.
+Aittene s pe ttsm
+Tl pctokeackevarmodenerttru
+Tansion wWch toubitt tratt smpe sforalllok cara tio tel me st wiodActtan taictin w, atrnh chedins.
 
-Thate whh llod paile am
-Atioo s.
-Th lec.
+Ttatte marnd.
+Tharnsfut s svinsterteal tt anster.
+Agumus.
 
-Aiod.
-Thamon,, t pWed t t s t cthain pan.xen checarn s</code></pre>
+Thate,ybvAatt an chae i
+Atior.
+AkeW, s.
+T.
+Tmal pel sfde t pWed t t s t cthake pan.xen checarn </code></pre>
 </div>
 </div>
 </section>
@@ -700,42 +697,42 @@ query 3   O  O  O  X  X
 query 4   O  O  O  O  X
 query 5   O  O  O  O  O</code></pre>
 <p>첫 번째 위치는 첫 번째 토큰만, 다섯 번째 위치는 첫 번째부터 다섯 번째 토큰까지 볼 수 있다.</p>
-<div id="7bd873ae" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-18T04:07:01.366122Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-18T04:07:01.366122Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-18T04:07:01.431067Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-18T04:07:01.430528Z&quot;}}" data-execution_count="8">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>demo_x <span class="op">=</span> tf.random.normal((<span class="dv">1</span>, <span class="dv">6</span>, <span class="dv">8</span>))</span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>att <span class="op">=</span> layers.MultiHeadAttention(num_heads<span class="op">=</span><span class="dv">2</span>, key_dim<span class="op">=</span><span class="dv">4</span>)</span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>out, scores <span class="op">=</span> att(</span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>    demo_x,</span>
-<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>    demo_x,</span>
-<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>    use_causal_mask<span class="op">=</span><span class="va">True</span>,</span>
-<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>    return_attention_scores<span class="op">=</span><span class="va">True</span>,</span>
-<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'output shape:'</span>, out.shape)</span>
-<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'attention score shape:'</span>, scores.shape)</span>
-<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(np.<span class="bu">round</span>(scores[<span class="dv">0</span>, <span class="dv">0</span>].numpy(), <span class="dv">3</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="7bd873ae" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-08-31T07:06:31.689406Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-08-31T07:06:31.689406Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-08-31T07:06:32.038267Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-08-31T07:06:32.036242Z&quot;}}" data-execution_count="8">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>demo_x <span class="op">=</span> tf.random.normal((<span class="dv">1</span>, <span class="dv">6</span>, <span class="dv">8</span>))</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>att <span class="op">=</span> layers.MultiHeadAttention(num_heads<span class="op">=</span><span class="dv">2</span>, key_dim<span class="op">=</span><span class="dv">4</span>)</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>out, scores <span class="op">=</span> att(</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>    demo_x,</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>    demo_x,</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>    use_causal_mask<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>    return_attention_scores<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'output shape:'</span>, out.shape)</span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'attention score shape:'</span>, scores.shape)</span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(np.<span class="bu">round</span>(scores[<span class="dv">0</span>, <span class="dv">0</span>].numpy(), <span class="dv">3</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>output shape: (1, 6, 8)
 attention score shape: (1, 2, 6, 6)
 [[1.    0.    0.    0.    0.    0.   ]
- [0.143 0.857 0.    0.    0.    0.   ]
- [0.141 0.143 0.716 0.    0.    0.   ]
- [0.419 0.057 0.333 0.192 0.    0.   ]
- [0.136 0.099 0.314 0.184 0.266 0.   ]
- [0.06  0.174 0.068 0.072 0.064 0.562]]</code></pre>
+ [0.883 0.117 0.    0.    0.    0.   ]
+ [0.123 0.055 0.822 0.    0.    0.   ]
+ [0.003 0.027 0.001 0.969 0.    0.   ]
+ [0.146 0.202 0.47  0.048 0.134 0.   ]
+ [0.065 0.126 0.051 0.299 0.217 0.241]]</code></pre>
 </div>
 </div>
 <p>출력된 attention score 행렬을 히트맵으로 그려 보자.</p>
 <p>causal mask 때문에 대각선 위(미래 위치)의 가중치가 정확히 0이 되어, 하삼각 형태가 나타난다.</p>
-<div id="tf-heat2" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-18T04:07:01.432634Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-18T04:07:01.432634Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-18T04:07:01.560170Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-18T04:07:01.560170Z&quot;}}" data-execution_count="9">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="fl">4.5</span>, <span class="dv">4</span>))</span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>plt.imshow(scores[<span class="dv">0</span>, <span class="dv">0</span>].numpy(), cmap<span class="op">=</span><span class="st">'Blues'</span>)</span>
-<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>plt.colorbar(label<span class="op">=</span><span class="st">'attention weight'</span>)</span>
-<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'key position'</span>)</span>
-<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'query position'</span>)</span>
-<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Causal self-attention weights'</span>)</span>
-<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="tf-heat2" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-08-31T07:06:32.042291Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-08-31T07:06:32.042291Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-08-31T07:06:32.476527Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-08-31T07:06:32.476527Z&quot;}}" data-execution_count="9">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="fl">4.5</span>, <span class="dv">4</span>))</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>plt.imshow(scores[<span class="dv">0</span>, <span class="dv">0</span>].numpy(), cmap<span class="op">=</span><span class="st">'Blues'</span>)</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>plt.colorbar(label<span class="op">=</span><span class="st">'attention weight'</span>)</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'key position'</span>)</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'query position'</span>)</span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Causal self-attention weights'</span>)</span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -773,47 +770,47 @@ h ──→ LayerNorm ──→ Feed-Forward Network ──→ (+) ──→ 출
 <li>LayerNorm을 attention과 FFN <strong>앞</strong>에 두는 구조를 Pre-LN이라 함</li>
 </ul>
 <p>원 논문은 뒤에 두는 Post-LN 구조였으나, Pre-LN이 학습이 더 안정적이어서 GPT-2 이후 사실상 표준이 되었다. 아래 구현도 Pre-LN이다.</p>
-<div id="2d3f318a" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-18T04:07:01.562178Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-18T04:07:01.562178Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-18T04:07:01.568607Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-18T04:07:01.568607Z&quot;}}" data-execution_count="10">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> TokenAndPositionEmbedding(layers.Layer):</span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, block_size, vocab_size, n_embd):</span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>        <span class="bu">super</span>().<span class="fu">__init__</span>()</span>
-<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.token_embedding <span class="op">=</span> layers.Embedding(vocab_size, n_embd)</span>
-<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.position_embedding <span class="op">=</span> layers.Embedding(block_size, n_embd)</span>
-<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> call(<span class="va">self</span>, idx):</span>
-<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>        T <span class="op">=</span> tf.shape(idx)[<span class="dv">1</span>]</span>
-<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>        positions <span class="op">=</span> tf.<span class="bu">range</span>(<span class="dv">0</span>, T)</span>
-<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>        tok_emb <span class="op">=</span> <span class="va">self</span>.token_embedding(idx)</span>
-<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>        pos_emb <span class="op">=</span> <span class="va">self</span>.position_embedding(positions)</span>
-<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> tok_emb <span class="op">+</span> pos_emb</span>
-<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> TransformerBlock(layers.Layer):</span>
-<span id="cb25-15"><a href="#cb25-15" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, n_embd, n_head, dropout<span class="op">=</span><span class="fl">0.1</span>):</span>
-<span id="cb25-16"><a href="#cb25-16" aria-hidden="true" tabindex="-1"></a>        <span class="bu">super</span>().<span class="fu">__init__</span>()</span>
-<span id="cb25-17"><a href="#cb25-17" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.ln1 <span class="op">=</span> layers.LayerNormalization()</span>
-<span id="cb25-18"><a href="#cb25-18" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.attn <span class="op">=</span> layers.MultiHeadAttention(</span>
-<span id="cb25-19"><a href="#cb25-19" aria-hidden="true" tabindex="-1"></a>            num_heads<span class="op">=</span>n_head,</span>
-<span id="cb25-20"><a href="#cb25-20" aria-hidden="true" tabindex="-1"></a>            key_dim<span class="op">=</span>n_embd <span class="op">//</span> n_head,</span>
-<span id="cb25-21"><a href="#cb25-21" aria-hidden="true" tabindex="-1"></a>            dropout<span class="op">=</span>dropout,</span>
-<span id="cb25-22"><a href="#cb25-22" aria-hidden="true" tabindex="-1"></a>        )</span>
-<span id="cb25-23"><a href="#cb25-23" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.ln2 <span class="op">=</span> layers.LayerNormalization()</span>
-<span id="cb25-24"><a href="#cb25-24" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.ffn <span class="op">=</span> keras.Sequential([</span>
-<span id="cb25-25"><a href="#cb25-25" aria-hidden="true" tabindex="-1"></a>            layers.Dense(<span class="dv">4</span> <span class="op">*</span> n_embd, activation<span class="op">=</span><span class="st">'relu'</span>),</span>
-<span id="cb25-26"><a href="#cb25-26" aria-hidden="true" tabindex="-1"></a>            layers.Dense(n_embd),</span>
-<span id="cb25-27"><a href="#cb25-27" aria-hidden="true" tabindex="-1"></a>            layers.Dropout(dropout),</span>
-<span id="cb25-28"><a href="#cb25-28" aria-hidden="true" tabindex="-1"></a>        ])</span>
-<span id="cb25-29"><a href="#cb25-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-30"><a href="#cb25-30" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> call(<span class="va">self</span>, x, training<span class="op">=</span><span class="va">False</span>):</span>
-<span id="cb25-31"><a href="#cb25-31" aria-hidden="true" tabindex="-1"></a>        norm_x <span class="op">=</span> <span class="va">self</span>.ln1(x)</span>
-<span id="cb25-32"><a href="#cb25-32" aria-hidden="true" tabindex="-1"></a>        attn_out <span class="op">=</span> <span class="va">self</span>.attn(</span>
-<span id="cb25-33"><a href="#cb25-33" aria-hidden="true" tabindex="-1"></a>            norm_x,</span>
-<span id="cb25-34"><a href="#cb25-34" aria-hidden="true" tabindex="-1"></a>            norm_x,</span>
-<span id="cb25-35"><a href="#cb25-35" aria-hidden="true" tabindex="-1"></a>            use_causal_mask<span class="op">=</span><span class="va">True</span>,</span>
-<span id="cb25-36"><a href="#cb25-36" aria-hidden="true" tabindex="-1"></a>            training<span class="op">=</span>training,</span>
-<span id="cb25-37"><a href="#cb25-37" aria-hidden="true" tabindex="-1"></a>        )</span>
-<span id="cb25-38"><a href="#cb25-38" aria-hidden="true" tabindex="-1"></a>        x <span class="op">=</span> x <span class="op">+</span> attn_out</span>
-<span id="cb25-39"><a href="#cb25-39" aria-hidden="true" tabindex="-1"></a>        x <span class="op">=</span> x <span class="op">+</span> <span class="va">self</span>.ffn(<span class="va">self</span>.ln2(x), training<span class="op">=</span>training)</span>
-<span id="cb25-40"><a href="#cb25-40" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> x</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="2d3f318a" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-08-31T07:06:32.482898Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-08-31T07:06:32.482898Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-08-31T07:06:32.494780Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-08-31T07:06:32.494780Z&quot;}}" data-execution_count="10">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> TokenAndPositionEmbedding(layers.Layer):</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, block_size, vocab_size, n_embd):</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>        <span class="bu">super</span>().<span class="fu">__init__</span>()</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.token_embedding <span class="op">=</span> layers.Embedding(vocab_size, n_embd)</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.position_embedding <span class="op">=</span> layers.Embedding(block_size, n_embd)</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> call(<span class="va">self</span>, idx):</span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>        T <span class="op">=</span> tf.shape(idx)[<span class="dv">1</span>]</span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>        positions <span class="op">=</span> tf.<span class="bu">range</span>(<span class="dv">0</span>, T)</span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>        tok_emb <span class="op">=</span> <span class="va">self</span>.token_embedding(idx)</span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>        pos_emb <span class="op">=</span> <span class="va">self</span>.position_embedding(positions)</span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> tok_emb <span class="op">+</span> pos_emb</span>
+<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> TransformerBlock(layers.Layer):</span>
+<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, n_embd, n_head, dropout<span class="op">=</span><span class="fl">0.1</span>):</span>
+<span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a>        <span class="bu">super</span>().<span class="fu">__init__</span>()</span>
+<span id="cb23-17"><a href="#cb23-17" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.ln1 <span class="op">=</span> layers.LayerNormalization()</span>
+<span id="cb23-18"><a href="#cb23-18" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.attn <span class="op">=</span> layers.MultiHeadAttention(</span>
+<span id="cb23-19"><a href="#cb23-19" aria-hidden="true" tabindex="-1"></a>            num_heads<span class="op">=</span>n_head,</span>
+<span id="cb23-20"><a href="#cb23-20" aria-hidden="true" tabindex="-1"></a>            key_dim<span class="op">=</span>n_embd <span class="op">//</span> n_head,</span>
+<span id="cb23-21"><a href="#cb23-21" aria-hidden="true" tabindex="-1"></a>            dropout<span class="op">=</span>dropout,</span>
+<span id="cb23-22"><a href="#cb23-22" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb23-23"><a href="#cb23-23" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.ln2 <span class="op">=</span> layers.LayerNormalization()</span>
+<span id="cb23-24"><a href="#cb23-24" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.ffn <span class="op">=</span> keras.Sequential([</span>
+<span id="cb23-25"><a href="#cb23-25" aria-hidden="true" tabindex="-1"></a>            layers.Dense(<span class="dv">4</span> <span class="op">*</span> n_embd, activation<span class="op">=</span><span class="st">'relu'</span>),</span>
+<span id="cb23-26"><a href="#cb23-26" aria-hidden="true" tabindex="-1"></a>            layers.Dense(n_embd),</span>
+<span id="cb23-27"><a href="#cb23-27" aria-hidden="true" tabindex="-1"></a>            layers.Dropout(dropout),</span>
+<span id="cb23-28"><a href="#cb23-28" aria-hidden="true" tabindex="-1"></a>        ])</span>
+<span id="cb23-29"><a href="#cb23-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-30"><a href="#cb23-30" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> call(<span class="va">self</span>, x, training<span class="op">=</span><span class="va">False</span>):</span>
+<span id="cb23-31"><a href="#cb23-31" aria-hidden="true" tabindex="-1"></a>        norm_x <span class="op">=</span> <span class="va">self</span>.ln1(x)</span>
+<span id="cb23-32"><a href="#cb23-32" aria-hidden="true" tabindex="-1"></a>        attn_out <span class="op">=</span> <span class="va">self</span>.attn(</span>
+<span id="cb23-33"><a href="#cb23-33" aria-hidden="true" tabindex="-1"></a>            norm_x,</span>
+<span id="cb23-34"><a href="#cb23-34" aria-hidden="true" tabindex="-1"></a>            norm_x,</span>
+<span id="cb23-35"><a href="#cb23-35" aria-hidden="true" tabindex="-1"></a>            use_causal_mask<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb23-36"><a href="#cb23-36" aria-hidden="true" tabindex="-1"></a>            training<span class="op">=</span>training,</span>
+<span id="cb23-37"><a href="#cb23-37" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb23-38"><a href="#cb23-38" aria-hidden="true" tabindex="-1"></a>        x <span class="op">=</span> x <span class="op">+</span> attn_out</span>
+<span id="cb23-39"><a href="#cb23-39" aria-hidden="true" tabindex="-1"></a>        x <span class="op">=</span> x <span class="op">+</span> <span class="va">self</span>.ffn(<span class="va">self</span>.ln2(x), training<span class="op">=</span>training)</span>
+<span id="cb23-40"><a href="#cb23-40" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> x</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 </section>
@@ -824,32 +821,32 @@ h ──→ LayerNorm ──→ Feed-Forward Network ──→ (+) ──→ 출
 <li>출력층: 각 위치마다 다음 문자 후보 전체에 대한 점수를 생성</li>
 <li>손실 함수: 정답 문자 번호와 예측 점수를 비교하는 sparse categorical crossentropy</li>
 </ul>
-<p>빠르게 실행하기 위해 각 epoch에서 일부 batch만 사용한다. 더 오래 학습하려면 <code>take(60)</code> 값을 늘리거나 제거한다.</p>
-<div id="7a602a02" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-18T04:07:01.568607Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-18T04:07:01.568607Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-18T04:07:03.635471Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-18T04:07:03.635471Z&quot;}}" data-execution_count="11">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> build_tiny_gpt(block_size, vocab_size, n_embd<span class="op">=</span><span class="dv">64</span>, n_head<span class="op">=</span><span class="dv">4</span>, n_layer<span class="op">=</span><span class="dv">2</span>, dropout<span class="op">=</span><span class="fl">0.1</span>):</span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>    inputs <span class="op">=</span> keras.Input(shape<span class="op">=</span>(<span class="va">None</span>,), dtype<span class="op">=</span><span class="st">'int32'</span>)</span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> TokenAndPositionEmbedding(block_size, vocab_size, n_embd)(inputs)</span>
-<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(n_layer):</span>
-<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>        x <span class="op">=</span> TransformerBlock(n_embd, n_head, dropout)(x)</span>
-<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> layers.LayerNormalization()(x)</span>
-<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>    logits <span class="op">=</span> layers.Dense(vocab_size)(x)</span>
-<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> keras.Model(inputs, logits, name<span class="op">=</span><span class="st">'tiny_gpt'</span>)</span>
-<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>gpt <span class="op">=</span> build_tiny_gpt(</span>
-<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a>    block_size<span class="op">=</span>block_size,</span>
-<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a>    vocab_size<span class="op">=</span>vocab_size,</span>
-<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a>    n_embd<span class="op">=</span><span class="dv">32</span>,</span>
-<span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a>    n_head<span class="op">=</span><span class="dv">2</span>,</span>
-<span id="cb26-15"><a href="#cb26-15" aria-hidden="true" tabindex="-1"></a>    n_layer<span class="op">=</span><span class="dv">1</span>,</span>
-<span id="cb26-16"><a href="#cb26-16" aria-hidden="true" tabindex="-1"></a>    dropout<span class="op">=</span><span class="fl">0.1</span>,</span>
-<span id="cb26-17"><a href="#cb26-17" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb26-18"><a href="#cb26-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-19"><a href="#cb26-19" aria-hidden="true" tabindex="-1"></a>gpt.<span class="bu">compile</span>(</span>
-<span id="cb26-20"><a href="#cb26-20" aria-hidden="true" tabindex="-1"></a>    optimizer<span class="op">=</span>keras.optimizers.Adam(learning_rate<span class="op">=</span><span class="fl">1e-3</span>),</span>
-<span id="cb26-21"><a href="#cb26-21" aria-hidden="true" tabindex="-1"></a>    loss<span class="op">=</span>keras.losses.SparseCategoricalCrossentropy(from_logits<span class="op">=</span><span class="va">True</span>),</span>
-<span id="cb26-22"><a href="#cb26-22" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb26-23"><a href="#cb26-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-24"><a href="#cb26-24" aria-hidden="true" tabindex="-1"></a>gpt.summary()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>빠르게 실행하기 위해 훈련 자료의 앞부분 960개만 사용한다. 더 오래 학습하려면 이 개수를 늘리거나 <code>X_train</code> 전체를 사용한다.</p>
+<div id="7a602a02" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-08-31T07:06:32.498663Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-08-31T07:06:32.498663Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-08-31T07:06:40.055980Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-08-31T07:06:40.055980Z&quot;}}" data-execution_count="11">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> build_tiny_gpt(block_size, vocab_size, n_embd<span class="op">=</span><span class="dv">64</span>, n_head<span class="op">=</span><span class="dv">4</span>, n_layer<span class="op">=</span><span class="dv">2</span>, dropout<span class="op">=</span><span class="fl">0.1</span>):</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>    inputs <span class="op">=</span> keras.Input(shape<span class="op">=</span>(<span class="va">None</span>,), dtype<span class="op">=</span><span class="st">'int32'</span>)</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> TokenAndPositionEmbedding(block_size, vocab_size, n_embd)(inputs)</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(n_layer):</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>        x <span class="op">=</span> TransformerBlock(n_embd, n_head, dropout)(x)</span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> layers.LayerNormalization()(x)</span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>    logits <span class="op">=</span> layers.Dense(vocab_size)(x)</span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> keras.Model(inputs, logits, name<span class="op">=</span><span class="st">'tiny_gpt'</span>)</span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>gpt <span class="op">=</span> build_tiny_gpt(</span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>    block_size<span class="op">=</span>block_size,</span>
+<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a>    vocab_size<span class="op">=</span>vocab_size,</span>
+<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a>    n_embd<span class="op">=</span><span class="dv">32</span>,</span>
+<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a>    n_head<span class="op">=</span><span class="dv">2</span>,</span>
+<span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a>    n_layer<span class="op">=</span><span class="dv">1</span>,</span>
+<span id="cb24-16"><a href="#cb24-16" aria-hidden="true" tabindex="-1"></a>    dropout<span class="op">=</span><span class="fl">0.1</span>,</span>
+<span id="cb24-17"><a href="#cb24-17" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb24-18"><a href="#cb24-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-19"><a href="#cb24-19" aria-hidden="true" tabindex="-1"></a>gpt.<span class="bu">compile</span>(</span>
+<span id="cb24-20"><a href="#cb24-20" aria-hidden="true" tabindex="-1"></a>    optimizer<span class="op">=</span>keras.optimizers.Adam(learning_rate<span class="op">=</span><span class="fl">1e-3</span>),</span>
+<span id="cb24-21"><a href="#cb24-21" aria-hidden="true" tabindex="-1"></a>    loss<span class="op">=</span>keras.losses.SparseCategoricalCrossentropy(from_logits<span class="op">=</span><span class="va">True</span>),</span>
+<span id="cb24-22"><a href="#cb24-22" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb24-23"><a href="#cb24-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-24"><a href="#cb24-24" aria-hidden="true" tabindex="-1"></a>gpt.summary()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>WARNING:tensorflow:From C:\Users\KSLee\AppData\Local\Programs\Python\Python311\Lib\site-packages\keras\src\backend\tensorflow\core.py:233: The name tf.placeholder is deprecated. Please use tf.compat.v1.placeholder instead.
 </code></pre>
@@ -890,51 +887,84 @@ h ──→ LayerNorm ──→ Feed-Forward Network ──→ (+) ──→ 출
 </pre>
 </div>
 </div>
-<div id="6ab04ce9" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-18T04:07:03.635471Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-18T04:07:03.635471Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-18T04:07:06.379389Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-18T04:07:06.379389Z&quot;}}" data-execution_count="12">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>gpt.fit(train_ds.take(<span class="dv">60</span>), validation_data<span class="op">=</span>val_ds.take(<span class="dv">10</span>), epochs<span class="op">=</span><span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="6ab04ce9" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-08-31T07:06:40.055980Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-08-31T07:06:40.055980Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-08-31T07:06:46.980892Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-08-31T07:06:46.980892Z&quot;}}" data-execution_count="12">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>gpt.fit(X_train[:<span class="dv">960</span>], y_train[:<span class="dv">960</span>],</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>        batch_size<span class="op">=</span>batch_size,</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>        validation_data<span class="op">=</span>(X_val[:<span class="dv">160</span>], y_val[:<span class="dv">160</span>]),</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>        epochs<span class="op">=</span><span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <div class="ansi-escaped-output">
 <pre>Epoch 1/3
 
 
-<span class="ansi-bold"> 1/60</span> <span class="ansi-white-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">1:50</span> 2s/step - loss: 3.8031
+<span class="ansi-bold"> 1/60</span> <span class="ansi-white-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">4:24</span> 4s/step - loss: 3.8727
 
-<span class="ansi-bold">19/60</span> <span class="ansi-green-fg">━━━━━━</span><span class="ansi-white-fg">━━━━━━━━━━━━━━</span> <span class="ansi-bold">0s</span> 3ms/step - loss: 3.0711 
+<span class="ansi-bold"> 8/60</span> <span class="ansi-green-fg">━━</span><span class="ansi-white-fg">━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">0s</span> 9ms/step - loss: 3.3023 
 
-<span class="ansi-bold">37/60</span> <span class="ansi-green-fg">━━━━━━━━━━━━</span><span class="ansi-white-fg">━━━━━━━━</span> <span class="ansi-bold">0s</span> 3ms/step - loss: 2.8876
+<span class="ansi-bold">15/60</span> <span class="ansi-green-fg">━━━━━</span><span class="ansi-white-fg">━━━━━━━━━━━━━━━</span> <span class="ansi-bold">0s</span> 8ms/step - loss: 3.1358
 
-<span class="ansi-bold">58/60</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━━━━</span><span class="ansi-white-fg">━</span> <span class="ansi-bold">0s</span> 3ms/step - loss: 2.7084
+<span class="ansi-bold">22/60</span> <span class="ansi-green-fg">━━━━━━━</span><span class="ansi-white-fg">━━━━━━━━━━━━━</span> <span class="ansi-bold">0s</span> 8ms/step - loss: 3.0541
 
-<span class="ansi-bold">60/60</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">2s</span> 8ms/step - loss: 2.6929 - val_loss: 2.0517
+<span class="ansi-bold">30/60</span> <span class="ansi-green-fg">━━━━━━━━━━</span><span class="ansi-white-fg">━━━━━━━━━━</span> <span class="ansi-bold">0s</span> 8ms/step - loss: 2.9707
+
+<span class="ansi-bold">37/60</span> <span class="ansi-green-fg">━━━━━━━━━━━━</span><span class="ansi-white-fg">━━━━━━━━</span> <span class="ansi-bold">0s</span> 8ms/step - loss: 2.9080
+
+<span class="ansi-bold">43/60</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━</span><span class="ansi-white-fg">━━━━━━</span> <span class="ansi-bold">0s</span> 8ms/step - loss: 2.8549
+
+<span class="ansi-bold">51/60</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━━</span><span class="ansi-white-fg">━━━</span> <span class="ansi-bold">0s</span> 8ms/step - loss: 2.7834
+
+<span class="ansi-bold">59/60</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━━━━</span><span class="ansi-white-fg">━</span> <span class="ansi-bold">0s</span> 8ms/step - loss: 2.7151
+
+<span class="ansi-bold">60/60</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">6s</span> 17ms/step - loss: 2.7069 - val_loss: 2.0410
 
 Epoch 2/3
 
 
-<span class="ansi-bold"> 1/60</span> <span class="ansi-white-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">0s</span> 17ms/step - loss: 2.1945
+<span class="ansi-bold"> 1/60</span> <span class="ansi-white-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">2s</span> 48ms/step - loss: 2.2488
 
-<span class="ansi-bold">21/60</span> <span class="ansi-green-fg">━━━━━━━</span><span class="ansi-white-fg">━━━━━━━━━━━━━</span> <span class="ansi-bold">0s</span> 3ms/step - loss: 2.0329 
+<span class="ansi-bold"> 8/60</span> <span class="ansi-green-fg">━━</span><span class="ansi-white-fg">━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">0s</span> 8ms/step - loss: 2.1716 
 
-<span class="ansi-bold">40/60</span> <span class="ansi-green-fg">━━━━━━━━━━━━━</span><span class="ansi-white-fg">━━━━━━━</span> <span class="ansi-bold">0s</span> 3ms/step - loss: 1.9099
+<span class="ansi-bold">15/60</span> <span class="ansi-green-fg">━━━━━</span><span class="ansi-white-fg">━━━━━━━━━━━━━━━</span> <span class="ansi-bold">0s</span> 8ms/step - loss: 2.0971
 
-<span class="ansi-bold">59/60</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━━━━</span><span class="ansi-white-fg">━</span> <span class="ansi-bold">0s</span> 3ms/step - loss: 1.7944
+<span class="ansi-bold">22/60</span> <span class="ansi-green-fg">━━━━━━━</span><span class="ansi-white-fg">━━━━━━━━━━━━━</span> <span class="ansi-bold">0s</span> 8ms/step - loss: 2.0548
 
-<span class="ansi-bold">60/60</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">0s</span> 3ms/step - loss: 1.7879 - val_loss: 1.2080
+<span class="ansi-bold">28/60</span> <span class="ansi-green-fg">━━━━━━━━━</span><span class="ansi-white-fg">━━━━━━━━━━━</span> <span class="ansi-bold">0s</span> 8ms/step - loss: 2.0063
+
+<span class="ansi-bold">35/60</span> <span class="ansi-green-fg">━━━━━━━━━━━</span><span class="ansi-white-fg">━━━━━━━━━</span> <span class="ansi-bold">0s</span> 8ms/step - loss: 1.9522
+
+<span class="ansi-bold">43/60</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━</span><span class="ansi-white-fg">━━━━━━</span> <span class="ansi-bold">0s</span> 8ms/step - loss: 1.8982
+
+<span class="ansi-bold">49/60</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━</span><span class="ansi-white-fg">━━━━</span> <span class="ansi-bold">0s</span> 8ms/step - loss: 1.8582
+
+<span class="ansi-bold">55/60</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━━━</span><span class="ansi-white-fg">━━</span> <span class="ansi-bold">0s</span> 8ms/step - loss: 1.8206
+
+<span class="ansi-bold">60/60</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">1s</span> 11ms/step - loss: 1.7872 - val_loss: 1.1500
 
 Epoch 3/3
 
 
-<span class="ansi-bold"> 1/60</span> <span class="ansi-white-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">0s</span> 16ms/step - loss: 1.3891
+<span class="ansi-bold"> 1/60</span> <span class="ansi-white-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">3s</span> 56ms/step - loss: 1.4561
 
-<span class="ansi-bold">21/60</span> <span class="ansi-green-fg">━━━━━━━</span><span class="ansi-white-fg">━━━━━━━━━━━━━</span> <span class="ansi-bold">0s</span> 3ms/step - loss: 1.3189 
+<span class="ansi-bold"> 9/60</span> <span class="ansi-green-fg">━━━</span><span class="ansi-white-fg">━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">0s</span> 7ms/step - loss: 1.3815 
 
-<span class="ansi-bold">40/60</span> <span class="ansi-green-fg">━━━━━━━━━━━━━</span><span class="ansi-white-fg">━━━━━━━</span> <span class="ansi-bold">0s</span> 3ms/step - loss: 1.2496
+<span class="ansi-bold">18/60</span> <span class="ansi-green-fg">━━━━━━</span><span class="ansi-white-fg">━━━━━━━━━━━━━━</span> <span class="ansi-bold">0s</span> 7ms/step - loss: 1.3294
 
-<span class="ansi-bold">60/60</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">0s</span> 3ms/step - loss: 1.1697 - val_loss: 0.6941
+<span class="ansi-bold">25/60</span> <span class="ansi-green-fg">━━━━━━━━</span><span class="ansi-white-fg">━━━━━━━━━━━━</span> <span class="ansi-bold">0s</span> 7ms/step - loss: 1.2978
+
+<span class="ansi-bold">33/60</span> <span class="ansi-green-fg">━━━━━━━━━━━</span><span class="ansi-white-fg">━━━━━━━━━</span> <span class="ansi-bold">0s</span> 7ms/step - loss: 1.2608
+
+<span class="ansi-bold">40/60</span> <span class="ansi-green-fg">━━━━━━━━━━━━━</span><span class="ansi-white-fg">━━━━━━━</span> <span class="ansi-bold">0s</span> 7ms/step - loss: 1.2215
+
+<span class="ansi-bold">47/60</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━</span><span class="ansi-white-fg">━━━━━</span> <span class="ansi-bold">0s</span> 7ms/step - loss: 1.1980
+
+<span class="ansi-bold">54/60</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━━━</span><span class="ansi-white-fg">━━</span> <span class="ansi-bold">0s</span> 7ms/step - loss: 1.1719
+
+<span class="ansi-bold">60/60</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">1s</span> 10ms/step - loss: 1.1507 - val_loss: 0.6653
 </pre>
 </div>
 </div>
 <div class="cell-output cell-output-display" data-execution_count="12">
-<pre><code>&lt;keras.src.callbacks.history.History at 0x16ee2949150&gt;</code></pre>
+<pre><code>&lt;keras.src.callbacks.history.History at 0x17a76644a50&gt;</code></pre>
 </div>
 </div>
 </section>
@@ -947,15 +977,15 @@ Epoch 3/3
 <li>여기서 validation loss는 일반화 성능이 아니라, 같은 말뭉치에서 Transformer가 문맥을 더 잘 학습하는지 비교하기 위한 값</li>
 <li><code>text</code>를 30번 반복한 뒤 셔플 없이 순서대로 나누었으므로, validation 구간도 학습에 쓰인 것과 같은 문단에서 나옴</li>
 </ul>
-<div id="tf-cmp2" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-18T04:07:06.379389Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-18T04:07:06.379389Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-18T04:07:06.498649Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-18T04:07:06.498103Z&quot;}}" data-execution_count="13">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>bigram_loss <span class="op">=</span> bigram.evaluate(val_ds, verbose<span class="op">=</span><span class="dv">0</span>)</span>
-<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>gpt_loss <span class="op">=</span> gpt.evaluate(val_ds, verbose<span class="op">=</span><span class="dv">0</span>)</span>
-<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Bigram validation loss : </span><span class="sc">{</span>bigram_loss<span class="sc">:.3f}</span><span class="ss">"</span>)</span>
-<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"GPT    validation loss : </span><span class="sc">{</span>gpt_loss<span class="sc">:.3f}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="tf-cmp2" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-08-31T07:06:46.988010Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-08-31T07:06:46.988010Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-08-31T07:06:48.093296Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-08-31T07:06:48.093296Z&quot;}}" data-execution_count="13">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>bigram_loss <span class="op">=</span> bigram.evaluate(X_val, y_val, verbose<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>gpt_loss <span class="op">=</span> gpt.evaluate(X_val, y_val, verbose<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Bigram validation loss : </span><span class="sc">{</span>bigram_loss<span class="sc">:.3f}</span><span class="ss">"</span>)</span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"GPT    validation loss : </span><span class="sc">{</span>gpt_loss<span class="sc">:.3f}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Bigram validation loss : 1.885
-GPT    validation loss : 0.712</code></pre>
+<pre><code>Bigram validation loss : 1.884
+GPT    validation loss : 0.727</code></pre>
 </div>
 </div>
 </section>
@@ -967,17 +997,20 @@ GPT    validation loss : 0.712</code></pre>
 <li><code>temperature</code>를 낮추면 더 보수적이고 반복적인 문장이 나옴</li>
 <li>epoch 수를 늘리면 말뭉치의 문장 패턴을 더 잘 따라감</li>
 </ul>
-<div id="2651df33" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-18T04:07:06.500211Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-18T04:07:06.498649Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-18T04:07:13.715475Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-18T04:07:13.713444Z&quot;}}" data-execution_count="14">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(generate_text(gpt, start<span class="op">=</span><span class="st">"To "</span>, max_new_tokens<span class="op">=</span><span class="dv">500</span>, temperature<span class="op">=</span><span class="fl">0.6</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="2651df33" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-08-31T07:06:48.093296Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-08-31T07:06:48.093296Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-08-31T07:07:05.909228Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-08-31T07:07:05.908216Z&quot;}}" data-execution_count="14">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(generate_text(gpt, start<span class="op">=</span><span class="st">"To "</span>, max_new_tokens<span class="op">=</span><span class="dv">500</span>, temperature<span class="op">=</span><span class="fl">0.6</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>To smel ar, ansacan llll parnsa smple, prnstailernsmodel caca ckten iraiformor, startainformerns stillearn smodel pre, st nctainsthe model s predicts what chatet gerrarn, mailtarnsamopr, stat wh aet chat pilran, samanple, spr starn
-The model arn sarar.
-The mor, an stat nswhat cWaterair atin, sampllel pandecarn s.
-The morararttins.
-The model preticts nhechaion s matttelrner.
-The model predicts ts what cthaien charangatttionenrmodercks.
-A tin lksfoorecks Te mel sdecact n theen ctiorn s.
-The model pre</code></pre>
+<pre><code>To aran stilll pamarlel parndileaparnicts.
+The model predicts A tinstinch satilon prerans.
+A ttintion len smodeel can stil carn stillean llll palean scarnttilen tion s.
+A tilonlearn s.
+A tintion loatn cen s.
+A tiny model l predins.
+
+The model  spredicts whararm aran, start attte tintionn sche samodel can still learn smarttelllarn sarnsformer, starttet tiinnlooooks s bat at ck charait aransformer, stansttern s.
+A tintention loooks s.
+A tin looks back at at prerevious tokens.
+A tinny model l pkereds </code></pre>
 </div>
 </div>
 </section>
@@ -989,30 +1022,30 @@ The model pre</code></pre>
 <li>행: query (예측하는 위치)</li>
 <li>열: key (참조되는 위치)</li>
 </ul>
-<div id="tf-att2" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-18T04:07:13.718995Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-18T04:07:13.718995Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-18T04:07:14.076784Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-18T04:07:14.075228Z&quot;}}" data-execution_count="15">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> attention_heatmap(model, prompt):</span>
-<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>    ids <span class="op">=</span> np.array([encode(prompt)], dtype<span class="op">=</span>np.int32)</span>
-<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>    emb_layer <span class="op">=</span> <span class="bu">next</span>(l <span class="cf">for</span> l <span class="kw">in</span> model.layers <span class="cf">if</span> <span class="bu">isinstance</span>(l, TokenAndPositionEmbedding))</span>
-<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>    block <span class="op">=</span> <span class="bu">next</span>(l <span class="cf">for</span> l <span class="kw">in</span> model.layers <span class="cf">if</span> <span class="bu">isinstance</span>(l, TransformerBlock))</span>
-<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> emb_layer(ids)</span>
-<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a>    norm_x <span class="op">=</span> block.ln1(x)</span>
-<span id="cb34-9"><a href="#cb34-9" aria-hidden="true" tabindex="-1"></a>    _, att_scores <span class="op">=</span> block.attn(norm_x, norm_x, use_causal_mask<span class="op">=</span><span class="va">True</span>,</span>
-<span id="cb34-10"><a href="#cb34-10" aria-hidden="true" tabindex="-1"></a>                               return_attention_scores<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb34-11"><a href="#cb34-11" aria-hidden="true" tabindex="-1"></a>    w <span class="op">=</span> att_scores[<span class="dv">0</span>].numpy().mean(axis<span class="op">=</span><span class="dv">0</span>)   <span class="co"># head 평균, shape (T, T)</span></span>
-<span id="cb34-12"><a href="#cb34-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-13"><a href="#cb34-13" aria-hidden="true" tabindex="-1"></a>    tokens <span class="op">=</span> <span class="bu">list</span>(prompt)</span>
-<span id="cb34-14"><a href="#cb34-14" aria-hidden="true" tabindex="-1"></a>    plt.figure(figsize<span class="op">=</span>(<span class="dv">7</span>, <span class="dv">6</span>))</span>
-<span id="cb34-15"><a href="#cb34-15" aria-hidden="true" tabindex="-1"></a>    plt.imshow(w, cmap<span class="op">=</span><span class="st">'Blues'</span>)</span>
-<span id="cb34-16"><a href="#cb34-16" aria-hidden="true" tabindex="-1"></a>    plt.xticks(<span class="bu">range</span>(<span class="bu">len</span>(tokens)), tokens)</span>
-<span id="cb34-17"><a href="#cb34-17" aria-hidden="true" tabindex="-1"></a>    plt.yticks(<span class="bu">range</span>(<span class="bu">len</span>(tokens)), tokens)</span>
-<span id="cb34-18"><a href="#cb34-18" aria-hidden="true" tabindex="-1"></a>    plt.xlabel(<span class="st">'key (attended-to position)'</span>)</span>
-<span id="cb34-19"><a href="#cb34-19" aria-hidden="true" tabindex="-1"></a>    plt.ylabel(<span class="st">'query (predicting position)'</span>)</span>
-<span id="cb34-20"><a href="#cb34-20" aria-hidden="true" tabindex="-1"></a>    plt.colorbar(label<span class="op">=</span><span class="st">'attention weight'</span>)</span>
-<span id="cb34-21"><a href="#cb34-21" aria-hidden="true" tabindex="-1"></a>    plt.show()</span>
-<span id="cb34-22"><a href="#cb34-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-23"><a href="#cb34-23" aria-hidden="true" tabindex="-1"></a>attention_heatmap(gpt, <span class="st">"attention looks back"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="tf-att2" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-08-31T07:07:05.913456Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-08-31T07:07:05.912103Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-08-31T07:07:06.279109Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-08-31T07:07:06.279109Z&quot;}}" data-execution_count="15">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> attention_heatmap(model, prompt):</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>    ids <span class="op">=</span> np.array([encode(prompt)], dtype<span class="op">=</span>np.int32)</span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>    emb_layer <span class="op">=</span> <span class="bu">next</span>(l <span class="cf">for</span> l <span class="kw">in</span> model.layers <span class="cf">if</span> <span class="bu">isinstance</span>(l, TokenAndPositionEmbedding))</span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>    block <span class="op">=</span> <span class="bu">next</span>(l <span class="cf">for</span> l <span class="kw">in</span> model.layers <span class="cf">if</span> <span class="bu">isinstance</span>(l, TransformerBlock))</span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> emb_layer(ids)</span>
+<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a>    norm_x <span class="op">=</span> block.ln1(x)</span>
+<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a>    _, att_scores <span class="op">=</span> block.attn(norm_x, norm_x, use_causal_mask<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a>                               return_attention_scores<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb32-11"><a href="#cb32-11" aria-hidden="true" tabindex="-1"></a>    w <span class="op">=</span> att_scores[<span class="dv">0</span>].numpy().mean(axis<span class="op">=</span><span class="dv">0</span>)   <span class="co"># head 평균, shape (T, T)</span></span>
+<span id="cb32-12"><a href="#cb32-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-13"><a href="#cb32-13" aria-hidden="true" tabindex="-1"></a>    tokens <span class="op">=</span> <span class="bu">list</span>(prompt)</span>
+<span id="cb32-14"><a href="#cb32-14" aria-hidden="true" tabindex="-1"></a>    plt.figure(figsize<span class="op">=</span>(<span class="dv">7</span>, <span class="dv">6</span>))</span>
+<span id="cb32-15"><a href="#cb32-15" aria-hidden="true" tabindex="-1"></a>    plt.imshow(w, cmap<span class="op">=</span><span class="st">'Blues'</span>)</span>
+<span id="cb32-16"><a href="#cb32-16" aria-hidden="true" tabindex="-1"></a>    plt.xticks(<span class="bu">range</span>(<span class="bu">len</span>(tokens)), tokens)</span>
+<span id="cb32-17"><a href="#cb32-17" aria-hidden="true" tabindex="-1"></a>    plt.yticks(<span class="bu">range</span>(<span class="bu">len</span>(tokens)), tokens)</span>
+<span id="cb32-18"><a href="#cb32-18" aria-hidden="true" tabindex="-1"></a>    plt.xlabel(<span class="st">'key (attended-to position)'</span>)</span>
+<span id="cb32-19"><a href="#cb32-19" aria-hidden="true" tabindex="-1"></a>    plt.ylabel(<span class="st">'query (predicting position)'</span>)</span>
+<span id="cb32-20"><a href="#cb32-20" aria-hidden="true" tabindex="-1"></a>    plt.colorbar(label<span class="op">=</span><span class="st">'attention weight'</span>)</span>
+<span id="cb32-21"><a href="#cb32-21" aria-hidden="true" tabindex="-1"></a>    plt.show()</span>
+<span id="cb32-22"><a href="#cb32-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-23"><a href="#cb32-23" aria-hidden="true" tabindex="-1"></a>attention_heatmap(gpt, <span class="st">"attention looks back"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
