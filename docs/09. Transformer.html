@@ -552,6 +552,12 @@ To learn a transformer, </code></pre>
 <section id="기준-모델-bigram-언어-모델" class="level2" data-number="9.6">
 <h2 data-number="9.6" class="anchored" data-anchor-id="기준-모델-bigram-언어-모델"><span class="header-section-number">9.6</span> 기준 모델: Bigram 언어 모델</h2>
 <p>먼저 매우 단순한 기준 모델을 만든다. Bigram 모델은 현재 문자 하나만 보고 다음 문자를 예측한다.</p>
+<p>아래 모델은 <code>Embedding</code> 층 하나로 끝난다. <code>vocab_size = 30</code>이므로 <code>Embedding(30, 30)</code> 안에는 <span class="math inline">\(30 \times 30\)</span> 행렬 <span class="math inline">\(W\)</span>가 생기고, 입력 문자의 번호에 해당하는 행을 그대로 꺼내 준다.</p>
+<ul>
+<li><code>stoi['a'] = 7</code>이면 <code>a</code>에 대해 <span class="math inline">\(W\)</span>의 7번 행(길이 30)이 나옴</li>
+<li>이 30개 값은 <code>a</code> 다음에 각 문자가 올 <strong>점수</strong>이며, 학습은 이 표를 채우는 과정</li>
+</ul>
+<p>점수는 아직 확률이 아니다(합이 1이 아니고 음수도 가능). 이런 값을 <strong>logit</strong>이라 부르며, attention에서 score를 가중치로 바꿀 때처럼 softmax를 취해야 확률이 된다. 모델이 logit을 출력하므로 손실 함수에도 <code>from_logits=True</code>를 지정한다.</p>
 <p>이 모델은 문맥을 길게 보지 못한다.</p>
 <p>따라서 나중에 만들 Transformer가 무엇을 개선하는지 비교하는 기준점이 된다.</p>
 <div id="2be17e28" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-08-31T07:06:28.423429Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-08-31T07:06:28.423429Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-08-31T07:06:28.576163Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-08-31T07:06:28.574147Z&quot;}}" data-execution_count="5">
