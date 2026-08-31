@@ -844,6 +844,15 @@ h ──→ LayerNorm ──→ Feed-Forward Network ──→ (+) ──→ 출
 <li>출력층: 각 위치마다 다음 문자 후보 전체에 대한 점수를 생성</li>
 <li>손실 함수: 정답 문자 번호와 예측 점수를 비교하는 sparse categorical crossentropy</li>
 </ul>
+<p>shape 변화는 다음과 같다 (<code>n_embd = 32</code>, <code>vocab_size = 30</code>).</p>
+<p><span class="math display">\[
+\underbrace{(B,\, T)}_{\text{문자 ID}} \;\to\; \underbrace{(B,\, T,\, 32)}_{\text{Transformer block 전후}} \;\to\; \underbrace{(B,\, T,\, 30)}_{\text{다음 문자 점수}}
+\]</span></p>
+<ul>
+<li>Transformer block은 shape을 바꾸지 않으므로 <code>n_layer</code>만큼 그대로 쌓을 수 있고, 모두 지난 뒤 <code>LayerNormalization</code>을 한 번 더 두는 것이 Pre-LN의 관례다</li>
+<li>마지막 <code>Dense(vocab_size)</code>가 32차원 표현을 30개 문자의 점수로 바꾼다</li>
+</ul>
+<p>Bigram에서는 <code>a</code>가 어디에 나오든 같은 행을 사용했지만, Transformer에서는 앞에 무엇이 있었는지에 따라 같은 <code>a</code>의 벡터가 달라진다. 문맥을 사용하게 되는 지점이 바로 여기다.</p>
 <p>빠르게 실행하기 위해 훈련 자료의 앞부분 960개만 사용한다. 더 오래 학습하려면 이 개수를 늘리거나 <code>X_train</code> 전체를 사용한다.</p>
 <div id="7a602a02" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-08-31T07:06:32.498663Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-08-31T07:06:32.498663Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-08-31T07:06:40.055980Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-08-31T07:06:40.055980Z&quot;}}" data-execution_count="11">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> build_tiny_gpt(block_size, vocab_size, n_embd<span class="op">=</span><span class="dv">64</span>, n_head<span class="op">=</span><span class="dv">4</span>, n_layer<span class="op">=</span><span class="dv">2</span>, dropout<span class="op">=</span><span class="fl">0.1</span>):</span>
