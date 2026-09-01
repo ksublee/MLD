@@ -253,24 +253,23 @@ window.Quarto = {
   <li><a href="#self-attention과-multi-head-attention" id="toc-self-attention과-multi-head-attention" class="nav-link" data-scroll-target="#self-attention과-multi-head-attention"><span class="header-section-number">9.1.3</span> Self-attention과 multi-head attention</a></li>
   </ul></li>
   <li><a href="#전체-구조-한눈에-보기" id="toc-전체-구조-한눈에-보기" class="nav-link" data-scroll-target="#전체-구조-한눈에-보기"><span class="header-section-number">9.2</span> 전체 구조 한눈에 보기</a></li>
-  <li><a href="#준비" id="toc-준비" class="nav-link" data-scroll-target="#준비"><span class="header-section-number">9.3</span> 준비</a></li>
-  <li><a href="#문자-단위-데이터-만들기" id="toc-문자-단위-데이터-만들기" class="nav-link" data-scroll-target="#문자-단위-데이터-만들기"><span class="header-section-number">9.4</span> 문자 단위 데이터 만들기</a></li>
-  <li><a href="#입력과-정답-만들기" id="toc-입력과-정답-만들기" class="nav-link" data-scroll-target="#입력과-정답-만들기"><span class="header-section-number">9.5</span> 입력과 정답 만들기</a></li>
-  <li><a href="#기준-모델-bigram-언어-모델" id="toc-기준-모델-bigram-언어-모델" class="nav-link" data-scroll-target="#기준-모델-bigram-언어-모델"><span class="header-section-number">9.6</span> 기준 모델: Bigram 언어 모델</a></li>
-  <li><a href="#문자-생성-함수" id="toc-문자-생성-함수" class="nav-link" data-scroll-target="#문자-생성-함수"><span class="header-section-number">9.7</span> 문자 생성 함수</a></li>
-  <li><a href="#causal-self-attention" id="toc-causal-self-attention" class="nav-link" data-scroll-target="#causal-self-attention"><span class="header-section-number">9.8</span> Causal self-attention</a>
+  <li><a href="#문자-단위-데이터-만들기" id="toc-문자-단위-데이터-만들기" class="nav-link" data-scroll-target="#문자-단위-데이터-만들기"><span class="header-section-number">9.3</span> 문자 단위 데이터 만들기</a></li>
+  <li><a href="#입력과-정답-만들기" id="toc-입력과-정답-만들기" class="nav-link" data-scroll-target="#입력과-정답-만들기"><span class="header-section-number">9.4</span> 입력과 정답 만들기</a></li>
+  <li><a href="#기준-모델-bigram-언어-모델" id="toc-기준-모델-bigram-언어-모델" class="nav-link" data-scroll-target="#기준-모델-bigram-언어-모델"><span class="header-section-number">9.5</span> 기준 모델: Bigram 언어 모델</a></li>
+  <li><a href="#문자-생성-함수" id="toc-문자-생성-함수" class="nav-link" data-scroll-target="#문자-생성-함수"><span class="header-section-number">9.6</span> 문자 생성 함수</a></li>
+  <li><a href="#causal-self-attention" id="toc-causal-self-attention" class="nav-link" data-scroll-target="#causal-self-attention"><span class="header-section-number">9.7</span> Causal self-attention</a>
   <ul class="collapse">
-  <li><a href="#causal-mask-그림" id="toc-causal-mask-그림" class="nav-link" data-scroll-target="#causal-mask-그림"><span class="header-section-number">9.8.1</span> Causal mask 그림</a></li>
+  <li><a href="#causal-mask-그림" id="toc-causal-mask-그림" class="nav-link" data-scroll-target="#causal-mask-그림"><span class="header-section-number">9.7.1</span> Causal mask 그림</a></li>
   </ul></li>
-  <li><a href="#transformer-block-만들기" id="toc-transformer-block-만들기" class="nav-link" data-scroll-target="#transformer-block-만들기"><span class="header-section-number">9.9</span> Transformer block 만들기</a>
+  <li><a href="#transformer-block-만들기" id="toc-transformer-block-만들기" class="nav-link" data-scroll-target="#transformer-block-만들기"><span class="header-section-number">9.8</span> Transformer block 만들기</a>
   <ul class="collapse">
-  <li><a href="#transformer-block의-내부-구조" id="toc-transformer-block의-내부-구조" class="nav-link" data-scroll-target="#transformer-block의-내부-구조"><span class="header-section-number">9.9.1</span> Transformer block의 내부 구조</a></li>
+  <li><a href="#transformer-block의-내부-구조" id="toc-transformer-block의-내부-구조" class="nav-link" data-scroll-target="#transformer-block의-내부-구조"><span class="header-section-number">9.8.1</span> Transformer block의 내부 구조</a></li>
   </ul></li>
-  <li><a href="#작은-gpt-모델-학습하기" id="toc-작은-gpt-모델-학습하기" class="nav-link" data-scroll-target="#작은-gpt-모델-학습하기"><span class="header-section-number">9.10</span> 작은 GPT 모델 학습하기</a></li>
-  <li><a href="#bigram과-정량적으로-비교하기" id="toc-bigram과-정량적으로-비교하기" class="nav-link" data-scroll-target="#bigram과-정량적으로-비교하기"><span class="header-section-number">9.11</span> Bigram과 정량적으로 비교하기</a></li>
-  <li><a href="#학습된-모델로-생성하기" id="toc-학습된-모델로-생성하기" class="nav-link" data-scroll-target="#학습된-모델로-생성하기"><span class="header-section-number">9.12</span> 학습된 모델로 생성하기</a></li>
-  <li><a href="#학습된-attention-들여다보기" id="toc-학습된-attention-들여다보기" class="nav-link" data-scroll-target="#학습된-attention-들여다보기"><span class="header-section-number">9.13</span> 학습된 attention 들여다보기</a></li>
-  <li><a href="#정리" id="toc-정리" class="nav-link" data-scroll-target="#정리"><span class="header-section-number">9.14</span> 정리</a></li>
+  <li><a href="#작은-gpt-모델-학습하기" id="toc-작은-gpt-모델-학습하기" class="nav-link" data-scroll-target="#작은-gpt-모델-학습하기"><span class="header-section-number">9.9</span> 작은 GPT 모델 학습하기</a></li>
+  <li><a href="#bigram과-정량적으로-비교하기" id="toc-bigram과-정량적으로-비교하기" class="nav-link" data-scroll-target="#bigram과-정량적으로-비교하기"><span class="header-section-number">9.10</span> Bigram과 정량적으로 비교하기</a></li>
+  <li><a href="#학습된-모델로-생성하기" id="toc-학습된-모델로-생성하기" class="nav-link" data-scroll-target="#학습된-모델로-생성하기"><span class="header-section-number">9.11</span> 학습된 모델로 생성하기</a></li>
+  <li><a href="#학습된-attention-들여다보기" id="toc-학습된-attention-들여다보기" class="nav-link" data-scroll-target="#학습된-attention-들여다보기"><span class="header-section-number">9.12</span> 학습된 attention 들여다보기</a></li>
+  <li><a href="#정리" id="toc-정리" class="nav-link" data-scroll-target="#정리"><span class="header-section-number">9.13</span> 정리</a></li>
   </ul>
 </nav>
     </div>
@@ -454,62 +453,44 @@ window.Quarto = {
   -&gt; 확률로 변환 후 sampling
   -&gt; 새 문자 생성</code></pre>
 <p>모델은 한 번에 문장 전체를 생성하지 않는다. “지금까지 나온 문자들을 보고 다음 문자 하나”를 반복해서 예측한다.</p>
-</section>
-<section id="준비" class="level2" data-number="9.3">
-<h2 data-number="9.3" class="anchored" data-anchor-id="준비"><span class="header-section-number">9.3</span> 준비</h2>
-<p>TensorFlow가 필요하다. 설치되어 있지 않으면 아래를 한 번 실행한다.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install tensorflow</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<ul>
-<li>외부 데이터셋은 다운로드하지 않음</li>
-<li>짧은 예제 문장을 여러 번 반복하여 작은 학습 데이터를 만듦</li>
-<li>기본 설정은 실습이 버벅이지 않도록 작게 설정</li>
-</ul>
-<p>더 좋은 생성 결과를 보고 싶으면 <code>n_layer</code>(층 수), <code>n_embd</code>(임베딩 차원), epoch 수를 늘려 본다.</p>
-<div id="03a90ad1" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-08-31T07:06:28.352793Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-08-31T07:06:28.352793Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-08-31T07:06:28.369308Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-08-31T07:06:28.368759Z&quot;}}" data-execution_count="2">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="cf">try</span>:</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    <span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="im">import</span> tensorflow <span class="im">as</span> tf</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    <span class="im">from</span> tensorflow <span class="im">import</span> keras</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    <span class="im">from</span> tensorflow.keras <span class="im">import</span> layers</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="cf">except</span> <span class="pp">ModuleNotFoundError</span> <span class="im">as</span> e:</span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">raise</span> <span class="pp">ModuleNotFoundError</span>(<span class="st">"TensorFlow가 필요합니다. 먼저 `pip install tensorflow`를 실행한 뒤 다시 시도하세요."</span>) <span class="im">from</span> e</span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>keras.utils.set_random_seed(<span class="dv">42</span>)</span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(tf.__version__)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>2.21.0</code></pre>
-</div>
+<div id="03a90ad1" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-08-31T07:06:28.352793Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-08-31T07:06:28.352793Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-08-31T07:06:28.369308Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-08-31T07:06:28.368759Z&quot;}}">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> tensorflow <span class="im">as</span> tf</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> tensorflow <span class="im">import</span> keras</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> tensorflow.keras <span class="im">import</span> layers</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>keras.utils.set_random_seed(<span class="dv">42</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
-<section id="문자-단위-데이터-만들기" class="level2" data-number="9.4">
-<h2 data-number="9.4" class="anchored" data-anchor-id="문자-단위-데이터-만들기"><span class="header-section-number">9.4</span> 문자 단위 데이터 만들기</h2>
+<section id="문자-단위-데이터-만들기" class="level2" data-number="9.3">
+<h2 data-number="9.3" class="anchored" data-anchor-id="문자-단위-데이터-만들기"><span class="header-section-number">9.3</span> 문자 단위 데이터 만들기</h2>
 <p>언어 모델은 토큰의 순서를 학습한다.</p>
 <p>실제 대형 언어 모델은 복잡한 tokenizer를 사용하지만, 여기서는 원리를 쉽게 보기 위해 문자 하나를 하나의 토큰으로 사용한다.</p>
 <p>예를 들어 <code>attention</code>은 여러 개의 문자 토큰으로 나뉘고, 각 문자는 정수 번호로 바뀐다.</p>
 <div id="45cf9414" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-08-31T07:06:28.373907Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-08-31T07:06:28.373907Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-08-31T07:06:28.387450Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-08-31T07:06:28.386436Z&quot;}}" data-execution_count="3">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>text <span class="op">=</span> <span class="st">"""</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="st">To learn a transformer, start with attention.</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="st">Attention looks back at previous tokens.</span></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="st">A tiny model can still learn small patterns.</span></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="st">The model predicts the next character.</span></span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="st">We train, sample, and inspect what changed.</span></span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span> <span class="op">*</span> <span class="dv">30</span></span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>chars <span class="op">=</span> <span class="bu">sorted</span>(<span class="bu">list</span>(<span class="bu">set</span>(text)))</span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>vocab_size <span class="op">=</span> <span class="bu">len</span>(chars)</span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>stoi <span class="op">=</span> {ch: i <span class="cf">for</span> i, ch <span class="kw">in</span> <span class="bu">enumerate</span>(chars)}</span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>itos <span class="op">=</span> {i: ch <span class="cf">for</span> ch, i <span class="kw">in</span> stoi.items()}</span>
-<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> encode(s):</span>
-<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> [stoi[c] <span class="cf">for</span> c <span class="kw">in</span> s]</span>
-<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> decode(ids):</span>
-<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="st">''</span>.join(itos[<span class="bu">int</span>(i)] <span class="cf">for</span> i <span class="kw">in</span> ids)</span>
-<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'vocab_size ='</span>, vocab_size)</span>
-<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'chars ='</span>, <span class="st">''</span>.join(chars))</span>
-<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(encode(<span class="st">'attention'</span>))</span>
-<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(decode(encode(<span class="st">'attention'</span>)))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>text <span class="op">=</span> <span class="st">"""</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="st">To learn a transformer, start with attention.</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="st">Attention looks back at previous tokens.</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="st">A tiny model can still learn small patterns.</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="st">The model predicts the next character.</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="st">We train, sample, and inspect what changed.</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span> <span class="op">*</span> <span class="dv">30</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>chars <span class="op">=</span> <span class="bu">sorted</span>(<span class="bu">list</span>(<span class="bu">set</span>(text)))</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>vocab_size <span class="op">=</span> <span class="bu">len</span>(chars)</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>stoi <span class="op">=</span> {ch: i <span class="cf">for</span> i, ch <span class="kw">in</span> <span class="bu">enumerate</span>(chars)}</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>itos <span class="op">=</span> {i: ch <span class="cf">for</span> ch, i <span class="kw">in</span> stoi.items()}</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> encode(s):</span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> [stoi[c] <span class="cf">for</span> c <span class="kw">in</span> s]</span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> decode(ids):</span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="st">''</span>.join(itos[<span class="bu">int</span>(i)] <span class="cf">for</span> i <span class="kw">in</span> ids)</span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'vocab_size ='</span>, vocab_size)</span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'chars ='</span>, <span class="st">''</span>.join(chars))</span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(encode(<span class="st">'attention'</span>))</span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(decode(encode(<span class="st">'attention'</span>)))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>vocab_size = 30
 chars = 
@@ -519,27 +500,27 @@ attention</code></pre>
 </div>
 </div>
 </section>
-<section id="입력과-정답-만들기" class="level2" data-number="9.5">
-<h2 data-number="9.5" class="anchored" data-anchor-id="입력과-정답-만들기"><span class="header-section-number">9.5</span> 입력과 정답 만들기</h2>
+<section id="입력과-정답-만들기" class="level2" data-number="9.4">
+<h2 data-number="9.4" class="anchored" data-anchor-id="입력과-정답-만들기"><span class="header-section-number">9.4</span> 입력과 정답 만들기</h2>
 <p>언어 모델의 학습 목표는 현재까지의 토큰을 보고 다음 토큰을 맞히는 것이다.</p>
 <p>예를 들어 입력이 <code>To learn</code>이면 정답은 한 칸 오른쪽으로 이동한 <code>o learn</code>이 된다.</p>
 <p>즉, 각 위치마다 “다음 문자”를 예측하도록 학습한다.</p>
 <div id="4fbb1dac" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-08-31T07:06:28.392358Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-08-31T07:06:28.391363Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-08-31T07:06:28.421686Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-08-31T07:06:28.420658Z&quot;}}" data-execution_count="4">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> np.array(encode(text), dtype<span class="op">=</span>np.int32)</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>block_size <span class="op">=</span> <span class="dv">24</span></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>batch_size <span class="op">=</span> <span class="dv">16</span></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> np.stack([data[i:i<span class="op">+</span>block_size] <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(data) <span class="op">-</span> block_size)])   <span class="co"># 길이 block_size 창을 한 칸씩 옮겨 가며 생성</span></span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> np.stack([data[i<span class="op">+</span><span class="dv">1</span>:i<span class="op">+</span>block_size<span class="op">+</span><span class="dv">1</span>] <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(data) <span class="op">-</span> block_size)])   <span class="co"># X를 한 칸 뒤로 민 것 (각 위치의 다음 문자)</span></span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="bu">int</span>(<span class="fl">0.9</span> <span class="op">*</span> <span class="bu">len</span>(X))</span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>X_train, y_train <span class="op">=</span> X[:n], y[:n]</span>
-<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>X_val, y_val <span class="op">=</span> X[n:], y[n:]</span>
-<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(X_train.shape, y_train.shape)</span>
-<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(decode(X_train[<span class="dv">0</span>]))</span>
-<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'--- target ---'</span>)</span>
-<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(decode(y_train[<span class="dv">0</span>]))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> np.array(encode(text), dtype<span class="op">=</span>np.int32)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>block_size <span class="op">=</span> <span class="dv">24</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>batch_size <span class="op">=</span> <span class="dv">16</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> np.stack([data[i:i<span class="op">+</span>block_size] <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(data) <span class="op">-</span> block_size)])   <span class="co"># 길이 block_size 창을 한 칸씩 옮겨 가며 생성</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> np.stack([data[i<span class="op">+</span><span class="dv">1</span>:i<span class="op">+</span>block_size<span class="op">+</span><span class="dv">1</span>] <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(data) <span class="op">-</span> block_size)])   <span class="co"># X를 한 칸 뒤로 민 것 (각 위치의 다음 문자)</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="bu">int</span>(<span class="fl">0.9</span> <span class="op">*</span> <span class="bu">len</span>(X))</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>X_train, y_train <span class="op">=</span> X[:n], y[:n]</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>X_val, y_val <span class="op">=</span> X[n:], y[n:]</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(X_train.shape, y_train.shape)</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(decode(X_train[<span class="dv">0</span>]))</span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'--- target ---'</span>)</span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(decode(y_train[<span class="dv">0</span>]))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>(5810, 24) (5810, 24)
 
@@ -549,8 +530,8 @@ To learn a transformer, </code></pre>
 </div>
 </div>
 </section>
-<section id="기준-모델-bigram-언어-모델" class="level2" data-number="9.6">
-<h2 data-number="9.6" class="anchored" data-anchor-id="기준-모델-bigram-언어-모델"><span class="header-section-number">9.6</span> 기준 모델: Bigram 언어 모델</h2>
+<section id="기준-모델-bigram-언어-모델" class="level2" data-number="9.5">
+<h2 data-number="9.5" class="anchored" data-anchor-id="기준-모델-bigram-언어-모델"><span class="header-section-number">9.5</span> 기준 모델: Bigram 언어 모델</h2>
 <p>먼저 매우 단순한 기준 모델을 만든다. Bigram 모델은 현재 문자 하나만 보고 다음 문자를 예측한다.</p>
 <p>아래 모델은 <code>Embedding</code> 층 하나로 끝난다. <code>vocab_size = 30</code>이므로 <code>Embedding(30, 30)</code> 안에는 <span class="math inline">\(30 \times 30\)</span> 행렬 <span class="math inline">\(W\)</span>가 생기고, 입력 문자의 번호에 해당하는 행을 그대로 꺼내 준다.</p>
 <ul>
@@ -561,17 +542,17 @@ To learn a transformer, </code></pre>
 <p>이 모델은 문맥을 길게 보지 못한다.</p>
 <p>따라서 나중에 만들 Transformer가 무엇을 개선하는지 비교하는 기준점이 된다.</p>
 <div id="2be17e28" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-08-31T07:06:28.423429Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-08-31T07:06:28.423429Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-08-31T07:06:28.576163Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-08-31T07:06:28.574147Z&quot;}}" data-execution_count="5">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> build_bigram_model(vocab_size):</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    inputs <span class="op">=</span> keras.Input(shape<span class="op">=</span>(<span class="va">None</span>,), dtype<span class="op">=</span><span class="st">'int32'</span>)</span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    logits <span class="op">=</span> layers.Embedding(vocab_size, vocab_size)(inputs)</span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> keras.Model(inputs, logits, name<span class="op">=</span><span class="st">'bigram_language_model'</span>)</span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>bigram <span class="op">=</span> build_bigram_model(vocab_size)</span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>bigram.<span class="bu">compile</span>(</span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>    optimizer<span class="op">=</span>keras.optimizers.Adam(learning_rate<span class="op">=</span><span class="fl">1e-2</span>),</span>
-<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>    loss<span class="op">=</span>keras.losses.SparseCategoricalCrossentropy(from_logits<span class="op">=</span><span class="va">True</span>),</span>
-<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>bigram.summary()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> build_bigram_model(vocab_size):</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    inputs <span class="op">=</span> keras.Input(shape<span class="op">=</span>(<span class="va">None</span>,), dtype<span class="op">=</span><span class="st">'int32'</span>)</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    logits <span class="op">=</span> layers.Embedding(vocab_size, vocab_size)(inputs)</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> keras.Model(inputs, logits, name<span class="op">=</span><span class="st">'bigram_language_model'</span>)</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>bigram <span class="op">=</span> build_bigram_model(vocab_size)</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>bigram.<span class="bu">compile</span>(</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>    optimizer<span class="op">=</span>keras.optimizers.Adam(learning_rate<span class="op">=</span><span class="fl">1e-2</span>),</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>    loss<span class="op">=</span>keras.losses.SparseCategoricalCrossentropy(from_logits<span class="op">=</span><span class="va">True</span>),</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>bigram.summary()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>WARNING:tensorflow:TensorFlow GPU support is not available on native Windows for TensorFlow &gt;= 2.11. Even if CUDA/cuDNN are installed, GPU will not be used. Please use WSL2 or the TensorFlow-DirectML plugin.</code></pre>
 </div>
@@ -603,10 +584,10 @@ To learn a transformer, </code></pre>
 </div>
 </div>
 <div id="03237654" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-08-31T07:06:28.577161Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-08-31T07:06:28.577161Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-08-31T07:06:30.062208Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-08-31T07:06:30.062208Z&quot;}}" data-execution_count="6">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>bigram.fit(X_train[:<span class="dv">640</span>], y_train[:<span class="dv">640</span>],</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>           batch_size<span class="op">=</span>batch_size,</span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>           validation_data<span class="op">=</span>(X_val[:<span class="dv">160</span>], y_val[:<span class="dv">160</span>]),</span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>           epochs<span class="op">=</span><span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>bigram.fit(X_train[:<span class="dv">640</span>], y_train[:<span class="dv">640</span>],</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>           batch_size<span class="op">=</span>batch_size,</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>           validation_data<span class="op">=</span>(X_val[:<span class="dv">160</span>], y_val[:<span class="dv">160</span>]),</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>           epochs<span class="op">=</span><span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <div class="ansi-escaped-output">
 <pre>Epoch 1/2
@@ -634,8 +615,8 @@ Epoch 2/2
 </div>
 </div>
 </section>
-<section id="문자-생성-함수" class="level2" data-number="9.7">
-<h2 data-number="9.7" class="anchored" data-anchor-id="문자-생성-함수"><span class="header-section-number">9.7</span> 문자 생성 함수</h2>
+<section id="문자-생성-함수" class="level2" data-number="9.6">
+<h2 data-number="9.6" class="anchored" data-anchor-id="문자-생성-함수"><span class="header-section-number">9.6</span> 문자 생성 함수</h2>
 <p>모델은 각 위치에서 다음 문자에 대한 점수(logit)를 출력한다.</p>
 <ul>
 <li>이 점수를 확률로 변환</li>
@@ -644,21 +625,21 @@ Epoch 2/2
 </ul>
 <p><code>temperature</code>가 작으면 더 보수적으로, 크면 더 다양하게 생성한다.</p>
 <div id="fd822f2d" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-08-31T07:06:30.070088Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-08-31T07:06:30.067744Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-08-31T07:06:31.689406Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-08-31T07:06:31.689406Z&quot;}}" data-execution_count="7">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> sample_from_logits(logits, temperature<span class="op">=</span><span class="fl">1.0</span>):</span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>    logits <span class="op">=</span> logits <span class="op">/</span> temperature   <span class="co"># 크게 나눌수록 분포가 평평해져 다양하게 뽑힘</span></span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> tf.random.categorical(logits, num_samples<span class="op">=</span><span class="dv">1</span>)[<span class="dv">0</span>, <span class="dv">0</span>].numpy()</span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> generate_text(model, start<span class="op">=</span><span class="st">'</span><span class="ch">\n</span><span class="st">'</span>, max_new_tokens<span class="op">=</span><span class="dv">300</span>, temperature<span class="op">=</span><span class="fl">1.0</span>):</span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>    ids <span class="op">=</span> encode(start)</span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(max_new_tokens):</span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>        idx <span class="op">=</span> np.array([ids[<span class="op">-</span>block_size:]], dtype<span class="op">=</span>np.int32)   <span class="co"># 최근 block_size개만 문맥으로 사용</span></span>
-<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>        logits <span class="op">=</span> model(idx, training<span class="op">=</span><span class="va">False</span>)</span>
-<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>        next_logits <span class="op">=</span> logits[:, <span class="op">-</span><span class="dv">1</span>, :]   <span class="co"># 마지막 위치의 점수만 다음 문자 예측에 사용</span></span>
-<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>        next_id <span class="op">=</span> sample_from_logits(next_logits, temperature<span class="op">=</span>temperature)</span>
-<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>        ids.append(next_id)</span>
-<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> decode(ids)</span>
-<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(generate_text(bigram, max_new_tokens<span class="op">=</span><span class="dv">300</span>, temperature<span class="op">=</span><span class="fl">0.8</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> sample_from_logits(logits, temperature<span class="op">=</span><span class="fl">1.0</span>):</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>    logits <span class="op">=</span> logits <span class="op">/</span> temperature   <span class="co"># 크게 나눌수록 분포가 평평해져 다양하게 뽑힘</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> tf.random.categorical(logits, num_samples<span class="op">=</span><span class="dv">1</span>)[<span class="dv">0</span>, <span class="dv">0</span>].numpy()</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> generate_text(model, start<span class="op">=</span><span class="st">'</span><span class="ch">\n</span><span class="st">'</span>, max_new_tokens<span class="op">=</span><span class="dv">300</span>, temperature<span class="op">=</span><span class="fl">1.0</span>):</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>    ids <span class="op">=</span> encode(start)</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(max_new_tokens):</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>        idx <span class="op">=</span> np.array([ids[<span class="op">-</span>block_size:]], dtype<span class="op">=</span>np.int32)   <span class="co"># 최근 block_size개만 문맥으로 사용</span></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>        logits <span class="op">=</span> model(idx, training<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>        next_logits <span class="op">=</span> logits[:, <span class="op">-</span><span class="dv">1</span>, :]   <span class="co"># 마지막 위치의 점수만 다음 문자 예측에 사용</span></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>        next_id <span class="op">=</span> sample_from_logits(next_logits, temperature<span class="op">=</span>temperature)</span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>        ids.append(next_id)</span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> decode(ids)</span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(generate_text(bigram, max_new_tokens<span class="op">=</span><span class="dv">300</span>, temperature<span class="op">=</span><span class="fl">0.8</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Aittene s pe ttsm
@@ -677,16 +658,16 @@ Tmal pel sfde t pWed t t s t cthake pan.xen checarn </code></pre>
 </div>
 </div>
 </section>
-<section id="causal-self-attention" class="level2" data-number="9.8">
-<h2 data-number="9.8" class="anchored" data-anchor-id="causal-self-attention"><span class="header-section-number">9.8</span> Causal self-attention</h2>
+<section id="causal-self-attention" class="level2" data-number="9.7">
+<h2 data-number="9.7" class="anchored" data-anchor-id="causal-self-attention"><span class="header-section-number">9.7</span> Causal self-attention</h2>
 <p>Bigram 모델은 현재 문자 하나만 본다. Transformer는 이전에 나온 여러 토큰을 함께 참고하며, 이때 사용하는 핵심 연산이 self-attention이다.</p>
 <p>다만 다음 문자를 예측하는 모델은 미래의 정답을 미리 보면 안 된다.</p>
 <ul>
 <li>각 위치가 자기 자신과 과거 위치만 보도록 causal mask를 적용</li>
 <li>Keras의 <a href="https://keras.io/api/layers/attention_layers/multi_head_attention/"><code>MultiHeadAttention</code></a>에서는 <code>use_causal_mask=True</code>로 사용</li>
 </ul>
-<section id="causal-mask-그림" class="level3" data-number="9.8.1">
-<h3 data-number="9.8.1" class="anchored" data-anchor-id="causal-mask-그림"><span class="header-section-number">9.8.1</span> Causal mask 그림</h3>
+<section id="causal-mask-그림" class="level3" data-number="9.7.1">
+<h3 data-number="9.7.1" class="anchored" data-anchor-id="causal-mask-그림"><span class="header-section-number">9.7.1</span> Causal mask 그림</h3>
 <p>다음 문자 예측에서는 미래 문자를 보면 안 된다.</p>
 <ul>
 <li>세 번째 입력 위치에서는 첫 번째부터 세 번째 문자까지를 이용해 네 번째 문자를 예측</li>
@@ -711,18 +692,18 @@ query 5   O  O  O  O  O</code></pre>
 <li>출력의 마지막 차원은 <code>key_dim</code>이 아니라 query의 마지막 차원(여기서는 8)으로 다시 투영된다</li>
 </ul>
 <div id="7bd873ae" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-08-31T07:06:31.689406Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-08-31T07:06:31.689406Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-08-31T07:06:32.038267Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-08-31T07:06:32.036242Z&quot;}}" data-execution_count="8">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>demo_x <span class="op">=</span> tf.random.normal((<span class="dv">1</span>, <span class="dv">6</span>, <span class="dv">8</span>))</span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>att <span class="op">=</span> layers.MultiHeadAttention(num_heads<span class="op">=</span><span class="dv">2</span>, key_dim<span class="op">=</span><span class="dv">4</span>)</span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>out, scores <span class="op">=</span> att(</span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>    demo_x,</span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>    demo_x,</span>
-<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>    use_causal_mask<span class="op">=</span><span class="va">True</span>,</span>
-<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>    return_attention_scores<span class="op">=</span><span class="va">True</span>,</span>
-<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'output shape:'</span>, out.shape)</span>
-<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'attention score shape:'</span>, scores.shape)</span>
-<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(np.<span class="bu">round</span>(scores[<span class="dv">0</span>, <span class="dv">0</span>].numpy(), <span class="dv">3</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>demo_x <span class="op">=</span> tf.random.normal((<span class="dv">1</span>, <span class="dv">6</span>, <span class="dv">8</span>))</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>att <span class="op">=</span> layers.MultiHeadAttention(num_heads<span class="op">=</span><span class="dv">2</span>, key_dim<span class="op">=</span><span class="dv">4</span>)</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>out, scores <span class="op">=</span> att(</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>    demo_x,</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>    demo_x,</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>    use_causal_mask<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>    return_attention_scores<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'output shape:'</span>, out.shape)</span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'attention score shape:'</span>, scores.shape)</span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(np.<span class="bu">round</span>(scores[<span class="dv">0</span>, <span class="dv">0</span>].numpy(), <span class="dv">3</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>output shape: (1, 6, 8)
 attention score shape: (1, 2, 6, 6)
@@ -737,15 +718,15 @@ attention score shape: (1, 2, 6, 6)
 <p>출력된 attention score 행렬을 히트맵으로 그려 보자.</p>
 <p>causal mask 때문에 대각선 위(미래 위치)의 가중치가 정확히 0이 되어, 하삼각 형태가 나타난다.</p>
 <div id="tf-heat2" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-08-31T07:06:32.042291Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-08-31T07:06:32.042291Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-08-31T07:06:32.476527Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-08-31T07:06:32.476527Z&quot;}}" data-execution_count="9">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="fl">4.5</span>, <span class="dv">4</span>))</span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>plt.imshow(scores[<span class="dv">0</span>, <span class="dv">0</span>].numpy(), cmap<span class="op">=</span><span class="st">'Blues'</span>)</span>
-<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>plt.colorbar(label<span class="op">=</span><span class="st">'attention weight'</span>)</span>
-<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'key position'</span>)</span>
-<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'query position'</span>)</span>
-<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Causal self-attention weights'</span>)</span>
-<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="fl">4.5</span>, <span class="dv">4</span>))</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>plt.imshow(scores[<span class="dv">0</span>, <span class="dv">0</span>].numpy(), cmap<span class="op">=</span><span class="st">'Blues'</span>)</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>plt.colorbar(label<span class="op">=</span><span class="st">'attention weight'</span>)</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'key position'</span>)</span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'query position'</span>)</span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Causal self-attention weights'</span>)</span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -756,8 +737,8 @@ attention score shape: (1, 2, 6, 6)
 </div>
 </section>
 </section>
-<section id="transformer-block-만들기" class="level2" data-number="9.9">
-<h2 data-number="9.9" class="anchored" data-anchor-id="transformer-block-만들기"><span class="header-section-number">9.9</span> Transformer block 만들기</h2>
+<section id="transformer-block-만들기" class="level2" data-number="9.8">
+<h2 data-number="9.8" class="anchored" data-anchor-id="transformer-block-만들기"><span class="header-section-number">9.8</span> Transformer block 만들기</h2>
 <p>이제 작은 GPT 모델을 구성한다. GPT는 encoder-decoder가 아니라 decoder-only 구조를 사용한다.</p>
 <p>다음 구성 요소를 순서대로 쌓는다.</p>
 <ol type="1">
@@ -773,8 +754,8 @@ attention score shape: (1, 2, 6, 6)
 <p><span class="math display">\[
 x_t = \underbrace{E(\text{token}_t)}_{\text{무슨 문자인가}} + \underbrace{P(t)}_{\text{몇 번째인가}}
 \]</span></p>
-<section id="transformer-block의-내부-구조" class="level3" data-number="9.9.1">
-<h3 data-number="9.9.1" class="anchored" data-anchor-id="transformer-block의-내부-구조"><span class="header-section-number">9.9.1</span> Transformer block의 내부 구조</h3>
+<section id="transformer-block의-내부-구조" class="level3" data-number="9.8.1">
+<h3 data-number="9.8.1" class="anchored" data-anchor-id="transformer-block의-내부-구조"><span class="header-section-number">9.8.1</span> Transformer block의 내부 구조</h3>
 <p>Transformer block은 입력 표현을 조금씩 더 좋은 표현으로 바꾸는 층이다. 이 실습에서는 매우 작은 block을 사용한다.</p>
 <pre class="text"><code>x ──→ LayerNorm ──→ Causal Multi-Head Self-Attention ──→ (+) ──→ h
 └───────────────────────────────────────────────────────────┘   residual 1
@@ -794,51 +775,51 @@ h ──→ LayerNorm ──→ Feed-Forward Network ──→ (+) ──→ 출
 <li><code>Dense(4 * n_embd)</code>: feed-forward network에서 차원을 4배로 늘렸다가 되돌리는 것이 Transformer의 관례다</li>
 </ul>
 <div id="2d3f318a" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-08-31T07:06:32.482898Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-08-31T07:06:32.482898Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-08-31T07:06:32.494780Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-08-31T07:06:32.494780Z&quot;}}" data-execution_count="10">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> TokenAndPositionEmbedding(layers.Layer):</span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, block_size, vocab_size, n_embd):</span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>        <span class="bu">super</span>().<span class="fu">__init__</span>()</span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.token_embedding <span class="op">=</span> layers.Embedding(vocab_size, n_embd)</span>
-<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.position_embedding <span class="op">=</span> layers.Embedding(block_size, n_embd)</span>
-<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> call(<span class="va">self</span>, idx):</span>
-<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>        T <span class="op">=</span> tf.shape(idx)[<span class="dv">1</span>]</span>
-<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>        positions <span class="op">=</span> tf.<span class="bu">range</span>(<span class="dv">0</span>, T)</span>
-<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>        tok_emb <span class="op">=</span> <span class="va">self</span>.token_embedding(idx)</span>
-<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>        pos_emb <span class="op">=</span> <span class="va">self</span>.position_embedding(positions)</span>
-<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> tok_emb <span class="op">+</span> pos_emb   <span class="co"># (T, n_embd)가 batch 전체에 더해짐 (broadcasting)</span></span>
-<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> TransformerBlock(layers.Layer):</span>
-<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, n_embd, n_head, dropout<span class="op">=</span><span class="fl">0.1</span>):</span>
-<span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a>        <span class="bu">super</span>().<span class="fu">__init__</span>()</span>
-<span id="cb23-17"><a href="#cb23-17" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.ln1 <span class="op">=</span> layers.LayerNormalization()</span>
-<span id="cb23-18"><a href="#cb23-18" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.attn <span class="op">=</span> layers.MultiHeadAttention(</span>
-<span id="cb23-19"><a href="#cb23-19" aria-hidden="true" tabindex="-1"></a>            num_heads<span class="op">=</span>n_head,</span>
-<span id="cb23-20"><a href="#cb23-20" aria-hidden="true" tabindex="-1"></a>            key_dim<span class="op">=</span>n_embd <span class="op">//</span> n_head,</span>
-<span id="cb23-21"><a href="#cb23-21" aria-hidden="true" tabindex="-1"></a>            dropout<span class="op">=</span>dropout,</span>
-<span id="cb23-22"><a href="#cb23-22" aria-hidden="true" tabindex="-1"></a>        )</span>
-<span id="cb23-23"><a href="#cb23-23" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.ln2 <span class="op">=</span> layers.LayerNormalization()</span>
-<span id="cb23-24"><a href="#cb23-24" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.ffn <span class="op">=</span> keras.Sequential([</span>
-<span id="cb23-25"><a href="#cb23-25" aria-hidden="true" tabindex="-1"></a>            layers.Dense(<span class="dv">4</span> <span class="op">*</span> n_embd, activation<span class="op">=</span><span class="st">'relu'</span>),</span>
-<span id="cb23-26"><a href="#cb23-26" aria-hidden="true" tabindex="-1"></a>            layers.Dense(n_embd),</span>
-<span id="cb23-27"><a href="#cb23-27" aria-hidden="true" tabindex="-1"></a>            layers.Dropout(dropout),</span>
-<span id="cb23-28"><a href="#cb23-28" aria-hidden="true" tabindex="-1"></a>        ])</span>
-<span id="cb23-29"><a href="#cb23-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-30"><a href="#cb23-30" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> call(<span class="va">self</span>, x, training<span class="op">=</span><span class="va">False</span>):</span>
-<span id="cb23-31"><a href="#cb23-31" aria-hidden="true" tabindex="-1"></a>        norm_x <span class="op">=</span> <span class="va">self</span>.ln1(x)</span>
-<span id="cb23-32"><a href="#cb23-32" aria-hidden="true" tabindex="-1"></a>        attn_out <span class="op">=</span> <span class="va">self</span>.attn(</span>
-<span id="cb23-33"><a href="#cb23-33" aria-hidden="true" tabindex="-1"></a>            norm_x,</span>
-<span id="cb23-34"><a href="#cb23-34" aria-hidden="true" tabindex="-1"></a>            norm_x,</span>
-<span id="cb23-35"><a href="#cb23-35" aria-hidden="true" tabindex="-1"></a>            use_causal_mask<span class="op">=</span><span class="va">True</span>,</span>
-<span id="cb23-36"><a href="#cb23-36" aria-hidden="true" tabindex="-1"></a>            training<span class="op">=</span>training,</span>
-<span id="cb23-37"><a href="#cb23-37" aria-hidden="true" tabindex="-1"></a>        )</span>
-<span id="cb23-38"><a href="#cb23-38" aria-hidden="true" tabindex="-1"></a>        x <span class="op">=</span> x <span class="op">+</span> attn_out</span>
-<span id="cb23-39"><a href="#cb23-39" aria-hidden="true" tabindex="-1"></a>        x <span class="op">=</span> x <span class="op">+</span> <span class="va">self</span>.ffn(<span class="va">self</span>.ln2(x), training<span class="op">=</span>training)</span>
-<span id="cb23-40"><a href="#cb23-40" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> x</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> TokenAndPositionEmbedding(layers.Layer):</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, block_size, vocab_size, n_embd):</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>        <span class="bu">super</span>().<span class="fu">__init__</span>()</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.token_embedding <span class="op">=</span> layers.Embedding(vocab_size, n_embd)</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.position_embedding <span class="op">=</span> layers.Embedding(block_size, n_embd)</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> call(<span class="va">self</span>, idx):</span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>        T <span class="op">=</span> tf.shape(idx)[<span class="dv">1</span>]</span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>        positions <span class="op">=</span> tf.<span class="bu">range</span>(<span class="dv">0</span>, T)</span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>        tok_emb <span class="op">=</span> <span class="va">self</span>.token_embedding(idx)</span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>        pos_emb <span class="op">=</span> <span class="va">self</span>.position_embedding(positions)</span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> tok_emb <span class="op">+</span> pos_emb   <span class="co"># (T, n_embd)가 batch 전체에 더해짐 (broadcasting)</span></span>
+<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> TransformerBlock(layers.Layer):</span>
+<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, n_embd, n_head, dropout<span class="op">=</span><span class="fl">0.1</span>):</span>
+<span id="cb21-16"><a href="#cb21-16" aria-hidden="true" tabindex="-1"></a>        <span class="bu">super</span>().<span class="fu">__init__</span>()</span>
+<span id="cb21-17"><a href="#cb21-17" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.ln1 <span class="op">=</span> layers.LayerNormalization()</span>
+<span id="cb21-18"><a href="#cb21-18" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.attn <span class="op">=</span> layers.MultiHeadAttention(</span>
+<span id="cb21-19"><a href="#cb21-19" aria-hidden="true" tabindex="-1"></a>            num_heads<span class="op">=</span>n_head,</span>
+<span id="cb21-20"><a href="#cb21-20" aria-hidden="true" tabindex="-1"></a>            key_dim<span class="op">=</span>n_embd <span class="op">//</span> n_head,</span>
+<span id="cb21-21"><a href="#cb21-21" aria-hidden="true" tabindex="-1"></a>            dropout<span class="op">=</span>dropout,</span>
+<span id="cb21-22"><a href="#cb21-22" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb21-23"><a href="#cb21-23" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.ln2 <span class="op">=</span> layers.LayerNormalization()</span>
+<span id="cb21-24"><a href="#cb21-24" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.ffn <span class="op">=</span> keras.Sequential([</span>
+<span id="cb21-25"><a href="#cb21-25" aria-hidden="true" tabindex="-1"></a>            layers.Dense(<span class="dv">4</span> <span class="op">*</span> n_embd, activation<span class="op">=</span><span class="st">'relu'</span>),</span>
+<span id="cb21-26"><a href="#cb21-26" aria-hidden="true" tabindex="-1"></a>            layers.Dense(n_embd),</span>
+<span id="cb21-27"><a href="#cb21-27" aria-hidden="true" tabindex="-1"></a>            layers.Dropout(dropout),</span>
+<span id="cb21-28"><a href="#cb21-28" aria-hidden="true" tabindex="-1"></a>        ])</span>
+<span id="cb21-29"><a href="#cb21-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-30"><a href="#cb21-30" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> call(<span class="va">self</span>, x, training<span class="op">=</span><span class="va">False</span>):</span>
+<span id="cb21-31"><a href="#cb21-31" aria-hidden="true" tabindex="-1"></a>        norm_x <span class="op">=</span> <span class="va">self</span>.ln1(x)</span>
+<span id="cb21-32"><a href="#cb21-32" aria-hidden="true" tabindex="-1"></a>        attn_out <span class="op">=</span> <span class="va">self</span>.attn(</span>
+<span id="cb21-33"><a href="#cb21-33" aria-hidden="true" tabindex="-1"></a>            norm_x,</span>
+<span id="cb21-34"><a href="#cb21-34" aria-hidden="true" tabindex="-1"></a>            norm_x,</span>
+<span id="cb21-35"><a href="#cb21-35" aria-hidden="true" tabindex="-1"></a>            use_causal_mask<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb21-36"><a href="#cb21-36" aria-hidden="true" tabindex="-1"></a>            training<span class="op">=</span>training,</span>
+<span id="cb21-37"><a href="#cb21-37" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb21-38"><a href="#cb21-38" aria-hidden="true" tabindex="-1"></a>        x <span class="op">=</span> x <span class="op">+</span> attn_out</span>
+<span id="cb21-39"><a href="#cb21-39" aria-hidden="true" tabindex="-1"></a>        x <span class="op">=</span> x <span class="op">+</span> <span class="va">self</span>.ffn(<span class="va">self</span>.ln2(x), training<span class="op">=</span>training)</span>
+<span id="cb21-40"><a href="#cb21-40" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> x</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 </section>
-<section id="작은-gpt-모델-학습하기" class="level2" data-number="9.10">
-<h2 data-number="9.10" class="anchored" data-anchor-id="작은-gpt-모델-학습하기"><span class="header-section-number">9.10</span> 작은 GPT 모델 학습하기</h2>
+<section id="작은-gpt-모델-학습하기" class="level2" data-number="9.9">
+<h2 data-number="9.9" class="anchored" data-anchor-id="작은-gpt-모델-학습하기"><span class="header-section-number">9.9</span> 작은 GPT 모델 학습하기</h2>
 <p>아래 모델은 실행하기 쉽도록 매우 작게 설정하였다. 그래도 GPT 계열 모델의 핵심 구조는 모두 들어 있다.</p>
 <ul>
 <li>출력층: 각 위치마다 다음 문자 후보 전체에 대한 점수를 생성</li>
@@ -853,32 +834,32 @@ h ──→ LayerNorm ──→ Feed-Forward Network ──→ (+) ──→ 출
 <li>마지막 <code>Dense(vocab_size)</code>가 32차원 표현을 30개 문자의 점수로 바꾼다</li>
 </ul>
 <p>Bigram에서는 <code>a</code>가 어디에 나오든 같은 행을 사용했지만, Transformer에서는 앞에 무엇이 있었는지에 따라 같은 <code>a</code>의 벡터가 달라진다. 문맥을 사용하게 되는 지점이 바로 여기다.</p>
-<p>빠르게 실행하기 위해 훈련 자료의 앞부분 960개만 사용한다. 더 오래 학습하려면 이 개수를 늘리거나 <code>X_train</code> 전체를 사용한다.</p>
+<p>빠르게 실행하기 위해 훈련 자료의 앞부분 960개만 사용한다. 더 오래 학습하려면 이 개수를 늘리거나 <code>X_train</code> 전체를 사용하고, <code>n_layer</code>(층 수)와 <code>n_embd</code>(임베딩 차원), epoch 수를 늘리면 생성 결과가 좋아진다.</p>
 <div id="7a602a02" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-08-31T07:06:32.498663Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-08-31T07:06:32.498663Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-08-31T07:06:40.055980Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-08-31T07:06:40.055980Z&quot;}}" data-execution_count="11">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> build_tiny_gpt(block_size, vocab_size, n_embd<span class="op">=</span><span class="dv">64</span>, n_head<span class="op">=</span><span class="dv">4</span>, n_layer<span class="op">=</span><span class="dv">2</span>, dropout<span class="op">=</span><span class="fl">0.1</span>):</span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>    inputs <span class="op">=</span> keras.Input(shape<span class="op">=</span>(<span class="va">None</span>,), dtype<span class="op">=</span><span class="st">'int32'</span>)</span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> TokenAndPositionEmbedding(block_size, vocab_size, n_embd)(inputs)</span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(n_layer):</span>
-<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>        x <span class="op">=</span> TransformerBlock(n_embd, n_head, dropout)(x)</span>
-<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> layers.LayerNormalization()(x)</span>
-<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>    logits <span class="op">=</span> layers.Dense(vocab_size)(x)</span>
-<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> keras.Model(inputs, logits, name<span class="op">=</span><span class="st">'tiny_gpt'</span>)</span>
-<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>gpt <span class="op">=</span> build_tiny_gpt(</span>
-<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>    block_size<span class="op">=</span>block_size,</span>
-<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a>    vocab_size<span class="op">=</span>vocab_size,</span>
-<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a>    n_embd<span class="op">=</span><span class="dv">32</span>,</span>
-<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a>    n_head<span class="op">=</span><span class="dv">2</span>,</span>
-<span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a>    n_layer<span class="op">=</span><span class="dv">1</span>,</span>
-<span id="cb24-16"><a href="#cb24-16" aria-hidden="true" tabindex="-1"></a>    dropout<span class="op">=</span><span class="fl">0.1</span>,</span>
-<span id="cb24-17"><a href="#cb24-17" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb24-18"><a href="#cb24-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-19"><a href="#cb24-19" aria-hidden="true" tabindex="-1"></a>gpt.<span class="bu">compile</span>(</span>
-<span id="cb24-20"><a href="#cb24-20" aria-hidden="true" tabindex="-1"></a>    optimizer<span class="op">=</span>keras.optimizers.Adam(learning_rate<span class="op">=</span><span class="fl">1e-3</span>),</span>
-<span id="cb24-21"><a href="#cb24-21" aria-hidden="true" tabindex="-1"></a>    loss<span class="op">=</span>keras.losses.SparseCategoricalCrossentropy(from_logits<span class="op">=</span><span class="va">True</span>),</span>
-<span id="cb24-22"><a href="#cb24-22" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb24-23"><a href="#cb24-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-24"><a href="#cb24-24" aria-hidden="true" tabindex="-1"></a>gpt.summary()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> build_tiny_gpt(block_size, vocab_size, n_embd<span class="op">=</span><span class="dv">64</span>, n_head<span class="op">=</span><span class="dv">4</span>, n_layer<span class="op">=</span><span class="dv">2</span>, dropout<span class="op">=</span><span class="fl">0.1</span>):</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>    inputs <span class="op">=</span> keras.Input(shape<span class="op">=</span>(<span class="va">None</span>,), dtype<span class="op">=</span><span class="st">'int32'</span>)</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> TokenAndPositionEmbedding(block_size, vocab_size, n_embd)(inputs)</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(n_layer):</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>        x <span class="op">=</span> TransformerBlock(n_embd, n_head, dropout)(x)</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> layers.LayerNormalization()(x)</span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>    logits <span class="op">=</span> layers.Dense(vocab_size)(x)</span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> keras.Model(inputs, logits, name<span class="op">=</span><span class="st">'tiny_gpt'</span>)</span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>gpt <span class="op">=</span> build_tiny_gpt(</span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>    block_size<span class="op">=</span>block_size,</span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a>    vocab_size<span class="op">=</span>vocab_size,</span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a>    n_embd<span class="op">=</span><span class="dv">32</span>,</span>
+<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a>    n_head<span class="op">=</span><span class="dv">2</span>,</span>
+<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a>    n_layer<span class="op">=</span><span class="dv">1</span>,</span>
+<span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a>    dropout<span class="op">=</span><span class="fl">0.1</span>,</span>
+<span id="cb22-17"><a href="#cb22-17" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb22-18"><a href="#cb22-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-19"><a href="#cb22-19" aria-hidden="true" tabindex="-1"></a>gpt.<span class="bu">compile</span>(</span>
+<span id="cb22-20"><a href="#cb22-20" aria-hidden="true" tabindex="-1"></a>    optimizer<span class="op">=</span>keras.optimizers.Adam(learning_rate<span class="op">=</span><span class="fl">1e-3</span>),</span>
+<span id="cb22-21"><a href="#cb22-21" aria-hidden="true" tabindex="-1"></a>    loss<span class="op">=</span>keras.losses.SparseCategoricalCrossentropy(from_logits<span class="op">=</span><span class="va">True</span>),</span>
+<span id="cb22-22"><a href="#cb22-22" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb22-23"><a href="#cb22-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-24"><a href="#cb22-24" aria-hidden="true" tabindex="-1"></a>gpt.summary()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>WARNING:tensorflow:From C:\Users\KSLee\AppData\Local\Programs\Python\Python311\Lib\site-packages\keras\src\backend\tensorflow\core.py:233: The name tf.placeholder is deprecated. Please use tf.compat.v1.placeholder instead.
 </code></pre>
@@ -920,10 +901,10 @@ h ──→ LayerNorm ──→ Feed-Forward Network ──→ (+) ──→ 출
 </div>
 </div>
 <div id="6ab04ce9" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-08-31T07:06:40.055980Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-08-31T07:06:40.055980Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-08-31T07:06:46.980892Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-08-31T07:06:46.980892Z&quot;}}" data-execution_count="12">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>gpt.fit(X_train[:<span class="dv">960</span>], y_train[:<span class="dv">960</span>],</span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>        batch_size<span class="op">=</span>batch_size,</span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>        validation_data<span class="op">=</span>(X_val[:<span class="dv">160</span>], y_val[:<span class="dv">160</span>]),</span>
-<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>        epochs<span class="op">=</span><span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>gpt.fit(X_train[:<span class="dv">960</span>], y_train[:<span class="dv">960</span>],</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>        batch_size<span class="op">=</span>batch_size,</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>        validation_data<span class="op">=</span>(X_val[:<span class="dv">160</span>], y_val[:<span class="dv">160</span>]),</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>        epochs<span class="op">=</span><span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <div class="ansi-escaped-output">
 <pre>Epoch 1/3
@@ -1000,8 +981,8 @@ Epoch 3/3
 </div>
 </div>
 </section>
-<section id="bigram과-정량적으로-비교하기" class="level2" data-number="9.11">
-<h2 data-number="9.11" class="anchored" data-anchor-id="bigram과-정량적으로-비교하기"><span class="header-section-number">9.11</span> Bigram과 정량적으로 비교하기</h2>
+<section id="bigram과-정량적으로-비교하기" class="level2" data-number="9.10">
+<h2 data-number="9.10" class="anchored" data-anchor-id="bigram과-정량적으로-비교하기"><span class="header-section-number">9.10</span> Bigram과 정량적으로 비교하기</h2>
 <p>생성 문장이 아직 어색하더라도, validation loss를 비교하면 개선을 수치로 확인할 수 있다.</p>
 <p>loss는 다음 문자에 대한 cross-entropy이므로, 낮을수록 다음 문자를 잘 맞힌다는 뜻이다.</p>
 <p>문맥을 한 글자만 보는 bigram보다 여러 글자를 보는 Transformer의 loss가 낮게 나오는지 확인해 보자.</p>
@@ -1010,19 +991,19 @@ Epoch 3/3
 <li><code>text</code>를 30번 반복한 뒤 셔플 없이 순서대로 나누었으므로, validation 구간도 학습에 쓰인 것과 같은 문단에서 나옴</li>
 </ul>
 <div id="tf-cmp2" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-08-31T07:06:46.988010Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-08-31T07:06:46.988010Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-08-31T07:06:48.093296Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-08-31T07:06:48.093296Z&quot;}}" data-execution_count="13">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>bigram_loss <span class="op">=</span> bigram.evaluate(X_val, y_val, verbose<span class="op">=</span><span class="dv">0</span>)</span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>gpt_loss <span class="op">=</span> gpt.evaluate(X_val, y_val, verbose<span class="op">=</span><span class="dv">0</span>)</span>
-<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Bigram validation loss : </span><span class="sc">{</span>bigram_loss<span class="sc">:.3f}</span><span class="ss">"</span>)</span>
-<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"GPT    validation loss : </span><span class="sc">{</span>gpt_loss<span class="sc">:.3f}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>bigram_loss <span class="op">=</span> bigram.evaluate(X_val, y_val, verbose<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>gpt_loss <span class="op">=</span> gpt.evaluate(X_val, y_val, verbose<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Bigram validation loss : </span><span class="sc">{</span>bigram_loss<span class="sc">:.3f}</span><span class="ss">"</span>)</span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"GPT    validation loss : </span><span class="sc">{</span>gpt_loss<span class="sc">:.3f}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Bigram validation loss : 1.884
 GPT    validation loss : 0.727</code></pre>
 </div>
 </div>
 </section>
-<section id="학습된-모델로-생성하기" class="level2" data-number="9.12">
-<h2 data-number="9.12" class="anchored" data-anchor-id="학습된-모델로-생성하기"><span class="header-section-number">9.12</span> 학습된 모델로 생성하기</h2>
+<section id="학습된-모델로-생성하기" class="level2" data-number="9.11">
+<h2 data-number="9.11" class="anchored" data-anchor-id="학습된-모델로-생성하기"><span class="header-section-number">9.11</span> 학습된 모델로 생성하기</h2>
 <p>학습이 끝난 뒤 같은 생성 함수로 문자를 생성한다.</p>
 <p>완벽한 영어 문장이 나오지는 않는다. 다만 Bigram 모델보다 반복되는 단어, 공백, 문장 구조를 더 잘 흉내 내는지 비교해 볼 수 있다.</p>
 <ul>
@@ -1030,7 +1011,7 @@ GPT    validation loss : 0.727</code></pre>
 <li>epoch 수를 늘리면 말뭉치의 문장 패턴을 더 잘 따라감</li>
 </ul>
 <div id="2651df33" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-08-31T07:06:48.093296Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-08-31T07:06:48.093296Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-08-31T07:07:05.909228Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-08-31T07:07:05.908216Z&quot;}}" data-execution_count="14">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(generate_text(gpt, start<span class="op">=</span><span class="st">"To "</span>, max_new_tokens<span class="op">=</span><span class="dv">500</span>, temperature<span class="op">=</span><span class="fl">0.6</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(generate_text(gpt, start<span class="op">=</span><span class="st">"To "</span>, max_new_tokens<span class="op">=</span><span class="dv">500</span>, temperature<span class="op">=</span><span class="fl">0.6</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>To aran stilll pamarlel parndileaparnicts.
 The model predicts A tinstinch satilon prerans.
@@ -1046,8 +1027,8 @@ A tinny model l pkereds </code></pre>
 </div>
 </div>
 </section>
-<section id="학습된-attention-들여다보기" class="level2" data-number="9.13">
-<h2 data-number="9.13" class="anchored" data-anchor-id="학습된-attention-들여다보기"><span class="header-section-number">9.13</span> 학습된 attention 들여다보기</h2>
+<section id="학습된-attention-들여다보기" class="level2" data-number="9.12">
+<h2 data-number="9.12" class="anchored" data-anchor-id="학습된-attention-들여다보기"><span class="header-section-number">9.12</span> 학습된 attention 들여다보기</h2>
 <p>학습된 모델이 실제로 어디를 참조하는지 attention weight를 시각화해 보자.</p>
 <p>첫 번째 Transformer block에서 attention score를 꺼내, head들의 평균을 히트맵으로 그린다.</p>
 <ul>
@@ -1055,29 +1036,29 @@ A tinny model l pkereds </code></pre>
 <li>열: key (참조되는 위치)</li>
 </ul>
 <div id="tf-att2" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-08-31T07:07:05.913456Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-08-31T07:07:05.912103Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-08-31T07:07:06.279109Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-08-31T07:07:06.279109Z&quot;}}" data-execution_count="15">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> attention_heatmap(model, prompt):</span>
-<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>    ids <span class="op">=</span> np.array([encode(prompt)], dtype<span class="op">=</span>np.int32)</span>
-<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>    emb_layer <span class="op">=</span> <span class="bu">next</span>(l <span class="cf">for</span> l <span class="kw">in</span> model.layers <span class="cf">if</span> <span class="bu">isinstance</span>(l, TokenAndPositionEmbedding))</span>
-<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>    block <span class="op">=</span> <span class="bu">next</span>(l <span class="cf">for</span> l <span class="kw">in</span> model.layers <span class="cf">if</span> <span class="bu">isinstance</span>(l, TransformerBlock))   <span class="co"># 모델에서 해당 층 객체를 찾음</span></span>
-<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> emb_layer(ids)</span>
-<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a>    norm_x <span class="op">=</span> block.ln1(x)   <span class="co"># block 내부를 직접 실행해 attention weight를 꺼냄</span></span>
-<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a>    _, att_scores <span class="op">=</span> block.attn(norm_x, norm_x, use_causal_mask<span class="op">=</span><span class="va">True</span>,</span>
-<span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a>                               return_attention_scores<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb32-11"><a href="#cb32-11" aria-hidden="true" tabindex="-1"></a>    w <span class="op">=</span> att_scores[<span class="dv">0</span>].numpy().mean(axis<span class="op">=</span><span class="dv">0</span>)   <span class="co"># head 평균, shape (T, T)</span></span>
-<span id="cb32-12"><a href="#cb32-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-13"><a href="#cb32-13" aria-hidden="true" tabindex="-1"></a>    tokens <span class="op">=</span> <span class="bu">list</span>(prompt)</span>
-<span id="cb32-14"><a href="#cb32-14" aria-hidden="true" tabindex="-1"></a>    plt.figure(figsize<span class="op">=</span>(<span class="dv">7</span>, <span class="dv">6</span>))</span>
-<span id="cb32-15"><a href="#cb32-15" aria-hidden="true" tabindex="-1"></a>    plt.imshow(w, cmap<span class="op">=</span><span class="st">'Blues'</span>)</span>
-<span id="cb32-16"><a href="#cb32-16" aria-hidden="true" tabindex="-1"></a>    plt.xticks(<span class="bu">range</span>(<span class="bu">len</span>(tokens)), tokens)</span>
-<span id="cb32-17"><a href="#cb32-17" aria-hidden="true" tabindex="-1"></a>    plt.yticks(<span class="bu">range</span>(<span class="bu">len</span>(tokens)), tokens)</span>
-<span id="cb32-18"><a href="#cb32-18" aria-hidden="true" tabindex="-1"></a>    plt.xlabel(<span class="st">'key (attended-to position)'</span>)</span>
-<span id="cb32-19"><a href="#cb32-19" aria-hidden="true" tabindex="-1"></a>    plt.ylabel(<span class="st">'query (predicting position)'</span>)</span>
-<span id="cb32-20"><a href="#cb32-20" aria-hidden="true" tabindex="-1"></a>    plt.colorbar(label<span class="op">=</span><span class="st">'attention weight'</span>)</span>
-<span id="cb32-21"><a href="#cb32-21" aria-hidden="true" tabindex="-1"></a>    plt.show()</span>
-<span id="cb32-22"><a href="#cb32-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-23"><a href="#cb32-23" aria-hidden="true" tabindex="-1"></a>attention_heatmap(gpt, <span class="st">"attention looks back"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> attention_heatmap(model, prompt):</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>    ids <span class="op">=</span> np.array([encode(prompt)], dtype<span class="op">=</span>np.int32)</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>    emb_layer <span class="op">=</span> <span class="bu">next</span>(l <span class="cf">for</span> l <span class="kw">in</span> model.layers <span class="cf">if</span> <span class="bu">isinstance</span>(l, TokenAndPositionEmbedding))</span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>    block <span class="op">=</span> <span class="bu">next</span>(l <span class="cf">for</span> l <span class="kw">in</span> model.layers <span class="cf">if</span> <span class="bu">isinstance</span>(l, TransformerBlock))   <span class="co"># 모델에서 해당 층 객체를 찾음</span></span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> emb_layer(ids)</span>
+<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a>    norm_x <span class="op">=</span> block.ln1(x)   <span class="co"># block 내부를 직접 실행해 attention weight를 꺼냄</span></span>
+<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a>    _, att_scores <span class="op">=</span> block.attn(norm_x, norm_x, use_causal_mask<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a>                               return_attention_scores<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb30-11"><a href="#cb30-11" aria-hidden="true" tabindex="-1"></a>    w <span class="op">=</span> att_scores[<span class="dv">0</span>].numpy().mean(axis<span class="op">=</span><span class="dv">0</span>)   <span class="co"># head 평균, shape (T, T)</span></span>
+<span id="cb30-12"><a href="#cb30-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-13"><a href="#cb30-13" aria-hidden="true" tabindex="-1"></a>    tokens <span class="op">=</span> <span class="bu">list</span>(prompt)</span>
+<span id="cb30-14"><a href="#cb30-14" aria-hidden="true" tabindex="-1"></a>    plt.figure(figsize<span class="op">=</span>(<span class="dv">7</span>, <span class="dv">6</span>))</span>
+<span id="cb30-15"><a href="#cb30-15" aria-hidden="true" tabindex="-1"></a>    plt.imshow(w, cmap<span class="op">=</span><span class="st">'Blues'</span>)</span>
+<span id="cb30-16"><a href="#cb30-16" aria-hidden="true" tabindex="-1"></a>    plt.xticks(<span class="bu">range</span>(<span class="bu">len</span>(tokens)), tokens)</span>
+<span id="cb30-17"><a href="#cb30-17" aria-hidden="true" tabindex="-1"></a>    plt.yticks(<span class="bu">range</span>(<span class="bu">len</span>(tokens)), tokens)</span>
+<span id="cb30-18"><a href="#cb30-18" aria-hidden="true" tabindex="-1"></a>    plt.xlabel(<span class="st">'key (attended-to position)'</span>)</span>
+<span id="cb30-19"><a href="#cb30-19" aria-hidden="true" tabindex="-1"></a>    plt.ylabel(<span class="st">'query (predicting position)'</span>)</span>
+<span id="cb30-20"><a href="#cb30-20" aria-hidden="true" tabindex="-1"></a>    plt.colorbar(label<span class="op">=</span><span class="st">'attention weight'</span>)</span>
+<span id="cb30-21"><a href="#cb30-21" aria-hidden="true" tabindex="-1"></a>    plt.show()</span>
+<span id="cb30-22"><a href="#cb30-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-23"><a href="#cb30-23" aria-hidden="true" tabindex="-1"></a>attention_heatmap(gpt, <span class="st">"attention looks back"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -1093,8 +1074,8 @@ A tinny model l pkereds </code></pre>
 </ul>
 <p>작게 학습한 모델이라 패턴이 뚜렷하지 않을 수 있다. epoch 수를 늘려 다시 학습하면 공백이나 자주 나오는 문자 조합에 집중하는 패턴이 점점 뚜렷해진다.</p>
 </section>
-<section id="정리" class="level2" data-number="9.14">
-<h2 data-number="9.14" class="anchored" data-anchor-id="정리"><span class="header-section-number">9.14</span> 정리</h2>
+<section id="정리" class="level2" data-number="9.13">
+<h2 data-number="9.13" class="anchored" data-anchor-id="정리"><span class="header-section-number">9.13</span> 정리</h2>
 <p>이 실습에서 만든 모델은 작지만 GPT 계열 모델의 핵심 부품을 포함한다.</p>
 <ul>
 <li>token embedding</li>
