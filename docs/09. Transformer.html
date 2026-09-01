@@ -260,6 +260,7 @@ window.Quarto = {
   <li><a href="#causal-self-attention" id="toc-causal-self-attention" class="nav-link" data-scroll-target="#causal-self-attention"><span class="header-section-number">9.7</span> Causal self-attention</a>
   <ul class="collapse">
   <li><a href="#causal-mask-그림" id="toc-causal-mask-그림" class="nav-link" data-scroll-target="#causal-mask-그림"><span class="header-section-number">9.7.1</span> Causal mask 그림</a></li>
+  <li><a href="#작업-흐름-정리" id="toc-작업-흐름-정리" class="nav-link" data-scroll-target="#작업-흐름-정리"><span class="header-section-number">9.7.2</span> 작업 흐름 정리</a></li>
   </ul></li>
   <li><a href="#transformer-block-만들기" id="toc-transformer-block-만들기" class="nav-link" data-scroll-target="#transformer-block-만들기"><span class="header-section-number">9.8</span> Transformer block 만들기</a>
   <ul class="collapse">
@@ -743,8 +744,9 @@ attention score shape: (1, 2, 6, 6)
 </div>
 </div>
 </div>
-<section id="작업-흐름-정리" class="level4" data-number="9.7.1.1">
-<h4 data-number="9.7.1.1" class="anchored" data-anchor-id="작업-흐름-정리"><span class="header-section-number">9.7.1.1</span> 작업 흐름 정리</h4>
+</section>
+<section id="작업-흐름-정리" class="level3" data-number="9.7.2">
+<h3 data-number="9.7.2" class="anchored" data-anchor-id="작업-흐름-정리"><span class="header-section-number">9.7.2</span> 작업 흐름 정리</h3>
 <p><code>MultiHeadAttention</code>에서의 작업 흐름은 다음과 같다.</p>
 <pre><code>Input Tensor → [Linear projection (Dense Layer) for Query (W_q)] → Queries (Q)
 Input Tensor → [Linear projection (Dense Layer) for Key (W_k)]   → Keys (K)
@@ -765,7 +767,6 @@ Input Tensor → [Linear projection (Dense Layer) for Value (W_v)] → Values (V
                ↓                       
 [Concatenate Heads] → Combined all Head Outputs → [Output Projection (Dense Layer)] →  Output
 </code></pre>
-</section>
 </section>
 </section>
 <section id="transformer-block-만들기" class="level2" data-number="9.8">
