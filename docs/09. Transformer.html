@@ -708,7 +708,7 @@ query 5   O  O  O  O  O</code></pre>
 <span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'output shape:'</span>, out.shape)</span>
 <span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'attention score shape:'</span>, scores.shape)</span>
-<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(np.<span class="bu">round</span>(scores[<span class="dv">0</span>, <span class="dv">0</span>].numpy(), <span class="dv">3</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(np.<span class="bu">round</span>(scores[<span class="dv">0</span>, <span class="dv">0</span>].numpy(), <span class="dv">3</span>))   <span class="co"># 0번 배치, 0번 head의 6x6 행렬</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>output shape: (1, 6, 8)
 attention score shape: (1, 2, 6, 6)
