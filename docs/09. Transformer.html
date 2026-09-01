@@ -529,8 +529,8 @@ attention</code></pre>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>block_size <span class="op">=</span> <span class="dv">24</span></span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>batch_size <span class="op">=</span> <span class="dv">16</span></span>
 <span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> np.stack([data[i:i<span class="op">+</span>block_size] <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(data) <span class="op">-</span> block_size)])</span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> np.stack([data[i<span class="op">+</span><span class="dv">1</span>:i<span class="op">+</span>block_size<span class="op">+</span><span class="dv">1</span>] <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(data) <span class="op">-</span> block_size)])</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> np.stack([data[i:i<span class="op">+</span>block_size] <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(data) <span class="op">-</span> block_size)])   <span class="co"># 길이 block_size 창을 한 칸씩 옮겨 가며 생성</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> np.stack([data[i<span class="op">+</span><span class="dv">1</span>:i<span class="op">+</span>block_size<span class="op">+</span><span class="dv">1</span>] <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(data) <span class="op">-</span> block_size)])   <span class="co"># X를 한 칸 뒤로 민 것 (각 위치의 다음 문자)</span></span>
 <span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="bu">int</span>(<span class="fl">0.9</span> <span class="op">*</span> <span class="bu">len</span>(X))</span>
 <span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>X_train, y_train <span class="op">=</span> X[:n], y[:n]</span>
@@ -645,15 +645,15 @@ Epoch 2/2
 <p><code>temperature</code>가 작으면 더 보수적으로, 크면 더 다양하게 생성한다.</p>
 <div id="fd822f2d" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-08-31T07:06:30.070088Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-08-31T07:06:30.067744Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-08-31T07:06:31.689406Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-08-31T07:06:31.689406Z&quot;}}" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> sample_from_logits(logits, temperature<span class="op">=</span><span class="fl">1.0</span>):</span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>    logits <span class="op">=</span> logits <span class="op">/</span> temperature</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>    logits <span class="op">=</span> logits <span class="op">/</span> temperature   <span class="co"># 크게 나눌수록 분포가 평평해져 다양하게 뽑힘</span></span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> tf.random.categorical(logits, num_samples<span class="op">=</span><span class="dv">1</span>)[<span class="dv">0</span>, <span class="dv">0</span>].numpy()</span>
 <span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> generate_text(model, start<span class="op">=</span><span class="st">'</span><span class="ch">\n</span><span class="st">'</span>, max_new_tokens<span class="op">=</span><span class="dv">300</span>, temperature<span class="op">=</span><span class="fl">1.0</span>):</span>
 <span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>    ids <span class="op">=</span> encode(start)</span>
 <span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(max_new_tokens):</span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>        idx <span class="op">=</span> np.array([ids[<span class="op">-</span>block_size:]], dtype<span class="op">=</span>np.int32)</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>        idx <span class="op">=</span> np.array([ids[<span class="op">-</span>block_size:]], dtype<span class="op">=</span>np.int32)   <span class="co"># 최근 block_size개만 문맥으로 사용</span></span>
 <span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>        logits <span class="op">=</span> model(idx, training<span class="op">=</span><span class="va">False</span>)</span>
-<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>        next_logits <span class="op">=</span> logits[:, <span class="op">-</span><span class="dv">1</span>, :]</span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>        next_logits <span class="op">=</span> logits[:, <span class="op">-</span><span class="dv">1</span>, :]   <span class="co"># 마지막 위치의 점수만 다음 문자 예측에 사용</span></span>
 <span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>        next_id <span class="op">=</span> sample_from_logits(next_logits, temperature<span class="op">=</span>temperature)</span>
 <span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>        ids.append(next_id)</span>
 <span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> decode(ids)</span>
@@ -805,7 +805,7 @@ h ──→ LayerNorm ──→ Feed-Forward Network ──→ (+) ──→ 출
 <span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>        positions <span class="op">=</span> tf.<span class="bu">range</span>(<span class="dv">0</span>, T)</span>
 <span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>        tok_emb <span class="op">=</span> <span class="va">self</span>.token_embedding(idx)</span>
 <span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>        pos_emb <span class="op">=</span> <span class="va">self</span>.position_embedding(positions)</span>
-<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> tok_emb <span class="op">+</span> pos_emb</span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> tok_emb <span class="op">+</span> pos_emb   <span class="co"># (T, n_embd)가 batch 전체에 더해짐 (broadcasting)</span></span>
 <span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> TransformerBlock(layers.Layer):</span>
 <span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, n_embd, n_head, dropout<span class="op">=</span><span class="fl">0.1</span>):</span>
@@ -1059,10 +1059,10 @@ A tinny model l pkereds </code></pre>
 <span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>    ids <span class="op">=</span> np.array([encode(prompt)], dtype<span class="op">=</span>np.int32)</span>
 <span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>    emb_layer <span class="op">=</span> <span class="bu">next</span>(l <span class="cf">for</span> l <span class="kw">in</span> model.layers <span class="cf">if</span> <span class="bu">isinstance</span>(l, TokenAndPositionEmbedding))</span>
-<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>    block <span class="op">=</span> <span class="bu">next</span>(l <span class="cf">for</span> l <span class="kw">in</span> model.layers <span class="cf">if</span> <span class="bu">isinstance</span>(l, TransformerBlock))</span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>    block <span class="op">=</span> <span class="bu">next</span>(l <span class="cf">for</span> l <span class="kw">in</span> model.layers <span class="cf">if</span> <span class="bu">isinstance</span>(l, TransformerBlock))   <span class="co"># 모델에서 해당 층 객체를 찾음</span></span>
 <span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> emb_layer(ids)</span>
-<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a>    norm_x <span class="op">=</span> block.ln1(x)</span>
+<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a>    norm_x <span class="op">=</span> block.ln1(x)   <span class="co"># block 내부를 직접 실행해 attention weight를 꺼냄</span></span>
 <span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a>    _, att_scores <span class="op">=</span> block.attn(norm_x, norm_x, use_causal_mask<span class="op">=</span><span class="va">True</span>,</span>
 <span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a>                               return_attention_scores<span class="op">=</span><span class="va">True</span>)</span>
 <span id="cb32-11"><a href="#cb32-11" aria-hidden="true" tabindex="-1"></a>    w <span class="op">=</span> att_scores[<span class="dv">0</span>].numpy().mean(axis<span class="op">=</span><span class="dv">0</span>)   <span class="co"># head 평균, shape (T, T)</span></span>
