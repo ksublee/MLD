@@ -816,11 +816,11 @@ x_t = \underbrace{E(\text{token}_t)}_{\text{무슨 문자인가}} + \underbrace{
 <section id="transformer-block의-내부-구조" class="level3" data-number="9.8.2">
 <h3 data-number="9.8.2" class="anchored" data-anchor-id="transformer-block의-내부-구조"><span class="header-section-number">9.8.2</span> Transformer block의 내부 구조</h3>
 <p>Transformer block은 입력 표현을 조금씩 더 좋은 표현으로 바꾸는 층이다. 이 실습에서는 매우 작은 block을 사용한다.</p>
-<pre class="text"><code>x ──→ LayerNorm ──→ Causal Multi-Head Self-Attention ──→ (+) ──→ h
-└───────────────────────────────────────────────────────────┘   residual 1
+<pre class="text"><code>x  →  LayerNorm  →  Causal Multi-Head Self-Attention  →  (+)  → h(residual 1)
+└─────────────────────────────────────────────────────────┘   
 
-h ──→ LayerNorm ──→ Feed-Forward Network ──→ (+) ──→ 출력
-└───────────────────────────────────────────────┘   residual 2</code></pre>
+h  →  LayerNorm  →  Feed-Forward Network  →  (+)  → 출력(residual 2)
+└─────────────────────────────────────────────┘   </code></pre>
 <ul>
 <li>두 개의 residual connection <code>(+)</code>: 이전 정보를 보존하면서 새 정보를 더함</li>
 <li>Layer normalization: 각 단계의 값 범위를 정돈하여 학습이 불안정해지지 않게 함</li>
