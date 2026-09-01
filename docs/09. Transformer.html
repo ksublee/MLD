@@ -692,7 +692,10 @@ query 5   O  O  O  O  O</code></pre>
 <ul>
 <li>head마다 따로 attention을 계산한 뒤 결과를 이어 붙인다 (여기서는 head 2개 x 4차원)</li>
 </ul></li>
-<li>호출은 <code>att(query, value)</code> 순서이며, 같은 값을 두 번 넣으면 self-attention이 된다 (key를 생략하면 value를 그대로 사용)</li>
+<li>호출은 <code>att(query, value)</code> 순서이며, 같은 값을 두 번 넣으면 self-attention이 된다 (key를 생략하면 value를 그대로 사용)
+<ul>
+<li>인자 이름은 query, key, value지만 넣는 값은 <span class="math inline">\(W_q, W_k, W_v\)</span>를 곱하기 전의 입력이다. <span class="math inline">\(Q, K, V\)</span>는 층이 내부에서 만든다</li>
+</ul></li>
 <li><code>return_attention_scores=True</code>: 출력과 함께 attention weight 행렬도 반환</li>
 <li>출력의 마지막 차원은 <code>key_dim</code>이 아니라 query의 마지막 차원(여기서는 8)으로 다시 투영된다</li>
 </ul>
