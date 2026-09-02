@@ -622,7 +622,7 @@ x₆ ─────▶ h₆, c₆</p>
 <ul>
 <li><p>이 과정은 각 디코더 타임스텝에 대해 인코더 타임스텝의 중요도를 0과 1사이의 확률로 변환한다.</p></li>
 <li><p>결과: 각 디코더 타임스텝에서 인코더 타임스텝 중 어디에 집중해야 하는지를 알려주는 가중치(Attention Weights)를 얻게 된다.</p></li>
-<li><p>이 예제에서는 <span class="math inline">\(7\times 6\)</span> 크기의 행렬을 얻게 된다.</p></li>
+<li><p>이 예제에서는 <span class="math inline">\(6\times 6\)</span> 크기의 행렬을 얻게 된다.</p></li>
 </ul>
 <div id="5e9dafa1-f61b-4f72-99a2-1d0634c2e427" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-22T01:11:32.674011Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-22T01:11:32.674011Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-22T01:11:32.689530Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-22T01:11:32.687007Z&quot;}}" data-execution_count="15">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>attention_weights <span class="op">=</span> Activation(<span class="st">'softmax'</span>, name<span class="op">=</span><span class="st">'attention'</span>)(attention_scores)</span>
@@ -633,13 +633,13 @@ x₆ ─────▶ h₆, c₆</p>
 </div>
 <p>가중치 행렬 <code>attention_weights</code>와 <code>encoder_outputs</code>의 곱을 취하여 context 벡터로 이루어진 행렬을 생성한다.</p>
 <ul>
-<li><p><span class="math inline">\(7\times 6\)</span> 행렬과 <span class="math inline">\(6 \times 50\)</span> 행렬의 곱이므로 <span class="math inline">\(7 \times 50\)</span> 행렬을 얻는다.</p></li>
+<li><p><span class="math inline">\(6\times 6\)</span> 행렬과 <span class="math inline">\(6 \times 50\)</span> 행렬의 곱이므로 <span class="math inline">\(6 \times 50\)</span> 행렬을 얻는다.</p></li>
 <li><p><code>attention</code> 행렬에 <code>encoder_outputs</code>을 value로 취하여 곱을 취하는 과정.</p></li>
 <li><p>이를 <code>Dot</code>을 이용하여 표현하면 아래 코드와 같다.</p>
 <ul>
 <li>원래의 encoder output에 시퀀스의 어디가 중요한지가 반영된 버전이라 하겠다. <br><br></li>
 </ul></li>
-<li><p><code>context</code>의 shape의 timestep은 <code>decoder_outputs</code>의 timestep과 동일한 7임을 주목하라.</p></li>
+<li><p><code>context</code>의 shape의 timestep은 <code>decoder_outputs</code>의 timestep과 동일한 6임을 주목하라.</p></li>
 </ul>
 <div id="0d8a07a2-a70f-4202-9389-e60202ba40cc" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-22T01:11:32.693532Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-22T01:11:32.693532Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-22T01:11:32.708618Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-22T01:11:32.706597Z&quot;}}" data-execution_count="16">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>context <span class="op">=</span> Dot(axes<span class="op">=</span>[<span class="dv">2</span>, <span class="dv">1</span>])([attention_weights, encoder_outputs])</span>
@@ -781,8 +781,8 @@ target_sequences shape: (10000, 6, 3)</code></pre>
 <p><code>start_token</code>과 <code>end_token</code>을 설정하여 디코더에 활용한다.</p>
 <p>여기서도 디코더가 이전 시점의 실제 정답을 입력으로 받는 방식인 Teacher forcing 방법을 훈련에 사용할 것이다. 이 예제는 출력 길이가 이미 정해져 있으므로 종료 토큰은 사용하지 않는다. 번역처럼 출력 길이를 미리 알 수 없는 문제에서는 시작 토큰과 종료 토큰을 함께 사용한다.</p>
 <ul>
-<li><p><code>decoder_input_data_with_start_token</code> → 디코더 입력 (<span class="math inline">\(Y_{t-1}\)</span>)</p></li>
-<li><p><code>output_data_with_end_token</code> → 디코더 출력 목표 (<span class="math inline">\(Y_t\)</span>)</p></li>
+<li><p><code>decoder_input_data</code> → 디코더 입력 (<span class="math inline">\(Y_{t-1}\)</span>)</p></li>
+<li><p><code>target_data</code> → 디코더 출력 목표 (<span class="math inline">\(Y_t\)</span>)</p></li>
 </ul>
 <div id="425f489c-fd92-433f-b61a-863f7fe51244" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-22T01:11:32.860542Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-22T01:11:32.860542Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-22T01:11:32.872863Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-22T01:11:32.870854Z&quot;}}" data-execution_count="21">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>start_token <span class="op">=</span> np.zeros((target_sequences.shape[<span class="dv">0</span>], <span class="dv">1</span>, input_dim), dtype<span class="op">=</span>np.float32)</span>
@@ -825,8 +825,8 @@ Target data         :
 <p>훈련에 사용되는 값 정리</p>
 <ul>
 <li><code>input_sequences</code> : 인코더 input</li>
-<li><code>decoder_input_data_with_start_token</code> : 디코더 input</li>
-<li><code>output_data_with_end_token</code> : 디코더 output을 훈련하기 위한 타겟으로 정답 시퀀스</li>
+<li><code>decoder_input_data</code> : 디코더 input</li>
+<li><code>target_data</code> : 디코더 output을 훈련하기 위한 타겟으로 정답 시퀀스</li>
 </ul>
 <div id="99906529-8cd3-489d-b84e-85174bbf8706" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-22T01:11:32.901022Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-22T01:11:32.901022Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-22T01:13:30.841718Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-22T01:13:30.838704Z&quot;}}" data-execution_count="23">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>history <span class="op">=</span> model.fit([input_sequences, decoder_input_data], target_data, epochs<span class="op">=</span><span class="dv">50</span>, batch_size<span class="op">=</span><span class="dv">32</span>, validation_split<span class="op">=</span><span class="fl">0.2</span>, verbose<span class="op">=</span><span class="dv">0</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
