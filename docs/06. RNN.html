@@ -252,7 +252,7 @@ window.Quarto = {
   <li><a href="#여러-유닛을-가지는-rnn-layer" id="toc-여러-유닛을-가지는-rnn-layer" class="nav-link" data-scroll-target="#여러-유닛을-가지는-rnn-layer"><span class="header-section-number">6.1.1</span> 여러 유닛을 가지는 RNN layer</a></li>
   <li><a href="#deep-rnn" id="toc-deep-rnn" class="nav-link" data-scroll-target="#deep-rnn"><span class="header-section-number">6.1.2</span> Deep RNN</a></li>
   </ul></li>
-  <li><a href="#시계열-예제" id="toc-시계열-예제" class="nav-link" data-scroll-target="#시계열-예제"><span class="header-section-number">6.2</span> ## 시계열 예제</a>
+  <li><a href="#시계열-예제" id="toc-시계열-예제" class="nav-link" data-scroll-target="#시계열-예제"><span class="header-section-number">6.2</span> 시계열 예제</a>
   <ul class="collapse">
   <li><a href="#마지막-값-예측하기" id="toc-마지막-값-예측하기" class="nav-link" data-scroll-target="#마지막-값-예측하기"><span class="header-section-number">6.2.1</span> 마지막 값 예측하기</a></li>
   <li><a href="#심층-rnn" id="toc-심층-rnn" class="nav-link" data-scroll-target="#심층-rnn"><span class="header-section-number">6.2.2</span> 심층 RNN</a></li>
@@ -698,7 +698,7 @@ array([[[-0.99354744,  0.5672516 , -0.9881419 ],
 </section>
 </section>
 <section id="시계열-예제" class="level2" data-number="6.2">
-<h2 data-number="6.2" class="anchored" data-anchor-id="시계열-예제"><span class="header-section-number">6.2</span> ## 시계열 예제</h2>
+<h2 data-number="6.2" class="anchored" data-anchor-id="시계열-예제"><span class="header-section-number">6.2</span> 시계열 예제</h2>
 <p>시계열을 입력 받아 예측하는 RNN을 구현해 보기 위해, 먼저 임의의 시계열을 생성하는 함수를 만들어 보겠다.</p>
 <p>여기서는 여러 개의 독립적인 합성 시계열을 생성하여 무작위로 훈련/검증/평가 자료로 나눈다. 하나의 실제 시계열을 분석할 때는 훈련, validation, test 자료를 시간 순서대로 나누어 미래 정보가 훈련에 포함되지 않도록 해야 한다.</p>
 <p>아래 코드에서 <code>...</code>는 ellipsis라고 불리우며, 여러 차원을 한꺼번에 선택할 때 사용한다.</p>
