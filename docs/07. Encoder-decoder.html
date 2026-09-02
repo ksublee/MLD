@@ -852,6 +852,28 @@ decoder_inputs → [Decoder LSTM] (uses state_h, state_c) → decoder_LSTM_outpu
 <p>실제 예측은 <strong>step-by-step</strong>으로 이루어지며, 각 스텝의 예측은 어느 정도 오차가 발생할 수 있다는 점이 다르다.</p>
 <p>훈련 시에는 이전 단계의 정답 시퀀스를 입력으로 받지만, 실제 예측 단계에서는 모델이 스스로 생성한 이전 출력에 의존해야 하기 때문이다.</p>
 <p>여기서 주의할 점은 디코더가 입력 시퀀스 <code>[1, 2, 3, 4, 5]</code>를 하나씩 받는 것이 아니라는 것이다. 디코더는 인코더가 만든 상태 <span class="math inline">\((h, c)\)</span>를 초기 상태로 하여 시작 토큰 <code>0</code>에서 출발하고, 그 다음부터는 자신의 이전 출력을 입력으로 받는다.</p>
+<p>인코더는 훈련이든 예측이든 똑같이 동작한다. 달라지는 것은 디코더의 다음 입력뿐이다.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th></th>
+<th>Encoder</th>
+<th>Decoder의 다음 입력</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>훈련</td>
+<td>입력 시퀀스를 읽음</td>
+<td>정답값</td>
+</tr>
+<tr class="even">
+<td>예측</td>
+<td>입력 시퀀스를 읽음</td>
+<td>이전 예측값</td>
+</tr>
+</tbody>
+</table>
 <p>예를 들어, 다음과 같은 예측 과정 시나리오를 생각해 보면, 매 출력의 예측이 항상 정답과 완벽하게 일치하지는 않을 수 있음을 충분히 상상할 수 있다.</p>
 <ul>
 <li>시작 토큰과 인코더 상태로 2를 예측해야 함, 가상의 예측 과정 : 0 → 2.01</li>
