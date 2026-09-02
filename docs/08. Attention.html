@@ -654,15 +654,6 @@ c = \alpha_1 v_1 + \alpha_2 v_2 + \alpha_3 v_3
 <section id="attention이-추가된-encoder-decoder-모형" class="level2" data-number="8.2">
 <h2 data-number="8.2" class="anchored" data-anchor-id="attention이-추가된-encoder-decoder-모형"><span class="header-section-number">8.2</span> Attention이 추가된 encoder-decoder 모형</h2>
 <p>기존 Encoder-Decoder에서 Decoder는 Encoder의 <strong>마지막 상태 하나</strong>만 받았다. Attention을 추가하면 Decoder가 매 출력 시점마다 Encoder의 <strong>모든 상태</strong>를 보고, 그중 지금 필요한 것에 큰 가중치를 주어 가져온다.</p>
-<blockquote class="blockquote">
-<p><strong>이 절의 핵심</strong></p>
-<p>이 절의 세부 코드를 모두 이해할 필요는 없다. 기존 Encoder-Decoder 모형에 Attention이 어디에 추가되고 어떤 정보를 전달하는지를 이해하는 것이 중요하다.</p>
-<ol type="1">
-<li>Decoder output을 Query로 사용한다.</li>
-<li>Encoder의 모든 output을 Key와 Value로 사용하여 Context vector를 만든다.</li>
-<li>Context vector와 Decoder output을 함께 사용하여 최종 출력을 만든다.</li>
-</ol>
-</blockquote>
 <p>이제 어텐션 메카니즘이 추가된 인코더-디코더 모형을 살펴보자.</p>
 <p>먼저, enconder-decoder 모형은 이전 단원에서 했던 것과 비슷하게 구성하였다.</p>
 <p>아래, 인코더의 출력 <code>encoder_outputs, state_h, state_c = encoder_lstm(encoder_inputs)</code>을 보자.</p>
