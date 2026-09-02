@@ -747,7 +747,6 @@ array([[[-0.99354744,  0.5672516 , -0.9881419 ],
 </tbody>
 </table>
 <ul>
-<li>절마다 <code>X_train</code>과 타깃을 <strong>같은 이름으로 다시 정의</strong>하므로, 앞 절의 것과 내용이 다르다.</li>
 <li>타깃 이름이 <code>y_train</code>(값 1개)에서 <code>Y_train</code>(여러 값)으로 바뀐다. 대소문자만 다르니 주의한다.</li>
 </ul>
 <div id="cell-50" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-21T06:00:53.653803Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-21T06:00:53.653803Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-21T06:00:53.669104Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-21T06:00:53.668089Z&quot;}}" data-execution_count="27">
@@ -1647,7 +1646,7 @@ Epoch 20/20
 </section>
 <section id="시퀀스-투-시퀀스-훈련" class="level3" data-number="6.2.4">
 <h3 data-number="6.2.4" class="anchored" data-anchor-id="시퀀스-투-시퀀스-훈련"><span class="header-section-number">6.2.4</span> 시퀀스-투-시퀀스 훈련</h3>
-<p>타깃이 <code>Y_train</code>, <code>(7000, 50, 10)</code>으로 바뀐다. 마지막 시점에서만이 아니라 <strong>모든 시점에서</strong> 각각 다음 10개를 예측하도록 훈련한다.</p>
+<p>타깃이 <code>Y_seq_train</code>, <code>(7000, 50, 10)</code>으로 바뀐다. 마지막 시점에서만이 아니라 <strong>모든 시점에서</strong> 각각 다음 10개를 예측하도록 훈련한다.</p>
 <section id="시퀀스-투-시퀀스-심층-rnn-many-to-many" class="level4" data-number="6.2.4.1">
 <h4 data-number="6.2.4.1" class="anchored" data-anchor-id="시퀀스-투-시퀀스-심층-rnn-many-to-many"><span class="header-section-number">6.2.4.1</span> 시퀀스-투-시퀀스 심층 RNN (Many-to-many)</h4>
 <p>하지만 개선의 여지가 더 있다.</p>
@@ -1671,27 +1670,27 @@ Epoch 20/20
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb116"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb116-1"><a href="#cb116-1" aria-hidden="true" tabindex="-1"></a>Y <span class="op">=</span> np.empty((<span class="dv">10000</span>, n_steps, <span class="dv">10</span>))</span>
 <span id="cb116-2"><a href="#cb116-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(n_steps):</span>
 <span id="cb116-3"><a href="#cb116-3" aria-hidden="true" tabindex="-1"></a>    Y[:, i, :] <span class="op">=</span> series[..., i<span class="op">+</span><span class="dv">1</span>:i<span class="op">+</span><span class="dv">11</span>, <span class="dv">0</span>]</span>
-<span id="cb116-4"><a href="#cb116-4" aria-hidden="true" tabindex="-1"></a>Y_train <span class="op">=</span> Y[:<span class="dv">7000</span>]</span>
-<span id="cb116-5"><a href="#cb116-5" aria-hidden="true" tabindex="-1"></a>Y_valid <span class="op">=</span> Y[<span class="dv">7000</span>:<span class="dv">9000</span>]</span>
-<span id="cb116-6"><a href="#cb116-6" aria-hidden="true" tabindex="-1"></a>Y_test <span class="op">=</span> Y[<span class="dv">9000</span>:]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb116-4"><a href="#cb116-4" aria-hidden="true" tabindex="-1"></a>Y_seq_train <span class="op">=</span> Y[:<span class="dv">7000</span>]</span>
+<span id="cb116-5"><a href="#cb116-5" aria-hidden="true" tabindex="-1"></a>Y_seq_valid <span class="op">=</span> Y[<span class="dv">7000</span>:<span class="dv">9000</span>]</span>
+<span id="cb116-6"><a href="#cb116-6" aria-hidden="true" tabindex="-1"></a>Y_seq_test <span class="op">=</span> Y[<span class="dv">9000</span>:]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p><code>Y</code>값을 step별로 하나씩 체크해 보자.</p>
 <div id="cell-129" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-21T06:03:27.783568Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-21T06:03:27.782571Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-21T06:03:27.792782Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-21T06:03:27.791770Z&quot;}}" data-execution_count="76">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb117"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb117-1"><a href="#cb117-1" aria-hidden="true" tabindex="-1"></a>Y_train[<span class="dv">0</span>,<span class="dv">0</span>,:]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb117"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb117-1"><a href="#cb117-1" aria-hidden="true" tabindex="-1"></a>Y_seq_train[<span class="dv">0</span>,<span class="dv">0</span>,:]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="76">
 <pre><code>array([ 0.33874455,  0.18980233,  0.00611999, -0.19590542, -0.38614848,
        -0.54409838, -0.62904716, -0.66339582, -0.65724516, -0.51447874])</code></pre>
 </div>
 </div>
 <div id="cell-130" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-21T06:03:27.796780Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-21T06:03:27.796780Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-21T06:03:27.805299Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-21T06:03:27.804790Z&quot;}}" data-execution_count="77">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb119"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb119-1"><a href="#cb119-1" aria-hidden="true" tabindex="-1"></a>Y_train[<span class="dv">0</span>,<span class="dv">1</span>,:]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb119"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb119-1"><a href="#cb119-1" aria-hidden="true" tabindex="-1"></a>Y_seq_train[<span class="dv">0</span>,<span class="dv">1</span>,:]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="77">
 <pre><code>array([ 0.18980233,  0.00611999, -0.19590542, -0.38614848, -0.54409838,
        -0.62904716, -0.66339582, -0.65724516, -0.51447874, -0.42731112])</code></pre>
 </div>
 </div>
 <div id="cell-131" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-21T06:03:27.809312Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-21T06:03:27.809312Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-21T06:03:27.820030Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-21T06:03:27.818514Z&quot;}}" data-execution_count="78">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb121"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb121-1"><a href="#cb121-1" aria-hidden="true" tabindex="-1"></a>Y_train[<span class="dv">0</span>,<span class="dv">2</span>,:]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb121"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb121-1"><a href="#cb121-1" aria-hidden="true" tabindex="-1"></a>Y_seq_train[<span class="dv">0</span>,<span class="dv">2</span>,:]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="78">
 <pre><code>array([ 0.00611999, -0.19590542, -0.38614848, -0.54409838, -0.62904716,
        -0.66339582, -0.65724516, -0.51447874, -0.42731112, -0.26288131])</code></pre>
@@ -1728,12 +1727,12 @@ Epoch 20/20
 </div>
 </div>
 <div id="cell-134" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-21T06:03:27.852194Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-21T06:03:27.852194Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-21T06:03:27.861165Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-21T06:03:27.860155Z&quot;}}" data-execution_count="81">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb127"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb127-1"><a href="#cb127-1" aria-hidden="true" tabindex="-1"></a>X_train.shape, Y_train.shape</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb127"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb127-1"><a href="#cb127-1" aria-hidden="true" tabindex="-1"></a>X_train.shape, Y_seq_train.shape</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="81">
 <pre><code>((7000, 50, 1), (7000, 50, 10))</code></pre>
 </div>
 </div>
-<p><code>Y_train.shape</code>이 <code>(7000, 50, 10) = (samples, input timesteps, forecast horizons)</code>인 것에 주목하라.</p>
+<p><code>Y_seq_train.shape</code>이 <code>(7000, 50, 10) = (samples, input timesteps, forecast horizons)</code>인 것에 주목하라.</p>
 <ul>
 <li>직전의 방법에서는 <code>Y_train.shape</code>이 <code>(7000, 10)</code></li>
 </ul>
@@ -1818,7 +1817,7 @@ array([[[-1.7253933 ,  1.0645192 , -0.14184439],
 <h4 data-number="6.2.4.3" class="anchored" data-anchor-id="model-summary"><span class="header-section-number">6.2.4.3</span> Model summary</h4>
 <p>아래 <code>model.summary()</code> 마지막 output shape이 <code>(None, None, 10)</code>의 3차원임을 주목하라.</p>
 <p>실제로는, <code>(batch size, number of time step, 10)</code>을 얻는다.</p>
-<p>이것은 <code>Y_train.shape</code>인 <code>(7000, 50, 10)</code>과 같다.</p>
+<p>이것은 <code>Y_seq_train.shape</code>인 <code>(7000, 50, 10)</code>과 같다.</p>
 <div id="cell-145" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-21T06:03:28.083348Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-21T06:03:28.082348Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-21T06:03:28.102867Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-21T06:03:28.101351Z&quot;}}" data-execution_count="87">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb137"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb137-1"><a href="#cb137-1" aria-hidden="true" tabindex="-1"></a>model.summary()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
@@ -1944,8 +1943,8 @@ array([[[-1.7253933 ,  1.0645192 , -0.14184439],
 <span id="cb149-2"><a href="#cb149-2" aria-hidden="true" tabindex="-1"></a>              optimizer<span class="op">=</span>keras.optimizers.Adam(learning_rate<span class="op">=</span><span class="fl">0.01</span>), </span>
 <span id="cb149-3"><a href="#cb149-3" aria-hidden="true" tabindex="-1"></a>              metrics<span class="op">=</span>[last_time_step_mse])  <span class="co"># 평가에 필요한 mse</span></span>
 <span id="cb149-4"><a href="#cb149-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb149-5"><a href="#cb149-5" aria-hidden="true" tabindex="-1"></a>history <span class="op">=</span> model.fit(X_train, Y_train, epochs<span class="op">=</span><span class="dv">20</span>,</span>
-<span id="cb149-6"><a href="#cb149-6" aria-hidden="true" tabindex="-1"></a>                    validation_data<span class="op">=</span>(X_valid, Y_valid), verbose<span class="op">=</span><span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb149-5"><a href="#cb149-5" aria-hidden="true" tabindex="-1"></a>history <span class="op">=</span> model.fit(X_train, Y_seq_train, epochs<span class="op">=</span><span class="dv">20</span>,</span>
+<span id="cb149-6"><a href="#cb149-6" aria-hidden="true" tabindex="-1"></a>                    validation_data<span class="op">=</span>(X_valid, Y_seq_valid), verbose<span class="op">=</span><span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Epoch 1/20
 219/219 - 9s - 39ms/step - last_time_step_mse: 0.0355 - loss: 0.0476 - val_last_time_step_mse: 0.0244 - val_loss: 0.0377
@@ -1990,7 +1989,7 @@ Epoch 20/20
 </div>
 </div>
 <div id="cell-160" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-21T06:04:38.286069Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-21T06:04:38.286069Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-21T06:04:38.572349Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-21T06:04:38.571338Z&quot;}}" data-execution_count="96">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb151"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb151-1"><a href="#cb151-1" aria-hidden="true" tabindex="-1"></a>test_results <span class="op">=</span> model.evaluate(X_test, Y_test, verbose<span class="op">=</span><span class="dv">0</span>, return_dict<span class="op">=</span><span class="va">True</span>)</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb151"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb151-1"><a href="#cb151-1" aria-hidden="true" tabindex="-1"></a>test_results <span class="op">=</span> model.evaluate(X_test, Y_seq_test, verbose<span class="op">=</span><span class="dv">0</span>, return_dict<span class="op">=</span><span class="va">True</span>)</span>
 <span id="cb151-2"><a href="#cb151-2" aria-hidden="true" tabindex="-1"></a>test_results</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="96">
 <pre><code>{'last_time_step_mse': 0.005992545746266842, 'loss': 0.016754871234297752}</code></pre>
@@ -2114,8 +2113,8 @@ model3.compile(loss="mse",
               optimizer=keras.optimizers.Adam(learning_rate=0.01), 
               metrics=[last_time_step_mse])  
 
-history = model3.fit(X_train, Y_train, epochs=20,
-                    validation_data=(X_valid, Y_valid))</code></pre>
+history = model3.fit(X_train, Y_seq_train, epochs=20,
+                    validation_data=(X_valid, Y_seq_valid))</code></pre>
 </section>
 </section>
 </section>
@@ -2302,8 +2301,8 @@ W_o
 <span id="cb174-2"><a href="#cb174-2" aria-hidden="true" tabindex="-1"></a>              optimizer<span class="op">=</span>keras.optimizers.Adam(learning_rate<span class="op">=</span><span class="fl">0.01</span>), </span>
 <span id="cb174-3"><a href="#cb174-3" aria-hidden="true" tabindex="-1"></a>              metrics<span class="op">=</span>[last_time_step_mse])  <span class="co"># 평가에 필요한 mse</span></span>
 <span id="cb174-4"><a href="#cb174-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb174-5"><a href="#cb174-5" aria-hidden="true" tabindex="-1"></a>history <span class="op">=</span> model.fit(X_train, Y_train, epochs<span class="op">=</span><span class="dv">20</span>,</span>
-<span id="cb174-6"><a href="#cb174-6" aria-hidden="true" tabindex="-1"></a>                    validation_data<span class="op">=</span>(X_valid, Y_valid), verbose<span class="op">=</span><span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb174-5"><a href="#cb174-5" aria-hidden="true" tabindex="-1"></a>history <span class="op">=</span> model.fit(X_train, Y_seq_train, epochs<span class="op">=</span><span class="dv">20</span>,</span>
+<span id="cb174-6"><a href="#cb174-6" aria-hidden="true" tabindex="-1"></a>                    validation_data<span class="op">=</span>(X_valid, Y_seq_valid), verbose<span class="op">=</span><span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Epoch 1/20
 219/219 - 13s - 59ms/step - last_time_step_mse: 0.0298 - loss: 0.0445 - val_last_time_step_mse: 0.0123 - val_loss: 0.0286
@@ -2348,7 +2347,7 @@ Epoch 20/20
 </div>
 </div>
 <div id="cell-189" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-21T06:06:57.139678Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-21T06:06:57.139678Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-21T06:06:57.567992Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-21T06:06:57.566983Z&quot;}}" data-execution_count="110">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb176"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb176-1"><a href="#cb176-1" aria-hidden="true" tabindex="-1"></a>test_results <span class="op">=</span> model.evaluate(X_test, Y_test, verbose<span class="op">=</span><span class="dv">0</span>, return_dict<span class="op">=</span><span class="va">True</span>)</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb176"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb176-1"><a href="#cb176-1" aria-hidden="true" tabindex="-1"></a>test_results <span class="op">=</span> model.evaluate(X_test, Y_seq_test, verbose<span class="op">=</span><span class="dv">0</span>, return_dict<span class="op">=</span><span class="va">True</span>)</span>
 <span id="cb176-2"><a href="#cb176-2" aria-hidden="true" tabindex="-1"></a>test_results</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="110">
 <pre><code>{'last_time_step_mse': 0.002868934301659465, 'loss': 0.013288723304867744}</code></pre>
