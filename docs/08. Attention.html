@@ -252,6 +252,7 @@ window.Quarto = {
   <li><a href="#query-하나로-따라가기" id="toc-query-하나로-따라가기" class="nav-link" data-scroll-target="#query-하나로-따라가기"><span class="header-section-number">8.1.1</span> query 하나로 따라가기</a></li>
   <li><a href="#attention-weights" id="toc-attention-weights" class="nav-link" data-scroll-target="#attention-weights"><span class="header-section-number">8.1.2</span> Attention Weights</a></li>
   <li><a href="#context-vector" id="toc-context-vector" class="nav-link" data-scroll-target="#context-vector"><span class="header-section-number">8.1.3</span> Context Vector</a></li>
+  <li><a href="#용어-정리" id="toc-용어-정리" class="nav-link" data-scroll-target="#용어-정리"><span class="header-section-number">8.1.4</span> 용어 정리</a></li>
   </ul></li>
   <li><a href="#attention이-추가된-encoder-decoder-모형" id="toc-attention이-추가된-encoder-decoder-모형" class="nav-link" data-scroll-target="#attention이-추가된-encoder-decoder-모형"><span class="header-section-number">8.2</span> Attention이 추가된 encoder-decoder 모형</a>
   <ul class="collapse">
@@ -594,6 +595,60 @@ c = \alpha_1 v_1 + \alpha_2 v_2 + \alpha_3 v_3
 </div>
 </div>
 </div>
+</section>
+<section id="용어-정리" class="level3" data-number="8.1.4">
+<h3 data-number="8.1.4" class="anchored" data-anchor-id="용어-정리"><span class="header-section-number">8.1.4</span> 용어 정리</h3>
+<p>여기까지 나온 용어를 정리하면 다음과 같다.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>용어</th>
+<th>이 예제에서</th>
+<th>역할</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Query (Q)</td>
+<td><code>decoder_outputs</code></td>
+<td>지금 무엇을 찾고 싶은가</td>
+</tr>
+<tr class="even">
+<td>Key (K)</td>
+<td><code>encoder_outputs</code></td>
+<td>각 위치를 무엇으로 식별하는가</td>
+</tr>
+<tr class="odd">
+<td>Value (V)</td>
+<td><code>encoder_outputs</code></td>
+<td>실제로 가져올 내용</td>
+</tr>
+<tr class="even">
+<td>Attention Scores</td>
+<td><code>attention_scores</code></td>
+<td>Query와 각 Key의 내적, 유사도</td>
+</tr>
+<tr class="odd">
+<td>Attention Weights</td>
+<td><code>attention_weights</code></td>
+<td>Scores를 key 방향으로 softmax한 값, 행의 합이 1</td>
+</tr>
+<tr class="even">
+<td>Context Vector</td>
+<td><code>context_vectors</code></td>
+<td>Weights로 Value를 가중평균한 결과</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>이 예제에서는 Key와 Value가 모두 <code>encoder_outputs</code>로 같지만, 둘은 원래 다른 역할이며 다르게 만들 수도 있다.</li>
+<li>지금은 <code>decoder_outputs</code>와 <code>encoder_outputs</code>를 그대로 Q, K, V로 사용했다. 뒤에서는 여기에 가중치 행렬 <span class="math inline">\(W_q, W_k, W_v\)</span>를 곱해 만드는 방법을 살펴본다.</li>
+</ul>
 </section>
 </section>
 <section id="attention이-추가된-encoder-decoder-모형" class="level2" data-number="8.2">
