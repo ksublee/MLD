@@ -394,7 +394,7 @@
     "href": "07. Encoder-decoder.html",
     "title": "7  Encoder-Decoder 모델 개요",
     "section": "",
-    "text": "7.1 Encoder\nEncoder-Decoder 구조는 입력 데이터를 내부 표현으로 변환(encoding)하고, 이 표현을 이용하여 원하는 형태의 출력을 생성(decoding)하는 구조이다.\n고전적인 RNN 기반 Encoder-Decoder에서는 입력 시퀀스를 고정된 크기의 상태 벡터로 요약하여 Decoder에 전달한다. Attention과 Transformer에서는 이 구조가 확장되며, 이는 뒤에서 살펴본다.\nEncoder-Decoder 모델은 입력 도메인에서 출력 도메인으로 데이터 포인트를 매핑하는 것을 학습하는 모델군으로, 두 단계의 네트워크로 구성된다.\n이때, \\(f\\)와 \\(g\\)는 각각 딥러닝 기반의 함수 (예: RNN, LSTM, GRU 등)로 구현된다.\n이 구조는 주로 자연어 처리에서 많이 사용되며, 기계 번역, 요약, 대화 시스템 등 다양한 곳에서 응용된다.",
+    "text": "7.1 Encoder\nEncoder-Decoder 구조는 입력 데이터를 내부 표현으로 변환(encoding)하고, 이 표현을 이용하여 원하는 형태의 출력을 생성(decoding)하는 구조이다.\n고전적인 RNN 기반 Encoder-Decoder에서는 입력 시퀀스를 고정된 크기의 상태 벡터로 요약하여 Decoder에 전달한다. Attention과 Transformer에서는 이 구조가 확장되며, 이는 뒤에서 살펴본다.\nEncoder-Decoder 모델은 입력 도메인에서 출력 도메인으로 데이터 포인트를 매핑하는 것을 학습하는 모델군으로, 두 단계의 네트워크로 구성된다.\n입력과 출력을 이렇게 분리했기 때문에 두 시퀀스의 길이가 서로 달라도 된다. 예를 들어 단어 10개짜리 문장을 단어 7개짜리 문장으로 번역할 수 있다.\n이때, \\(f\\)와 \\(g\\)는 각각 딥러닝 기반의 함수 (예: RNN, LSTM, GRU 등)로 구현된다.\n이 구조는 주로 자연어 처리에서 많이 사용되며, 기계 번역, 요약, 대화 시스템 등 다양한 곳에서 응용된다.",
     "crumbs": [
       "<span class='chapter-number'>7</span>  <span class='chapter-title'>Encoder-Decoder 모델 개요</span>"
     ]
@@ -455,6 +455,16 @@
     "title": "7  Encoder-Decoder 모델 개요",
     "section": "7.6 Encoder-Decoder 구조의 활용",
     "text": "7.6 Encoder-Decoder 구조의 활용\n이번 예제에서는 연속된 숫자 시퀀스를 입력받아, 다음 시퀀스를 예측하는 단순한 seq2seq 문제를 통해 Encoder-Decoder 구조의 핵심 원리를 살펴보았다.\n하지만 이 구조는 단순한 숫자 예측을 넘어서, 실제 다양한 문제에 매우 폭넓게 활용된다.\n\n7.6.1 대표적인 응용 분야\n\n\n\n\n\n\n\n분야\n예시\n\n\n\n\n기계 번역\n영어 문장을 입력받아 한국어 문장으로 번역 (예: Google Translate)\n\n\n텍스트 요약\n긴 문서 → 핵심 요약 문장 생성\n\n\n챗봇 / 대화 시스템\n질문을 입력하면 적절한 응답 문장을 생성\n\n\n음성 인식\n소리(음성) → 문자 시퀀스\n\n\n이미지 캡셔닝\n이미지 → 설명 문장 생성\n\n\n시계열 예측\n과거 데이터를 기반으로 미래 시계열 값 예측",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Encoder-Decoder 모델 개요</span>"
+    ]
+  },
+  {
+    "objectID": "07. Encoder-decoder.html#고전적-encoder-decoder의-한계",
+    "href": "07. Encoder-decoder.html#고전적-encoder-decoder의-한계",
+    "title": "7  Encoder-Decoder 모델 개요",
+    "section": "7.7 고전적 Encoder-Decoder의 한계",
+    "text": "7.7 고전적 Encoder-Decoder의 한계\n지금까지 살펴본 구조에서 Decoder가 참고하는 것은 Encoder의 마지막 상태 \\((h, c)\\) 하나뿐이다.\n긴 입력 시퀀스\n      ↓\n모든 정보를 하나의 state에 압축\n      ↓\ninformation bottleneck\n\n입력이 길어질수록 마지막 상태 하나에 모든 정보를 담기 어려워진다.\nDecoder는 매 시점 같은 벡터 하나만 참고하므로, 지금 필요한 부분을 골라서 볼 수 없다.\n\n여기서 자연스러운 질문이 나온다.\n\n굳이 입력 전체를 하나의 벡터에 압축하지 말고, Decoder가 필요한 Encoder state를 직접 참고하면 되지 않을까?\n\n이 질문에 대한 답이 Attention이며, 다음 장에서 살펴본다.\nEncoder\nh1  h2  h3 ... hT\n \\   |   |     /\n     Attention\n        ↓\n     Decoder\n그리고 Attention을 중심으로 구조를 다시 만들면서 순환 구조를 완전히 제거한 것이 그 다음 장의 Transformer이다.",
     "crumbs": [
       "<span class='chapter-number'>7</span>  <span class='chapter-title'>Encoder-Decoder 모델 개요</span>"
     ]

@@ -273,6 +273,7 @@ window.Quarto = {
   <ul class="collapse">
   <li><a href="#대표적인-응용-분야" id="toc-대표적인-응용-분야" class="nav-link" data-scroll-target="#대표적인-응용-분야"><span class="header-section-number">7.6.1</span> 대표적인 응용 분야</a></li>
   </ul></li>
+  <li><a href="#고전적-encoder-decoder의-한계" id="toc-고전적-encoder-decoder의-한계" class="nav-link" data-scroll-target="#고전적-encoder-decoder의-한계"><span class="header-section-number">7.7</span> 고전적 Encoder-Decoder의 한계</a></li>
   </ul>
 </nav>
     </div>
@@ -305,6 +306,7 @@ window.Quarto = {
 <li><p>인코더(Encoder): 입력 시퀀스 <span class="math inline">\(x\)</span>를 내부 표현 <span class="math inline">\(z = f(x)\)</span>로 인코딩한다.</p></li>
 <li><p>디코더(Decoder): 이 표현 <span class="math inline">\(z\)</span>를 바탕으로 출력 시퀀스 <span class="math inline">\(y = g(z)\)</span>를 단계적으로 생성한다.</p></li>
 </ul>
+<p>입력과 출력을 이렇게 분리했기 때문에 <strong>두 시퀀스의 길이가 서로 달라도 된다.</strong> 예를 들어 단어 10개짜리 문장을 단어 7개짜리 문장으로 번역할 수 있다.</p>
 <p>이때, <span class="math inline">\(f\)</span>와 <span class="math inline">\(g\)</span>는 각각 딥러닝 기반의 함수 (예: RNN, LSTM, GRU 등)로 구현된다.</p>
 <p>이 구조는 주로 자연어 처리에서 많이 사용되며, 기계 번역, 요약, 대화 시스템 등 다양한 곳에서 응용된다.</p>
 <section id="encoder" class="level2" data-number="7.1">
@@ -1139,9 +1141,34 @@ start_token                             ↓
 </tr>
 </tbody>
 </table>
-
-
 </section>
+</section>
+<section id="고전적-encoder-decoder의-한계" class="level2" data-number="7.7">
+<h2 data-number="7.7" class="anchored" data-anchor-id="고전적-encoder-decoder의-한계"><span class="header-section-number">7.7</span> 고전적 Encoder-Decoder의 한계</h2>
+<p>지금까지 살펴본 구조에서 Decoder가 참고하는 것은 Encoder의 <strong>마지막 상태 <span class="math inline">\((h, c)\)</span> 하나뿐</strong>이다.</p>
+<pre class="text"><code>긴 입력 시퀀스
+      ↓
+모든 정보를 하나의 state에 압축
+      ↓
+information bottleneck</code></pre>
+<ul>
+<li>입력이 길어질수록 마지막 상태 하나에 모든 정보를 담기 어려워진다.</li>
+<li>Decoder는 매 시점 같은 벡터 하나만 참고하므로, 지금 필요한 부분을 골라서 볼 수 없다.</li>
+</ul>
+<p>여기서 자연스러운 질문이 나온다.</p>
+<blockquote class="blockquote">
+<p>굳이 입력 전체를 하나의 벡터에 압축하지 말고, Decoder가 필요한 Encoder state를 직접 참고하면 되지 않을까?</p>
+</blockquote>
+<p>이 질문에 대한 답이 <strong>Attention</strong>이며, 다음 장에서 살펴본다.</p>
+<pre class="text"><code>Encoder
+h1  h2  h3 ... hT
+ \   |   |     /
+     Attention
+        ↓
+     Decoder</code></pre>
+<p>그리고 Attention을 중심으로 구조를 다시 만들면서 순환 구조를 완전히 제거한 것이 그 다음 장의 <strong>Transformer</strong>이다.</p>
+
+
 </section>
 
 </main> <!-- /main -->
