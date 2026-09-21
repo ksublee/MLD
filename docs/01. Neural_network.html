@@ -236,11 +236,7 @@ window.Quarto = {
 </li>
     </ul>
     </div>
-</nav>
-<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
-<!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
+    <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
@@ -278,6 +274,10 @@ window.Quarto = {
   </ul></li>
   </ul>
 </nav>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -720,7 +720,7 @@ J(\boldsymbol{\theta}) = - \frac{1}{N} \sum_{i=1}^{N} \sum_{k=1}^{K} y_{ik} \log
 <h3 data-number="1.8.1" class="anchored" data-anchor-id="순전파-단계"><span class="header-section-number">1.8.1</span> 순전파 단계</h3>
 <p>먼저 입력 데이터를 신경망에 통과시켜 각 층의 뉴런을 따라 계산을 수행하고, 최종 예측값 <span class="math inline">\(\hat{y}\)</span>를 얻는다.</p>
 <p>이 예측값과 실제 <span class="math inline">\(y\)</span>를 비교하여 손실(loss)을 계산한다.</p>
-<p>이때 각 층에서 계산한 <span class="math inline">\(z^{(\ell)}\)</span>와 <span class="math inline">\(a^{(\ell)}\)</span>를 저장해 둔다. 역전파 단계에서 gradient를 계산할 때 이 값들을 다시 사용하기 때문이다.</p>
+<p>이때 각 층의 계산 결과(활성화 함수 적용 전 값 <span class="math inline">\(z\)</span>와 적용 후 값 <span class="math inline">\(a\)</span>)를 저장해 둔다. 역전파 단계에서 gradient를 계산할 때 이 값들을 다시 사용하기 때문이다.</p>
 </section>
 <section id="역전파-단계" class="level3" data-number="1.8.2">
 <h3 data-number="1.8.2" class="anchored" data-anchor-id="역전파-단계"><span class="header-section-number">1.8.2</span> 역전파 단계</h3>
