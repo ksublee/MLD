@@ -415,9 +415,9 @@ array([[[0.9944765],
 </div>
 <p>모형을 만들어 파라미터 개수를 확인해 보자.</p>
 <ul>
-<li>아래 코드에서 <code>input_shape = (4,2)</code>는 길이 4의 2차원 데이터가 입력됨을 의미한다. <code>(time step, dimension)</code>
+<li>아래 코드에서 <code>keras.Input(shape=(4, 2))</code>는 길이 4의 2차원 데이터가 입력됨을 의미한다. <code>(time step, dimension)</code>
 <ul>
-<li>임의의 길이 시퀀스의 <code>input_shape</code>을 의미하도록 <code>(None, 2)</code>로 설정할 수도 있음</li>
+<li>임의의 길이 시퀀스를 입력받으려면 <code>shape=(None, 2)</code>로 설정할 수도 있음</li>
 </ul></li>
 <li>2차원 input x를 담당하는 parameter 2개, y를 담당하는 파라미터 1개, bias 1개의 parameter가 존재함</li>
 </ul>
@@ -524,8 +524,12 @@ array([[[-0.24009974],
 </pre>
 </div>
 </div>
-<p>위 모델에서는 각 유닛 당 총 7개의 parameter가 존재한다.<br>
-* 각 타임 스텝에서 하나의 입력 <span class="math inline">\(x_t\)</span> 에 대한 가중치 parameter * 5개의 이전 스텝 출력 <span class="math inline">\(y_{t-1}\)</span>에 대한 가중치 parameter * 그리고 편향 parameter</p>
+<p>위 모델에서는 각 유닛 당 총 7개의 parameter가 존재한다.</p>
+<ul>
+<li>각 타임 스텝에서 하나의 입력 <span class="math inline">\(x_t\)</span> 에 대한 가중치 parameter</li>
+<li>5개의 이전 스텝 출력 <span class="math inline">\(y_{t-1}\)</span>에 대한 가중치 parameter</li>
+<li>그리고 편향 parameter</li>
+</ul>
 <p>이러한 유닛이 총 5개 있으므로 <span class="math inline">\(5 \times 7 = 35\)</span>개의 parameter가 존재한다.</p>
 <p>Unit이 여러 개인 RNN layer의 출력 결과를 살펴보자.<br>
 길이가 3인 sequence <code>x</code>를 input으로 사용하여 본다.</p>
@@ -591,8 +595,12 @@ array([[[-0.2420366 ,  0.10210828,  0.60706776,  0.7570985 ,
 </pre>
 </div>
 </div>
-<p>위 모델에서는 각 유닛 당 총 9개의 parameter가 존재한다.<br>
-* 각 타임 스텝에서 3개의 입력 <span class="math inline">\(x_t\)</span>에 대한 가중치 parameter * 5개의 이전 스텝 출력 <span class="math inline">\(y_{t-1}\)</span>에 대한 가중치 parameter * 편향 parameter</p>
+<p>위 모델에서는 각 유닛 당 총 9개의 parameter가 존재한다.</p>
+<ul>
+<li>각 타임 스텝에서 3개의 입력 <span class="math inline">\(x_t\)</span>에 대한 가중치 parameter</li>
+<li>5개의 이전 스텝 출력 <span class="math inline">\(y_{t-1}\)</span>에 대한 가중치 parameter</li>
+<li>편향 parameter</li>
+</ul>
 <p>이러한 유닛이 총 5개 있으므로 <span class="math inline">\(5 \times 9 = 45\)</span>개의 parameter가 존재한다.</p>
 <p>입력이 2-dimension인 데이터에 대해 RNN layer의 출력 결과를 테스트 해 보자.</p>
 <div id="cell-37" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-21T06:00:53.409125Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-21T06:00:53.408127Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-21T06:00:53.419594Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-21T06:00:53.418127Z&quot;}}" data-execution_count="19">
@@ -913,9 +921,9 @@ array([[[-0.99354744,  0.5672516 , -0.9881419 ],
 <section id="keras.layers.simplernn" class="level4" data-number="6.2.1.1">
 <h4 data-number="6.2.1.1" class="anchored" data-anchor-id="keras.layers.simplernn"><span class="header-section-number">6.2.1.1</span> keras.layers.SimpleRNN</h4>
 <p>앞에서 살펴본 것처럼 <code>keras.layers.SimpleRNN</code>를 이용하여 간단한 RNN을 구현할 수 있다.</p>
-<p>1차원 시계열이므로, <code>input_shape = [None, 1]</code>로 하여, 유닛 하나만 있는 RNN에 훈련 데이터 하나 <code>X_train[:1]</code>를 적용해 계산해 보자.</p>
+<p>1차원 시계열이므로, <code>keras.Input(shape=(None, 1))</code>로 입력 형태를 지정하고, 유닛 하나만 있는 RNN에 훈련 데이터 하나 <code>X_train[:1]</code>를 적용해 계산해 보자.</p>
 <ul>
-<li>임의의 길이의 시계열 input이 입력될 수 있으므로, <code>input_shape</code>의 첫 번째 값은 <code>None</code>을 이용하였음</li>
+<li>임의의 길이의 시계열 input이 입력될 수 있으므로, <code>shape</code>의 첫 번째 값은 <code>None</code>을 이용하였음</li>
 </ul>
 <p>아래 코드에서는 가장 마지막 스텝의 값만 반환된다.</p>
 <ul>
@@ -1011,7 +1019,10 @@ array([[[-0.4660612 ],
 <span id="cb63-6"><a href="#cb63-6" aria-hidden="true" tabindex="-1"></a>    keras.layers.SimpleRNN(units <span class="op">=</span> <span class="dv">1</span>)</span>
 <span id="cb63-7"><a href="#cb63-7" aria-hidden="true" tabindex="-1"></a>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>가장 간단한 형태의 RNN에는 3개의 parameter가 있다. * 입력 <span class="math inline">\(x_{(t)}\)</span>을 위한 것, 이전 타임 스텝의 출력 <span class="math inline">\(y_{(t-1)}\)</span>을 위한 것, 편향 <span class="math inline">\(b\)</span>에 해당하는 것</p>
+<p>가장 간단한 형태의 RNN에는 3개의 parameter가 있다.</p>
+<ul>
+<li>입력 <span class="math inline">\(x_{(t)}\)</span>을 위한 것, 이전 타임 스텝의 출력 <span class="math inline">\(y_{(t-1)}\)</span>을 위한 것, 편향 <span class="math inline">\(b\)</span>에 해당하는 것</li>
+</ul>
 <div id="cell-72" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-21T06:00:55.072933Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-21T06:00:55.071941Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-21T06:00:55.093298Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-21T06:00:55.092285Z&quot;}}" data-execution_count="40">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb64"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a>model.summary()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
@@ -1212,11 +1223,19 @@ Epoch 20/20
 </section>
 <section id="parameter" class="level4" data-number="6.2.2.2">
 <h4 data-number="6.2.2.2" class="anchored" data-anchor-id="parameter"><span class="header-section-number">6.2.2.2</span> Parameter</h4>
-<p>앞에서 살펴본 것처럼 첫 번째 layer의 각 unit에는 총 22개의 parameter가 존재한다.<br>
-* 각 unit에는 20개의 뉴런에서 출력되는 <span class="math inline">\(y_{(t-1)}\)</span> * 1개의 <span class="math inline">\(x_{(t)}\)</span> * 그리고 1개의 편향을 담당하는 parameter</p>
+<p>앞에서 살펴본 것처럼 첫 번째 layer의 각 unit에는 총 22개의 parameter가 존재한다.</p>
+<ul>
+<li>각 unit에는 20개의 뉴런에서 출력되는 <span class="math inline">\(y_{(t-1)}\)</span></li>
+<li>1개의 <span class="math inline">\(x_{(t)}\)</span></li>
+<li>그리고 1개의 편향을 담당하는 parameter</li>
+</ul>
 <p>이러한 unit이 총 20개 존재하므로 첫 번째 layer의 총 parameter 수는 <span class="math inline">\(22 \times 20 = 440\)</span>개이다.</p>
-<p>두 번째 layer에는 각 unit에는 총 41개의 parameter가 존재한다.<br>
-* 해당 layer의 20개 unit에서 출력되는 <span class="math inline">\(y_{(t-1)}\)</span> * 이전 layer의 output에서 나오는 출력값 20개 * 그리고 1개의 편향까지</p>
+<p>두 번째 layer에는 각 unit에는 총 41개의 parameter가 존재한다.</p>
+<ul>
+<li>해당 layer의 20개 unit에서 출력되는 <span class="math inline">\(y_{(t-1)}\)</span></li>
+<li>이전 layer의 output에서 나오는 출력값 20개</li>
+<li>그리고 1개의 편향까지</li>
+</ul>
 <p>이러한 unit이 총 20개 존재하므로 두 번째 layer의 총 parameter 수는 <span class="math inline">\(41 \times 20 = 820\)</span>개이다.</p>
 <p>마지막 dense 층에는 20의 input과 하나의 bias를 처리하는 한 개의 unit만 있으므로 총 21개의 parameter가 있다.</p>
 <div id="cell-91" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-21T06:01:27.740822Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-21T06:01:27.739822Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-21T06:02:25.596557Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-21T06:02:25.595478Z&quot;}}" data-execution_count="51">
@@ -1525,9 +1544,14 @@ Epoch 20/20
 </section>
 <section id="parameter-1" class="level4" data-number="6.2.3.3">
 <h4 data-number="6.2.3.3" class="anchored" data-anchor-id="parameter-1"><span class="header-section-number">6.2.3.3</span> Parameter</h4>
-<p>첫 번째 RNN layer에서는 <span class="math inline">\((20 + 1 + 1) \times 20 = 440\)</span>개의 parameter가 있다.<br>
-* <span class="math inline">\((순환입력 + 입력 + 편향) \times 뉴런의 수\)</span></p>
-<p>두 번째 RNN layer에서는 <span class="math inline">\((20 + 20 + 1) \times 20 = 820\)</span>개의 parameter가 있다. * <span class="math inline">\((순환입력 + 입력 + 편향) \times 뉴런의 수\)</span></p>
+<p>첫 번째 RNN layer에서는 <span class="math inline">\((20 + 1 + 1) \times 20 = 440\)</span>개의 parameter가 있다.</p>
+<ul>
+<li><span class="math inline">\((순환입력 + 입력 + 편향) \times 뉴런의 수\)</span></li>
+</ul>
+<p>두 번째 RNN layer에서는 <span class="math inline">\((20 + 20 + 1) \times 20 = 820\)</span>개의 parameter가 있다.</p>
+<ul>
+<li><span class="math inline">\((순환입력 + 입력 + 편향) \times 뉴런의 수\)</span></li>
+</ul>
 <div id="cell-114" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-21T06:02:29.383636Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-21T06:02:29.383636Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-21T06:03:26.855155Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-21T06:03:26.854145Z&quot;}}" data-execution_count="68">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb101"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb101-1"><a href="#cb101-1" aria-hidden="true" tabindex="-1"></a>model.<span class="bu">compile</span>(loss<span class="op">=</span><span class="st">"mse"</span>, optimizer<span class="op">=</span><span class="st">"adam"</span>)</span>
 <span id="cb101-2"><a href="#cb101-2" aria-hidden="true" tabindex="-1"></a>history <span class="op">=</span> model.fit(X_train, Y_train, epochs<span class="op">=</span><span class="dv">20</span>,</span>
@@ -2245,7 +2269,7 @@ W_o
 <h3 data-number="6.3.2" class="anchored" data-anchor-id="모델의-파라미터-수-계산"><span class="header-section-number">6.3.2</span> 모델의 파라미터 수 계산</h3>
 <section id="lstm-첫-번째-층" class="level4" data-number="6.3.2.1">
 <h4 data-number="6.3.2.1" class="anchored" data-anchor-id="lstm-첫-번째-층"><span class="header-section-number">6.3.2.1</span> LSTM 첫 번째 층</h4>
-<p><code>keras.layers.LSTM(20, return_sequences = True, input_shape = [None, 1])</code></p>
+<p><code>keras.layers.LSTM(20, return_sequences = True)</code> (입력: <code>keras.Input(shape=[None, 1])</code>, 입력 dim = 1)</p>
 <ul>
 <li><p>LSTM의 파라미터 수 공식:</p>
 <p><span class="math display">\[

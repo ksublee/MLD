@@ -668,7 +668,11 @@ Epoch 10/10
 <p>기본 문법은 다음과 같다.</p>
 <p><code>y_pred = model.predict(X_new)</code></p>
 <p>현재 모형의 마지막 층의 활성함수인 sigmoid 함수는 0과 1 사이의 실수(확률)를 내보내기 때문에, <code>predict()</code>의 출력은 0과 1 사이의 실수값(확률)이다.</p>
-<p>이 확률값을 이용해 클래스를 결정한다. - 예측확률이 0.5보다 크면 클래스 1로, 그렇지 않으면 클래스 0으로 분류한다. - 이 과정은 신경망 모형의 출력에 별도의 기준을 적용하는 코드로 작성해 주어야 한다.</p>
+<p>이 확률값을 이용해 클래스를 결정한다.</p>
+<ul>
+<li>예측확률이 0.5보다 크면 클래스 1로, 그렇지 않으면 클래스 0으로 분류한다.</li>
+<li>이 과정은 신경망 모형의 출력에 별도의 기준을 적용하는 코드로 작성해 주어야 한다.</li>
+</ul>
 <div id="1154ee0e-7e62-48f6-aeb8-ed5032cd18ee" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-19T12:25:12.222148Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-19T12:25:12.222148Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-19T12:25:12.449828Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-19T12:25:12.449828Z&quot;}}" data-execution_count="11">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>y_prob <span class="op">=</span> model.predict(X_testing, verbose<span class="op">=</span><span class="dv">0</span>)</span>

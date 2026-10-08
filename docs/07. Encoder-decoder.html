@@ -331,7 +331,10 @@ window.Quarto = {
 <p>입력과 출력이 동일한 인코더-디코더 모델의 특수한 사례를 <strong>Autoencoder</strong>라고 부른다.</p>
 <p>오토인코더는 입력 데이터를 저차원의 <strong>잠재 공간(latent space)</strong> 으로 압축한 뒤, 이를 다시 원래의 입력과 최대한 유사하게 복원하도록 학습하는 모델이다.</p>
 <p>별도의 정답 label 없이 입력 자체를 target으로 사용하므로 비지도 학습(또는 자기지도 학습)에 해당한다.</p>
-<p>기본적인 구조는 일반적인 Encoder-Decoder와 유사하나, <strong>입력과 출력이 동일</strong>하다는 점에서 차별된다. - 즉, 모델은 입력 데이터를 스스로 “설명”하는 방식으로 내부 표현을 학습한다.</p>
+<p>기본적인 구조는 일반적인 Encoder-Decoder와 유사하나, <strong>입력과 출력이 동일</strong>하다는 점에서 차별된다.</p>
+<ul>
+<li>즉, 모델은 입력 데이터를 스스로 “설명”하는 방식으로 내부 표현을 학습한다.</li>
+</ul>
 <p>오토인코더는 다음 두 구성 요소로 이루어진다:</p>
 <ul>
 <li><p><strong>인코더(Encoder)</strong>: 입력 데이터를 잠재 벡터 <span class="math inline">\(z\)</span>로 압축하는 함수 <span class="math inline">\(z = f(x)\)</span></p></li>
