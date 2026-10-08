@@ -921,9 +921,6 @@ Target data         :
 </div>
 <div id="97ee9f68-a88c-479a-9f97-cea248005bc1" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-22T01:11:32.876869Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-22T01:11:32.875862Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-22T01:11:32.897019Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-22T01:11:32.896009Z&quot;}}" data-execution_count="22">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>model.<span class="bu">compile</span>(optimizer<span class="op">=</span><span class="st">'adam'</span>, loss<span class="op">=</span><span class="st">'mean_squared_error'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>WARNING:tensorflow:TensorFlow GPU support is not available on native Windows for TensorFlow &gt;= 2.11. Even if CUDA/cuDNN are installed, GPU will not be used. Please use WSL2 or the TensorFlow-DirectML plugin.</code></pre>
-</div>
 </div>
 <p>훈련에 사용되는 값 정리</p>
 <ul>
@@ -932,15 +929,15 @@ Target data         :
 <li><code>target_data</code> : 디코더 output을 훈련하기 위한 타겟으로 정답 시퀀스</li>
 </ul>
 <div id="99906529-8cd3-489d-b84e-85174bbf8706" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-22T01:11:32.901022Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-22T01:11:32.901022Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-22T01:13:30.841718Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-22T01:13:30.838704Z&quot;}}" data-execution_count="23">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>history <span class="op">=</span> model.fit([input_sequences, decoder_input_data], target_data, epochs<span class="op">=</span><span class="dv">50</span>, batch_size<span class="op">=</span><span class="dv">32</span>, validation_split<span class="op">=</span><span class="fl">0.2</span>, verbose<span class="op">=</span><span class="dv">0</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>history <span class="op">=</span> model.fit([input_sequences, decoder_input_data], target_data, epochs<span class="op">=</span><span class="dv">50</span>, batch_size<span class="op">=</span><span class="dv">32</span>, validation_split<span class="op">=</span><span class="fl">0.2</span>, verbose<span class="op">=</span><span class="dv">0</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div id="dddddddd-0002-4000-8000-000000000002" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-22T01:13:30.846715Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-22T01:13:30.846715Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-22T01:13:31.017177Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-22T01:13:31.016161Z&quot;}}" data-execution_count="24">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>plt.plot(history.history[<span class="st">"loss"</span>], label<span class="op">=</span><span class="st">"Training loss"</span>)</span>
-<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>plt.plot(history.history[<span class="st">"val_loss"</span>], label<span class="op">=</span><span class="st">"Validation loss"</span>)</span>
-<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Epoch"</span>)</span>
-<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Loss"</span>)</span>
-<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
-<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>plt.plot(history.history[<span class="st">"loss"</span>], label<span class="op">=</span><span class="st">"Training loss"</span>)</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>plt.plot(history.history[<span class="st">"val_loss"</span>], label<span class="op">=</span><span class="st">"Validation loss"</span>)</span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Epoch"</span>)</span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Loss"</span>)</span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -965,34 +962,34 @@ Target data         :
 <li>훈련 단계에서는 <code>decoder_outputs.shape = (batch, timesteps, latent_dim)</code></li>
 </ul>
 <div id="e41dd5be-9bc5-4b2f-bb27-42a31b9161c8" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-22T01:13:31.021194Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-22T01:13:31.021194Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-22T01:13:31.077328Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-22T01:13:31.075313Z&quot;}}" data-execution_count="25">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 예측을 위한 모델 설정</span></span>
-<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="co"># 인코더는 기존의 모델 그대로 이용</span></span>
-<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>encoder_model <span class="op">=</span> Model(encoder_inputs, [encoder_outputs, state_h, state_c])</span>
-<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a><span class="co"># 디코더의 입력이 한 번에 하나의 값을 받음</span></span>
-<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a>decoder_single_input <span class="op">=</span> Input(shape<span class="op">=</span>(<span class="dv">1</span>, input_dim), name<span class="op">=</span><span class="st">"previous_prediction"</span>)</span>
-<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a>decoder_state_input_h <span class="op">=</span> Input(shape<span class="op">=</span>(latent_dim,), name<span class="op">=</span><span class="st">"hidden_status"</span>)</span>
-<span id="cb38-8"><a href="#cb38-8" aria-hidden="true" tabindex="-1"></a>decoder_state_input_c <span class="op">=</span> Input(shape<span class="op">=</span>(latent_dim,), name<span class="op">=</span><span class="st">"cell_status"</span>)</span>
-<span id="cb38-9"><a href="#cb38-9" aria-hidden="true" tabindex="-1"></a>encoder_output_input <span class="op">=</span> Input(shape<span class="op">=</span>(timesteps, latent_dim), name<span class="op">=</span><span class="st">"encoder_output"</span>)</span>
-<span id="cb38-10"><a href="#cb38-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-11"><a href="#cb38-11" aria-hidden="true" tabindex="-1"></a><span class="co"># 훈련된 decoder_lstm을 이용</span></span>
-<span id="cb38-12"><a href="#cb38-12" aria-hidden="true" tabindex="-1"></a>decoder_outputs, state_h, state_c <span class="op">=</span> decoder_lstm(decoder_single_input, initial_state<span class="op">=</span>[decoder_state_input_h, decoder_state_input_c])</span>
-<span id="cb38-13"><a href="#cb38-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-14"><a href="#cb38-14" aria-hidden="true" tabindex="-1"></a>attention_scores <span class="op">=</span> Dot(axes<span class="op">=</span>[<span class="dv">2</span>, <span class="dv">2</span>], name<span class="op">=</span><span class="st">"attention_scores"</span>)([decoder_outputs, encoder_output_input])</span>
-<span id="cb38-15"><a href="#cb38-15" aria-hidden="true" tabindex="-1"></a>attention_weights <span class="op">=</span> Activation(<span class="st">'softmax'</span>, name<span class="op">=</span><span class="st">"attention_weights"</span>)(attention_scores)</span>
-<span id="cb38-16"><a href="#cb38-16" aria-hidden="true" tabindex="-1"></a>context <span class="op">=</span> Dot(axes<span class="op">=</span>[<span class="dv">2</span>, <span class="dv">1</span>], name<span class="op">=</span><span class="st">"context_vector"</span>)([attention_weights, encoder_output_input])</span>
-<span id="cb38-17"><a href="#cb38-17" aria-hidden="true" tabindex="-1"></a>decoder_combined_context <span class="op">=</span> Concatenate(axis<span class="op">=-</span><span class="dv">1</span>)([context, decoder_outputs])</span>
-<span id="cb38-18"><a href="#cb38-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-19"><a href="#cb38-19" aria-hidden="true" tabindex="-1"></a><span class="co"># 훈련된 decoder_dense를 이용</span></span>
-<span id="cb38-20"><a href="#cb38-20" aria-hidden="true" tabindex="-1"></a>decoder_outputs <span class="op">=</span> decoder_dense(decoder_combined_context)</span>
-<span id="cb38-21"><a href="#cb38-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-22"><a href="#cb38-22" aria-hidden="true" tabindex="-1"></a>decoder_states <span class="op">=</span> [state_h, state_c]</span>
-<span id="cb38-23"><a href="#cb38-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-24"><a href="#cb38-24" aria-hidden="true" tabindex="-1"></a>decoder_model <span class="op">=</span> Model(</span>
-<span id="cb38-25"><a href="#cb38-25" aria-hidden="true" tabindex="-1"></a>    inputs<span class="op">=</span>[decoder_single_input, encoder_output_input, decoder_state_input_h, decoder_state_input_c],</span>
-<span id="cb38-26"><a href="#cb38-26" aria-hidden="true" tabindex="-1"></a>    outputs<span class="op">=</span>[decoder_outputs] <span class="op">+</span> decoder_states)</span>
-<span id="cb38-27"><a href="#cb38-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-28"><a href="#cb38-28" aria-hidden="true" tabindex="-1"></a>decoder_model.summary()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 예측을 위한 모델 설정</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="co"># 인코더는 기존의 모델 그대로 이용</span></span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>encoder_model <span class="op">=</span> Model(encoder_inputs, [encoder_outputs, state_h, state_c])</span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a><span class="co"># 디코더의 입력이 한 번에 하나의 값을 받음</span></span>
+<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a>decoder_single_input <span class="op">=</span> Input(shape<span class="op">=</span>(<span class="dv">1</span>, input_dim), name<span class="op">=</span><span class="st">"previous_prediction"</span>)</span>
+<span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a>decoder_state_input_h <span class="op">=</span> Input(shape<span class="op">=</span>(latent_dim,), name<span class="op">=</span><span class="st">"hidden_status"</span>)</span>
+<span id="cb37-8"><a href="#cb37-8" aria-hidden="true" tabindex="-1"></a>decoder_state_input_c <span class="op">=</span> Input(shape<span class="op">=</span>(latent_dim,), name<span class="op">=</span><span class="st">"cell_status"</span>)</span>
+<span id="cb37-9"><a href="#cb37-9" aria-hidden="true" tabindex="-1"></a>encoder_output_input <span class="op">=</span> Input(shape<span class="op">=</span>(timesteps, latent_dim), name<span class="op">=</span><span class="st">"encoder_output"</span>)</span>
+<span id="cb37-10"><a href="#cb37-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-11"><a href="#cb37-11" aria-hidden="true" tabindex="-1"></a><span class="co"># 훈련된 decoder_lstm을 이용</span></span>
+<span id="cb37-12"><a href="#cb37-12" aria-hidden="true" tabindex="-1"></a>decoder_outputs, state_h, state_c <span class="op">=</span> decoder_lstm(decoder_single_input, initial_state<span class="op">=</span>[decoder_state_input_h, decoder_state_input_c])</span>
+<span id="cb37-13"><a href="#cb37-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-14"><a href="#cb37-14" aria-hidden="true" tabindex="-1"></a>attention_scores <span class="op">=</span> Dot(axes<span class="op">=</span>[<span class="dv">2</span>, <span class="dv">2</span>], name<span class="op">=</span><span class="st">"attention_scores"</span>)([decoder_outputs, encoder_output_input])</span>
+<span id="cb37-15"><a href="#cb37-15" aria-hidden="true" tabindex="-1"></a>attention_weights <span class="op">=</span> Activation(<span class="st">'softmax'</span>, name<span class="op">=</span><span class="st">"attention_weights"</span>)(attention_scores)</span>
+<span id="cb37-16"><a href="#cb37-16" aria-hidden="true" tabindex="-1"></a>context <span class="op">=</span> Dot(axes<span class="op">=</span>[<span class="dv">2</span>, <span class="dv">1</span>], name<span class="op">=</span><span class="st">"context_vector"</span>)([attention_weights, encoder_output_input])</span>
+<span id="cb37-17"><a href="#cb37-17" aria-hidden="true" tabindex="-1"></a>decoder_combined_context <span class="op">=</span> Concatenate(axis<span class="op">=-</span><span class="dv">1</span>)([context, decoder_outputs])</span>
+<span id="cb37-18"><a href="#cb37-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-19"><a href="#cb37-19" aria-hidden="true" tabindex="-1"></a><span class="co"># 훈련된 decoder_dense를 이용</span></span>
+<span id="cb37-20"><a href="#cb37-20" aria-hidden="true" tabindex="-1"></a>decoder_outputs <span class="op">=</span> decoder_dense(decoder_combined_context)</span>
+<span id="cb37-21"><a href="#cb37-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-22"><a href="#cb37-22" aria-hidden="true" tabindex="-1"></a>decoder_states <span class="op">=</span> [state_h, state_c]</span>
+<span id="cb37-23"><a href="#cb37-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-24"><a href="#cb37-24" aria-hidden="true" tabindex="-1"></a>decoder_model <span class="op">=</span> Model(</span>
+<span id="cb37-25"><a href="#cb37-25" aria-hidden="true" tabindex="-1"></a>    inputs<span class="op">=</span>[decoder_single_input, encoder_output_input, decoder_state_input_h, decoder_state_input_c],</span>
+<span id="cb37-26"><a href="#cb37-26" aria-hidden="true" tabindex="-1"></a>    outputs<span class="op">=</span>[decoder_outputs] <span class="op">+</span> decoder_states)</span>
+<span id="cb37-27"><a href="#cb37-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-28"><a href="#cb37-28" aria-hidden="true" tabindex="-1"></a>decoder_model.summary()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="font-weight: bold">Model: "functional_2"</span>
 </pre>
@@ -1048,42 +1045,42 @@ Target data         :
 </div>
 </div>
 <div id="72b38eaf-9f34-4d7c-b970-01aa9c46793c" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-22T01:13:31.082346Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-22T01:13:31.081346Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-22T01:13:32.424985Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-22T01:13:32.423430Z&quot;}}" data-execution_count="26">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>new_input_sequence <span class="op">=</span> np.array([[[<span class="fl">11.</span>, <span class="fl">21.</span>, <span class="fl">93.</span>],</span>
-<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>                                [<span class="fl">19.</span>, <span class="fl">22.</span>, <span class="fl">34.</span>],</span>
-<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>                                [<span class="fl">13.</span>, <span class="fl">33.</span>, <span class="fl">25.</span>],</span>
-<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>                                [<span class="fl">32.</span>, <span class="fl">14.</span>, <span class="fl">26.</span>],</span>
-<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a>                                [<span class="fl">56.</span>, <span class="fl">75.</span>, <span class="fl">47.</span>],</span>
-<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a>                                [<span class="fl">26.</span>, <span class="fl">76.</span>, <span class="fl">58.</span>]]])</span>
-<span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-8"><a href="#cb39-8" aria-hidden="true" tabindex="-1"></a>encoder_output, h, c <span class="op">=</span> encoder_model.predict(new_input_sequence, verbose<span class="op">=</span><span class="dv">0</span>)</span>
-<span id="cb39-9"><a href="#cb39-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-10"><a href="#cb39-10" aria-hidden="true" tabindex="-1"></a><span class="co"># 디코더의 초기 입력 (시작 토큰)</span></span>
-<span id="cb39-11"><a href="#cb39-11" aria-hidden="true" tabindex="-1"></a>target_seq <span class="op">=</span> np.zeros((<span class="dv">1</span>, <span class="dv">1</span>, input_dim))</span>
-<span id="cb39-12"><a href="#cb39-12" aria-hidden="true" tabindex="-1"></a>target_seq[<span class="dv">0</span>, <span class="dv">0</span>, :] <span class="op">=</span> <span class="fl">0.0</span></span>
-<span id="cb39-13"><a href="#cb39-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-14"><a href="#cb39-14" aria-hidden="true" tabindex="-1"></a>predicted_sequence <span class="op">=</span> []</span>
-<span id="cb39-15"><a href="#cb39-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-16"><a href="#cb39-16" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> t <span class="kw">in</span> <span class="bu">range</span>(timesteps):</span>
-<span id="cb39-17"><a href="#cb39-17" aria-hidden="true" tabindex="-1"></a>    output_tokens, h, c <span class="op">=</span> decoder_model.predict([target_seq, encoder_output, h, c], verbose<span class="op">=</span><span class="dv">0</span>)</span>
-<span id="cb39-18"><a href="#cb39-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-19"><a href="#cb39-19" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Predicted value in this step: "</span>, output_tokens[<span class="dv">0</span>, <span class="dv">0</span>, :], <span class="st">"based on"</span>, target_seq[<span class="dv">0</span>,<span class="dv">0</span>,:])</span>
-<span id="cb39-20"><a href="#cb39-20" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 가장 최근의 디코더 출력을 저장</span></span>
-<span id="cb39-21"><a href="#cb39-21" aria-hidden="true" tabindex="-1"></a>    predicted_sequence.append(output_tokens[<span class="dv">0</span>, <span class="dv">0</span>, :])</span>
-<span id="cb39-22"><a href="#cb39-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-23"><a href="#cb39-23" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 다음 타임스텝을 위한 디코더 입력 준비 (현재 출력 사용)</span></span>
-<span id="cb39-24"><a href="#cb39-24" aria-hidden="true" tabindex="-1"></a>    target_seq <span class="op">=</span> np.zeros((<span class="dv">1</span>, <span class="dv">1</span>, input_dim))</span>
-<span id="cb39-25"><a href="#cb39-25" aria-hidden="true" tabindex="-1"></a>    target_seq[<span class="dv">0</span>, <span class="dv">0</span>, :] <span class="op">=</span> output_tokens[<span class="dv">0</span>, <span class="dv">0</span>, :]</span>
-<span id="cb39-26"><a href="#cb39-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-27"><a href="#cb39-27" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 갱신된 상태 사용</span></span>
-<span id="cb39-28"><a href="#cb39-28" aria-hidden="true" tabindex="-1"></a>    h, c <span class="op">=</span> [h, c]</span>
-<span id="cb39-29"><a href="#cb39-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-30"><a href="#cb39-30" aria-hidden="true" tabindex="-1"></a>predicted_sequence <span class="op">=</span> np.array(predicted_sequence)</span>
-<span id="cb39-31"><a href="#cb39-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-32"><a href="#cb39-32" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"New_input_sequence:"</span>)</span>
-<span id="cb39-33"><a href="#cb39-33" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(new_input_sequence)</span>
-<span id="cb39-34"><a href="#cb39-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-35"><a href="#cb39-35" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Predicted sequence:"</span>)</span>
-<span id="cb39-36"><a href="#cb39-36" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(predicted_sequence)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>new_input_sequence <span class="op">=</span> np.array([[[<span class="fl">11.</span>, <span class="fl">21.</span>, <span class="fl">93.</span>],</span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>                                [<span class="fl">19.</span>, <span class="fl">22.</span>, <span class="fl">34.</span>],</span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>                                [<span class="fl">13.</span>, <span class="fl">33.</span>, <span class="fl">25.</span>],</span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>                                [<span class="fl">32.</span>, <span class="fl">14.</span>, <span class="fl">26.</span>],</span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>                                [<span class="fl">56.</span>, <span class="fl">75.</span>, <span class="fl">47.</span>],</span>
+<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a>                                [<span class="fl">26.</span>, <span class="fl">76.</span>, <span class="fl">58.</span>]]])</span>
+<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-8"><a href="#cb38-8" aria-hidden="true" tabindex="-1"></a>encoder_output, h, c <span class="op">=</span> encoder_model.predict(new_input_sequence, verbose<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb38-9"><a href="#cb38-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-10"><a href="#cb38-10" aria-hidden="true" tabindex="-1"></a><span class="co"># 디코더의 초기 입력 (시작 토큰)</span></span>
+<span id="cb38-11"><a href="#cb38-11" aria-hidden="true" tabindex="-1"></a>target_seq <span class="op">=</span> np.zeros((<span class="dv">1</span>, <span class="dv">1</span>, input_dim))</span>
+<span id="cb38-12"><a href="#cb38-12" aria-hidden="true" tabindex="-1"></a>target_seq[<span class="dv">0</span>, <span class="dv">0</span>, :] <span class="op">=</span> <span class="fl">0.0</span></span>
+<span id="cb38-13"><a href="#cb38-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-14"><a href="#cb38-14" aria-hidden="true" tabindex="-1"></a>predicted_sequence <span class="op">=</span> []</span>
+<span id="cb38-15"><a href="#cb38-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-16"><a href="#cb38-16" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> t <span class="kw">in</span> <span class="bu">range</span>(timesteps):</span>
+<span id="cb38-17"><a href="#cb38-17" aria-hidden="true" tabindex="-1"></a>    output_tokens, h, c <span class="op">=</span> decoder_model.predict([target_seq, encoder_output, h, c], verbose<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb38-18"><a href="#cb38-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-19"><a href="#cb38-19" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Predicted value in this step: "</span>, output_tokens[<span class="dv">0</span>, <span class="dv">0</span>, :], <span class="st">"based on"</span>, target_seq[<span class="dv">0</span>,<span class="dv">0</span>,:])</span>
+<span id="cb38-20"><a href="#cb38-20" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 가장 최근의 디코더 출력을 저장</span></span>
+<span id="cb38-21"><a href="#cb38-21" aria-hidden="true" tabindex="-1"></a>    predicted_sequence.append(output_tokens[<span class="dv">0</span>, <span class="dv">0</span>, :])</span>
+<span id="cb38-22"><a href="#cb38-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-23"><a href="#cb38-23" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 다음 타임스텝을 위한 디코더 입력 준비 (현재 출력 사용)</span></span>
+<span id="cb38-24"><a href="#cb38-24" aria-hidden="true" tabindex="-1"></a>    target_seq <span class="op">=</span> np.zeros((<span class="dv">1</span>, <span class="dv">1</span>, input_dim))</span>
+<span id="cb38-25"><a href="#cb38-25" aria-hidden="true" tabindex="-1"></a>    target_seq[<span class="dv">0</span>, <span class="dv">0</span>, :] <span class="op">=</span> output_tokens[<span class="dv">0</span>, <span class="dv">0</span>, :]</span>
+<span id="cb38-26"><a href="#cb38-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-27"><a href="#cb38-27" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 갱신된 상태 사용</span></span>
+<span id="cb38-28"><a href="#cb38-28" aria-hidden="true" tabindex="-1"></a>    h, c <span class="op">=</span> [h, c]</span>
+<span id="cb38-29"><a href="#cb38-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-30"><a href="#cb38-30" aria-hidden="true" tabindex="-1"></a>predicted_sequence <span class="op">=</span> np.array(predicted_sequence)</span>
+<span id="cb38-31"><a href="#cb38-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-32"><a href="#cb38-32" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"New_input_sequence:"</span>)</span>
+<span id="cb38-33"><a href="#cb38-33" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(new_input_sequence)</span>
+<span id="cb38-34"><a href="#cb38-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-35"><a href="#cb38-35" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Predicted sequence:"</span>)</span>
+<span id="cb38-36"><a href="#cb38-36" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(predicted_sequence)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Predicted value in this step:  [25.724493 75.128395 58.684128] based on [0. 0. 0.]
 Predicted value in this step:  [60.69027  80.08674  48.963425] based on [25.72449303 75.12839508 58.68412781]
@@ -1119,33 +1116,33 @@ start_token                             ↓
           → next_value 
                                   (Repeat)</code></pre>
 <div id="b673214b-0dd4-4b26-ac02-99be68145537" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-22T01:13:32.428998Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-22T01:13:32.427999Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-22T01:13:32.980246Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-22T01:13:32.978724Z&quot;}}" data-execution_count="27">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 입력 시퀀스를 시간 축으로 뒤집고 1을 더함</span></span>
-<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a>reversed_input_sequence <span class="op">=</span> np.flip(new_input_sequence, axis<span class="op">=</span><span class="dv">1</span>) <span class="op">+</span> <span class="dv">1</span></span>
-<span id="cb42-6"><a href="#cb42-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb42-7"><a href="#cb42-7" aria-hidden="true" tabindex="-1"></a><span class="co"># 입력 시퀀스와 예측 시퀀스를 시각화</span></span>
-<span id="cb42-8"><a href="#cb42-8" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> plot_sequences(modified_input_sequence, predicted_sequence):</span>
-<span id="cb42-9"><a href="#cb42-9" aria-hidden="true" tabindex="-1"></a>    timesteps <span class="op">=</span> modified_input_sequence.shape[<span class="dv">1</span>]</span>
-<span id="cb42-10"><a href="#cb42-10" aria-hidden="true" tabindex="-1"></a>    input_dim <span class="op">=</span> modified_input_sequence.shape[<span class="dv">2</span>]</span>
-<span id="cb42-11"><a href="#cb42-11" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb42-12"><a href="#cb42-12" aria-hidden="true" tabindex="-1"></a>    plt.figure(figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">6</span>))</span>
-<span id="cb42-13"><a href="#cb42-13" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb42-14"><a href="#cb42-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> dim <span class="kw">in</span> <span class="bu">range</span>(input_dim):</span>
-<span id="cb42-15"><a href="#cb42-15" aria-hidden="true" tabindex="-1"></a>        plt.subplot(<span class="dv">1</span>, input_dim, dim <span class="op">+</span> <span class="dv">1</span>)</span>
-<span id="cb42-16"><a href="#cb42-16" aria-hidden="true" tabindex="-1"></a>        plt.plot(<span class="bu">range</span>(timesteps), modified_input_sequence[<span class="dv">0</span>, :, dim], label<span class="op">=</span><span class="st">'Target Sequence'</span>)</span>
-<span id="cb42-17"><a href="#cb42-17" aria-hidden="true" tabindex="-1"></a>        plt.plot(<span class="bu">range</span>(timesteps), predicted_sequence[:, dim], label<span class="op">=</span><span class="st">'Predicted Sequence'</span>, linestyle<span class="op">=</span><span class="st">'--'</span>)</span>
-<span id="cb42-18"><a href="#cb42-18" aria-hidden="true" tabindex="-1"></a>        plt.title(<span class="ss">f'Dimension </span><span class="sc">{</span>dim <span class="op">+</span> <span class="dv">1</span><span class="sc">}</span><span class="ss">'</span>)</span>
-<span id="cb42-19"><a href="#cb42-19" aria-hidden="true" tabindex="-1"></a>        plt.xlabel(<span class="st">'Timestep'</span>)</span>
-<span id="cb42-20"><a href="#cb42-20" aria-hidden="true" tabindex="-1"></a>        plt.ylabel(<span class="st">'Value'</span>)</span>
-<span id="cb42-21"><a href="#cb42-21" aria-hidden="true" tabindex="-1"></a>        plt.legend()</span>
-<span id="cb42-22"><a href="#cb42-22" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb42-23"><a href="#cb42-23" aria-hidden="true" tabindex="-1"></a>    plt.tight_layout()</span>
-<span id="cb42-24"><a href="#cb42-24" aria-hidden="true" tabindex="-1"></a>    plt.show()</span>
-<span id="cb42-25"><a href="#cb42-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb42-26"><a href="#cb42-26" aria-hidden="true" tabindex="-1"></a><span class="co"># 시각화 함수 호출</span></span>
-<span id="cb42-27"><a href="#cb42-27" aria-hidden="true" tabindex="-1"></a>plot_sequences(reversed_input_sequence, predicted_sequence)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 입력 시퀀스를 시간 축으로 뒤집고 1을 더함</span></span>
+<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a>reversed_input_sequence <span class="op">=</span> np.flip(new_input_sequence, axis<span class="op">=</span><span class="dv">1</span>) <span class="op">+</span> <span class="dv">1</span></span>
+<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-7"><a href="#cb41-7" aria-hidden="true" tabindex="-1"></a><span class="co"># 입력 시퀀스와 예측 시퀀스를 시각화</span></span>
+<span id="cb41-8"><a href="#cb41-8" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> plot_sequences(modified_input_sequence, predicted_sequence):</span>
+<span id="cb41-9"><a href="#cb41-9" aria-hidden="true" tabindex="-1"></a>    timesteps <span class="op">=</span> modified_input_sequence.shape[<span class="dv">1</span>]</span>
+<span id="cb41-10"><a href="#cb41-10" aria-hidden="true" tabindex="-1"></a>    input_dim <span class="op">=</span> modified_input_sequence.shape[<span class="dv">2</span>]</span>
+<span id="cb41-11"><a href="#cb41-11" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb41-12"><a href="#cb41-12" aria-hidden="true" tabindex="-1"></a>    plt.figure(figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">6</span>))</span>
+<span id="cb41-13"><a href="#cb41-13" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb41-14"><a href="#cb41-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> dim <span class="kw">in</span> <span class="bu">range</span>(input_dim):</span>
+<span id="cb41-15"><a href="#cb41-15" aria-hidden="true" tabindex="-1"></a>        plt.subplot(<span class="dv">1</span>, input_dim, dim <span class="op">+</span> <span class="dv">1</span>)</span>
+<span id="cb41-16"><a href="#cb41-16" aria-hidden="true" tabindex="-1"></a>        plt.plot(<span class="bu">range</span>(timesteps), modified_input_sequence[<span class="dv">0</span>, :, dim], label<span class="op">=</span><span class="st">'Target Sequence'</span>)</span>
+<span id="cb41-17"><a href="#cb41-17" aria-hidden="true" tabindex="-1"></a>        plt.plot(<span class="bu">range</span>(timesteps), predicted_sequence[:, dim], label<span class="op">=</span><span class="st">'Predicted Sequence'</span>, linestyle<span class="op">=</span><span class="st">'--'</span>)</span>
+<span id="cb41-18"><a href="#cb41-18" aria-hidden="true" tabindex="-1"></a>        plt.title(<span class="ss">f'Dimension </span><span class="sc">{</span>dim <span class="op">+</span> <span class="dv">1</span><span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb41-19"><a href="#cb41-19" aria-hidden="true" tabindex="-1"></a>        plt.xlabel(<span class="st">'Timestep'</span>)</span>
+<span id="cb41-20"><a href="#cb41-20" aria-hidden="true" tabindex="-1"></a>        plt.ylabel(<span class="st">'Value'</span>)</span>
+<span id="cb41-21"><a href="#cb41-21" aria-hidden="true" tabindex="-1"></a>        plt.legend()</span>
+<span id="cb41-22"><a href="#cb41-22" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb41-23"><a href="#cb41-23" aria-hidden="true" tabindex="-1"></a>    plt.tight_layout()</span>
+<span id="cb41-24"><a href="#cb41-24" aria-hidden="true" tabindex="-1"></a>    plt.show()</span>
+<span id="cb41-25"><a href="#cb41-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-26"><a href="#cb41-26" aria-hidden="true" tabindex="-1"></a><span class="co"># 시각화 함수 호출</span></span>
+<span id="cb41-27"><a href="#cb41-27" aria-hidden="true" tabindex="-1"></a>plot_sequences(reversed_input_sequence, predicted_sequence)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -1181,65 +1178,65 @@ start_token                             ↓
 <p>아래 예제에서는 가중치 행렬 <code>W</code>들을 간단히 정의하였지만, 실제 뉴럴 네트워크 모형에서는 훈련 가능한 파라미터들로 구성된다.</p>
 <p>한편, 아래 코드에서 <code>W</code>들의 shape은 <code>(latent_dim, latent_dim)</code>로 하여, 생성된 쿼리/키, 값의 차원을 <code>latent_dim</code>로 동일하게 하였다.</p>
 <div id="b790930f-62f2-49ca-ae1b-dc5fd6c46ee7" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-22T01:13:32.985250Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-22T01:13:32.985250Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-22T01:13:34.380709Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-22T01:13:34.379288Z&quot;}}" data-execution_count="28">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb43"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 설정</span></span>
-<span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a>encoder_timesteps <span class="op">=</span> <span class="dv">6</span></span>
-<span id="cb43-6"><a href="#cb43-6" aria-hidden="true" tabindex="-1"></a>decoder_timesteps <span class="op">=</span> <span class="dv">6</span></span>
-<span id="cb43-7"><a href="#cb43-7" aria-hidden="true" tabindex="-1"></a>latent_dim <span class="op">=</span> <span class="dv">4</span></span>
-<span id="cb43-8"><a href="#cb43-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-9"><a href="#cb43-9" aria-hidden="true" tabindex="-1"></a><span class="co"># 인코더 출력 (임의의 값)</span></span>
-<span id="cb43-10"><a href="#cb43-10" aria-hidden="true" tabindex="-1"></a>encoder_outputs <span class="op">=</span> np.random.normal(<span class="dv">0</span>, <span class="dv">1</span>, size<span class="op">=</span>(encoder_timesteps, latent_dim))</span>
-<span id="cb43-11"><a href="#cb43-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-12"><a href="#cb43-12" aria-hidden="true" tabindex="-1"></a><span class="co"># 디코더 출력</span></span>
-<span id="cb43-13"><a href="#cb43-13" aria-hidden="true" tabindex="-1"></a>decoder_outputs <span class="op">=</span> np.roll(encoder_outputs, shift<span class="op">=</span><span class="dv">1</span>, axis<span class="op">=</span><span class="dv">0</span>)</span>
-<span id="cb43-14"><a href="#cb43-14" aria-hidden="true" tabindex="-1"></a>decoder_outputs[<span class="dv">0</span>] <span class="op">=</span> np.random.normal(<span class="dv">0</span>, <span class="fl">0.1</span>, latent_dim)</span>
-<span id="cb43-15"><a href="#cb43-15" aria-hidden="true" tabindex="-1"></a>decoder_outputs <span class="op">=</span> decoder_outputs <span class="op">+</span> np.random.normal(<span class="dv">0</span>, <span class="fl">0.01</span>, decoder_outputs.shape)</span>
-<span id="cb43-16"><a href="#cb43-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-17"><a href="#cb43-17" aria-hidden="true" tabindex="-1"></a><span class="co"># 가상의 가중치 행렬 생성 (랜덤하게 생성함)</span></span>
-<span id="cb43-18"><a href="#cb43-18" aria-hidden="true" tabindex="-1"></a>W_q <span class="op">=</span> np.random.normal(<span class="dv">0</span>, <span class="dv">1</span>, (latent_dim, latent_dim))</span>
-<span id="cb43-19"><a href="#cb43-19" aria-hidden="true" tabindex="-1"></a>W_k <span class="op">=</span> np.random.normal(<span class="dv">0</span>, <span class="dv">1</span>, (latent_dim, latent_dim))</span>
-<span id="cb43-20"><a href="#cb43-20" aria-hidden="true" tabindex="-1"></a>W_v <span class="op">=</span> np.random.normal(<span class="dv">0</span>, <span class="dv">1</span>, (latent_dim, latent_dim))</span>
-<span id="cb43-21"><a href="#cb43-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-22"><a href="#cb43-22" aria-hidden="true" tabindex="-1"></a><span class="co"># 쿼리, 키, 값 생성</span></span>
-<span id="cb43-23"><a href="#cb43-23" aria-hidden="true" tabindex="-1"></a>queries <span class="op">=</span> np.dot(decoder_outputs, W_q)</span>
-<span id="cb43-24"><a href="#cb43-24" aria-hidden="true" tabindex="-1"></a>keys <span class="op">=</span> np.dot(encoder_outputs, W_k)</span>
-<span id="cb43-25"><a href="#cb43-25" aria-hidden="true" tabindex="-1"></a>values <span class="op">=</span> np.dot(encoder_outputs, W_v)</span>
-<span id="cb43-26"><a href="#cb43-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-27"><a href="#cb43-27" aria-hidden="true" tabindex="-1"></a><span class="co"># 어텐션 가중치 계산 (여기서는 단순한 내적)</span></span>
-<span id="cb43-28"><a href="#cb43-28" aria-hidden="true" tabindex="-1"></a>attention_scores <span class="op">=</span> np.dot(queries, keys.T)</span>
-<span id="cb43-29"><a href="#cb43-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-30"><a href="#cb43-30" aria-hidden="true" tabindex="-1"></a><span class="co"># Softmax 적용하여 가중치 정규화</span></span>
-<span id="cb43-31"><a href="#cb43-31" aria-hidden="true" tabindex="-1"></a>attention_weights <span class="op">=</span> np.exp(attention_scores) <span class="op">/</span> np.<span class="bu">sum</span>(np.exp(attention_scores), axis<span class="op">=</span><span class="dv">1</span>, keepdims<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb43-32"><a href="#cb43-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-33"><a href="#cb43-33" aria-hidden="true" tabindex="-1"></a><span class="co"># Context 벡터 계산</span></span>
-<span id="cb43-34"><a href="#cb43-34" aria-hidden="true" tabindex="-1"></a>context_vectors <span class="op">=</span> np.dot(attention_weights, values)</span>
-<span id="cb43-35"><a href="#cb43-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-36"><a href="#cb43-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-37"><a href="#cb43-37" aria-hidden="true" tabindex="-1"></a><span class="co"># 시각화</span></span>
-<span id="cb43-38"><a href="#cb43-38" aria-hidden="true" tabindex="-1"></a>fig, axes <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">3</span>, figsize<span class="op">=</span>(<span class="dv">15</span>, <span class="dv">5</span>))</span>
-<span id="cb43-39"><a href="#cb43-39" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-40"><a href="#cb43-40" aria-hidden="true" tabindex="-1"></a>plot_matrix(axes[<span class="dv">0</span>], queries, <span class="st">'Queries'</span>, <span class="st">'Features'</span>, <span class="st">'Timesteps'</span>)</span>
-<span id="cb43-41"><a href="#cb43-41" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-42"><a href="#cb43-42" aria-hidden="true" tabindex="-1"></a>plot_matrix(axes[<span class="dv">1</span>], keys.T, <span class="st">'Keys'</span>, <span class="st">'Features'</span>, <span class="st">'Timesteps'</span>)</span>
-<span id="cb43-43"><a href="#cb43-43" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-44"><a href="#cb43-44" aria-hidden="true" tabindex="-1"></a>plot_matrix(axes[<span class="dv">2</span>], attention_weights, <span class="st">'Attention Weights'</span>, <span class="st">'Encoder Timesteps'</span>, <span class="st">'Decoder Timesteps'</span>)</span>
-<span id="cb43-45"><a href="#cb43-45" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-46"><a href="#cb43-46" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
-<span id="cb43-47"><a href="#cb43-47" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
-<span id="cb43-48"><a href="#cb43-48" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-49"><a href="#cb43-49" aria-hidden="true" tabindex="-1"></a><span class="co"># 시각화</span></span>
-<span id="cb43-50"><a href="#cb43-50" aria-hidden="true" tabindex="-1"></a>fig, axes <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">3</span>, figsize<span class="op">=</span>(<span class="dv">15</span>, <span class="dv">5</span>))</span>
-<span id="cb43-51"><a href="#cb43-51" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-52"><a href="#cb43-52" aria-hidden="true" tabindex="-1"></a>plot_matrix(axes[<span class="dv">0</span>], attention_weights, <span class="st">'Attention Weights'</span>, <span class="st">'Encoder Timesteps'</span>, <span class="st">'Decoder Timesteps'</span>)</span>
-<span id="cb43-53"><a href="#cb43-53" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-54"><a href="#cb43-54" aria-hidden="true" tabindex="-1"></a>plot_matrix(axes[<span class="dv">1</span>], values, <span class="st">'Values'</span>, <span class="st">'Features'</span>, <span class="st">'Timesteps'</span>)</span>
-<span id="cb43-55"><a href="#cb43-55" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-56"><a href="#cb43-56" aria-hidden="true" tabindex="-1"></a>plot_matrix(axes[<span class="dv">2</span>], context_vectors, <span class="st">'Context Vectors'</span>, <span class="st">'Features'</span>, <span class="st">'Decoder Timesteps'</span>)</span>
-<span id="cb43-57"><a href="#cb43-57" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-58"><a href="#cb43-58" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
-<span id="cb43-59"><a href="#cb43-59" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 설정</span></span>
+<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a>encoder_timesteps <span class="op">=</span> <span class="dv">6</span></span>
+<span id="cb42-6"><a href="#cb42-6" aria-hidden="true" tabindex="-1"></a>decoder_timesteps <span class="op">=</span> <span class="dv">6</span></span>
+<span id="cb42-7"><a href="#cb42-7" aria-hidden="true" tabindex="-1"></a>latent_dim <span class="op">=</span> <span class="dv">4</span></span>
+<span id="cb42-8"><a href="#cb42-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-9"><a href="#cb42-9" aria-hidden="true" tabindex="-1"></a><span class="co"># 인코더 출력 (임의의 값)</span></span>
+<span id="cb42-10"><a href="#cb42-10" aria-hidden="true" tabindex="-1"></a>encoder_outputs <span class="op">=</span> np.random.normal(<span class="dv">0</span>, <span class="dv">1</span>, size<span class="op">=</span>(encoder_timesteps, latent_dim))</span>
+<span id="cb42-11"><a href="#cb42-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-12"><a href="#cb42-12" aria-hidden="true" tabindex="-1"></a><span class="co"># 디코더 출력</span></span>
+<span id="cb42-13"><a href="#cb42-13" aria-hidden="true" tabindex="-1"></a>decoder_outputs <span class="op">=</span> np.roll(encoder_outputs, shift<span class="op">=</span><span class="dv">1</span>, axis<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb42-14"><a href="#cb42-14" aria-hidden="true" tabindex="-1"></a>decoder_outputs[<span class="dv">0</span>] <span class="op">=</span> np.random.normal(<span class="dv">0</span>, <span class="fl">0.1</span>, latent_dim)</span>
+<span id="cb42-15"><a href="#cb42-15" aria-hidden="true" tabindex="-1"></a>decoder_outputs <span class="op">=</span> decoder_outputs <span class="op">+</span> np.random.normal(<span class="dv">0</span>, <span class="fl">0.01</span>, decoder_outputs.shape)</span>
+<span id="cb42-16"><a href="#cb42-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-17"><a href="#cb42-17" aria-hidden="true" tabindex="-1"></a><span class="co"># 가상의 가중치 행렬 생성 (랜덤하게 생성함)</span></span>
+<span id="cb42-18"><a href="#cb42-18" aria-hidden="true" tabindex="-1"></a>W_q <span class="op">=</span> np.random.normal(<span class="dv">0</span>, <span class="dv">1</span>, (latent_dim, latent_dim))</span>
+<span id="cb42-19"><a href="#cb42-19" aria-hidden="true" tabindex="-1"></a>W_k <span class="op">=</span> np.random.normal(<span class="dv">0</span>, <span class="dv">1</span>, (latent_dim, latent_dim))</span>
+<span id="cb42-20"><a href="#cb42-20" aria-hidden="true" tabindex="-1"></a>W_v <span class="op">=</span> np.random.normal(<span class="dv">0</span>, <span class="dv">1</span>, (latent_dim, latent_dim))</span>
+<span id="cb42-21"><a href="#cb42-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-22"><a href="#cb42-22" aria-hidden="true" tabindex="-1"></a><span class="co"># 쿼리, 키, 값 생성</span></span>
+<span id="cb42-23"><a href="#cb42-23" aria-hidden="true" tabindex="-1"></a>queries <span class="op">=</span> np.dot(decoder_outputs, W_q)</span>
+<span id="cb42-24"><a href="#cb42-24" aria-hidden="true" tabindex="-1"></a>keys <span class="op">=</span> np.dot(encoder_outputs, W_k)</span>
+<span id="cb42-25"><a href="#cb42-25" aria-hidden="true" tabindex="-1"></a>values <span class="op">=</span> np.dot(encoder_outputs, W_v)</span>
+<span id="cb42-26"><a href="#cb42-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-27"><a href="#cb42-27" aria-hidden="true" tabindex="-1"></a><span class="co"># 어텐션 가중치 계산 (여기서는 단순한 내적)</span></span>
+<span id="cb42-28"><a href="#cb42-28" aria-hidden="true" tabindex="-1"></a>attention_scores <span class="op">=</span> np.dot(queries, keys.T)</span>
+<span id="cb42-29"><a href="#cb42-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-30"><a href="#cb42-30" aria-hidden="true" tabindex="-1"></a><span class="co"># Softmax 적용하여 가중치 정규화</span></span>
+<span id="cb42-31"><a href="#cb42-31" aria-hidden="true" tabindex="-1"></a>attention_weights <span class="op">=</span> np.exp(attention_scores) <span class="op">/</span> np.<span class="bu">sum</span>(np.exp(attention_scores), axis<span class="op">=</span><span class="dv">1</span>, keepdims<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb42-32"><a href="#cb42-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-33"><a href="#cb42-33" aria-hidden="true" tabindex="-1"></a><span class="co"># Context 벡터 계산</span></span>
+<span id="cb42-34"><a href="#cb42-34" aria-hidden="true" tabindex="-1"></a>context_vectors <span class="op">=</span> np.dot(attention_weights, values)</span>
+<span id="cb42-35"><a href="#cb42-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-36"><a href="#cb42-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-37"><a href="#cb42-37" aria-hidden="true" tabindex="-1"></a><span class="co"># 시각화</span></span>
+<span id="cb42-38"><a href="#cb42-38" aria-hidden="true" tabindex="-1"></a>fig, axes <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">3</span>, figsize<span class="op">=</span>(<span class="dv">15</span>, <span class="dv">5</span>))</span>
+<span id="cb42-39"><a href="#cb42-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-40"><a href="#cb42-40" aria-hidden="true" tabindex="-1"></a>plot_matrix(axes[<span class="dv">0</span>], queries, <span class="st">'Queries'</span>, <span class="st">'Features'</span>, <span class="st">'Timesteps'</span>)</span>
+<span id="cb42-41"><a href="#cb42-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-42"><a href="#cb42-42" aria-hidden="true" tabindex="-1"></a>plot_matrix(axes[<span class="dv">1</span>], keys.T, <span class="st">'Keys'</span>, <span class="st">'Features'</span>, <span class="st">'Timesteps'</span>)</span>
+<span id="cb42-43"><a href="#cb42-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-44"><a href="#cb42-44" aria-hidden="true" tabindex="-1"></a>plot_matrix(axes[<span class="dv">2</span>], attention_weights, <span class="st">'Attention Weights'</span>, <span class="st">'Encoder Timesteps'</span>, <span class="st">'Decoder Timesteps'</span>)</span>
+<span id="cb42-45"><a href="#cb42-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-46"><a href="#cb42-46" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb42-47"><a href="#cb42-47" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
+<span id="cb42-48"><a href="#cb42-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-49"><a href="#cb42-49" aria-hidden="true" tabindex="-1"></a><span class="co"># 시각화</span></span>
+<span id="cb42-50"><a href="#cb42-50" aria-hidden="true" tabindex="-1"></a>fig, axes <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">3</span>, figsize<span class="op">=</span>(<span class="dv">15</span>, <span class="dv">5</span>))</span>
+<span id="cb42-51"><a href="#cb42-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-52"><a href="#cb42-52" aria-hidden="true" tabindex="-1"></a>plot_matrix(axes[<span class="dv">0</span>], attention_weights, <span class="st">'Attention Weights'</span>, <span class="st">'Encoder Timesteps'</span>, <span class="st">'Decoder Timesteps'</span>)</span>
+<span id="cb42-53"><a href="#cb42-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-54"><a href="#cb42-54" aria-hidden="true" tabindex="-1"></a>plot_matrix(axes[<span class="dv">1</span>], values, <span class="st">'Values'</span>, <span class="st">'Features'</span>, <span class="st">'Timesteps'</span>)</span>
+<span id="cb42-55"><a href="#cb42-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-56"><a href="#cb42-56" aria-hidden="true" tabindex="-1"></a>plot_matrix(axes[<span class="dv">2</span>], context_vectors, <span class="st">'Context Vectors'</span>, <span class="st">'Features'</span>, <span class="st">'Decoder Timesteps'</span>)</span>
+<span id="cb42-57"><a href="#cb42-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-58"><a href="#cb42-58" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb42-59"><a href="#cb42-59" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -1330,57 +1327,57 @@ queries = W_q(decoder_outputs)
 keys = W_k(encoder_outputs)
 values = W_v(encoder_outputs)</code></pre>
 <div id="162ffea5-df97-4ff0-a1bf-eb43d6caac7e" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-22T01:13:34.383707Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-22T01:13:34.383707Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-22T01:13:34.393718Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-22T01:13:34.392708Z&quot;}}" data-execution_count="29">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb45"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> keras.layers <span class="im">import</span> Input, LSTM, Dense, Concatenate, Dot, Activation</span>
-<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> keras.models <span class="im">import</span> Model</span>
-<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 입력 데이터 및 모델 파라미터 설정</span></span>
-<span id="cb45-5"><a href="#cb45-5" aria-hidden="true" tabindex="-1"></a>timesteps <span class="op">=</span> <span class="dv">6</span></span>
-<span id="cb45-6"><a href="#cb45-6" aria-hidden="true" tabindex="-1"></a>input_dim <span class="op">=</span> <span class="dv">3</span></span>
-<span id="cb45-7"><a href="#cb45-7" aria-hidden="true" tabindex="-1"></a>latent_dim <span class="op">=</span> <span class="dv">50</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb44"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> keras.layers <span class="im">import</span> Input, LSTM, Dense, Concatenate, Dot, Activation</span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> keras.models <span class="im">import</span> Model</span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 입력 데이터 및 모델 파라미터 설정</span></span>
+<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a>timesteps <span class="op">=</span> <span class="dv">6</span></span>
+<span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a>input_dim <span class="op">=</span> <span class="dv">3</span></span>
+<span id="cb44-7"><a href="#cb44-7" aria-hidden="true" tabindex="-1"></a>latent_dim <span class="op">=</span> <span class="dv">50</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div id="937c9680-5693-45dc-96eb-8e8243c35efd" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-22T01:13:34.397719Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-22T01:13:34.397719Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-22T01:13:34.514342Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-22T01:13:34.513331Z&quot;}}" data-execution_count="30">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb46"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 인코더 정의</span></span>
-<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>encoder_inputs <span class="op">=</span> Input(shape<span class="op">=</span>(timesteps, input_dim), name<span class="op">=</span><span class="st">'encoder_input'</span>)</span>
-<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a>encoder_lstm <span class="op">=</span> LSTM(latent_dim, return_state<span class="op">=</span><span class="va">True</span>, return_sequences<span class="op">=</span><span class="va">True</span>, name<span class="op">=</span><span class="st">'encoder_lstm'</span>)</span>
-<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a>encoder_outputs, state_h, state_c <span class="op">=</span> encoder_lstm(encoder_inputs)</span>
-<span id="cb46-5"><a href="#cb46-5" aria-hidden="true" tabindex="-1"></a>encoder_states <span class="op">=</span> [state_h, state_c]</span>
-<span id="cb46-6"><a href="#cb46-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-7"><a href="#cb46-7" aria-hidden="true" tabindex="-1"></a><span class="co"># 디코더 정의</span></span>
-<span id="cb46-8"><a href="#cb46-8" aria-hidden="true" tabindex="-1"></a>decoder_inputs <span class="op">=</span> Input(shape<span class="op">=</span>(timesteps, input_dim), name<span class="op">=</span><span class="st">'decoder_input'</span>)</span>
-<span id="cb46-9"><a href="#cb46-9" aria-hidden="true" tabindex="-1"></a>decoder_lstm <span class="op">=</span> LSTM(latent_dim, return_sequences<span class="op">=</span><span class="va">True</span>, return_state<span class="op">=</span><span class="va">True</span>, name<span class="op">=</span><span class="st">'decoder_lstm'</span>)</span>
-<span id="cb46-10"><a href="#cb46-10" aria-hidden="true" tabindex="-1"></a>decoder_outputs, _, _ <span class="op">=</span> decoder_lstm(decoder_inputs, initial_state<span class="op">=</span>encoder_states)</span>
-<span id="cb46-11"><a href="#cb46-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-12"><a href="#cb46-12" aria-hidden="true" tabindex="-1"></a><span class="co"># 쿼리, 키, 값 가중치 생성</span></span>
-<span id="cb46-13"><a href="#cb46-13" aria-hidden="true" tabindex="-1"></a>W_q <span class="op">=</span> Dense(latent_dim, use_bias<span class="op">=</span><span class="va">False</span>, name<span class="op">=</span><span class="st">'W_q'</span>)</span>
-<span id="cb46-14"><a href="#cb46-14" aria-hidden="true" tabindex="-1"></a>W_k <span class="op">=</span> Dense(latent_dim, use_bias<span class="op">=</span><span class="va">False</span>, name<span class="op">=</span><span class="st">'W_k'</span>)</span>
-<span id="cb46-15"><a href="#cb46-15" aria-hidden="true" tabindex="-1"></a>W_v <span class="op">=</span> Dense(latent_dim, use_bias<span class="op">=</span><span class="va">False</span>, name<span class="op">=</span><span class="st">'W_v'</span>)</span>
-<span id="cb46-16"><a href="#cb46-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-17"><a href="#cb46-17" aria-hidden="true" tabindex="-1"></a><span class="co"># 쿼리, 키, 값 계산</span></span>
-<span id="cb46-18"><a href="#cb46-18" aria-hidden="true" tabindex="-1"></a>queries <span class="op">=</span> W_q(decoder_outputs)</span>
-<span id="cb46-19"><a href="#cb46-19" aria-hidden="true" tabindex="-1"></a>keys <span class="op">=</span> W_k(encoder_outputs)</span>
-<span id="cb46-20"><a href="#cb46-20" aria-hidden="true" tabindex="-1"></a>values <span class="op">=</span> W_v(encoder_outputs)</span>
-<span id="cb46-21"><a href="#cb46-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-22"><a href="#cb46-22" aria-hidden="true" tabindex="-1"></a><span class="co"># 어텐션 스코어 계산</span></span>
-<span id="cb46-23"><a href="#cb46-23" aria-hidden="true" tabindex="-1"></a>attention_scores <span class="op">=</span> Dot(axes<span class="op">=</span>[<span class="dv">2</span>, <span class="dv">2</span>])([queries, keys])</span>
-<span id="cb46-24"><a href="#cb46-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-25"><a href="#cb46-25" aria-hidden="true" tabindex="-1"></a><span class="co"># Softmax 적용</span></span>
-<span id="cb46-26"><a href="#cb46-26" aria-hidden="true" tabindex="-1"></a>attention_weights <span class="op">=</span> Activation(<span class="st">'softmax'</span>)(attention_scores)</span>
-<span id="cb46-27"><a href="#cb46-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-28"><a href="#cb46-28" aria-hidden="true" tabindex="-1"></a><span class="co"># 컨텍스트 벡터 계산</span></span>
-<span id="cb46-29"><a href="#cb46-29" aria-hidden="true" tabindex="-1"></a>context_vectors <span class="op">=</span> Dot(axes<span class="op">=</span>[<span class="dv">2</span>, <span class="dv">1</span>])([attention_weights, values])</span>
-<span id="cb46-30"><a href="#cb46-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-31"><a href="#cb46-31" aria-hidden="true" tabindex="-1"></a><span class="co"># 컨텍스트 벡터와 디코더 출력 결합</span></span>
-<span id="cb46-32"><a href="#cb46-32" aria-hidden="true" tabindex="-1"></a>decoder_combined_context <span class="op">=</span> Concatenate(axis<span class="op">=-</span><span class="dv">1</span>)([context_vectors, decoder_outputs])</span>
-<span id="cb46-33"><a href="#cb46-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-34"><a href="#cb46-34" aria-hidden="true" tabindex="-1"></a><span class="co"># 출력층 정의</span></span>
-<span id="cb46-35"><a href="#cb46-35" aria-hidden="true" tabindex="-1"></a>decoder_dense <span class="op">=</span> Dense(input_dim, activation<span class="op">=</span><span class="st">'linear'</span>, name<span class="op">=</span><span class="st">'decoder_output'</span>)</span>
-<span id="cb46-36"><a href="#cb46-36" aria-hidden="true" tabindex="-1"></a>decoder_outputs <span class="op">=</span> decoder_dense(decoder_combined_context)</span>
-<span id="cb46-37"><a href="#cb46-37" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-38"><a href="#cb46-38" aria-hidden="true" tabindex="-1"></a><span class="co"># 모델 정의</span></span>
-<span id="cb46-39"><a href="#cb46-39" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> Model([encoder_inputs, decoder_inputs], decoder_outputs)</span>
-<span id="cb46-40"><a href="#cb46-40" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-41"><a href="#cb46-41" aria-hidden="true" tabindex="-1"></a><span class="co"># 모델 요약 출력</span></span>
-<span id="cb46-42"><a href="#cb46-42" aria-hidden="true" tabindex="-1"></a>model.summary()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb45"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 인코더 정의</span></span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>encoder_inputs <span class="op">=</span> Input(shape<span class="op">=</span>(timesteps, input_dim), name<span class="op">=</span><span class="st">'encoder_input'</span>)</span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>encoder_lstm <span class="op">=</span> LSTM(latent_dim, return_state<span class="op">=</span><span class="va">True</span>, return_sequences<span class="op">=</span><span class="va">True</span>, name<span class="op">=</span><span class="st">'encoder_lstm'</span>)</span>
+<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a>encoder_outputs, state_h, state_c <span class="op">=</span> encoder_lstm(encoder_inputs)</span>
+<span id="cb45-5"><a href="#cb45-5" aria-hidden="true" tabindex="-1"></a>encoder_states <span class="op">=</span> [state_h, state_c]</span>
+<span id="cb45-6"><a href="#cb45-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-7"><a href="#cb45-7" aria-hidden="true" tabindex="-1"></a><span class="co"># 디코더 정의</span></span>
+<span id="cb45-8"><a href="#cb45-8" aria-hidden="true" tabindex="-1"></a>decoder_inputs <span class="op">=</span> Input(shape<span class="op">=</span>(timesteps, input_dim), name<span class="op">=</span><span class="st">'decoder_input'</span>)</span>
+<span id="cb45-9"><a href="#cb45-9" aria-hidden="true" tabindex="-1"></a>decoder_lstm <span class="op">=</span> LSTM(latent_dim, return_sequences<span class="op">=</span><span class="va">True</span>, return_state<span class="op">=</span><span class="va">True</span>, name<span class="op">=</span><span class="st">'decoder_lstm'</span>)</span>
+<span id="cb45-10"><a href="#cb45-10" aria-hidden="true" tabindex="-1"></a>decoder_outputs, _, _ <span class="op">=</span> decoder_lstm(decoder_inputs, initial_state<span class="op">=</span>encoder_states)</span>
+<span id="cb45-11"><a href="#cb45-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-12"><a href="#cb45-12" aria-hidden="true" tabindex="-1"></a><span class="co"># 쿼리, 키, 값 가중치 생성</span></span>
+<span id="cb45-13"><a href="#cb45-13" aria-hidden="true" tabindex="-1"></a>W_q <span class="op">=</span> Dense(latent_dim, use_bias<span class="op">=</span><span class="va">False</span>, name<span class="op">=</span><span class="st">'W_q'</span>)</span>
+<span id="cb45-14"><a href="#cb45-14" aria-hidden="true" tabindex="-1"></a>W_k <span class="op">=</span> Dense(latent_dim, use_bias<span class="op">=</span><span class="va">False</span>, name<span class="op">=</span><span class="st">'W_k'</span>)</span>
+<span id="cb45-15"><a href="#cb45-15" aria-hidden="true" tabindex="-1"></a>W_v <span class="op">=</span> Dense(latent_dim, use_bias<span class="op">=</span><span class="va">False</span>, name<span class="op">=</span><span class="st">'W_v'</span>)</span>
+<span id="cb45-16"><a href="#cb45-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-17"><a href="#cb45-17" aria-hidden="true" tabindex="-1"></a><span class="co"># 쿼리, 키, 값 계산</span></span>
+<span id="cb45-18"><a href="#cb45-18" aria-hidden="true" tabindex="-1"></a>queries <span class="op">=</span> W_q(decoder_outputs)</span>
+<span id="cb45-19"><a href="#cb45-19" aria-hidden="true" tabindex="-1"></a>keys <span class="op">=</span> W_k(encoder_outputs)</span>
+<span id="cb45-20"><a href="#cb45-20" aria-hidden="true" tabindex="-1"></a>values <span class="op">=</span> W_v(encoder_outputs)</span>
+<span id="cb45-21"><a href="#cb45-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-22"><a href="#cb45-22" aria-hidden="true" tabindex="-1"></a><span class="co"># 어텐션 스코어 계산</span></span>
+<span id="cb45-23"><a href="#cb45-23" aria-hidden="true" tabindex="-1"></a>attention_scores <span class="op">=</span> Dot(axes<span class="op">=</span>[<span class="dv">2</span>, <span class="dv">2</span>])([queries, keys])</span>
+<span id="cb45-24"><a href="#cb45-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-25"><a href="#cb45-25" aria-hidden="true" tabindex="-1"></a><span class="co"># Softmax 적용</span></span>
+<span id="cb45-26"><a href="#cb45-26" aria-hidden="true" tabindex="-1"></a>attention_weights <span class="op">=</span> Activation(<span class="st">'softmax'</span>)(attention_scores)</span>
+<span id="cb45-27"><a href="#cb45-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-28"><a href="#cb45-28" aria-hidden="true" tabindex="-1"></a><span class="co"># 컨텍스트 벡터 계산</span></span>
+<span id="cb45-29"><a href="#cb45-29" aria-hidden="true" tabindex="-1"></a>context_vectors <span class="op">=</span> Dot(axes<span class="op">=</span>[<span class="dv">2</span>, <span class="dv">1</span>])([attention_weights, values])</span>
+<span id="cb45-30"><a href="#cb45-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-31"><a href="#cb45-31" aria-hidden="true" tabindex="-1"></a><span class="co"># 컨텍스트 벡터와 디코더 출력 결합</span></span>
+<span id="cb45-32"><a href="#cb45-32" aria-hidden="true" tabindex="-1"></a>decoder_combined_context <span class="op">=</span> Concatenate(axis<span class="op">=-</span><span class="dv">1</span>)([context_vectors, decoder_outputs])</span>
+<span id="cb45-33"><a href="#cb45-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-34"><a href="#cb45-34" aria-hidden="true" tabindex="-1"></a><span class="co"># 출력층 정의</span></span>
+<span id="cb45-35"><a href="#cb45-35" aria-hidden="true" tabindex="-1"></a>decoder_dense <span class="op">=</span> Dense(input_dim, activation<span class="op">=</span><span class="st">'linear'</span>, name<span class="op">=</span><span class="st">'decoder_output'</span>)</span>
+<span id="cb45-36"><a href="#cb45-36" aria-hidden="true" tabindex="-1"></a>decoder_outputs <span class="op">=</span> decoder_dense(decoder_combined_context)</span>
+<span id="cb45-37"><a href="#cb45-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-38"><a href="#cb45-38" aria-hidden="true" tabindex="-1"></a><span class="co"># 모델 정의</span></span>
+<span id="cb45-39"><a href="#cb45-39" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> Model([encoder_inputs, decoder_inputs], decoder_outputs)</span>
+<span id="cb45-40"><a href="#cb45-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-41"><a href="#cb45-41" aria-hidden="true" tabindex="-1"></a><span class="co"># 모델 요약 출력</span></span>
+<span id="cb45-42"><a href="#cb45-42" aria-hidden="true" tabindex="-1"></a>model.summary()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="font-weight: bold">Model: "functional_3"</span>
 </pre>

@@ -509,8 +509,7 @@ Biases shape: (1,)</code></pre>
 <span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># print each column in the row</span></span>
 <span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>([yhat[<span class="dv">0</span>,r,c,<span class="dv">0</span>] <span class="cf">for</span> c <span class="kw">in</span> <span class="bu">range</span>(yhat.shape[<span class="dv">2</span>])])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>WARNING:tensorflow:TensorFlow GPU support is not available on native Windows for TensorFlow &gt;= 2.11. Even if CUDA/cuDNN are installed, GPU will not be used. Please use WSL2 or the TensorFlow-DirectML plugin.
-[np.float32(0.0), np.float32(0.0), np.float32(3.0), np.float32(3.0), np.float32(0.0), np.float32(0.0)]
+<pre><code>[np.float32(0.0), np.float32(0.0), np.float32(3.0), np.float32(3.0), np.float32(0.0), np.float32(0.0)]
 [np.float32(0.0), np.float32(0.0), np.float32(3.0), np.float32(3.0), np.float32(0.0), np.float32(0.0)]
 [np.float32(0.0), np.float32(0.0), np.float32(3.0), np.float32(3.0), np.float32(0.0), np.float32(0.0)]
 [np.float32(0.0), np.float32(0.0), np.float32(3.0), np.float32(3.0), np.float32(0.0), np.float32(0.0)]
