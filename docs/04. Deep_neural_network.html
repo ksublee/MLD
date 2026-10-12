@@ -1006,9 +1006,14 @@ Epoch 20/20
 1375/1375 - 5s - 4ms/step - accuracy: 0.9252 - loss: 0.2190 - val_accuracy: 0.9170 - val_loss: 0.2469</code></pre>
 </div>
 </div>
-<div id="cell-42" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-20T06:37:14.726479Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-20T06:37:14.726479Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-20T06:37:14.829150Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-20T06:37:14.828136Z&quot;}}" data-execution_count="27">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>model_A.save(<span class="st">"my_model_A.keras"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
+<p><strong>참고: 모델 저장과 불러오기</strong></p>
+<p>이 예제에서는 학습한 <code>model_A</code>가 메모리에 있으므로 바로 재사용한다. 다른 곳에서 학습한 모델을 재사용하려면, 학습한 모델을 파일로 저장해 두었다가 불러온다.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>model_A.save(<span class="st">"my_model_A.keras"</span>)                        <span class="co"># 구조, 가중치, 옵티마이저 상태를 한 파일에 저장</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>model_A <span class="op">=</span> keras.models.load_model(<span class="st">"my_model_A.keras"</span>)   <span class="co"># 저장한 모델을 그대로 불러옴</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<ul>
+<li><code>.keras</code>는 Keras 3의 기본 저장 형식이다.</li>
+<li>가중치만 저장하려면 <code>model.save_weights("my_model_A.weights.h5")</code>를 쓰고, 불러올 때는 같은 구조의 모델을 만든 뒤 <code>model.load_weights("my_model_A.weights.h5")</code>를 쓴다.</li>
+</ul>
 <p>model B는 자체 훈련으로 생성해 본다.</p>
 <p>추후에 전이 학습된 결과와 비교해 볼 수 있다.</p>
 <div id="cell-44" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-20T06:37:14.833149Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-20T06:37:14.833149Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-20T06:37:14.915123Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-20T06:37:14.913112Z&quot;}}" data-execution_count="28">
@@ -1116,15 +1121,13 @@ Epoch 20/20
 <li>하위층(feature extractor) 재사용</li>
 </ul>
 <div id="cell-49" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-20T06:37:20.493133Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-20T06:37:20.493133Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-20T06:37:20.954123Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-20T06:37:20.952112Z&quot;}}" data-execution_count="32">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>model_A <span class="op">=</span> keras.models.load_model(<span class="st">"my_model_A.keras"</span>)</span>
-<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a><span class="co"># model_A.layers를 그대로 쓰면 레이어를 공유하게 되어 model_B_on_A를 훈련할 때</span></span>
-<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a><span class="co"># model_A도 함께 바뀐다. clone_model()로 구조와 가중치를 복제해 독립된 사본을 먼저 만든다.</span></span>
-<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a>model_A_clone <span class="op">=</span> keras.models.clone_model(model_A)</span>
-<span id="cb42-6"><a href="#cb42-6" aria-hidden="true" tabindex="-1"></a>model_A_clone.set_weights(model_A.get_weights())</span>
-<span id="cb42-7"><a href="#cb42-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb42-8"><a href="#cb42-8" aria-hidden="true" tabindex="-1"></a>model_B_on_A <span class="op">=</span> keras.models.Sequential(model_A_clone.layers[:<span class="op">-</span><span class="dv">1</span>])</span>
-<span id="cb42-9"><a href="#cb42-9" aria-hidden="true" tabindex="-1"></a>model_B_on_A.add(keras.layers.Dense(<span class="dv">1</span>, activation<span class="op">=</span><span class="st">"sigmoid"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co"># model_A.layers를 그대로 쓰면 레이어를 공유하게 되어 model_B_on_A를 훈련할 때</span></span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a><span class="co"># model_A도 함께 바뀐다. clone_model()로 구조와 가중치를 복제해 독립된 사본을 먼저 만든다.</span></span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>model_A_clone <span class="op">=</span> keras.models.clone_model(model_A)</span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a>model_A_clone.set_weights(model_A.get_weights())</span>
+<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-6"><a href="#cb42-6" aria-hidden="true" tabindex="-1"></a>model_B_on_A <span class="op">=</span> keras.models.Sequential(model_A_clone.layers[:<span class="op">-</span><span class="dv">1</span>])</span>
+<span id="cb42-7"><a href="#cb42-7" aria-hidden="true" tabindex="-1"></a>model_B_on_A.add(keras.layers.Dense(<span class="dv">1</span>, activation<span class="op">=</span><span class="st">"sigmoid"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p><code>model_A.layers[:-1]</code>을 그대로 가져다 쓰면 <code>model_B_on_A</code>와 <code>model_A</code>가 레이어를 실제로 공유하게 되어, <code>model_B_on_A</code>를 훈련할 때 <code>model_A</code>의 가중치도 함께 바뀐다.</p>
 <p>이를 피하기 위해 위 코드에서는 <code>clone_model()</code>로 <code>model_A</code>의 구조를 복제하고 가중치를 복사한 <code>model_A_clone</code>을 만들었고, <code>model_B_on_A</code>는 원본이 아니라 이 복제본의 레이어로부터 구성했다.</p>
@@ -1465,7 +1468,7 @@ Epoch 25/25
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="04. Deep_neural_network_files/figure-html/cell-50-output-1.png" class="img-fluid figure-img"></p>
+<p><img src="04. Deep_neural_network_files/figure-html/cell-49-output-1.png" class="img-fluid figure-img"></p>
 </figure>
 </div>
 </div>
@@ -1560,7 +1563,7 @@ Epoch 25/25
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="04. Deep_neural_network_files/figure-html/cell-54-output-1.png" class="img-fluid figure-img"></p>
+<p><img src="04. Deep_neural_network_files/figure-html/cell-53-output-1.png" class="img-fluid figure-img"></p>
 </figure>
 </div>
 </div>
