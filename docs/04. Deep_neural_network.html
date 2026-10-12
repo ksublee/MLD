@@ -1371,10 +1371,13 @@ Epoch 25/25
 <section id="지수-기반-스케줄링" class="level3" data-number="4.3.2">
 <h3 data-number="4.3.2" class="anchored" data-anchor-id="지수-기반-스케줄링"><span class="header-section-number">4.3.2</span> 지수 기반 스케줄링</h3>
 <p>비슷하게 지수 기반으로 감소하는 학습률 스케줄링을 사용할 수 있다.</p>
-<p><code>lr = lr0 * 0.1**(epoch / s)</code></p>
+<p><span class="math display">\[\eta(t) = \eta_0 \cdot 0.1^{\,t / s}\]</span></p>
+<p><span class="math inline">\(\eta_0\)</span>는 초기 학습률이고, <span class="math inline">\(s\)</span> epoch마다 학습률이 1/10로 줄어든다.</p>
 <div id="cell-65" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-20T06:40:14.777424Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-20T06:40:14.777424Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-20T06:40:14.784950Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-20T06:40:14.783427Z&quot;}}" data-execution_count="49">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb56"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> exponential_decay_fn(epoch):</span>
-<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="fl">0.01</span> <span class="op">*</span> <span class="fl">0.1</span><span class="op">**</span>(epoch <span class="op">/</span> <span class="dv">20</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb56"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a>eta0, s <span class="op">=</span> <span class="fl">0.01</span>, <span class="dv">20</span>   <span class="co"># 초기 학습률, 학습률이 1/10로 줄어드는 데 걸리는 epoch 수</span></span>
+<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb56-3"><a href="#cb56-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> exponential_decay_fn(epoch):</span>
+<span id="cb56-4"><a href="#cb56-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> eta0 <span class="op">*</span> <span class="fl">0.1</span> <span class="op">**</span> (epoch <span class="op">/</span> s)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div id="cell-66" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-20T06:40:14.788954Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-20T06:40:14.787950Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-20T06:40:14.836862Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-20T06:40:14.834847Z&quot;}}" data-execution_count="50">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb57"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> keras.models.Sequential([</span>
