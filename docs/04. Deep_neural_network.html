@@ -1579,8 +1579,17 @@ Epoch 25/25
 <hr>
 <section id="ell_1과-ell_2-규제" class="level3" data-number="4.5.1">
 <h3 data-number="4.5.1" class="anchored" data-anchor-id="ell_1과-ell_2-규제"><span class="header-section-number">4.5.1</span> <span class="math inline">\(\ell_1\)</span>과 <span class="math inline">\(\ell_2\)</span> 규제</h3>
-<p>선형 모델에서 했던 것처럼 신경망의 연결 가중치를 제한하기 위해 <span class="math inline">\(\ell_2\)</span> 규제를 사용하거나, 아예 일부 가중치를 0으로 만들기 위해 <span class="math inline">\(\ell_1\)</span> 규제를 적용할 수 있다.</p>
-<p>규제를 적용한 경우 훈련 로그의 loss에는 cross-entropy와 regularization penalty가 함께 포함된다.</p>
+<p>가중치를 자유롭게 학습하도록 두면 훈련 데이터의 우연한 잡음까지 학습하여 일부 가중치가 지나치게 커질 수 있다. 선형 모델에서 했던 것처럼, 손실 함수에 가중치 크기에 대한 벌점(penalty)을 더해 이를 억제한다.</p>
+<p><span class="math display">\[
+J_{\text{규제}} = J + \lambda \sum w^2 \quad (\ell_2), \qquad J_{\text{규제}} = J + \lambda \sum |w| \quad (\ell_1)
+\]</span></p>
+<ul>
+<li><span class="math inline">\(\ell_2\)</span> 규제: 가중치를 전반적으로 작게 만든다. 정확히 0이 되는 경우는 드물다. 신경망에서 가장 많이 쓰는 규제이다.</li>
+<li><span class="math inline">\(\ell_1\)</span> 규제: 일부 가중치를 정확히 0으로 만들어 불필요한 연결을 없애는 효과가 있다.</li>
+</ul>
+<p>케라스에서는 층의 <code>kernel_regularizer</code>로 지정한다. 아래 <code>l2(0.01)</code>의 0.01이 <span class="math inline">\(\lambda\)</span>이며, 클수록 가중치를 강하게 제한한다.</p>
+<p>규제를 적용하면 훈련 로그의 loss에 cross-entropy와 벌점이 함께 포함된다. 따라서 규제가 없는 모델과 loss 값을 그대로 비교하면 안 되고, accuracy 등으로 비교해야 한다.</p>
+<p>최근에는 같은 아이디어를 옵티마이저에서 적용하는 weight decay도 많이 쓴다(예: <code>keras.optimizers.AdamW</code>).</p>
 <div id="cell-88" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-20T06:43:41.488235Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-20T06:43:41.488235Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-20T06:43:41.497690Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-20T06:43:41.496172Z&quot;}}" data-execution_count="53">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb68"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a>layer <span class="op">=</span> keras.layers.Dense(<span class="dv">100</span>, activation<span class="op">=</span><span class="st">"elu"</span>,</span>
 <span id="cb68-2"><a href="#cb68-2" aria-hidden="true" tabindex="-1"></a>                           kernel_initializer<span class="op">=</span><span class="st">"he_normal"</span>,</span>
