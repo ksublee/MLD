@@ -1312,7 +1312,7 @@ actual :  2
 </section>
 <section id="영화-리뷰-예제" class="level2" data-number="3.4">
 <h2 data-number="3.4" class="anchored" data-anchor-id="영화-리뷰-예제"><span class="header-section-number">3.4</span> 영화 리뷰 예제</h2>
-<p>이 예제는 영화 리뷰(review) 텍스트를 긍정(positive) 또는 부정(negative)으로 분류한다.</p>
+<p>이 예제는 <a href="https://keras.io/api/datasets/imdb/"><code>keras.datasets.imdb</code></a>의 영화 리뷰(review) 텍스트를 긍정(positive) 또는 부정(negative)으로 분류한다.</p>
 <div id="cell-89" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-20T06:01:49.857244Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-20T06:01:49.856249Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-20T06:01:54.404549Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-20T06:01:54.402540Z&quot;}}" data-execution_count="56">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb85"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb85-1"><a href="#cb85-1" aria-hidden="true" tabindex="-1"></a>imdb <span class="op">=</span> keras.datasets.imdb</span>
 <span id="cb85-2"><a href="#cb85-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -1587,8 +1587,8 @@ actual :  2
 </div>
 <p>위 코드에서</p>
 <ol type="1">
-<li><p>첫 번째 층은 Embedding 층이다. 이 층은 각 단어 인덱스를 실수 벡터로 변환한다. 임베딩 벡터는 처음에는 무작위로 설정되며, 모형을 훈련하면서 함께 학습된다.</p></li>
-<li><p>그 다음 GlobalAveragePooling1D 층은 sequence 차원에 대해 평균을 계산하여 각 샘플에 대해 고정된 길이의 출력 벡터를 반환한다. 패딩된 단어를 제외한 임베딩 벡터의 평균을 계산하여 각 리뷰를 고정된 길이의 벡터로 변환한다.</p></li>
+<li><p>첫 번째 층은 <a href="https://keras.io/api/layers/core_layers/embedding/"><code>Embedding</code></a> 층이다. 이 층은 각 단어 인덱스를 실수 벡터로 변환한다. 임베딩 벡터는 처음에는 무작위로 설정되며, 모형을 훈련하면서 함께 학습된다.</p></li>
+<li><p>그 다음 <a href="https://keras.io/api/layers/pooling_layers/global_average_pooling1d/"><code>GlobalAveragePooling1D</code></a> 층은 sequence 차원에 대해 평균을 계산하여 각 샘플에 대해 고정된 길이의 출력 벡터를 반환한다. 패딩된 단어를 제외한 임베딩 벡터의 평균을 계산하여 각 리뷰를 고정된 길이의 벡터로 변환한다.</p></li>
 <li><p>이 고정 길이의 출력 벡터는 16개의 은닉 유닛을 가진 완전 연결(fully-connected) 층(Dense)을 거친다.</p></li>
 <li><p>마지막 층은 하나의 출력 노드(node)를 가진 완전 연결 층으로, sigmoid 활성화 함수를 사용하여 0과 1 사이의 실수를 출력한다. 이 값은 긍정 리뷰일 예측확률을 나타낸다.</p></li>
 </ol>

@@ -820,7 +820,7 @@ h  →  LayerNorm  →  Feed-Forward Network  →  (+)  → 출력(residual 2)
 └─────────────────────────────────────────────┘   </code></pre>
 <ul>
 <li>두 개의 residual connection <code>(+)</code>: 이전 정보를 보존하면서 새 정보를 더함</li>
-<li>Layer normalization: 각 단계의 값 범위를 정돈하여 학습이 불안정해지지 않게 함</li>
+<li><a href="https://keras.io/api/layers/normalization_layers/layer_normalization/">Layer normalization</a>: 각 단계의 값 범위를 정돈하여 학습이 불안정해지지 않게 함</li>
 <li>LayerNorm을 attention과 FFN <strong>앞</strong>에 두는 구조를 Pre-LN이라 함</li>
 </ul>
 <p>원 논문은 뒤에 두는 Post-LN 구조였으나, Pre-LN이 학습이 더 안정적이어서 GPT-2 이후 사실상 표준이 되었다. 아래 구현도 Pre-LN이다.</p>
