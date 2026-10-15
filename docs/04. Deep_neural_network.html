@@ -469,7 +469,7 @@ z &amp; z \geq 0 \end{array} \right.
   keras.layers.LeakyReLU(negative_slope=0.2)
   [...]
 ])</code></pre>
-<p>SELU 함수를 사용하려면 다음과 같이 코드를 작성한다.</p>
+<p><a href="https://keras.io/api/layers/activations/#selu-function">SELU</a> 함수를 사용하려면 다음과 같이 코드를 작성한다.</p>
 <p><code>layer = keras.layers.Dense(10, activation="selu", kernel_initializer="lecun_normal")</code></p>
 <p><code>keras.datasets.fashion_mnist</code>를 이용하여 예제를 실행해 본다.</p>
 <div id="cell-9" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-20T06:30:33.265311Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-20T06:30:33.265311Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-20T06:30:44.679337Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-20T06:30:44.677323Z&quot;}}" data-execution_count="4">
@@ -1290,7 +1290,11 @@ Epoch 16/16
 <span id="cb52-8"><a href="#cb52-8" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb52-9"><a href="#cb52-9" aria-hidden="true" tabindex="-1"></a>model.<span class="bu">compile</span>(loss<span class="op">=</span><span class="st">"sparse_categorical_crossentropy"</span>,optimizer <span class="op">=</span> keras.optimizers.SGD(learning_rate<span class="op">=</span><span class="fl">0.01</span>), metrics<span class="op">=</span>[<span class="st">"accuracy"</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p><code>callbacks</code>는 <code>fit()</code>이 학습하는 도중 정해진 시점(예: 각 epoch의 시작과 끝)마다 자동으로 불러 주는 함수이다. 학습 코드를 고치지 않고 “매 epoch마다 이 일을 해 달라”를 끼워 넣는 장치로, <code>fit(..., callbacks=[...])</code>처럼 리스트로 넘긴다. <code>LearningRateScheduler</code>는 매 epoch 시작 때 학습률을 바꾸는 callback이다.</p>
+<p><code>callbacks</code>는 <code>fit()</code>이 학습하는 도중 정해진 시점(예: 각 epoch의 시작과 끝)마다 자동으로 불러 주는 함수이다.</p>
+<ul>
+<li>학습 코드를 고치지 않고 “매 epoch마다 이 일을 해 달라”를 끼워 넣는 장치로, <code>fit(..., callbacks=[...])</code>처럼 리스트로 넘긴다.</li>
+<li><code>LearningRateScheduler</code>는 매 epoch 시작 때 학습률을 바꾸는 callback이다.</li>
+</ul>
 <div id="cell-63" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-20T06:37:29.388457Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-20T06:37:29.388457Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-20T06:40:14.619514Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-20T06:40:14.618504Z&quot;}}" data-execution_count="47">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb53"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a>n_epochs <span class="op">=</span> <span class="dv">25</span></span>
 <span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a>history <span class="op">=</span> model.fit(X_train_scaled, y_train, epochs<span class="op">=</span>n_epochs,</span>
