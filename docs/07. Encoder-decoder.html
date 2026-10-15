@@ -975,7 +975,11 @@ Target data         :  [0.98162187 0.99162187 1.00162187 1.01162187 1.02162187]<
 </section>
 <section id="예측용-디코더-모델" class="level4" data-number="7.5.4.2">
 <h4 data-number="7.5.4.2" class="anchored" data-anchor-id="예측용-디코더-모델"><span class="header-section-number">7.5.4.2</span> 예측용 디코더 모델</h4>
-<p>훈련할 때는 전체 정답 시퀀스를 사용할 수 있지만, 실제 예측에서는 정답을 알 수 없다. 따라서 예측 시에는 Decoder를 한 번에 한 스텝씩 실행한다. 각 단계에서 (1) 이전 출력값, (2) 이전 hidden state와 cell state를 입력하여 다음 값과 새로운 상태를 얻는다.</p>
+<p>훈련할 때는 전체 정답 시퀀스를 사용할 수 있지만, 실제 예측에서는 정답을 알 수 없다. 따라서 예측 시에는 Decoder를 한 번에 한 스텝씩 실행한다. 각 단계에서 다음 두 가지를 입력하여 다음 값과 새로운 상태를 얻는다.</p>
+<ul>
+<li>이전 출력값</li>
+<li>이전 hidden state와 cell state</li>
+</ul>
 <p><strong>예측용 디코더 모델</strong>은 이전에 정의하고 훈련했던 <code>decoder_lstm</code>와 <code>decoder_dense</code>를 그대로 가져다 사용하나, Input layer들은 새롭게 생성한다.</p>
 <blockquote class="blockquote">
 <p><strong>참고:</strong> 훈련 시에는 길이가 5인 시퀀스를 사용했지만 예측 시에는 길이 1의 시퀀스를 사용한다. LSTM과 Dense 층은 모두 타임스텝 단위로 반복 적용되는 구조이므로, 훈련과 예측에서 시퀀스 길이가 달라도 동일한 레이어를 그대로 사용할 수 있다.</p>
