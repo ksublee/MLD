@@ -2206,21 +2206,23 @@ h_t = o_t \odot \tanh(c_t)
 <p>위 과정을 한 줄로 표현하면 다음과 같다.</p>
 <p><span class="math display">\[ c_t, h_t = \text{LSTMCell}(x_t, c_{t-1}, h_{t-1}) = \Big( f_t \odot c_{t-1} + i_t \odot \tilde{c}_t,\; o_t \odot \tanh({c}_t) \Big)
 \]</span></p>
-<p>여기서,</p>
+<p>여기서 앞의 SimpleRNN과 같이 뉴런의 개수(<code>units</code>)를 <span class="math inline">\(n_h\)</span>, 입력 <span class="math inline">\(x_t\)</span>의 dimension을 <span class="math inline">\(n_x\)</span>라 하면 다음과 같다.</p>
 <p><span class="math display">\[
-f_t = \sigma(z_f), \quad
-i_t = \sigma(z_i), \quad
-\tilde{c}_t = \tanh(z_c), \quad
-o_t = \sigma(z_o), \quad
-[z_f, z_i, z_c, z_o] = W \cdot [h_{t-1}, x_t] + b, \quad
-W =
-\begin{bmatrix}
-W_f \\
-W_i \\
-W_c \\
-W_o
-\end{bmatrix}
+\underbrace{\begin{bmatrix} z_f \\ z_i \\ z_c \\ z_o \end{bmatrix}}_{4n_h \times 1}
+=
+\underbrace{\begin{bmatrix} W_f \\ W_i \\ W_c \\ W_o \end{bmatrix}}_{4n_h \times (n_h+n_x)}
+\underbrace{\begin{bmatrix} h_{t-1} \\ x_t \end{bmatrix}}_{(n_h+n_x) \times 1}
++
+\underbrace{\begin{bmatrix} b_f \\ b_i \\ b_c \\ b_o \end{bmatrix}}_{4n_h \times 1}
 \]</span></p>
+<p><span class="math display">\[
+f_t = \sigma(z_f), \quad i_t = \sigma(z_i), \quad \tilde{c}_t = \tanh(z_c), \quad o_t = \sigma(z_o)
+\]</span></p>
+<ul>
+<li><span class="math inline">\(W_f, W_i, W_c, W_o\)</span>는 각각 <span class="math inline">\(n_h \times (n_h+n_x)\)</span> 행렬, <span class="math inline">\(b_f, b_i, b_c, b_o\)</span>는 각각 길이 <span class="math inline">\(n_h\)</span>인 벡터이다.</li>
+<li><span class="math inline">\(z_f, z_i, z_c, z_o\)</span>와 <span class="math inline">\(f_t, i_t, \tilde{c}_t, o_t, c_t, h_t\)</span>는 모두 길이 <span class="math inline">\(n_h\)</span>인 벡터이다. 그래서 <span class="math inline">\(\odot\)</span>(요소별 곱)으로 서로 계산할 수 있다.</li>
+<li>파라미터 수는 <span class="math inline">\(\underbrace{4n_h(n_h+n_x)}_{W} + \underbrace{4n_h}_{b} = 4n_h(n_h+n_x+1)\)</span>이다. 아래 “모델의 파라미터 수 계산”의 공식과 같다. 예를 들어 <span class="math inline">\(n_h=20\)</span>, <span class="math inline">\(n_x=1\)</span>이면 <span class="math inline">\(W\)</span>는 <span class="math inline">\(80 \times 21\)</span>, <span class="math inline">\(b\)</span>는 길이 80이므로 <span class="math inline">\(80 \times 21 + 80 = 1760\)</span>이다.</li>
+</ul>
 <p>아래 예제에서 위에서 수행한 시계열 예측 문제를 다시 수행해보자.</p>
 <p>먼저 LSTM을 두 개 이용하여 심층 순환 신경망을 생성하였다. 각 LSTM 층은 서로 다른 <span class="math inline">\((h, c)\)</span> 상태 쌍을 독립적으로 유지한다.</p>
 <p>따라서, 이 부분의 <span class="math inline">\(t\)</span>시점 연산은 다음과 같이 요약될 수 있다.</p>
