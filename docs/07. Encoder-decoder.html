@@ -340,7 +340,7 @@ window.Quarto = {
 <li><p><strong>인코더(Encoder)</strong>: 입력 데이터를 잠재 벡터 <span class="math inline">\(z\)</span>로 압축하는 함수 <span class="math inline">\(z = f(x)\)</span></p></li>
 <li><p><strong>디코더(Decoder)</strong>: 잠재 벡터 <span class="math inline">\(z\)</span>를 다시 원래의 입력으로 복원하는 함수 <span class="math inline">\(\hat{x} = g(z)\)</span></p></li>
 </ul>
-<p>학습의 목적은 <strong>복원된 출력 <span class="math inline">\(\hat{x}\)</span>가 원래 입력 <span class="math inline">\(x\)</span>와 최대한 비슷해지도록</strong> 손실함수(예: MSE)를 최소화하는 것이다.</p>
+<p>학습의 목적은 <strong>복원된 출력 <span class="math inline">\(\hat{x}\)</span>가 원래 입력 <span class="math inline">\(x\)</span>와 최대한 비슷해지도록</strong> 손실함수(예: binary cross-entropy, MSE)를 최소화하는 것이다.</p>
 <div id="fig-autoencoder-fashion-mnist" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-autoencoder-fashion-mnist-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -432,6 +432,7 @@ Figure&nbsp;7.1: Fashion-MNIST 오토인코더: 784차원 입력을 32차원 잠
 <li><p>따라서 특징 추출이나 차원 축소에 활용할 수 있다.</p></li>
 <li><p>다만 이는 일반적인 이미지 압축 파일처럼 저장 공간을 직접 줄여주는 것은 아니다.</p></li>
 </ul>
+<p>입력(픽셀값을 255로 나눈 값)과 출력(sigmoid)이 모두 0과 1 사이의 값이므로 손실 함수로 binary cross-entropy를 쓸 수 있다. MSE를 사용해도 된다.</p>
 <div id="d21c4072-45d1-45cd-8de3-df5dd7f93987" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-21T08:36:51.762287Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-21T08:36:51.761275Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-21T08:37:20.702327Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-21T08:37:20.701112Z&quot;}}" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 모델 컴파일</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>autoencoder.<span class="bu">compile</span>(optimizer<span class="op">=</span><span class="st">'adam'</span>, loss<span class="op">=</span><span class="st">'binary_crossentropy'</span>)</span>
