@@ -504,10 +504,10 @@ Epoch 20/20
 <section id="예측-및-노이즈-복원" class="level3" data-number="7.3.2">
 <h3 data-number="7.3.2" class="anchored" data-anchor-id="예측-및-노이즈-복원"><span class="header-section-number">7.3.2</span> 예측 및 노이즈 복원</h3>
 <p>그림에 인위적으로 노이즈를 추가한 후 복원하는 작업을 하여 보겠다.</p>
-<p>지금까지 훈련한 autoencoder는 깨끗한 이미지에서 깨끗한 이미지를 복원하도록만 학습되었으므로, 노이즈 제거를 직접 학습하지는 않았다.</p>
+<p>위에서 훈련한 <code>autoencoder</code>에 노이즈 이미지를 넣어도 어느 정도는 복원된다. 다만 이 모델은 깨끗한 이미지를 그대로 복원하도록 학습했을 뿐, 노이즈 제거를 직접 학습하지는 않았다.</p>
 <ul>
-<li>노이즈 제거 능력을 보여주려면 noisy 이미지를 입력으로, 원래의 clean 이미지를 타겟으로 하여 별도로 훈련해야 한다.</li>
-<li>아래에서는 동일한 구조의 <code>denoising_autoencoder</code>를 새로 만들어 이 방식으로 훈련한다.</li>
+<li>더 좋은 결과를 얻기 위해, 같은 구조의 <code>denoising_autoencoder</code>를 새로 만들어 다시 훈련한다.</li>
+<li>이때 노이즈 이미지를 입력으로, 원래의 깨끗한 이미지를 타깃으로 사용한다.</li>
 </ul>
 <p>먼저 노이즈를 인위적으로 그림에 추가해 본다.</p>
 <div id="f9c18839-959f-42c7-9de5-ace12ce6fbc7" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;execution&quot;,&quot;value&quot;:{&quot;iopub.execute_input&quot;:&quot;2026-07-21T08:37:21.436854Z&quot;,&quot;iopub.status.busy&quot;:&quot;2026-07-21T08:37:21.436854Z&quot;,&quot;iopub.status.idle&quot;:&quot;2026-07-21T08:37:23.975422Z&quot;,&quot;shell.execute_reply&quot;:&quot;2026-07-21T08:37:23.973440Z&quot;}}" data-execution_count="6">
