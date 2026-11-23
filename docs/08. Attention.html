@@ -1469,6 +1469,16 @@ decoder_input → [Decoder LSTM] (uses state_h, state_c) → decoder_outputs
        [Dot Product] (attention_weights, values) → context_vectors
                                       ↓  
          [Concatenate] ([context_vectors, decoder_outputs])  → [Dense] → final_output</code></pre>
+<div id="fig-encoder-decoder-cross-attention" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-encoder-decoder-cross-attention-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="figures/encoder_decoder_cross_attention.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:100.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-encoder-decoder-cross-attention-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;8.2: Cross-attention을 적용한 LSTM 인코더–디코더 구조. 행렬 크기는 배치 차원을 생략해 표시했다.
+</figcaption>
+</figure>
+</div>
 <p>이후 <code>compile</code>, 훈련, 단계별 예측 과정은 앞 절의 Dot 기반 구현과 동일하므로 여기서는 생략한다.</p>
 <p>여기서는 Attention의 원리를 간단히 보기 위해 scaling을 생략하였다. Transformer에서는 score가 지나치게 커지는 것을 완화하기 위해 <span class="math inline">\(QK^\top\)</span>을 <span class="math inline">\(\sqrt{d_k}\)</span>로 나눈다.</p>
 <p><span class="math display">\[
