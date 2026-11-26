@@ -547,8 +547,8 @@ c = \alpha_1 v_1 + \alpha_2 v_2 + \alpha_3 v_3
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 시각화</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>fig, axes <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">3</span>, figsize<span class="op">=</span>(<span class="dv">15</span>, <span class="dv">5</span>))</span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>plot_matrix(axes[<span class="dv">0</span>], encoder_outputs, <span class="st">'Encoder Outputs'</span>, <span class="st">'Features'</span>, <span class="st">'Timesteps'</span>)</span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>plot_matrix(axes[<span class="dv">1</span>], decoder_outputs.T, <span class="st">'Decoder Outputs'</span>, <span class="st">'Timesteps'</span>, <span class="st">'Features'</span>)</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>plot_matrix(axes[<span class="dv">0</span>], decoder_outputs, <span class="st">'Decoder Outputs(Query)'</span>,  <span class="st">'Features'</span>, <span class="st">'Timesteps'</span>)</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>plot_matrix(axes[<span class="dv">1</span>], encoder_outputs.T, <span class="st">'Encoder Outputs(Key)'</span>, <span class="st">'Timesteps'</span>, <span class="st">'Features'</span>)</span>
 <span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>plot_matrix(axes[<span class="dv">2</span>], attention_weights, <span class="st">'Attention Weights'</span>, <span class="st">'Encoder Timesteps'</span>, <span class="st">'Decoder Timesteps'</span>)</span>
 <span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a></span>
