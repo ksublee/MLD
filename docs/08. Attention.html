@@ -385,7 +385,7 @@ c = \alpha_1 v_1 + \alpha_2 v_2 + \alpha_3 v_3
 <li><span class="math inline">\(\mathrm{Q}\)</span>는 쿼리 즉, 이 예제에서는 <code>decoder_outputs</code>으로 이루어진 행렬.</li>
 <li><span class="math inline">\(\mathrm{K}\)</span>는 키 즉, 이 예제에서는 <code>encoder_outputs</code>으로 이루어진 행렬.</li>
 </ul>
-<p>보다 자세히 쓰면, 각 query <span class="math inline">\(i\)</span>마다 모든 key <span class="math inline">\(j\)</span> 방향으로 softmax를 적용하는 것이다.</p>
+<p>보다 자세히 쓰면, 각 query <span class="math inline">\(i\)</span>마다 모든 key <span class="math inline">\(j\)</span> 방향(<span class="math inline">\(QK^{\top}\)</span>의 행별로)으로 softmax를 적용하는 것이다.</p>
 <p><span class="math display">\[
 \alpha_{ij} = \frac{\exp(q_i^\top k_j)}{\sum_{\ell=1}^{T_k} \exp(q_i^\top k_\ell)}
 \]</span></p>
